@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="UTF-8">
+		<title>Pagina d'esempio</title>
+	</head>
+	<body>
+		<div id="mainDiv">
+			<h1>Titolo</h1>
+			<p id="paragrafo1">Questo &egrave; un paragrafo</p>
+			<div>
+                <h2>Sottotitolo</h2>
+                <p>Altro paragrafo</p>
+            </div>
+		</div>
+        <script>
+            let p = document.getElementById("paragrafo1");
+            p.innerHTML = "Il contenuto del paragrafo è stato modificato tramite DOM";
+            p.style.color = "blue";
+            console.log(p);
+
+            // Aggiungo un nuovo paragrafo dentro mainDiv
+            let mainDiv = document.getElementById("mainDiv"); // seleziono il div principale
+
+            let nuovoParagrafo = document.createElement("p"); // creo un nuovo elemento paragrafo
+            nuovoParagrafo.innerHTML = "Questo paragrafo è stato aggiunto dinamicamente"; // imposto il contenuto
+            mainDiv.appendChild(nuovoParagrafo); // aggiungo il nuovo paragrafo al div principale
+
+            //creo altri 4 paragrafi         
+            function creaParagrafi(numParagrafi){
+                let mainDiv = document.getElementById("mainDiv"); // seleziono il div principale
+                for(let i = 1; i <= numParagrafi; i++){
+                    let p = document.createElement("p"); // creo un nuovo elemento paragrafo
+                    p.innerHTML = "Paragrafo creato con ciclo: numero " + i; // imposto il contenuto
+                    mainDiv.appendChild(p); // aggiungo il paragrafo al div principale
+                    //aspetto 30 secondi prima di creare il prossimo
+                }
+            }
+        </script>
+	</body>
+</html>

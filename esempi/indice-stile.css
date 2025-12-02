@@ -1,0 +1,259 @@
+/** Indice delle principali proprietà 
+0. Selettori CSS
+1. Blocchi, posizionamenti e dimensioni (Display, Position, Width, Height, Z-index, Overflow) 
+2. Spaziature (Padding, Margin, Border)
+3. Colori 
+4. Proprietà per i testi
+5. Proprietà per le immagini
+6. Altri effetti (immagini di sfondo, gradienti, ombre..)
+7. Trasformazioni, transizioni ed animazioni 
+8. Media querys
+*/
+
+/*************** 
+0 Selettori CSS 
+***************/
+/* Selettore di classe */
+.box {
+    /* proprietà CSS */
+}
+
+/* Selettore di ID */
+#box1 {
+    /* proprietà CSS */
+}
+
+/* Selettore di elemento */
+div {
+    /* proprietà CSS */
+}
+
+/* Selettore di attributo */
+img[src$=".jpg"] {
+    /* proprietà CSS */
+}
+
+/* Selettore discendente */
+.contenitore .box {
+    /* proprietà CSS */
+}
+
+/* Selettore di stato */
+.box:hover {
+    /* proprietà CSS */
+}
+
+/* Selettore universale */
+* {
+    /* proprietà CSS */
+}
+
+/* Selettore di gruppo */
+#box1, .box {
+    /* proprietà CSS */
+}
+
+/* Selettore figlio */
+.contenitore > .box {
+    /* proprietà CSS */
+}
+
+/* Selettore fratello adiacente */
+.box + .box {
+    /* proprietà CSS */
+}
+
+/* Selettore fratello generale */
+.box ~ .box {
+    /* proprietà CSS */
+}
+
+/* Selettore pseudo-elemento */
+.box::after, .box::before {
+    /* proprietà CSS */
+}
+
+/* Selettore pseudo-classe */
+.box:first-child, .box:last-child, .box:nth-child(2), .box:nth-of-type(odd), .box:nth-of-type(even), .box:only-child {
+    /* proprietà CSS */
+}
+
+/* Selettore di gruppo di attributi */
+input[type="text"], input[type="password"], input[type="email"] {
+    /* proprietà CSS */
+}   
+
+/*************** 
+1 Blocchi e posizionamenti 
+***************/
+
+/* Proprietà  display: block | inline | inline-block | flex | grid| list-item | table | none  */
+.box {
+    display: inline-block;
+}
+/* Proprietà per le dimnesioni width ed height */
+#box1 {
+    width:50%; /* larghezza (auto, px, %, em, rem, vw) */ 
+    max-width:800px; /* larghezza massima */
+    min-width: 400px; /* larghezza minima */
+    height:200px; /* altezza (auto, px, %, em, rem, vh) */ 
+    /* anche l'altezza può avere proprietà per la massima e la minima */
+}
+#box2, #box3 {
+    width:24%;
+}
+/* Utilizzo di flex */
+.contenitore-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-around;
+}
+.box-flex {
+    background-color:#539653;
+    max-width:200px;
+}
+/* Proprietà position: static|relative|absolute|fixed|sticky */
+/* Proprietà del contenitore */
+.position-relative {    
+    position:relative;
+    min-height:4000px;
+    background-color:#ce8c8c;
+    padding-top:50px; 
+}
+/* Esempio per centrare orizzontalmente e verticalmente con position absolute */
+.fiore {
+    width:100px;
+    height:auto;
+}
+.position-absolute {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.div-testo {
+    z-index:2; 
+    position:relative;
+    text-align:center;
+}
+.position-fixed {
+    position:fixed;
+    bottom: 20px;
+    right: 20px; 
+}
+.position-sticky {
+    position:sticky;
+    top: 20px;
+    left: 20px; 
+}
+/* Overflow */
+.overflow-scroll {
+    width:300px;
+    height:150px;
+    overflow: scroll; /* auto | hidden | visible | scroll */
+    border: 2px solid black;
+}   
+/***************
+2 Spaziature (Padding, Margin, Border) 
+***************/
+.box {
+    padding: 10px; /* padding-top, padding-bottom */
+    padding: 10px 8px 5px 3px; /* padding sopra, destra, sotto, sinistra */
+    margin: 10px 5px; /* margin verticale 10px, orizzontale 5px; */
+    border: 10px solid red; /* bordo del box */
+    border-radius: 10px; /* angoli arrotondati */
+}
+
+/*************** 
+3. Colori 
+***************/
+.box {
+    color:white; /* colorare il testo nei box */
+    background-color:#000000; /* colorare lo sfondo dei box */
+    background-color: rgba(0,0,0,0.3); /* colorare lo sfondo dei box, utilizzando rgb in opacità .3 */
+    opacity: 0.8; /* trasparenza di tutto il box */
+}
+
+/***************
+4. Proprietà per i testi 
+***************/
+
+.box {
+    font-size:1.2rem; /* dimensione del testo in px o in rem */
+    font-family: Arial, sans-serif; /* tipo di carattere questo non basta, spesso serve includere anche il font*/
+    font-weight: bold; /* peso del carattere (normal, bold, 100-900) */
+    text-align: center; /* allineamento del testo (left, right, center, justify) */
+    text-decoration: underline; /* decorazione del testo (none, sottolineato, barrato) */
+    line-height: 1.5; /* altezza interlinea */
+    text-transform: uppercase; /* per mettere tutto maiuscolo */
+}
+
+/***************
+5. Proprietà per le immagini 
+***************/
+img {
+    width:100%; /* larghezza immagine */
+    height:auto; /* altezza immagine */
+    object-fit: cover; /* adattare l'immagine al contenitore (taglia, no stretch) */
+    object-position: center; /* posizione dell'immagine all'interno del contenitore */
+}
+
+/*************** 
+6. Altri effetti 
+***************/
+.box {
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3); /* ombra del box */
+}
+#box1 {
+    background: linear-gradient(to right, red, yellow); /* sfondo con gradiente */
+}
+#box4 {
+    background-image: url('immagine.jpg'); /* immagine di sfondo */
+    background-size: cover; /* adattare l'immagine di sfondo al box */
+    background-position: center; /* posizione dell'immagine di sfondo */
+    background-repeat: no-repeat; /* non ripetere l'immagine di sfondo */
+    backdrop-filter: blur(5px); /* sfocatura dello sfondo */  
+}
+
+/***************
+7. Trasformazioni, Transizioni ed Animazioni
+***************/
+
+/* selettori di stato per hover, focus, active */
+#box1:hover, #box1:focus, #box1:active {
+    /* Proprietà transform : translate | rotate | scale | skew | rotateX | rotateY | rotateZ */
+    transform: rotate(120deg) scale(1.2); /* ruotare di 120 gradi e ingrandire del 20% */
+}
+/* Transizioni */
+#box1 {
+    transition: transform 0.5s ease-in-out; /* applicare la transizione */
+}
+/* Animazioni */
+@keyframes esempioAnimazione {
+    from {background-color: red;}
+    to {background-color: yellow;}
+}
+#box2 {
+    animation: esempioAnimazione 3s infinite alternate; /* applicare l'animazione */
+}
+
+/***************
+8. Media Queries
+***************/
+
+/* Esempio di media query per schermi con larghezza massima di 600px */
+@media (max-width: 600px) {
+    .box {
+        width: 100%; /* rendere i box a tutta larghezza su schermi piccoli */
+    }
+    .contenitore-flex {
+        flex-direction: column; /* disporre i box in colonna su schermi piccoli */
+    }
+}
+@media (min-width: 601px) and (max-width: 1200px) {
+    .box {
+        width: 48%; /* rendere i box al 48% su schermi medi */
+    }
+}

@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida CSS - Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-code-slash"></i> Web Design Guide
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="html-guide.html">HTML</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="css-guide.html">CSS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript-guide.html">JavaScript</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="best-practices.html">Best Practices</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header bg-success text-white py-4">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-filetype-css"></i> Guida CSS</h1>
+            <p class="lead">Cascading Style Sheets - Stili e layout per il web</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#introduzione">Introduzione</a>
+                        <a class="nav-link" href="#selettori">Selettori</a>
+                        <a class="nav-link" href="#box-model">Box Model</a>
+                        <a class="nav-link" href="#posizionamento">Posizionamento</a>
+                        <a class="nav-link" href="#flexbox">Flexbox</a>
+                        <a class="nav-link" href="#grid">CSS Grid</a>
+                        <a class="nav-link" href="#colori">Colori</a>
+                        <a class="nav-link" href="#testi">Testi e Font</a>
+                        <a class="nav-link" href="#immagini">Immagini</a>
+                        <a class="nav-link" href="#effetti">Effetti Visivi</a>
+                        <a class="nav-link" href="#animazioni">Animazioni</a>
+                        <a class="nav-link" href="#media-queries">Media Queries</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                
+                <!-- Introduzione -->
+                <section id="introduzione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-info-circle"></i> Introduzione a CSS</h2>
+                    <div class="content-box">
+                        <p>CSS (Cascading Style Sheets) è il linguaggio usato per definire lo stile e il layout delle pagine web.</p>
+                        
+                        <h4>Come Includere CSS</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>1. CSS Esterno (Consigliato)</h6>
+                                <div class="code-example">
+                                    <pre><code class="language-html">&lt;link href="style.css" 
+      rel="stylesheet"&gt;</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>2. CSS Interno</h6>
+                                <div class="code-example">
+                                    <pre><code class="language-html">&lt;style&gt;
+  p { color: blue; }
+&lt;/style&gt;</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>3. CSS Inline</h6>
+                                <div class="code-example">
+                                    <pre><code class="language-html">&lt;p style="color:blue"&gt;
+  Testo
+&lt;/p&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Selettori -->
+                <section id="selettori" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-cursor"></i> Selettori CSS</h2>
+                    <div class="content-box">
+                        <p>I selettori determinano quali elementi HTML vengono stilizzati:</p>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Selettore</th>
+                                        <th>Sintassi</th>
+                                        <th>Descrizione</th>
+                                        <th>Esempio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Universale</strong></td>
+                                        <td><code>*</code></td>
+                                        <td>Seleziona tutti gli elementi</td>
+                                        <td><code>* { margin: 0; }</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Elemento</strong></td>
+                                        <td><code>elemento</code></td>
+                                        <td>Seleziona elementi per tipo</td>
+                                        <td><code>p { color: red; }</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Classe</strong></td>
+                                        <td><code>.classe</code></td>
+                                        <td>Seleziona per classe</td>
+                                        <td><code>.box { width: 100px; }</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>ID</strong></td>
+                                        <td><code>#id</code></td>
+                                        <td>Seleziona per ID univoco</td>
+                                        <td><code>#header { height: 60px; }</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Discendente</strong></td>
+                                        <td><code>A B</code></td>
+                                        <td>B dentro A (qualsiasi livello)</td>
+                                        <td><code>div p { color: blue; }</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Figlio</strong></td>
+                                        <td><code>A > B</code></td>
+                                        <td>B figlio diretto di A</td>
+                                        <td><code>div > p { font-size: 14px; }</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Fratello adiacente</strong></td>
+                                        <td><code>A + B</code></td>
+                                        <td>B immediatamente dopo A</td>
+                                        <td><code>h1 + p { margin-top: 0; }</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Fratelli generali</strong></td>
+                                        <td><code>A ~ B</code></td>
+                                        <td>Tutti i B dopo A</td>
+                                        <td><code>h1 ~ p { color: gray; }</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Gruppo</strong></td>
+                                        <td><code>A, B</code></td>
+                                        <td>Seleziona A e B</td>
+                                        <td><code>h1, h2, h3 { font-weight: bold; }</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 class="mt-4">Pseudo-classi</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Stati degli elementi */
+a:hover { color: red; }          /* Al passaggio del mouse */
+a:active { color: green; }        /* Durante il click */
+a:visited { color: purple; }      /* Link visitato */
+input:focus { border: 2px solid blue; } /* Elemento attivo */
+
+/* Posizione nell'albero */
+li:first-child { font-weight: bold; }   /* Primo figlio */
+li:last-child { color: gray; }          /* Ultimo figlio */
+li:nth-child(2) { color: blue; }        /* Secondo figlio */
+li:nth-child(odd) { background: #f0f0f0; }  /* Figli dispari */
+li:nth-child(even) { background: white; }   /* Figli pari */
+
+/* Altri */
+p:not(.special) { color: black; } /* Tutti i p tranne .special */
+div:empty { display: none; }      /* Div vuoti */</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Pseudo-elementi</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Aggiungere contenuto prima/dopo */
+p::before {
+    content: "→ ";
+    color: blue;
+}
+
+p::after {
+    content: " ←";
+    color: red;
+}
+
+/* Prima lettera e prima riga */
+p::first-letter {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+p::first-line {
+    color: blue;
+}
+
+/* Selezione del testo */
+::selection {
+    background: yellow;
+    color: black;
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Selettori di Attributo</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Elemento con attributo */
+img[alt] { border: 1px solid blue; }
+
+/* Attributo con valore esatto */
+input[type="text"] { background: white; }
+
+/* Attributo che contiene */
+a[href*="google"] { color: blue; }
+
+/* Attributo che inizia con */
+a[href^="https"] { color: green; }
+
+/* Attributo che finisce con */
+img[src$=".jpg"] { border: 2px solid red; }</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Box Model -->
+                <section id="box-model" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-box"></i> Box Model</h2>
+                    <div class="content-box">
+                        <p>Ogni elemento HTML è una "scatola" con: contenuto, padding, border e margin.</p>
+                        
+                        <div class="box-model-demo text-center my-4">
+                            <div class="box-margin">
+                                <div class="box-label">Margin (margine esterno)</div>
+                                <div class="box-border">
+                                    <div class="box-label">Border (bordo)</div>
+                                    <div class="box-padding">
+                                        <div class="box-label">Padding (spaziatura interna)</div>
+                                        <div class="box-content">
+                                            <div class="box-label">Content (contenuto)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-example">
+                            <pre><code class="language-css">.box {
+    /* Dimensioni */
+    width: 300px;
+    height: 200px;
+    max-width: 100%;      /* Larghezza massima */
+    min-height: 150px;    /* Altezza minima */
+    
+    /* Padding (spaziatura interna) */
+    padding: 20px;                    /* Tutti i lati */
+    padding: 10px 20px;               /* Verticale | Orizzontale */
+    padding: 10px 20px 15px 25px;    /* Top | Right | Bottom | Left */
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 15px;
+    padding-left: 25px;
+    
+    /* Border (bordo) */
+    border: 2px solid black;          /* Spessore | Stile | Colore */
+    border-width: 2px;
+    border-style: solid;              /* solid | dashed | dotted | double */
+    border-color: black;
+    border-radius: 10px;              /* Angoli arrotondati */
+    border-radius: 10px 20px;         /* Top-left/Bottom-right | Top-right/Bottom-left */
+    
+    /* Margin (margine esterno) */
+    margin: 20px;                     /* Tutti i lati */
+    margin: 10px auto;                /* Verticale | Orizzontale (auto centra) */
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+    /* Box sizing */
+    box-sizing: border-box;           /* Include padding e border nella width */
+}</code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-lightbulb"></i> Tip:</strong> Usa <code>box-sizing: border-box;</code> per calcoli più intuitivi delle dimensioni. È una best practice applicarlo a tutti gli elementi con <code>* { box-sizing: border-box; }</code>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Posizionamento -->
+                <section id="posizionamento" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-grid-3x3"></i> Display e Posizionamento</h2>
+                    <div class="content-box">
+                        <h4>Display</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">.elemento {
+    display: block;        /* Occupa tutta la larghezza, va a capo */
+    display: inline;       /* Occupa solo lo spazio necessario, sulla stessa linea */
+    display: inline-block; /* Come inline ma accetta width/height */
+    display: flex;         /* Contenitore flessibile (vedi Flexbox) */
+    display: grid;         /* Griglia (vedi CSS Grid) */
+    display: none;         /* Nasconde l'elemento */
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Position</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Valore</th>
+                                        <th>Descrizione</th>
+                                        <th>Esempio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>static</code></td>
+                                        <td>Posizionamento normale (default)</td>
+                                        <td><code>position: static;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>relative</code></td>
+                                        <td>Relativo alla posizione normale</td>
+                                        <td><code>position: relative; top: 10px;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>absolute</code></td>
+                                        <td>Relativo al parent più vicino con position</td>
+                                        <td><code>position: absolute; top: 0; left: 0;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>fixed</code></td>
+                                        <td>Fisso rispetto alla finestra del browser</td>
+                                        <td><code>position: fixed; bottom: 20px;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>sticky</code></td>
+                                        <td>Fisso quando raggiungi una posizione di scroll</td>
+                                        <td><code>position: sticky; top: 0;</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Centrare con position absolute */
+.centrato {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Z-index (ordine di sovrapposizione) */
+.sopra {
+    position: relative;
+    z-index: 10;
+}
+
+/* Overflow (gestione contenuto che eccede) */
+.container {
+    overflow: auto;     /* Mostra scrollbar se necessario */
+    overflow: hidden;   /* Nasconde contenuto eccedente */
+    overflow: scroll;   /* Mostra sempre scrollbar */
+    overflow-x: auto;   /* Solo orizzontale */
+    overflow-y: auto;   /* Solo verticale */
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Flexbox -->
+                <section id="flexbox" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-layout-three-columns"></i> Flexbox</h2>
+                    <div class="content-box">
+                        <p>Flexbox è un sistema di layout unidimensionale (riga o colonna) per distribuire spazio tra elementi.</p>
+
+                        <h4>Proprietà del Contenitore (Container)</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">.container {
+    display: flex;
+    
+    /* Direzione */
+    flex-direction: row;           /* Default: da sinistra a destra */
+    flex-direction: row-reverse;   /* Da destra a sinistra */
+    flex-direction: column;        /* Dall'alto al basso */
+    flex-direction: column-reverse; /* Dal basso all'alto */
+    
+    /* Wrap (a capo) */
+    flex-wrap: nowrap;    /* Default: tutto su una linea */
+    flex-wrap: wrap;      /* Va a capo se necessario */
+    flex-wrap: wrap-reverse;
+    
+    /* Allineamento principale (asse principale) */
+    justify-content: flex-start;   /* Inizio (default) */
+    justify-content: flex-end;     /* Fine */
+    justify-content: center;       /* Centro */
+    justify-content: space-between; /* Spazio tra gli elementi */
+    justify-content: space-around;  /* Spazio intorno agli elementi */
+    justify-content: space-evenly;  /* Spazio uniforme */
+    
+    /* Allineamento trasversale (asse secondario) */
+    align-items: stretch;      /* Allunga (default) */
+    align-items: flex-start;   /* Inizio */
+    align-items: flex-end;     /* Fine */
+    align-items: center;       /* Centro */
+    align-items: baseline;     /* Allineato alla baseline del testo */
+    
+    /* Allineamento righe multiple */
+    align-content: flex-start;
+    align-content: center;
+    align-content: space-between;
+    
+    /* Gap tra elementi */
+    gap: 20px;              /* Spazio tra tutti gli elementi */
+    row-gap: 20px;          /* Spazio tra righe */
+    column-gap: 10px;       /* Spazio tra colonne */
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Proprietà degli Elementi (Items)</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">.item {
+    /* Crescita */
+    flex-grow: 1;      /* Quanto l'elemento può crescere */
+    
+    /* Riduzione */
+    flex-shrink: 1;    /* Quanto l'elemento può ridursi */
+    
+    /* Dimensione base */
+    flex-basis: 200px; /* Dimensione iniziale */
+    
+    /* Shorthand */
+    flex: 1;           /* grow shrink basis */
+    flex: 1 1 200px;
+    
+    /* Ordine */
+    order: 2;          /* Cambia l'ordine visivo */
+    
+    /* Allineamento individuale */
+    align-self: center; /* Sovrascrive align-items del container */
+}</code></pre>
+                        </div>
+
+                        <div class="example-result mt-4">
+                            <h5>Esempio Pratico - Layout a 3 Colonne:</h5>
+                            <div class="d-flex gap-3 mb-3">
+                                <div class="flex-fill bg-primary text-white p-3 rounded">Colonna 1</div>
+                                <div class="flex-fill bg-success text-white p-3 rounded">Colonna 2</div>
+                                <div class="flex-fill bg-info text-white p-3 rounded">Colonna 3</div>
+                            </div>
+                            
+                            <h5>Esempio - Centratura Perfetta:</h5>
+                            <div class="d-flex justify-content-center align-items-center bg-light rounded" style="height: 150px;">
+                                <div class="bg-warning p-3 rounded">Elemento Centrato</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CSS Grid -->
+                <section id="grid" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-grid"></i> CSS Grid</h2>
+                    <div class="content-box">
+                        <p>CSS Grid è un sistema di layout bidimensionale per righe e colonne.</p>
+
+                        <div class="code-example">
+                            <pre><code class="language-css">.container {
+    display: grid;
+    
+    /* Definire colonne */
+    grid-template-columns: 200px 200px 200px;     /* 3 colonne fisse */
+    grid-template-columns: 1fr 1fr 1fr;          /* 3 colonne uguali */
+    grid-template-columns: 1fr 2fr 1fr;          /* Colonna centrale doppia */
+    grid-template-columns: repeat(3, 1fr);       /* 3 colonne uguali (shorthand) */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive */
+    
+    /* Definire righe */
+    grid-template-rows: 100px 200px auto;
+    grid-template-rows: repeat(3, 100px);
+    
+    /* Gap (spazio tra celle) */
+    gap: 20px;              /* Tra righe e colonne */
+    row-gap: 20px;          /* Tra righe */
+    column-gap: 10px;       /* Tra colonne */
+    
+    /* Allineamento */
+    justify-items: start | center | end | stretch;
+    align-items: start | center | end | stretch;
+    justify-content: start | center | end | space-between;
+    align-content: start | center | end | space-between;
+}
+
+/* Posizionare singoli elementi */
+.item {
+    grid-column: 1 / 3;      /* Dalla colonna 1 alla 3 */
+    grid-column: span 2;     /* Occupa 2 colonne */
+    grid-row: 1 / 3;         /* Dalla riga 1 alla 3 */
+    
+    /* Shorthand */
+    grid-area: 1 / 1 / 3 / 3; /* row-start / col-start / row-end / col-end */
+}</code></pre>
+                        </div>
+
+                        <div class="example-result mt-4">
+                            <h5>Esempio Grid - Layout Dashboard:</h5>
+                            <div class="demo-grid">
+                                <div class="grid-item header">Header</div>
+                                <div class="grid-item sidebar">Sidebar</div>
+                                <div class="grid-item main">Main Content</div>
+                                <div class="grid-item footer">Footer</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Colori -->
+                <section id="colori" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-palette"></i> Colori</h2>
+                    <div class="content-box">
+                        <p>CSS supporta vari modi per definire i colori:</p>
+
+                        <div class="code-example">
+                            <pre><code class="language-css">.elemento {
+    /* Nomi colori predefiniti */
+    color: red;
+    color: blue;
+    color: transparent;
+    
+    /* Esadecimale */
+    color: #FF0000;        /* Rosso */
+    color: #00F;           /* Blu (shorthand) */
+    
+    /* RGB */
+    color: rgb(255, 0, 0);           /* Rosso */
+    color: rgba(255, 0, 0, 0.5);     /* Rosso semi-trasparente */
+    
+    /* HSL (Hue, Saturation, Lightness) */
+    color: hsl(0, 100%, 50%);        /* Rosso */
+    color: hsla(0, 100%, 50%, 0.5);  /* Rosso semi-trasparente */
+    
+    /* Colori per testo e sfondo */
+    color: #333;                     /* Colore testo */
+    background-color: #f0f0f0;       /* Colore sfondo */
+    
+    /* Opacità */
+    opacity: 0.5;                    /* 0 (trasparente) a 1 (opaco) */
+}</code></pre>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-3">
+                                <div class="color-box" style="background: #FF0000;">
+                                    <code>#FF0000</code><br>
+                                    <small>Rosso</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="color-box" style="background: #00FF00;">
+                                    <code>#00FF00</code><br>
+                                    <small>Verde</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="color-box" style="background: #0000FF;">
+                                    <code>#0000FF</code><br>
+                                    <small>Blu</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="color-box" style="background: rgba(0,0,0,0.5); color: white;">
+                                    <code>rgba(0,0,0,0.5)</code><br>
+                                    <small>Nero 50%</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Testi e Font -->
+                <section id="testi" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-fonts"></i> Testi e Tipografia</h2>
+                    <div class="content-box">
+                        <div class="code-example">
+                            <pre><code class="language-css">.testo {
+    /* Font */
+    font-family: Arial, Helvetica, sans-serif;  /* Lista fallback */
+    font-family: 'Times New Roman', serif;
+    font-family: 'Courier New', monospace;
+    
+    /* Dimensione */
+    font-size: 16px;        /* Pixel */
+    font-size: 1.2em;       /* Relativo al parent */
+    font-size: 1.2rem;      /* Relativo al root (html) */
+    font-size: 100%;        /* Percentuale */
+    
+    /* Peso (grassetto) */
+    font-weight: normal;    /* 400 */
+    font-weight: bold;      /* 700 */
+    font-weight: 100;       /* Sottile */
+    font-weight: 900;       /* Extra grassetto */
+    
+    /* Stile */
+    font-style: normal;
+    font-style: italic;
+    font-style: oblique;
+    
+    /* Allineamento */
+    text-align: left;
+    text-align: right;
+    text-align: center;
+    text-align: justify;
+    
+    /* Decorazione */
+    text-decoration: none;           /* Rimuovi sottolineatura link */
+    text-decoration: underline;      /* Sottolineato */
+    text-decoration: line-through;   /* Barrato */
+    text-decoration: overline;       /* Linea sopra */
+    
+    /* Trasformazione */
+    text-transform: uppercase;       /* MAIUSCOLO */
+    text-transform: lowercase;       /* minuscolo */
+    text-transform: capitalize;      /* Prima Lettera Maiuscola */
+    
+    /* Spaziatura */
+    letter-spacing: 2px;    /* Spaziatura tra lettere */
+    word-spacing: 5px;      /* Spaziatura tra parole */
+    line-height: 1.5;       /* Interlinea */
+    
+    /* Ombra testo */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    /* x-offset y-offset blur color */
+    
+    /* Overflow testo */
+    white-space: nowrap;           /* No a capo */
+    overflow: hidden;              /* Nasconde eccedenza */
+    text-overflow: ellipsis;       /* Aggiungi ... */
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Google Fonts</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Nel head dell'HTML --&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"&gt;</code></pre>
+                        </div>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Nel CSS */
+body {
+    font-family: 'Roboto', sans-serif;
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Immagini -->
+                <section id="immagini" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-image-fill"></i> Stili per Immagini</h2>
+                    <div class="content-box">
+                        <div class="code-example">
+                            <pre><code class="language-css">img {
+    /* Dimensioni */
+    width: 100%;           /* Larghezza responsive */
+    height: auto;          /* Mantieni proporzioni */
+    max-width: 100%;       /* Non eccedere container */
+    
+    /* Object-fit (come l'immagine si adatta) */
+    object-fit: cover;     /* Copre tutto, taglia se necessario */
+    object-fit: contain;   /* Contiene tutto, può avere spazi */
+    object-fit: fill;      /* Riempie stirando */
+    object-fit: none;      /* Dimensione originale */
+    object-fit: scale-down; /* Il minore tra none e contain */
+    
+    /* Posizione dell'immagine */
+    object-position: center;
+    object-position: top left;
+    object-position: 50% 50%;
+    
+    /* Bordi e ombre */
+    border-radius: 10px;           /* Angoli arrotondati */
+    border-radius: 50%;            /* Cerchio perfetto */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    
+    /* Filtri */
+    filter: grayscale(100%);       /* Bianco e nero */
+    filter: blur(5px);             /* Sfocatura */
+    filter: brightness(150%);      /* Luminosità */
+    filter: contrast(200%);        /* Contrasto */
+    filter: sepia(100%);           /* Effetto seppia */
+    filter: saturate(200%);        /* Saturazione */
+    filter: hue-rotate(90deg);     /* Rotazione colore */
+    
+    /* Filtri combinati */
+    filter: grayscale(50%) blur(2px);
+}
+
+/* Immagine di sfondo */
+.elemento {
+    background-image: url('immagine.jpg');
+    background-size: cover;        /* Copre tutto */
+    background-size: contain;      /* Contiene tutto */
+    background-size: 100% auto;    /* Dimensione custom */
+    
+    background-position: center;   /* Posizione */
+    background-position: top left;
+    background-position: 50% 50%;
+    
+    background-repeat: no-repeat;  /* Non ripetere */
+    background-repeat: repeat;     /* Ripeti */
+    background-repeat: repeat-x;   /* Ripeti orizzontalmente */
+    background-repeat: repeat-y;   /* Ripeti verticalmente */
+    
+    background-attachment: fixed;  /* Sfondo fisso durante scroll */
+    background-attachment: scroll; /* Sfondo scorrevole */
+    
+    /* Shorthand */
+    background: url('img.jpg') no-repeat center/cover;
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Effetti Visivi -->
+                <section id="effetti" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-stars"></i> Effetti Visivi</h2>
+                    <div class="content-box">
+                        <h4>Ombre (Shadows)</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Ombra box */
+.box {
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    /* x-offset y-offset blur spread color */
+    
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);      /* Leggera */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);    /* Pronunciata */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5); /* Interna */
+    
+    /* Ombre multiple */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1),
+                0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* Ombra testo */
+.testo {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Gradienti</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Gradiente lineare */
+.box {
+    background: linear-gradient(to right, red, yellow);
+    background: linear-gradient(45deg, red, yellow);
+    background: linear-gradient(to bottom, red 0%, yellow 50%, blue 100%);
+}
+
+/* Gradiente radiale */
+.box {
+    background: radial-gradient(circle, red, yellow);
+    background: radial-gradient(circle at top left, red, yellow);
+}
+
+/* Gradiente conico */
+.box {
+    background: conic-gradient(red, yellow, green, blue, red);
+}</code></pre>
+                        </div>
+
+                        <div class="example-result mt-4">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="gradient-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                        <p class="text-white mb-0">Gradiente Lineare</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="gradient-box" style="background: radial-gradient(circle, #ffecd2 0%, #fcb69f 100%);">
+                                        <p class="mb-0">Gradiente Radiale</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="gradient-box shadow-lg">
+                                        <p class="mb-0">Box Shadow</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">Backdrop Filter</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Effetto vetro smerigliato */
+.glass {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Animazioni -->
+                <section id="animazioni" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-lightning"></i> Transizioni e Animazioni</h2>
+                    <div class="content-box">
+                        <h4>Transizioni</h4>
+                        <p>Le transizioni animano il cambiamento di proprietà CSS:</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.box {
+    background: blue;
+    transition: background 0.3s ease;
+    /* proprietà durata timing-function delay */
+}
+
+.box:hover {
+    background: red;  /* Transizione animata */
+}
+
+/* Transizioni multiple */
+.box {
+    transition: background 0.3s ease,
+                transform 0.5s ease-in-out,
+                opacity 0.2s linear;
+}
+
+/* Transizione su tutto */
+.box {
+    transition: all 0.3s ease;
+}
+
+/* Timing functions */
+.box {
+    transition-timing-function: ease;        /* Default */
+    transition-timing-function: linear;      /* Velocità costante */
+    transition-timing-function: ease-in;     /* Accelera */
+    transition-timing-function: ease-out;    /* Decelera */
+    transition-timing-function: ease-in-out; /* Accelera e decelera */
+    transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1); /* Custom */
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Trasformazioni (Transform)</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">.elemento {
+    /* Traslazione (spostamento) */
+    transform: translate(50px, 100px);    /* x, y */
+    transform: translateX(50px);
+    transform: translateY(100px);
+    
+    /* Rotazione */
+    transform: rotate(45deg);             /* Gradi */
+    transform: rotateX(45deg);            /* 3D sull'asse X */
+    transform: rotateY(45deg);            /* 3D sull'asse Y */
+    transform: rotateZ(45deg);            /* 3D sull'asse Z */
+    
+    /* Scala (ridimensionamento) */
+    transform: scale(1.5);                /* 150% */
+    transform: scale(2, 0.5);             /* x, y */
+    transform: scaleX(2);
+    transform: scaleY(0.5);
+    
+    /* Inclinazione */
+    transform: skew(10deg, 5deg);         /* x, y */
+    transform: skewX(10deg);
+    transform: skewY(5deg);
+    
+    /* Trasformazioni multiple */
+    transform: rotate(45deg) scale(1.5) translate(50px, 50px);
+    
+    /* Origine trasformazione */
+    transform-origin: center;             /* Default */
+    transform-origin: top left;
+    transform-origin: 50% 50%;
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Animazioni Keyframe</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Definire l'animazione */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Con step intermedi */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Applicare l'animazione */
+.elemento {
+    animation: slideIn 1s ease-out;
+    /* nome durata timing-function delay iteration-count direction fill-mode */
+    
+    animation-name: slideIn;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-delay: 0.5s;
+    animation-iteration-count: infinite;  /* o un numero */
+    animation-direction: normal;          /* normal | reverse | alternate */
+    animation-fill-mode: forwards;        /* none | forwards | backwards | both */
+    animation-play-state: running;        /* running | paused */
+}
+
+/* Animazione al hover */
+.elemento:hover {
+    animation: pulse 0.5s infinite;
+}</code></pre>
+                        </div>
+
+                        <div class="example-result mt-4">
+                            <h5>Esempio Interattivo:</h5>
+                            <div class="text-center">
+                                <div class="animated-box">
+                                    Passa il mouse sopra di me!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Media Queries -->
+                <section id="media-queries" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-phone"></i> Media Queries (Responsive Design)</h2>
+                    <div class="content-box">
+                        <p>Le media queries permettono di applicare stili diversi in base alle caratteristiche del dispositivo:</p>
+
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Mobile First Approach (Consigliato) */
+/* Stili base per mobile */
+.container {
+    width: 100%;
+    padding: 15px;
+}
+
+/* Tablet e oltre (min-width: da questa dimensione in su) */
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+        padding: 20px;
+    }
+}
+
+/* Desktop (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .container {
+        width: 1000px;
+    }
+}
+
+/* Desktop Large */
+@media (min-width: 1200px) {
+    .container {
+        width: 1140px;
+    }
+}
+
+/* Desktop Approach (max-width: fino a questa dimensione) */
+@media (max-width: 1200px) {
+    /* Stili per schermi fino a 1200px */
+}
+
+@media (max-width: 768px) {
+    /* Stili per tablet e smartphone */
+    .menu {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Stili solo per smartphone */
+    .box {
+        width: 100%;
+    }
+}
+
+/* Range di dimensioni */
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Solo per tablet */
+}
+
+/* Orientamento */
+@media (orientation: portrait) {
+    /* Modalità verticale */
+}
+
+@media (orientation: landscape) {
+    /* Modalità orizzontale */
+}
+
+/* Tipo di media */
+@media print {
+    /* Stili per la stampa */
+    .no-print {
+        display: none;
+    }
+}
+
+@media screen {
+    /* Solo per schermi */
+}
+
+/* Retina display */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Schermi ad alta densità */
+}
+
+/* Preferenze utente */
+@media (prefers-color-scheme: dark) {
+    /* Dark mode */
+    body {
+        background: #1a1a1a;
+        color: #ffffff;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    /* Ridurre animazioni per accessibilità */
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Breakpoint Comuni</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Dispositivo</th>
+                                        <th>Dimensione</th>
+                                        <th>Media Query</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Smartphone</td>
+                                        <td>< 576px</td>
+                                        <td><code>@media (max-width: 575px)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tablet Portrait</td>
+                                        <td>≥ 576px</td>
+                                        <td><code>@media (min-width: 576px)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tablet Landscape</td>
+                                        <td>≥ 768px</td>
+                                        <td><code>@media (min-width: 768px)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Desktop</td>
+                                        <td>≥ 992px</td>
+                                        <td><code>@media (min-width: 992px)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Desktop Large</td>
+                                        <td>≥ 1200px</td>
+                                        <td><code>@media (min-width: 1200px)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Desktop XL</td>
+                                        <td>≥ 1400px</td>
+                                        <td><code>@media (min-width: 1400px)</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="alert alert-success mt-3">
+                            <strong><i class="bi bi-lightbulb"></i> Best Practice:</strong> Usa l'approccio "Mobile First" - inizia con gli stili per mobile e aggiungi complessità con <code>min-width</code> per schermi più grandi.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigazione Pagine -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="html-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Guida HTML
+                    </a>
+                    <a href="best-practices.html" class="btn btn-primary">
+                        Best Practices <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-code-slash"></i> Web Design Guide</h5>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2025 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Cambia tema">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+</body>
+</html>

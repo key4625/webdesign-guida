@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form HTML</title>
+</head>
+<body>
+    <h1>Nuova persona</h1>
+    <form name="form-anagrafica" action="">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Nome">
+        <label name="cognome">Cognome</label>
+        <input type="text" id="cognome" name="cognome">
+        <label for="datanascita">Data di nascita</label>
+        <input type="date" id="datanascita" name="datanascita">
+        <label for="oranascita">Ora di nascita</label>
+        <input type="time" id="oranascita" name="oranascita">
+        <!-- Radio button -->
+        <h4>Scegli una di queste opzioni</h4>
+        <input type="radio" id="opzione1" name="radioinput" value="Opzione 1">
+        <label for="opzione1">Opzione 1</label>
+        <input type="radio" id="opzione2" name="radioinput" value="Opzione 2">
+        <label for="opzione2">Opzione 2</label>
+        <input type="radio" id="opzione3" name="radioinput" value="Opzione 3">
+        <label for="opzione3">Opzione 3</label>
+        <!-- Checkbox opzioni multiple non esclusive-->
+        <h4>Interessi personali</h4>
+        <input type="checkbox" id="sport" name="interessi_personali" value="Sport">
+        <label for="sport">Sport</label>
+        <input type="checkbox" id="moda" name="interessi_personali" value="Moda">
+        <label for="moda">Moda</label>
+        <input type="checkbox" id="cucina" name="interessi_personali" value="Cucina">
+        <label for="cucina">Cucina</label>
+        <!-- Select/Option -->
+        <h4>Dropdown</h4>
+        <label for="tipo_utente">Seleziona gruppo</label>
+        <select id="tipo_utente" name="tipo_utente">
+            <option value="generico">Generico</option>
+            <option value="autore">Autore</option>
+            <option value="amministratore">Amministratore</option>
+        </select>
+        <!-- Textarea-->
+        <h4>Textarea</h4>
+        <label for="note">Note</label>
+        <textarea id="note" name="note" rows="4" placeholder="Inserisci una nota..."></textarea>
+
+        <input type="submit" value="Salva">
+    </form>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida HTML & CSS - Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-code-slash"></i> Web Design Guide
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="html-guide.html">HTML</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="css-guide.html">CSS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bootstrap-guide.html">Bootstrap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript-guide.html">JavaScript</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="best-practices.html">Best Practices</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-white text-center py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="display-3 fw-bold mb-4">Guida Completa HTML & CSS</h1>
+                    <p class="lead mb-4">Impara a creare siti web moderni e responsive con questa guida pratica e completa</p>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <a href="html-guide.html" class="btn btn-light btn-lg px-4 gap-3">
+                            <i class="bi bi-filetype-html"></i> Inizia con HTML
+                        </a>
+                        <a href="css-guide.html" class="btn btn-outline-light btn-lg px-4">
+                            <i class="bi bi-filetype-css"></i> Esplora CSS
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Cosa Imparerai</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 text-center shadow-sm hover-card">
+                        <div class="card-body">
+                            <div class="feature-icon bg-primary bg-gradient text-white mb-3">
+                                <i class="bi bi-code-square fs-1"></i>
+                            </div>
+                            <h5 class="card-title">HTML Basics</h5>
+                            <p class="card-text">Struttura, tag semantici, form, tabelle e molto altro</p>
+                            <a href="html-guide.html" class="btn btn-sm btn-outline-primary mt-2">Vai alla guida</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 text-center shadow-sm hover-card">
+                        <div class="card-body">
+                            <div class="feature-icon bg-success bg-gradient text-white mb-3">
+                                <i class="bi bi-palette fs-1"></i>
+                            </div>
+                            <h5 class="card-title">CSS Styling</h5>
+                            <p class="card-text">Selettori, colori, testi, layout e posizionamento</p>
+                            <a href="css-guide.html" class="btn btn-sm btn-outline-primary mt-2">Vai alla guida</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 text-center shadow-sm hover-card">
+                        <div class="card-body">
+                            <div class="feature-icon bg-purple bg-gradient text-white mb-3" style="background-color: #712cf9;">
+                                <i class="bi bi-bootstrap-fill fs-1"></i>
+                            </div>
+                            <h5 class="card-title">Bootstrap</h5>
+                            <p class="card-text">Framework CSS per layout responsive e componenti pronti</p>
+                            <a href="bootstrap-guide.html" class="btn btn-sm btn-outline-primary mt-2">Vai alla guida</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 text-center shadow-sm hover-card">
+                        <div class="card-body">
+                            <div class="feature-icon bg-danger bg-gradient text-white mb-3">
+                                <i class="bi bi-braces fs-1"></i>
+                            </div>
+                            <h5 class="card-title">JavaScript</h5>
+                            <p class="card-text">Programmazione, DOM manipulation, eventi e API</p>
+                            <a href="javascript-guide.html" class="btn btn-sm btn-outline-primary mt-2">Vai alla guida</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 text-center shadow-sm hover-card">
+                        <div class="card-body">
+                            <div class="feature-icon bg-warning bg-gradient text-white mb-3">
+                                <i class="bi bi-stars fs-1"></i>
+                            </div>
+                            <h5 class="card-title">Best Practices</h5>
+                            <p class="card-text">Accessibilità, SEO, performance e codice pulito</p>
+                            <a href="best-practices.html" class="btn btn-sm btn-outline-primary mt-2">Vai alla guida</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Overview -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100 shadow">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="mb-0"><i class="bi bi-filetype-html"></i> Guida HTML</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="bi bi-check-circle-fill text-success"></i> Struttura di base del documento</li>
+                                <li class="list-group-item"><i class="bi bi-check-circle-fill text-success"></i> Tag per titoli e paragrafi</li>
+                                <li class="list-group-item"><i class="bi bi-check-circle-fill text-success"></i> Link, immagini e multimedia</li>
+                                <li class="list-group-item"><i class="bi bi-check-circle-fill text-success"></i> Liste e tabelle</li>
+                                <li class="list-group-item"><i class="bi bi-check-circle-fill text-success"></i> Form e input avanzati</li>
+                                <li class="list-group-item"><i class="bi bi-check-circle-fill text-success"></i> Tag semantici HTML5</li>
+                            </ul>
+                            <div class="mt-3">
+                                <a href="html-guide.html" class="btn btn-primary w-100">Vai alla Guida HTML</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100 shadow">
+                        <div class="card-header bg-success text-white">
+                            <h3 class="mb-0"><i class="bi bi-filetype-css"></i> Guida CSS</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="bi bi-check-circle-fill text-success"></i> Selettori CSS avanzati</li>
+                                <li class="list-group-item"><i class="bi bi-check-circle-fill text-success"></i> Box model e posizionamento</li>
+                                <li class="list-group-item"><i class="bi bi-check-circle-fill text-success"></i> Flexbox e CSS Grid</li>
+                                <li class="list-group-item"><i class="bi bi-check-circle-fill text-success"></i> Colori, tipografia e stili</li>
+                                <li class="list-group-item"><i class="bi bi-check-circle-fill text-success"></i> Transizioni e animazioni</li>
+                                <li class="list-group-item"><i class="bi bi-check-circle-fill text-success"></i> Media queries e responsive</li>
+                            </ul>
+                            <div class="mt-3">
+                                <a href="css-guide.html" class="btn btn-success w-100">Vai alla Guida CSS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- External Resources Section -->
+    <section class="py-5 bg-light border-top" id="external-resources">
+        <div class="container">
+            <h2 class="text-center mb-5"><i class="bi bi-link-45deg"></i> Risorse Esterne Utili</h2>
+            
+            <!-- Link Principali -->
+            <div class="alert alert-info mb-5 shadow-sm">
+                <h4 class="alert-heading"><i class="bi bi-bookmark-star"></i> Link del Corso</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Indice Guide ed Esercizi:</strong><br>
+                        <a href="https://micheleabamc.netsons.org/wd2/2025/index.html" target="_blank" class="alert-link">micheleabamc.netsons.org/wd2/2025/index.html</a>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Nostra Guida:</strong><br>
+                        <a href="https://micheleabamc.netsons.org/wd2/guida/" target="_blank" class="alert-link">micheleabamc.netsons.org/wd2/guida/</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Guide -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="bi bi-book"></i> Guide</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><strong>HTML:</strong> <a href="https://www.html.it/guide/guida-html/" target="_blank">HTML.it</a> | <a href="https://www.w3schools.com/html/" target="_blank">W3Schools</a></li>
+                                <li class="mb-2"><strong>CSS:</strong> <a href="https://www.html.it/guide/guida-css-di-base/" target="_blank">HTML.it</a> | <a href="https://www.w3schools.com/css/" target="_blank">W3Schools</a></li>
+                                <li class="mb-2"><strong>CSS Ref:</strong> <a href="https://cssreference.io/" target="_blank">cssreference.io</a></li>
+                                <li class="mb-2"><strong>JS:</strong> <a href="https://www.html.it/guide/guida-javascript-di-base/" target="_blank">HTML.it</a> | <a href="https://it.javascript.info/" target="_blank">javascript.info</a></li>
+                                <li class="mb-2"><strong>jQuery:</strong> <a href="https://www.html.it/guide/guida-jquery/" target="_blank">HTML.it</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tips CSS -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="bi bi-lightbulb"></i> Tips CSS</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled small">
+                                <li class="mb-1"><a href="https://www.w3schools.com/css/css3_fonts.asp" target="_blank">Fonts</a></li>
+                                <li class="mb-1"><a href="https://www.w3schools.com/css/css3_mediaqueries_ex.asp" target="_blank">Media Queries</a></li>
+                                <li class="mb-1"><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank">Flexbox Guide</a></li>
+                                <li class="mb-1"><a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank">Grid Guide</a> | <a href="https://cssgridgenerator.io/" target="_blank">Generator</a></li>
+                                <li class="mb-1"><a href="https://css-tricks.com/a-guide-to-the-responsive-images-syntax-in-html/" target="_blank">Responsive Images</a></li>
+                                <li class="mb-1"><a href="https://css-tricks.com/centering-css-complete-guide/" target="_blank">Centering</a></li>
+                                <li class="mb-1"><a href="https://css-tricks.com/a-complete-guide-to-custom-properties/" target="_blank">Custom Properties</a></li>
+                                <li class="mb-1"><a href="https://bennettfeely.com/clippy/" target="_blank">Clip Path Generator</a></li>
+                                <li class="mb-1"><a href="https://bentogrids.com/" target="_blank">Bento Grids</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Esercizi -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0"><i class="bi bi-pencil-square"></i> Esercizi</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><strong>W3Schools:</strong>
+                                    <br><a href="https://www.w3schools.com/html/exercise.asp" target="_blank">HTML</a> | 
+                                    <a href="https://www.w3schools.com/css/css_exercises.asp" target="_blank">CSS</a> | 
+                                    <a href="https://www.w3schools.com/bootstrap5/bootstrap_exercises.php" target="_blank">Bootstrap</a> | 
+                                    <a href="https://www.w3schools.com/js/exercise_js.asp?filename=exercise_js_variables1" target="_blank">JS</a>
+                                </li>
+                                <li class="mb-2"><strong>GitHub:</strong> <a href="https://github.com/AlbertoOlla/esercizi-di-programmazione-javascript/tree/master" target="_blank">Esercizi JS (A. Olla)</a></li>
+                                <li class="mb-2"><strong>Giochi Coding:</strong>
+                                    <ul class="ps-3 mt-1 small">
+                                        <li><a href="https://flukeout.github.io/" target="_blank">CSS Diner (Selettori)</a></li>
+                                        <li><a href="https://flexboxfroggy.com/#it" target="_blank">Flexbox Froggy</a></li>
+                                        <li><a href="https://codepip.com/games/grid-garden/" target="_blank">Grid Garden</a></li>
+                                        <li><a href="https://cssbattle.dev/" target="_blank">CSS Battle</a></li>
+                                        <li><a href="https://codingfantasy.com/games" target="_blank">Coding Fantasy</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frameworks & Librerie -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0"><i class="bi bi-box-seam"></i> Frameworks & Libs</h5>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="fw-bold">CSS Frameworks</h6>
+                            <ul class="list-unstyled small mb-3">
+                                <li><a href="https://getbootstrap.com/" target="_blank">Bootstrap</a></li>
+                                <li><a href="https://tailwindcss.com/" target="_blank">Tailwind</a></li>
+                                <li><a href="https://getuikit.com/" target="_blank">UIKit</a></li>
+                            </ul>
+                            <h6 class="fw-bold">JS Libraries</h6>
+                            <ul class="list-unstyled small">
+                                <li><a href="https://yaireo.github.io/tagify/" target="_blank">Tagify</a> (Tags)</li>
+                                <li><a href="https://select2.org/" target="_blank">Select2</a> (Select)</li>
+                                <li><a href="https://swiperjs.com/" target="_blank">Swiper</a> / <a href="https://splidejs.com/" target="_blank">Splide</a> (Sliders)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animazioni -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0"><i class="bi bi-film"></i> Animazioni</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled small">
+                                <li class="mb-1"><a href="https://animate.style/" target="_blank">Animate.css</a></li>
+                                <li class="mb-1"><a href="https://michalsnik.github.io/aos/" target="_blank">AOS (Scroll)</a></li>
+                                <li class="mb-1"><a href="https://gsap.com/" target="_blank">GreenSock (GSAP)</a></li>
+                                <li class="mb-1"><a href="https://animejs.com/" target="_blank">AnimeJS</a></li>
+                                <li class="mb-1"><a href="https://www.svgator.com/" target="_blank">SVGator</a></li>
+                                <li class="mb-1"><a href="https://threejs.org/" target="_blank">ThreeJS</a> (3D)</li>
+                                <li class="mb-1"><a href="https://babylonjs.com/" target="_blank">BabylonJS</a> (Gaming)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ispirazione & Tools -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="mb-0"><i class="bi bi-magic"></i> Ispirazione & Tools</h5>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="fw-bold">Design Awards</h6>
+                            <ul class="list-unstyled small mb-3">
+                                <li><a href="https://www.awwwards.com/" target="_blank">Awwwards</a></li>
+                                <li><a href="https://www.cssdesignawards.com/" target="_blank">CSS Design Awards</a></li>
+                                <li><a href="https://godly.website/" target="_blank">Godly</a></li>
+                            </ul>
+                            <h6 class="fw-bold">Tools</h6>
+                            <ul class="list-unstyled small">
+                                <li><a href="https://realfavicongenerator.net/" target="_blank">Favicon Generator</a></li>
+                                <li><a href="https://thecodingtrain.com/" target="_blank">The Coding Train (P5JS)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-code-slash"></i> Web Design Guide</h5>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2025 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Cambia tema">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+</body>
+</html>

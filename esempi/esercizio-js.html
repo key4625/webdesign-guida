@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 1 - Javascript</title>
+</head>
+<body>
+    <script>
+        /* Esercizi sulle variabili in JavaScript */
+        let arrayNum = [45,81,53];
+        //console.log("Array originale: " + arrayNum);
+        //console.log("Seconda posizione dell'array: " + arrayNum[1]);
+        arrayNum[1] = 2;
+        //console.log("Array modificato: " + arrayNum);
+        arrayNum.push(99);
+        //console.log("Array dopo l'aggiunta di un elemento: " + arrayNum);
+
+        /* 
+        Esercizio 1
+        Dobbiamo rappresentare digitalmente un'opera d'arte.
+        Crea un oggetto chiamato operaArte.
+        Inserisci le proprietà:
+        titolo: (es. "Notte Stellata")
+        artista: (es. "Vincent van Gogh")
+        anno: 1889
+        inPrestito: false (booleano)
+        Stampa in console una frase descrittiva combinando le proprietà: "L'opera [titolo] è stata realizzata da [artista] nel [anno]".
+        L'opera viene prestata a un altro museo. Cambia il valore di inPrestito a true.
+        */
+        let operaArte = { titolo:"Notte Stellata", artista:"Vincent van Gogh", anno:1989, inPrestito:false };
+        //console.log("L'opera " + operaArte.titolo + " è stata realizzata da " + operaArte.artista + " nel " + operaArte.anno);
+        operaArte.inPrestito = true;
+
+        /*
+        Esercizio 2
+        Hai tre progetti da mostrare nel portfolio.
+        Crea un array chiamato portfolio.
+        Dentro l'array, inserisci direttamente 3 oggetti (senza dargli un nome variabile, separati da virgola). Ogni oggetto rappresenta un progetto e ha: nome e categoria.
+        La sfida: Stampa in console il nome del secondo progetto.
+        */
+        let portfolio = [
+            {nome:"Sito Web",categoria:"UI Design"},
+            {nome:"Locandina",categoria:"Grafica"},
+            {nome:"App Mobile",categoria:"UX Design"}
+        ];
+        //console.log(portfolio[1].nome);
+
+        /* 
+        Esercizio 3 
+        Dichiariamo un array vuoto chiamato numeri.
+        Aggiungiamo un ciclo for che inserisce nell'array i numeri da 1 a 30.
+        Stampiamo sulla console l'array risultante.
+        Ora sommiamo tutti i numeri presenti nell'array e stampiamo il risultato sulla console.
+        */
+        let arrayNumeri = [];
+        let numeriTotali = 30;
+        for (let i = 1; i <= numeriTotali; i++) {
+            arrayNumeri.push(i);
+        }
+        console.log("Array generato di numeri: " + arrayNumeri);
+        let somma = 0;
+        //Definisci i = 0; finché i è minore di numeriTotali(25); incrementa i di 1 ad ogni ciclo
+        for (let i = 0; i < arrayNumeri.length; i++) {
+            somma += arrayNumeri[i];
+            //somma = somma + arrayNumeri[i]; 
+        }
+        console.log("Somma dei numeri nell'array: " + somma);
+
+        /* Cerca nell'array appena creato il numero 21 */
+        let numeroCercato = 21;
+        let trovato = false;
+        for (let i = 0; i < arrayNumeri.length; i++) { //length è la proprietà che indica la lunghezza dell'array
+            if (arrayNumeri[i] == numeroCercato) { 
+                trovato = true;
+                break; // Esce dal ciclo non appena trova il numero
+            }
+        }
+        console.log("Numero trovato" + trovato + " nell'array.");
+
+        
+        
+
+    </script>
+</body>
+</html>

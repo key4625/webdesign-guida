@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titolo</title>
+</head>
+
+<body>
+    <!-- Tag contenitore -->
+    <div id="sezione1">
+        <!-- Tag per i titoli -->
+        <h1>Titolo 1</h1>
+        <h2>Titolo 2</h2>
+        <h3>Titolo 3</h3>
+        <h4>Titolo 4</h4>
+        <h5>Titolo 5</h5>
+        <h6>Titolo 6</h6>
+        <!-- Testo e paragrafi -->
+        <p>Questo è il tag per inserire testo simile a paragrafo</p>
+        <p>Questo è un altro paragrafo, ogni paragrafo dovrebbe iniziare e finire con questi tag.</p>
+        <p>Questo testo è in <strong>grassetto</strong> mentre questo è in <em>corsivo</em></p>
+        <p>Questo testo è in <b>grassetto</b> mentre questo è in <i>corsivo</i></p>
+        <span>Questo è testo sulla stessa linea</span>
+        <span>Questo è sempre uno span</span>
+
+        <br> <!-- questo è un accapo forzato-->
+
+        <!-- Immagini con indirizzo di sorgente (path source) relativo o assoluto -->
+        <!-- il file si trova in una sottocartella rispetto al file dove sono, chiamata immagini -->
+        <img src="immagini/nomeimmagine.jpg" alt="testo alternativo">
+        <!-- il file si trova in una cartella a partire dalla root del sito web -->
+        <img src="/immagini/nomeimmagine.jpg">
+        <!-- il file si trova in rete -->
+        <img src="https://abamc.it/templates/yootheme/cache/d8/logo_abamc-d8843b27.webp">
+
+        <!-- link o ancore -->
+        <a href="https://wwww.google.it"></a> <!-- assoluto -->
+        <a href="chisiamo.html">Chi siamo</a> <!-- indirizzo relativo al file chisiamo.html -->
+        <a href="#sezione1">Link alla sezione</a> <!-- ancora su una sezione che ha #id dello stesso documento -->
+    </div>
+    <div id="sezione2">
+        <h2>Sezione 2</h2>
+        <!-- Elenchi ordinati o non ordinati -->
+        <h3>Elenchi ordinati o non ordinati</h3>
+        <ol>
+            <li>Punto 1</li>
+            <li>Punto 2</li>
+            <li>Punto 3</li>
+        </ol>
+        <ul>
+            <li>Punto 1</li>
+            <li>Punto 2</li>
+            <li>Punto 3</li>
+        </ul>  
+        <h3>Tabelle</h3>
+        <table>
+            <tr><!-- table row -->
+                <th>N°</th><!-- table header -->
+                <th>Nome</th>
+                <th>Forse</th>
+            </tr>
+            <tr>
+                <td>1</td><!-- table data -->
+                <td>Michele</td>
+                <td>Si</td>
+            </tr>
+            <tr>
+                <td>2</td><!-- table data -->
+                <td>Lucia</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

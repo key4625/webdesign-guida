@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida Bootstrap - Web Design Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-code-slash"></i> Web Design Guide
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="html-guide.html">HTML</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="css-guide.html">CSS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="bootstrap-guide.html">Bootstrap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript-guide.html">JavaScript</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="best-practices.html">Best Practices</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header bg-purple text-white py-4" style="background-color: #712cf9;">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-bootstrap-fill"></i> Guida Bootstrap</h1>
+            <p class="lead">Framework CSS per sviluppare siti responsive e mobile-first velocemente</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#introduzione">Introduzione</a>
+                        <a class="nav-link" href="#breakpoints">Breakpoints</a>
+                        <a class="nav-link" href="#grid">Grid System</a>
+                        <a class="nav-link" href="#utilities">Utilities</a>
+                        <a class="nav-link" href="#components">Componenti</a>
+                        <a class="nav-link" href="#resources">Risorse</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+
+                <!-- Introduzione -->
+                <section id="introduzione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-info-circle"></i> Introduzione</h2>
+                    <div class="content-box">
+                        <p>Bootstrap è un framework che ci permette di utilizzare una serie di classi già impostate per velocizzare lo sviluppo web.</p>
+                        
+                        <p>Per iniziare è possibile utilizzare il codice di partenza che troviamo nella documentazione ufficiale:</p>
+                        <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank" class="btn btn-outline-primary mb-3">
+                            <i class="bi bi-box-arrow-up-right"></i> Vai alla documentazione (Getting Started)
+                        </a>
+
+                        <div class="alert alert-info">
+                            <i class="bi bi-lightbulb"></i>
+                            <strong>Nota:</strong> Bootstrap richiede l'inclusione del file CSS nell'<code>&lt;head&gt;</code> e del file JS prima della chiusura del <code>&lt;body&gt;</code>.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Breakpoints -->
+                <section id="breakpoints" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-aspect-ratio"></i> Breakpoints</h2>
+                    <div class="content-box">
+                        <p>I breakpoints sono i punti di interruzione dove il layout può cambiare. Bootstrap utilizza i seguenti:</p>
+                        
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Sigla</th>
+                                    <th>Dimensione</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>X-Small</td>
+                                    <td><code>xs</code></td>
+                                    <td>&lt; 576px</td>
+                                </tr>
+                                <tr>
+                                    <td>Small</td>
+                                    <td><code>sm</code></td>
+                                    <td>≥ 576px</td>
+                                </tr>
+                                <tr>
+                                    <td>Medium</td>
+                                    <td><code>md</code></td>
+                                    <td>≥ 768px</td>
+                                </tr>
+                                <tr>
+                                    <td>Large</td>
+                                    <td><code>lg</code></td>
+                                    <td>≥ 992px</td>
+                                </tr>
+                                <tr>
+                                    <td>Extra Large</td>
+                                    <td><code>xl</code></td>
+                                    <td>≥ 1200px</td>
+                                </tr>
+                                <tr>
+                                    <td>XX-Large</td>
+                                    <td><code>xxl</code></td>
+                                    <td>≥ 1400px</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Grid System -->
+                <section id="grid" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-grid-3x3"></i> Grid System</h2>
+                    <div class="content-box">
+                        <p>Il sistema a griglia di Bootstrap utilizza una serie di contenitori, righe e colonne per impaginare e allineare i contenuti.</p>
+
+                        <h3>Elementi Base</h3>
+                        <ul class="list-group mb-4">
+                            <li class="list-group-item">
+                                <strong>container</strong>: Div contenitore che ha una larghezza massima fissa. Esiste anche <code>container-{dimensione}</code> (es. <code>container-fluid</code> per larghezza 100%).
+                            </li>
+                            <li class="list-group-item">
+                                <strong>row</strong>: Classe che definisce che il contenuto sarà gestito come una griglia. Utilizza <code>display: flex</code>.
+                            </li>
+                            <li class="list-group-item">
+                                <strong>col</strong>: Classe che definisce la singola colonna. Sintassi: <code>col-{dim}-{1-12}</code> dove <em>dim</em> è il breakpoint.
+                                <br><small class="text-muted">Gli elementi con classe col devono essere sempre contenuti all'interno di un elemento con classe row!</small>
+                            </li>
+                        </ul>
+
+                        <h3>Esempio Breakpoints e Colonne</h3>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;div class="row"&gt;
+    &lt;div class="col-12 col-sm-6 col-md-4 col-xl-3"&gt;
+        Contenuto Colonna
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                        </div>
+                        <div class="alert alert-secondary mt-3">
+                            <strong>Spiegazione:</strong>
+                            <ul>
+                                <li><code>col-12</code>: Occupa 12 colonne (tutta la larghezza) su tutti i dispositivi (default mobile).</li>
+                                <li><code>col-sm-6</code>: Occupa 6 colonne (50%) dai dispositivi <strong>sm</strong> in su.</li>
+                                <li><code>col-md-4</code>: Occupa 4 colonne (33%) dai dispositivi <strong>md</strong> in su (sovrascrive sm).</li>
+                                <li><code>col-xl-3</code>: Occupa 3 colonne (25%) dai dispositivi <strong>xl</strong> in su (sovrascrive md).</li>
+                            </ul>
+                        </div>
+
+                        <h3>Row Columns (Griglia Automatica)</h3>
+                        <p>Se le colonne sono tutte larghe uguali, invece di specificare la larghezza su ogni colonna, possiamo definirla nel genitore <code>row</code>:</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;div class="row row-cols-1 row-cols-md-2"&gt;
+    &lt;div class="col"&gt;Colonna 1&lt;/div&gt;
+    &lt;div class="col"&gt;Colonna 2&lt;/div&gt;
+    &lt;div class="col"&gt;Colonna 3&lt;/div&gt;
+    &lt;div class="col"&gt;Colonna 4&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                        </div>
+                        <p>In questo esempio avremo 1 colonna per riga su mobile e 2 colonne per riga da <strong>md</strong> in su.</p>
+
+                        <h3>Allineamento (Flexbox)</h3>
+                        <p>Poiché <code>row</code> usa Flexbox, possiamo usare le utility flex:</p>
+                        <ul>
+                            <li><code>align-items-*</code>: Allineamento verticale (start, center, end).</li>
+                            <li><code>justify-content-*</code>: Allineamento orizzontale (start, center, end, between, around).</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Utilities -->
+                <section id="utilities" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-tools"></i> Classi Utility</h2>
+                    <div class="content-box">
+                        
+                        <h4>Spacing (Margini e Padding)</h4>
+                        <p>Sintassi: <code>{property}{sides}-{breakpoint}-{size}</code></p>
+                        <ul>
+                            <li><strong>Property:</strong> <code>m</code> (margin), <code>p</code> (padding)</li>
+                            <li><strong>Sides:</strong> <code>t</code> (top), <code>b</code> (bottom), <code>s</code> (start/left), <code>e</code> (end/right), <code>x</code> (orizzontale), <code>y</code> (verticale)</li>
+                            <li><strong>Size:</strong> 0-5, auto</li>
+                        </ul>
+                        <p>Esempi: <code>mt-md-4</code> (margin-top 4 da md in su), <code>p-2</code> (padding 2 ovunque).</p>
+                        <a href="https://getbootstrap.com/docs/5.3/utilities/spacing/" target="_blank">Doc Spacing</a>
+
+                        <h4 class="mt-4">Colori</h4>
+                        <p>Bootstrap offre una palette di colori semantici:</p>
+                        <ul>
+                            <li><code>bg-{nome}</code>: Background (primary, secondary, success, danger, warning, info, light, dark, white, black).</li>
+                            <li><code>text-{nome}</code>: Colore testo (stessi colori).</li>
+                        </ul>
+                        <a href="https://getbootstrap.com/docs/5.3/utilities/background/" target="_blank">Doc Background</a>
+
+                        <h4 class="mt-4">Display e Visibilità</h4>
+                        <p>Controlla la proprietà display con <code>d-{breakpoint}-{value}</code>.</p>
+                        <p>Valori: <code>none</code>, <code>inline</code>, <code>inline-block</code>, <code>block</code>, <code>flex</code>, ecc.</p>
+                        
+                        <h5>Nascondere/Mostrare elementi</h5>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Nascondi su mobile, mostra da md in su --&gt;
+&lt;div class="d-none d-md-block"&gt;Visibile solo su Desktop&lt;/div&gt;
+
+&lt;!-- Mostra su mobile, nascondi da md in su --&gt;
+&lt;div class="d-block d-md-none"&gt;Visibile solo su Mobile&lt;/div&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Altre Utility</h4>
+                        <ul>
+                            <li><code>border-{nome}</code>: Colore bordo (richiede classe <code>border</code>).</li>
+                            <li><code>rounded-{0-5}</code>: Bordi arrotondati (o <code>rounded-circle</code>, <code>rounded-pill</code>).</li>
+                            <li><code>position-{nome}</code>: relative, static, absolute, fixed, sticky.</li>
+                            <li><code>text-{align}</code>: start, center, end.</li>
+                            <li><code>text-{transform}</code>: uppercase, lowercase, capitalize.</li>
+                            <li><code>fs-{1-6}</code>: Font size (1 è il più grande).</li>
+                            <li><code>img-fluid</code>: Rende l'immagine responsive (max-width: 100%, height: auto).</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Componenti -->
+                <section id="components" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-puzzle"></i> Componenti</h2>
+                    <div class="content-box">
+                        
+                        <h3>Bottoni</h3>
+                        <p>Classi base: <code>btn btn-{colore}</code>.</p>
+                        <div class="mb-3">
+                            <button class="btn btn-primary">Primary</button>
+                            <button class="btn btn-secondary">Secondary</button>
+                            <button class="btn btn-success">Success</button>
+                            <button class="btn btn-danger">Danger</button>
+                        </div>
+
+                        <h3>Cards</h3>
+                        <p>Componente flessibile per contenuti.</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;div class="card"&gt;
+    &lt;div class="card-body"&gt;
+        &lt;h5 class="card-title"&gt;Titolo Carta&lt;/h5&gt;
+        &lt;p class="card-text"&gt;Testo della carta.&lt;/p&gt;
+        &lt;a href="#" class="btn btn-primary"&gt;Azione&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                        </div>
+                        
+                        <h4>Griglia di Cards</h4>
+                        <p>Per creare una griglia di card, usa la struttura row/col:</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;div class="row"&gt;
+    &lt;div class="col-md-4"&gt;
+        &lt;div class="card"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-4"&gt;
+        &lt;div class="card"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                        </div>
+                        <a href="https://getbootstrap.com/docs/5.3/components/card/#grid-cards" target="_blank">Doc Grid Cards</a>
+
+                        <h3>Form</h3>
+                        <ul>
+                            <li><code>form-control</code>: Per input testuali, textarea.</li>
+                            <li><code>form-label</code>: Per le etichette.</li>
+                            <li><code>form-select</code>: Per i menu a tendina.</li>
+                        </ul>
+
+                        <h3>Altri Componenti Utili</h3>
+                        <ul>
+                            <li><strong>Navbar</strong>: Menu di navigazione responsive (<a href="https://getbootstrap.com/docs/5.3/components/navbar/#nav" target="_blank">Doc</a>).</li>
+                            <li><strong>Accordion</strong>: Liste collassabili.</li>
+                            <li><strong>Carousel</strong>: Slider di immagini.</li>
+                            <li><strong>Modal</strong>: Finestre di dialogo/popup.</li>
+                            <li><strong>Collapse</strong>: Per mostrare/nascondere contenuti.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Risorse -->
+                <section id="resources" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-link-45deg"></i> Risorse Utili</h2>
+                    <div class="content-box">
+                        <p>Per approfondire e trovare rapidamente le classi:</p>
+                        <a href="https://getbootstrap.com/docs/5.3/examples/cheatsheet/" target="_blank" class="btn btn-lg btn-success">
+                            <i class="bi bi-file-earmark-text"></i> Bootstrap Cheatsheet
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Navigazione Pagine -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="css-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Guida CSS
+                    </a>
+                    <a href="javascript-guide.html" class="btn btn-primary">
+                        Guida JavaScript <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-code-slash"></i> Web Design Guide</h5>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2025 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Attiva/disattiva tema scuro">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-html.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+</body>
+</html>

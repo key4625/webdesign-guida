@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida HTML - Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-code-slash"></i> Web Design Guide
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="html-guide.html">HTML</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="css-guide.html">CSS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript-guide.html">JavaScript</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="best-practices.html">Best Practices</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header bg-primary text-white py-4">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-filetype-html"></i> Guida HTML</h1>
+            <p class="lead">Tutti gli elementi HTML essenziali con esempi pratici</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#struttura-base">Struttura Base</a>
+                        <a class="nav-link" href="#titoli">Titoli</a>
+                        <a class="nav-link" href="#testo">Testo e Paragrafi</a>
+                        <a class="nav-link" href="#link">Link (Ancore)</a>
+                        <a class="nav-link" href="#immagini">Immagini</a>
+                        <a class="nav-link" href="#liste">Liste</a>
+                        <a class="nav-link" href="#tabelle">Tabelle</a>
+                        <a class="nav-link" href="#form">Form</a>
+                        <a class="nav-link" href="#semantic">Tag Semantici</a>
+                        <a class="nav-link" href="#multimedia">Multimedia</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                
+                <!-- Struttura Base -->
+                <section id="struttura-base" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-file-earmark-code"></i> Struttura Base di un Documento HTML</h2>
+                    <div class="content-box">
+                        <p>Ogni documento HTML inizia con questa struttura fondamentale:</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="it"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Titolo della Pagina&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Il contenuto della pagina va qui --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-info-circle"></i> Nota:</strong>
+                            <ul class="mb-0 mt-2">
+                                <li><code>&lt;!DOCTYPE html&gt;</code> - Dichiara che il documento è HTML5</li>
+                                <li><code>&lt;html lang="it"&gt;</code> - Tag radice, specifica la lingua</li>
+                                <li><code>&lt;head&gt;</code> - Contiene metadati e riferimenti esterni</li>
+                                <li><code>&lt;body&gt;</code> - Contiene il contenuto visibile della pagina</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Titoli -->
+                <section id="titoli" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-type-h1"></i> Titoli (Headings)</h2>
+                    <div class="content-box">
+                        <p>HTML offre 6 livelli di titoli, da <code>&lt;h1&gt;</code> (più importante) a <code>&lt;h6&gt;</code> (meno importante):</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;h1&gt;Titolo Principale (H1)&lt;/h1&gt;
+&lt;h2&gt;Sotto-titolo (H2)&lt;/h2&gt;
+&lt;h3&gt;Sezione (H3)&lt;/h3&gt;
+&lt;h4&gt;Sotto-sezione (H4)&lt;/h4&gt;
+&lt;h5&gt;Titolo Minore (H5)&lt;/h5&gt;
+&lt;h6&gt;Titolo Minimo (H6)&lt;/h6&gt;</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <h1 style="font-size: 2rem;">Titolo Principale (H1)</h1>
+                            <h2 style="font-size: 1.75rem;">Sotto-titolo (H2)</h2>
+                            <h3 style="font-size: 1.5rem;">Sezione (H3)</h3>
+                            <h4 style="font-size: 1.25rem;">Sotto-sezione (H4)</h4>
+                            <h5>Titolo Minore (H5)</h5>
+                            <h6>Titolo Minimo (H6)</h6>
+                        </div>
+                        <div class="alert alert-warning mt-3">
+                            <strong><i class="bi bi-exclamation-triangle"></i> Best Practice:</strong> Usa un solo <code>&lt;h1&gt;</code> per pagina per una corretta gerarchia SEO.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Testo e Paragrafi -->
+                <section id="testo" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-paragraph"></i> Testo e Paragrafi</h2>
+                    <div class="content-box">
+                        <h4>Paragrafi</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;p&gt;Questo è un paragrafo di testo.&lt;/p&gt;
+&lt;p&gt;Ogni paragrafo inizia su una nuova riga.&lt;/p&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Formattazione del Testo</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;p&gt;Testo &lt;strong&gt;importante (grassetto semantico)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Testo &lt;b&gt;in grassetto (solo visivo)&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;Testo &lt;em&gt;enfatizzato (corsivo semantico)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Testo &lt;i&gt;in corsivo (solo visivo)&lt;/i&gt;&lt;/p&gt;
+&lt;p&gt;Testo &lt;mark&gt;evidenziato&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;Testo &lt;del&gt;cancellato&lt;/del&gt; e &lt;ins&gt;inserito&lt;/ins&gt;&lt;/p&gt;
+&lt;p&gt;Testo &lt;small&gt;piccolo&lt;/small&gt; e &lt;sub&gt;pedice&lt;/sub&gt; e &lt;sup&gt;apice&lt;/sup&gt;&lt;/p&gt;</code></pre>
+                        </div>
+
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <p>Testo <strong>importante (grassetto semantico)</strong></p>
+                            <p>Testo <b>in grassetto (solo visivo)</b></p>
+                            <p>Testo <em>enfatizzato (corsivo semantico)</em></p>
+                            <p>Testo <i>in corsivo (solo visivo)</i></p>
+                            <p>Testo <mark>evidenziato</mark></p>
+                            <p>Testo <del>cancellato</del> e <ins>inserito</ins></p>
+                            <p>Testo <small>piccolo</small> e H<sub>2</sub>O e x<sup>2</sup></p>
+                        </div>
+
+                        <h4 class="mt-4">Elementi Inline</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;span&gt;Elemento inline&lt;/span&gt; &lt;span&gt;sulla stessa linea&lt;/span&gt;
+&lt;br&gt; &lt;!-- Interruzione di riga --&gt;
+&lt;span&gt;Nuova linea dopo il br&lt;/span&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Link -->
+                <section id="link" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-link-45deg"></i> Link (Ancore)</h2>
+                    <div class="content-box">
+                        <p>I link permettono di navigare tra pagine e sezioni:</p>
+                        
+                        <h4>Tipi di Link</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Link assoluto (esterno) --&gt;
+&lt;a href="https://www.google.it"&gt;Vai a Google&lt;/a&gt;
+
+&lt;!-- Link relativo (stesso sito) --&gt;
+&lt;a href="chisiamo.html"&gt;Chi Siamo&lt;/a&gt;
+
+&lt;!-- Link a sezione (ancora) --&gt;
+&lt;a href="#sezione1"&gt;Vai alla Sezione 1&lt;/a&gt;
+
+&lt;!-- Link email --&gt;
+&lt;a href="mailto:info@esempio.it"&gt;Contattaci&lt;/a&gt;
+
+&lt;!-- Link telefono --&gt;
+&lt;a href="tel:+393331234567"&gt;Chiamaci&lt;/a&gt;
+
+&lt;!-- Link con target (apri in nuova finestra) --&gt;
+&lt;a href="https://www.google.it" target="_blank" rel="noopener"&gt;
+    Apri in nuova finestra
+&lt;/a&gt;</code></pre>
+                        </div>
+
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <a href="https://www.google.it" class="btn btn-sm btn-outline-primary me-2">Link Esterno</a>
+                            <a href="#titoli" class="btn btn-sm btn-outline-secondary me-2">Link ad Ancora</a>
+                            <a href="mailto:info@esempio.it" class="btn btn-sm btn-outline-success">Link Email</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Immagini -->
+                <section id="immagini" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-image"></i> Immagini</h2>
+                    <div class="content-box">
+                        <p>Le immagini sono elementi fondamentali per il web:</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Immagine con percorso relativo --&gt;
+&lt;img src="immagini/foto.jpg" alt="Descrizione immagine"&gt;
+
+&lt;!-- Immagine con percorso assoluto --&gt;
+&lt;img src="/immagini/foto.jpg" alt="Descrizione"&gt;
+
+&lt;!-- Immagine da URL esterno --&gt;
+&lt;img src="https://esempio.com/foto.jpg" alt="Foto"&gt;
+
+&lt;!-- Immagine con dimensioni specifiche --&gt;
+&lt;img src="foto.jpg" alt="Foto" width="300" height="200"&gt;
+
+&lt;!-- Immagine responsive --&gt;
+&lt;img src="foto.jpg" alt="Foto" class="img-fluid"&gt;</code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-info-circle"></i> Attributo ALT:</strong> L'attributo <code>alt</code> è essenziale per l'accessibilità e il SEO. Descrive l'immagine per screen reader e motori di ricerca.
+                        </div>
+
+                        <div class="example-result">
+                            <h5>Esempio Pratico:</h5>
+                            <img src="https://via.placeholder.com/400x200/0d6efd/ffffff?text=Immagine+Esempio" alt="Immagine di esempio" class="img-fluid rounded shadow-sm">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Liste -->
+                <section id="liste" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-list-ul"></i> Liste</h2>
+                    <div class="content-box">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Lista Non Ordinata (ul)</h4>
+                                <div class="code-example">
+                                    <pre><code class="language-html">&lt;ul&gt;
+    &lt;li&gt;Primo elemento&lt;/li&gt;
+    &lt;li&gt;Secondo elemento&lt;/li&gt;
+    &lt;li&gt;Terzo elemento&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                                </div>
+                                <div class="example-result">
+                                    <h5>Risultato:</h5>
+                                    <ul>
+                                        <li>Primo elemento</li>
+                                        <li>Secondo elemento</li>
+                                        <li>Terzo elemento</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Lista Ordinata (ol)</h4>
+                                <div class="code-example">
+                                    <pre><code class="language-html">&lt;ol&gt;
+    &lt;li&gt;Primo passo&lt;/li&gt;
+    &lt;li&gt;Secondo passo&lt;/li&gt;
+    &lt;li&gt;Terzo passo&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+                                </div>
+                                <div class="example-result">
+                                    <h5>Risultato:</h5>
+                                    <ol>
+                                        <li>Primo passo</li>
+                                        <li>Secondo passo</li>
+                                        <li>Terzo passo</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">Lista di Definizioni</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;dl&gt;
+    &lt;dt&gt;HTML&lt;/dt&gt;
+    &lt;dd&gt;HyperText Markup Language&lt;/dd&gt;
+    &lt;dt&gt;CSS&lt;/dt&gt;
+    &lt;dd&gt;Cascading Style Sheets&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tabelle -->
+                <section id="tabelle" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-table"></i> Tabelle</h2>
+                    <div class="content-box">
+                        <p>Le tabelle organizzano i dati in righe e colonne:</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;N°&lt;/th&gt;
+            &lt;th&gt;Nome&lt;/th&gt;
+            &lt;th&gt;Cognome&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;1&lt;/td&gt;
+            &lt;td&gt;Mario&lt;/td&gt;
+            &lt;td&gt;Rossi&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;2&lt;/td&gt;
+            &lt;td&gt;Laura&lt;/td&gt;
+            &lt;td&gt;Bianchi&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+                        </div>
+
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <table class="table table-striped table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>N°</th>
+                                        <th>Nome</th>
+                                        <th>Cognome</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mario</td>
+                                        <td>Rossi</td>
+                                        <td>mario.rossi@email.it</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Laura</td>
+                                        <td>Bianchi</td>
+                                        <td>laura.bianchi@email.it</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Giuseppe</td>
+                                        <td>Verdi</td>
+                                        <td>giuseppe.verdi@email.it</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 class="mt-4">Colspan e Rowspan</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td colspan="2"&gt;Cella che occupa 2 colonne&lt;/td&gt;
+        &lt;td&gt;Normale&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td rowspan="2"&gt;Cella che occupa 2 righe&lt;/td&gt;
+        &lt;td&gt;Normale&lt;/td&gt;
+        &lt;td&gt;Normale&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Form -->
+                <section id="form" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-input-cursor-text"></i> Form e Input</h2>
+                    <div class="content-box">
+                        <p>I form permettono agli utenti di inviare dati:</p>
+                        
+                        <h4>Struttura Base di un Form</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;form action="/submit" method="POST"&gt;
+    &lt;label for="nome"&gt;Nome:&lt;/label&gt;
+    &lt;input type="text" id="nome" name="nome" required&gt;
+    
+    &lt;input type="submit" value="Invia"&gt;
+&lt;/form&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Tipi di Input</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Input testo --&gt;
+&lt;input type="text" placeholder="Nome"&gt;
+
+&lt;!-- Input email --&gt;
+&lt;input type="email" placeholder="email@esempio.it"&gt;
+
+&lt;!-- Input password --&gt;
+&lt;input type="password" placeholder="Password"&gt;
+
+&lt;!-- Input numero --&gt;
+&lt;input type="number" min="0" max="100"&gt;
+
+&lt;!-- Input data --&gt;
+&lt;input type="date"&gt;
+
+&lt;!-- Input ora --&gt;
+&lt;input type="time"&gt;
+
+&lt;!-- Input colore --&gt;
+&lt;input type="color"&gt;
+
+&lt;!-- Input file --&gt;
+&lt;input type="file"&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Radio Button</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;input type="radio" id="opzione1" name="scelta" value="1"&gt;
+&lt;label for="opzione1"&gt;Opzione 1&lt;/label&gt;
+
+&lt;input type="radio" id="opzione2" name="scelta" value="2"&gt;
+&lt;label for="opzione2"&gt;Opzione 2&lt;/label&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Checkbox</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;input type="checkbox" id="sport" name="interessi" value="sport"&gt;
+&lt;label for="sport"&gt;Sport&lt;/label&gt;
+
+&lt;input type="checkbox" id="musica" name="interessi" value="musica"&gt;
+&lt;label for="musica"&gt;Musica&lt;/label&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Select (Dropdown)</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;select name="citta"&gt;
+    &lt;option value="roma"&gt;Roma&lt;/option&gt;
+    &lt;option value="milano"&gt;Milano&lt;/option&gt;
+    &lt;option value="napoli"&gt;Napoli&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Textarea</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;textarea name="messaggio" rows="4" cols="50"&gt;
+Testo predefinito...
+&lt;/textarea&gt;</code></pre>
+                        </div>
+
+                        <div class="example-result">
+                            <h5>Form Completo di Esempio:</h5>
+                            <form class="border p-4 rounded bg-light">
+                                <div class="mb-3">
+                                    <label for="exNome" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="exNome" placeholder="Inserisci il tuo nome">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="exEmail" placeholder="email@esempio.it">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exData" class="form-label">Data di nascita</label>
+                                    <input type="date" class="form-control" id="exData">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label d-block">Genere</label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="genere" id="maschile">
+                                        <label class="form-check-label" for="maschile">Maschile</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="genere" id="femminile">
+                                        <label class="form-check-label" for="femminile">Femminile</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exCitta" class="form-label">Città</label>
+                                    <select class="form-select" id="exCitta">
+                                        <option>Roma</option>
+                                        <option>Milano</option>
+                                        <option>Napoli</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exNote" class="form-label">Note</label>
+                                    <textarea class="form-control" id="exNote" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Invia</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tag Semantici -->
+                <section id="semantic" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-diagram-3"></i> Tag Semantici HTML5</h2>
+                    <div class="content-box">
+                        <p>I tag semantici danno significato alla struttura della pagina, migliorando l'accessibilità e il SEO:</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;header&gt;
+    &lt;!-- Intestazione del sito o sezione --&gt;
+    &lt;nav&gt;
+        &lt;!-- Menu di navigazione --&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+    &lt;!-- Contenuto principale della pagina --&gt;
+    &lt;article&gt;
+        &lt;!-- Contenuto autonomo (articolo, post) --&gt;
+        &lt;section&gt;
+            &lt;!-- Sezione tematica --&gt;
+        &lt;/section&gt;
+    &lt;/article&gt;
+    
+    &lt;aside&gt;
+        &lt;!-- Contenuto correlato (sidebar) --&gt;
+    &lt;/aside&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+    &lt;!-- Piè di pagina --&gt;
+&lt;/footer&gt;</code></pre>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <h5><i class="bi bi-box"></i> Altri Tag Semantici:</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item"><code>&lt;figure&gt;</code> - Contenuto illustrativo</li>
+                                    <li class="list-group-item"><code>&lt;figcaption&gt;</code> - Didascalia di figure</li>
+                                    <li class="list-group-item"><code>&lt;mark&gt;</code> - Testo evidenziato</li>
+                                    <li class="list-group-item"><code>&lt;time&gt;</code> - Data/ora</li>
+                                    <li class="list-group-item"><code>&lt;details&gt;</code> - Contenuto espandibile</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Esempio Figure:</h5>
+                                <div class="code-example">
+                                    <pre><code class="language-html">&lt;figure&gt;
+    &lt;img src="foto.jpg" alt="Foto"&gt;
+    &lt;figcaption&gt;
+        Didascalia della foto
+    &lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Multimedia -->
+                <section id="multimedia" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-play-circle"></i> Elementi Multimedia</h2>
+                    <div class="content-box">
+                        <h4>Video</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;video width="640" height="360" controls&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    &lt;source src="video.webm" type="video/webm"&gt;
+    Il tuo browser non supporta il tag video.
+&lt;/video&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Audio</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;audio controls&gt;
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+    &lt;source src="audio.ogg" type="audio/ogg"&gt;
+    Il tuo browser non supporta il tag audio.
+&lt;/audio&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">iFrame (Incorporare contenuti esterni)</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/VIDEO_ID"
+    frameborder="0" 
+    allowfullscreen&gt;
+&lt;/iframe&gt;</code></pre>
+                        </div>
+
+                        <div class="alert alert-success mt-4">
+                            <strong><i class="bi bi-lightbulb"></i> Suggerimento:</strong> Usa sempre l'attributo <code>controls</code> per permettere agli utenti di controllare la riproduzione. Fornisci formati alternativi per compatibilità cross-browser.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigazione Pagine -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="index.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Torna alla Home
+                    </a>
+                    <a href="css-guide.html" class="btn btn-primary">
+                        Guida CSS <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-code-slash"></i> Web Design Guide</h5>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2025 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Cambia tema">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+</body>
+</html>

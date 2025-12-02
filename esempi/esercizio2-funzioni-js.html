@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 2</title>
+</head>
+<body>
+    <h1>Esercizi di Javascript</h1>
+    <script>
+        let lato1 = 4;
+        let lato2 = 8;
+        
+        //Dichiaro le funzioni, in questo momento non vengono eseguire ma solo definite
+        function calcolaArea(l1, l2) {
+            let area = l1 * l2;
+            console.log("L'area del rettangolo è: " + area);
+        }
+        function calcolaPerimetro(l1, l2) {
+            if(l1 < 0 || l2 < 0){
+                console.log("I lati non possono essere negativi");
+                return;
+            }
+            return 2 * (l1 + l2);
+        }
+
+        //Esegue la funzione calcolaArea che stampa l'area del rettangolo
+        calcolaArea(lato1, lato2);
+        //Esegue la funzione calcolaPerimetro che restituisce il perimetro del rettangolo
+        let areaPerimetro = calcolaPerimetro(lato1, lato2);
+        console.log("Il perimetro del rettangolo è: " + areaPerimetro);
+
+        calcolaArea(3,2);
+        calcolaPerimetro(5, 10);
+
+     
+    </script>
+</body>
+</html>

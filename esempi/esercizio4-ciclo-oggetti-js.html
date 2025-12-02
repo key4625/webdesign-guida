@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 4 - Ciclo oggetti JS</title>
+    <style>
+        .persona-dettagliata{
+            border: 1px solid #000;
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Esercizio 4: Ciclo su oggetti in JavaScript</h1>
+    <p>Crea un array di oggetti in JavaScript che rappresentano persone</p>
+    <p>Ogni persona avrà i seguenti attributi</p>
+    <ul>
+        <li>Nome</li>
+        <li>Cognome</li>
+        <li>Email</li>
+        <li>Telefono</li>
+    </ul>
+    <p>Stampiamo nell'elenco qui sotto la lista delle persone</p>
+    <ul id="elencoPersone"></ul>
+    <p>Stampiamo in un div la lista delle persone in maniera dettagliata</p>
+    <div id="elencoDettagliatoPersone"></div>
+    <script>
+        //Dichiarazione dell'array di oggetti
+        let persone = [
+            {nome:"Mario", cognome:"Rossi", email:"mario.rossi@example.com", telefono:"1234567890"},
+            {nome:"Luigi", cognome:"Verdi", email:"luigi.verdi@example.com", telefono:"0987654321"},
+            {nome:"dasfd", cognome:"Verdi", email:"luigi.verdi@example.com", telefono:"0987654321"},
+            {nome:"sadfas", cognome:"Verdi", email:"luigi.verdi@example.com", telefono:"0987654321"},
+            {nome:"Anna", cognome:"Bianchi", email:null, telefono:null}
+        ];
+
+        function stampaPersone(arrayPersone){
+            let ulElenco = document.getElementById("elencoPersone");
+            //Ciclo sugli oggetti dell'array
+            for(let i = 0; i < arrayPersone.length; i++){
+                let persona = arrayPersone[i]; //prendo l'oggetto corrente
+                let li = document.createElement("li"); //creo un elemento lista
+                li.innerHTML = persona.nome + " " + persona.cognome; //imposto il contenuto
+                ulElenco.appendChild(li); //aggiungo l'elemento alla lista
+            }
+        }
+
+        function stampaPersoneDettagliato(arrayPersone){
+            let divElencoDettagliato = document.getElementById("elencoDettagliatoPersone");
+            for(let i = 0; i < arrayPersone.length; i++){
+                let persona = arrayPersone[i];
+                //Creo il div per ogni persona
+                let divSingolo = document.createElement("div");
+                    divSingolo.classList.add("persona-dettagliata");
+                    let titolo = document.createElement("h3");
+                    titolo.innerHTML = persona.nome + " " + persona.cognome;
+                    let altreInfo = document.createElement("p");
+                    /* persona.email esiste ? se si allora stampo persona.email altrimenti stampo "Non disponibile" */
+                    altreInfo.innerHTML = "Email: " + (persona.email ? persona.email : "Non disponibile") + "<br>";
+                    altreInfo.innerHTML += "Telefono: " + (persona.telefono ? persona.telefono : "Non disponibile");
+                    divSingolo.appendChild(titolo);
+                    divSingolo.appendChild(altreInfo);
+                //Aggiungo il div singolo al div principale
+                divElencoDettagliato.appendChild(divSingolo);
+            }
+        }
+
+        //Chiamo la funzione per stampare le persone
+        stampaPersone(persone);
+        stampaPersoneDettagliato(persone);
+    </script>
+
+</body>
+</html>

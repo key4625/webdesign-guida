@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esempio Javascript o JS</title>
+   
+</head>
+<body>
+    <h1 >Esempio Javascript o JS</h1>
+    
+    <script>
+    /* 1. DICHIARAZIONI DELLE VARIABILI */
+        /*
+        Var, Let e Const sono le tre parole chiave per dichiarare variabili in JavaScript
+        Ovvero stiamo dicendo al sistema di prendere una scatola, mettere un'etichetta e 
+        inserire un valore all'interno della scatola.
+        
+        L'etichetta della scatola deve essere unica nel contesto, è case sensitive, non 
+        può iniziare con un numero e non può contenere spazi o caratteri speciali 
+        
+        Il valore della scatola può essere di diversi tipi: numerico, stringa, booleano, array, oggetto, ecc.
+        */
+        
+        //Variabili semplici    
+        var nome = "Mario"; // Variabile globale. in disuso nelle versioni moderne di JS 
+        let eta = 30;      // Variabile a blocco
+        const citta = "Roma"; // Costante
+
+        /* Tipi di variabile */ 
+        let numeroIntero = 42;          // Numero intero
+        let numeroDecimale = 3.14;      // Numero decimale
+        let stringaTesto = "Ciao Mondo"; // Stringa di testo
+        let booleanoVero = true;        // Valore booleano vero
+        let booleanoFalso = false;      // Valore booleano falso
+
+        //Tipi più complessi
+        let arrayEsempio = [54, 23, 35, 7, 6]; // Array
+        let oggettoEsempio = {nome:"Andrea", eta: 25, citta:"Roma"}; //Oggetto
+        let oggetto1 = {nome:"Luca", eta: 25, citta:"Roma"};
+        let oggetto2 = {nome:"Paolo", eta: 25, citta:"Roma"};
+
+        //Leggere posizione di un array o proprietà di un oggetto
+        let primoElArray  = arrayEsempio[0]; // Accesso al primo elemento dell'array
+        let nomeOggetto  = oggettoEsempio.nome; // Accesso alla proprietà 'nome' dell'oggetto
+        
+        //Array multidimensionali e array di array
+        let arrayEsempio1 = [ "rosso", "verde", "blu" ]; // Array di stringhe
+        let arrayEsempio2 = [ 12, "ciao", true, 45.6 ]; // Array misto
+        let arrayDiArray = [arrayEsempio, arrayEsempio1, arrayEsempio2]; // Array di array
+        let arrayEsempio3 = [ [1, 2], [3, 4], [5, 6] ]; // Array multidimensionale
+        let listaPersone = [oggettoEsempio, oggetto1, oggetto2]; // Array di oggetti
+        let elementoArrayMultidim = arrayEsempio3[1][0]; // Accesso al primo elemento del secondo array (valore 3)
+
+        //Modifica dei valori delle variabili
+        eta = 31; // Modifica della variabile eta
+        nome = "Luigi"; // Modifica della variabile nome
+        //Array
+        arrayEsempio[2] = 99; // Modifica del terzo elemento dell'array
+        arrayEsempio.push(88); // Aggiunta di un nuovo elemento alla fine dell'array
+        arrayEsempio.pop(); // Rimozione dell'ultimo elemento dell'array
+        arrayEsempio.splice(2, 1); // Rimuove 1 elemento a partire dall'indice 2
+        //Oggetto
+        oggettoEsempio.eta = 26; // Modifica della proprietà 'eta' dell'oggetto
+        oggettoEsempio.cognome = "Rossi"; // Aggiunta di una nuova proprietà 'cognome' all'oggetto
+        
+    /* 2. STAMPA SULLA CONSOLE */
+        console.log("Ciao, mi chiamo " + nome + ", ho " + eta + " anni e vivo a " + citta + ".");
+
+    /* 3. CONDIZIONE  */
+        if (isNaN(eta)) { // Controlla se eta non è un numero
+            console.error("Attenzione: l'età inserita non è un numero valido.");
+        } else {
+            if (eta >= 18) { 
+                console.log(nome + " è maggiorenne.");
+            } else {
+                console.log(nome + " è minorenne.");
+            }
+        } 
+        /* CONDIZIONE MULTIPLA */
+        if(eta < 7) {
+            console.log(nome + " è un bambino.");
+        } else if(eta < 18) {
+            console.log(nome + " è un adolescente.");
+        } else if(eta < 65) {
+            console.log(nome + " è un adulto.");
+        } else {
+            console.log(nome + " è un anziano.");
+        }
+        
+    /* 4. OPERAZIONI TRA NUMERI, calcolo perimetro ed area di un rettangolo */
+        let base = 5;
+        let altezza = 10;
+        let perimetro = 2 * (base + altezza); // 2*(5+10) = 30
+        let area = base * altezza;
+        console.log("Il perimetro del rettangolo è: " + perimetro);
+        console.log("L'area del rettangolo è: " + area);
+
+        //Calcolo del maggiore tra 3 numeri
+        let a = 57;
+        let b = 25;
+        let c = 20;
+
+        let max = a;
+        if(b > max) {
+            max = b;
+        }
+        if(c > max) {
+            max = c;
+        }
+        console.log("Il numero massimo è " + max);
+
+    /* 5. Cicli */
+        //Ciclo for
+        console.log("Ciclo for:");
+        //Definisci i = 0; finché i è minore di 10; incrementa i di 1 ad ogni ciclo
+        for(let i = 0; i < 10; i = i + 1) {
+            console.log("Elemento " + i);
+        }
+
+        //Ciclo while
+        console.log("Ciclo while:");
+        let condizione = true;
+        let j = 0;
+        while(condizione) {
+            console.log("Elemento " + j);
+            j = j + 1;
+            if (j >= 6) {
+                condizione = false;
+            }
+        }
+
+
+    </script>
+</body>
+</html>
