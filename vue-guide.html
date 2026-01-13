@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida Vue.js - Manuale Web Design</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- PrismJS for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Vue Specific Styles */
+        :root {
+            --vue-green: #42b883;
+            --vue-dark: #35495e;
+        }
+
+        .bg-vue {
+            background-color: var(--vue-green);
+            color: white;
+        }
+
+        .text-vue {
+            color: var(--vue-green);
+        }
+
+        .section-title {
+            border-left: 5px solid var(--vue-green);
+            padding-left: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .concept-card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            height: 100%;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .anatomy-block {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+        }
+        
+        .anatomy-template { background-color: #e3f2fd; color: #0d47a1; border-left: 5px solid #2196f3; }
+        .anatomy-script { background-color: #fff3e0; color: #e65100; border-left: 5px solid #ff9800; }
+        .anatomy-style { background-color: #f3e5f5; color: #7b1fa2; border-left: 5px solid #9c27b0; }
+
+        /* Dark Mode compatibility helpers (if needed) */
+        [data-bs-theme="dark"] .anatomy-template { background-color: #1a3b5c; color: #90caf9; }
+        [data-bs-theme="dark"] .anatomy-script { background-color: #4a3b2b; color: #ffcc80; }
+        [data-bs-theme="dark"] .anatomy-style { background-color: #3b2b4a; color: #ce93d8; }
+
+        .step-badge {
+            background-color: var(--vue-dark);
+            color: white;
+            padding: 0.25em 0.6em;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="border-bottom: 3px solid var(--vue-green);">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-code-slash text-vue"></i> Web Design Guide
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="html-guide.html">HTML</a></li>
+                    <li class="nav-item"><a class="nav-link" href="css-guide.html">CSS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="bootstrap-guide.html">Bootstrap</a></li>
+                    <li class="nav-item"><a class="nav-link" href="javascript-guide.html">JavaScript</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="vue-guide.html">Vue.js</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-vue py-5 mb-4">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold"><i class="bi bi-box-seam"></i> Guida Vue.js</h1>
+            <p class="lead text-white-50">Il framework progressivo per interfacce utente moderne</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3 mb-4">
+                <div class="list-group sticky-top" style="top: 100px;">
+                    <a href="#intro" class="list-group-item list-group-item-action fw-bold active-vue">Introduzione</a>
+                    <a href="#anatomia" class="list-group-item list-group-item-action">Anatomia Componente</a>
+                    <a href="#direttive" class="list-group-item list-group-item-action">Le Armi (Direttive)</a>
+                    <a href="#setup" class="list-group-item list-group-item-action fw-bold ">Setup & Installazione</a>
+                    <a href="#laboratorio" class="list-group-item list-group-item-action fw-bold">Laboratorio Pratico</a>
+                    <a href="#step1" class="list-group-item list-group-item-action ps-4">1. Ordine e Componenti</a>
+                    <a href="#step2" class="list-group-item list-group-item-action ps-4">2. Props</a>
+                    <a href="#step3" class="list-group-item list-group-item-action ps-4">3. Reattività</a>
+                    <a href="#step4" class="list-group-item list-group-item-action ps-4">4. Router</a>
+                    <a href="#step5" class="list-group-item list-group-item-action ps-4">5. API & Fetch</a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                
+                <!-- SEZIONE 1: TEORIA -->
+                <div class="mb-5">
+                    <span class="badge bg-primary mb-2">Teoria Essenziale</span>
+                    <h2 class="display-6 fw-bold text-vue">Capire la Struttura</h2>
+                    <hr>
+
+                    <!-- Intro -->
+                    <section id="intro" class="mb-5">
+                        <h3><i class="bi bi-question-circle-fill text-vue"></i> Perché Vue.js?</h3>
+                        <p class="lead">Immagina di costruire una casa Lego senza istruzioni e mischiando tutti i pezzi in un unico scatolone. Ecco, quello è il "JavaScript Spaghetti Code".</p>
+                        <p>Vue.js è come un <strong>organizzatore</strong>: ti costringe a dividere i pezzi per colore e funzione, mettendoli in scatolette ordinate (i Componenti). In questo modo, se devi cambiare il tetto, sai esattamente dove trovare i pezzi senza rompere le fondamenta.</p>
+                        <div class="alert alert-success border-0 shadow-sm">
+                            <i class="bi bi-check-circle-fill me-2"></i> <strong>Vantaggio:</strong> Codice pulito, riutilizzabile e facile da leggere.
+                        </div>
+                    </section>
+
+                    <!-- Anatomia -->
+                    <section id="anatomia" class="mb-5">
+                        <h3><i class="bi bi-layers-fill text-vue"></i> L'Anatomia di un Componente (.vue)</h3>
+                        <p>Ogni file Vue è un piccolo mondo autonomo diviso in tre piani:</p>
+                        
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-4">
+                                <div class="anatomy-block anatomy-template">
+                                    &lt;template&gt;<br>
+                                    <small class="fw-normal">La Struttura (HTML)</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="anatomy-block anatomy-script">
+                                    &lt;script&gt;<br>
+                                    <small class="fw-normal">Il Cervello (Logic)</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="anatomy-block anatomy-style">
+                                    &lt;style&gt;<br>
+                                    <small class="fw-normal">Il Vestito (CSS)</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card bg-dark text-white border-0 shadow">
+                            <div class="card-header border-bottom border-secondary code-header">
+                                <small>App.vue</small>
+                            </div>
+                            <div class="card-body p-0">
+<pre class="m-0 rounded-0"><code class="language-html">&lt;template&gt;
+  &lt;!-- Qui va l'HTML --&gt;
+  &lt;div class="card"&gt;
+    &lt;h1&gt;{{ titolo }}&lt;/h1&gt;
+    &lt;button @click="saluta"&gt;Cliccami&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  // 1. DATA: La memoria del componente
+  data() {
+    return {
+      titolo: "Ciao classe!"
+    }
+  },
+  // 2. METHODS: Le azioni che può compiere
+  methods: {
+    saluta() {
+      alert("Benvenuto in Vue.js!");
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+/* Qui va il CSS solo per questo componente */
+h1 { color: blue; }
+&lt;/style&gt;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Direttive -->
+                    <section id="direttive" class="mb-5">
+                        <h3><i class="bi bi-lightning-fill text-vue"></i> Le "Armi" principali (Direttive)</h3>
+                        <p>Le direttive sono istruzioni speciali che diamo all'HTML per renderlo intelligente. Iniziano tutte con <code>v-</code>.</p>
+
+                        <div class="row g-4 mt-2">
+                            <!-- Interpolazione -->
+                            <div class="col-md-6">
+                                <div class="card concept-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-vue">{{ Mustache }}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Interpolazione</h6>
+                                        <p class="card-text">Stampa il valore di una variabile direttamente nell'HTML.</p>
+                                        <pre><code class="language-html">&lt;p&gt;Ciao {{ nomeUtente }}&lt;/p&gt;</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- v-if -->
+                            <div class="col-md-6">
+                                <div class="card concept-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-danger">v-if / v-else</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Condizioni</h6>
+                                        <p class="card-text">Decide se mostrare o nascondere un elemento.</p>
+                                        <pre><code class="language-html">&lt;p v-if="loggato"&gt;Benvenuto&lt;/p&gt;
+&lt;p v-else&gt;Accedi&lt;/p&gt;</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- v-for -->
+                            <div class="col-md-6">
+                                <div class="card concept-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-warning">v-for</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Cicli</h6>
+                                        <p class="card-text">Ripete un elemento per ogni oggetto in una lista.</p>
+                                        <pre><code class="language-html">&lt;li v-for="alunno in classe"&gt;
+  {{ alunno }}
+&lt;/li&gt;</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- v-on -->
+                            <div class="col-md-6">
+                                <div class="card concept-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-success">@click (v-on)</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Eventi</h6>
+                                        <p class="card-text">Ascolta eventi come il click del mouse.</p>
+                                        <pre><code class="language-html">&lt;button @click="faiQualcosa"&gt;
+  Invia
+&lt;/button&gt;</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- SEZIONE 1.5: SETUP -->
+                <div class="mb-5" id="setup">
+                    <span class="badge bg-info text-dark mb-2">Preparazione</span>
+                    <h2 class="display-6 fw-bold text-vue">Getting Started</h2>
+                    <hr>
+                    
+                    <section class="mb-5">
+                        <h3><i class="bi bi-tools text-vue"></i> Prerequisiti & Installazione</h3>
+                        <p>Prima di iniziare il laboratorio, assicurati di avere gli strumenti giusti. Al giorno d'oggi non si scaricano più i file <code>.js</code> a mano, ma si usa un ambiente di sviluppo professionale.</p>
+                        
+                        <div class="row g-4 mt-2">
+                            <div class="col-md-6">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-success"><i class="bi bi-box-seam"></i> 1. Node.js</h5>
+                                        <p class="card-text">È il motore che fa girare gli strumenti moderni. Scarica la versione <strong>LTS</strong> (Long Term Support) dal sito ufficiale. Include <code>npm</code>, il gestore di pacchetti necessario per installare Vue.</p>
+                                        <a href="https://nodejs.org/" target="_blank" class="btn btn-outline-success btn-sm">Scarica Node.js</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-primary"><i class="bi bi-code-square"></i> 2. VS Code</h5>
+                                        <p class="card-text">L'editor che useremo. Installa anche l'estensione ufficiale <strong>Vue - Official</strong> per avere i colori giusti nel codice.</p>
+                                        <a href="https://code.visualstudio.com/" target="_blank" class="btn btn-outline-primary btn-sm">Scarica VS Code</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h4><i class="bi bi-terminal text-vue"></i> Come creare il progetto</h4>
+                            <p>Dimentica il mouse per un attimo! Apri VS Code e usa il <strong>Terminale Integrato</strong> (premi <code>CTRL + ò</code> oppure vai su Menu > Terminale > Nuovo Terminale).</p>
+                            
+                            <div class="card bg-dark text-white mb-3">
+                                <div class="card-header border-secondary">
+                                    <small class="text-white-50">Terminale</small>
+                                </div>
+                                <div class="card-body font-monospace">
+                                    <p class="mb-2 text-white-50">// 1. Lancia il comando magico per creare un progetto Vue</p>
+                                    <p class="mb-4"><span class="text-success">➜</span> <span class="text-warning">npm</span> create vue@latest</p>
+                                    
+                                    <p class="mb-2 text-white-50">// 2. Rispondi alle domande (Sì/No)</p>
+                                    <p class="mb-4 text-white-50">
+                                        Project name: <span class="text-white">vue-project</span><br>
+                                        Add TypeScript? <span class="text-white">No</span><br>
+                                        Add JSX Support? <span class="text-white">No</span><br>
+                                        Add Vue Router? <span class="text-white">Sì (ci servirà!)</span><br>
+                                        ... (tutto No per il resto)
+                                    </p>
+
+                                    <p class="mb-2 text-white-50">// 3. Entra nella cartella e accendi i motori</p>
+                                    <p class="mb-1"><span class="text-success">cd</span> vue-project</p>
+                                    <p class="mb-1"><span class="text-success">npm</span> install</p>
+                                    <p class="mb-0"><span class="text-success">npm</span> run dev</p>
+                                </div>
+                            </div>
+                            
+                            <div class="alert alert-success border-0 shadow-sm">
+                                <i class="bi bi-check-circle-fill me-2"></i> Fatto! Ora apri il browser all'indirizzo <strong>http://localhost:5173</strong> per vedere il tuo primo sito in Vue.
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- SEZIONE 2: PRATICA -->
+                <div class="mt-5">
+                    <span class="badge bg-warning text-dark mb-2">Laboratorio</span>
+                    <h2 class="display-6 fw-bold text-vue" id="laboratorio">Progetto: Il Sito della Classe</h2>
+                    <p>Creiamo un mini-sito passo dopo passo per capire come i pezzi si uniscono.</p>
+                    <hr>
+
+                    <!-- Step 1 -->
+                    <section id="step1" class="mb-5">
+                        <h4><span class="step-badge">Step 1</span> Ordine e Componenti</h4>
+                        <p><strong>Obiettivo:</strong> Pulire e organizzare. Invece di scrivere tutto in un solo file, creiamo dei pezzi Lego.</p>
+                        <p>Struttura file da creare:</p>
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item"><i class="bi bi-file-earmark-code"></i> <code>components/Header.vue</code> (Contiene il titolo)</li>
+                            <li class="list-group-item"><i class="bi bi-file-earmark-code"></i> <code>components/Footer.vue</code> (Contiene il copyright)</li>
+                        </ul>
+
+                        <p>Come usarli in <code>App.vue</code>:</p>
+                        <pre><code class="language-html">&lt;script&gt;
+// 1. IMPORTARE
+import HeaderClasse from './components/Header.vue'
+import FooterClasse from './components/Footer.vue'
+
+export default {
+  // 2. REGISTRARE
+  components: {
+    HeaderClasse,
+    FooterClasse
+  }
+}
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div id="app"&gt;
+    &lt;!-- 3. USARE --&gt;
+    &lt;HeaderClasse /&gt;
+    &lt;main&gt;Contenuto principale...&lt;/main&gt;
+    &lt;FooterClasse /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+                        <div class="alert alert-light border-start border-4 border-info">
+                            <small><strong>Concetto Chiave (Modularità):</strong> "Divide et Impera". Dividere il problema grande in problemi piccoli risolvibili separatamente.</small>
+                        </div>
+                    </section>
+
+                    <!-- Step 2 -->
+                    <section id="step2" class="mb-5">
+                        <h4><span class="step-badge">Step 2</span> Comunicazione (Props)</h4>
+                        <p><strong>Obiettivo:</strong> Rendere i componenti dinamici. Vogliamo che l'Header scriva il nome della classe, ma il nome glielo deve passare l'App principale.</p>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Padre (App.vue)</h6>
+                                <pre><code class="language-html">&lt;template&gt;
+   &lt;!-- Passaggio dati verso il basso --&gt;
+   &lt;HeaderClasse titolo="Classe 5^A" /&gt;
+&lt;/template&gt;</code></pre>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Figlio (Header.vue)</h6>
+                                <pre><code class="language-javascript">&lt;script&gt;
+export default {
+  // Il figlio dichiara cosa si aspetta
+  props: ['titolo']
+}
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;h1&gt;Benvenuti nella {{ titolo }}&lt;/h1&gt;
+&lt;/template&gt;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 3 -->
+                    <section id="step3" class="mb-5">
+                        <h4><span class="step-badge">Step 3</span> Reattività (Data Binding)</h4>
+                        <p><strong>Obiettivo:</strong> La magia di Vue. Creiamo un contatore di "Mi Piace". Quando il dato cambia, lo schermo si aggiorna da solo.</p>
+                        
+                        <pre><code class="language-html">&lt;template&gt;
+  &lt;div class="like-box"&gt;
+    &lt;h3&gt;Ti piace questo sito?&lt;/h3&gt;
+    &lt;p&gt;Numero likes: {{ likes }}&lt;/p&gt;
+    
+    &lt;!-- Al click, incrementa la variabile --&gt;
+    &lt;button @click="likes++" class="btn btn-primary"&gt;
+      👍 Mi Piace
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      likes: 0 // Stato iniziale
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+                    </section>
+
+                    <!-- Step 4 -->
+                    <section id="step4" class="mb-5">
+                        <h4><span class="step-badge">Step 4</span> Navigazione (Cenni di Routing)</h4>
+                        <p><strong>Obiettivo:</strong> Simulare un sito multipagina senza ricaricare.</p>
+                        <p>In Vue non si usa <code>&lt;a href="..."&gt;</code> perché ricaricherebbe tutta la pagina. Si usa il <strong>Vue Router</strong>.</p>
+                        
+                        <div class="card p-3 bg-light">
+                            <p>Immagina il Router come un <strong>Portiere d'albergo</strong>. Invece di farti uscire dall'albergo e rientrare per cambiare stanza (ricaricare la pagina), il portiere ti accompagna semplicemente alla porta giusta.</p>
+                            <ul>
+                                <li><code>&lt;router-link to="/"&gt;</code>: È il link magico (sostituisce <code>a href</code>).</li>
+                                <li><code>&lt;router-view&gt;</code>: È la "cornice" dove Vue mostrerà il componente della pagina (Home o Chi Siamo) a seconda dell'indirizzo.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Step 5 -->
+                    <section id="step5" class="mb-5">
+                        <h4><span class="step-badge">Step 5</span> Dati dal Mondo Reale (API & Fetch)</h4>
+                        <p><strong>Obiettivo:</strong> Connettere il sito a un CMS esterno (come Strapi, WordPress) o a un servizio dati.</p>
+                        <p>Finora abbiamo scritto i dati a mano nel codice (hardcoded). Nel mondo reale, i dati arrivano da un Server tramite <strong>API</strong> (Application Programming Interface).</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <h6 class="text-vue">Il concetto chiave: Lifecycle Hooks</h6>
+                                <p>Quando "nasce" un componente? Quando viene visualizzato a schermo. Vue ci permette di eseguire codice esattamente in quel momento tramite la funzione <code>mounted()</code>.</p>
+                                <p>È come dire: <em class="text-muted">"Appena questa pagina è pronta, telefona al server e fatti dare gli articoli del blog"</em>.</p>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="alert alert-info border-0 shadow-sm">
+                                    <i class="bi bi-diagram-2-fill"></i> <strong>Flusso tipico:</strong><br>
+                                    1. Pagina vuota (loading...)<br>
+                                    2. <code>mounted()</code> chiama l'API<br>
+                                    3. I dati arrivano<br>
+                                    4. Vue aggiorna la pagina automaticamente
+                                </div>
+                            </div>
+                        </div>
+
+                        <h6 class="mt-3">Esempio Pratico (Lista Utenti)</h6>
+                        <pre><code class="language-html">&lt;script&gt;
+export default {
+  data() {
+    return {
+      utenti: [],    // 1. Array vuoto all'inizio
+      caricamento: true
+    }
+  },
+  // 2. Appena il componente è montato...
+  async mounted() {
+    try {
+      // Simuliamo una chiamata a Strapi o un'API pubblica
+      const risposta = await fetch('https://jsonplaceholder.typicode.com/users');
+      const dati = await risposta.json();
+      
+      this.utenti = dati; // 3. Riempiamo l'array con i dati veri
+    } catch (errore) {
+      console.error("Ops, errore nel server:", errore);
+    } finally {
+      this.caricamento = false; // Stop rotellina di caricamento
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;h2&gt;I nostri Utenti&lt;/h2&gt;
+    
+    &lt;!-- Messaggio mentre carica --&gt;
+    &lt;p v-if="caricamento"&gt;Caricamento in corso...&lt;/p&gt;
+    
+    &lt;!-- Lista finale --&gt;
+    &lt;ul v-else&gt;
+      &lt;li v-for="utente in utenti" :key="utente.id"&gt;
+        {{ utente.name }} ({{ utente.email }})
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+                    </section>
+                    
+                    <div class="text-center mt-5 mb-5">
+                        <a href="#" class="btn btn-outline-success btn-lg">Scarica Esercizi Completi <i class="bi bi-download"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <div class="container">
+            <p class="mb-0">&copy; 2024 Manuale Web Design - Guida Didattica per Studenti</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <!-- Theme Toggle (se presente nella cartella js) -->
+    <script src="js/theme-toggle.js"></script>
+</body>
+</html>
