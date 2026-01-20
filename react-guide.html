@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida React - Manuale Web Design</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- PrismJS for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* React Specific Styles */
+        :root {
+            --react-blue: #61DAFB;
+            --react-dark: #20232a;
+            --react-dark-bg: #282c34;
+        }
+
+        .bg-react {
+            background-color: var(--react-dark-bg);
+            color: var(--react-blue);
+        }
+
+        .text-react {
+            color: #0d6efd; /* Darker blue for light background text readability */
+        }
+        
+        [data-bs-theme="dark"] .text-react {
+            color: var(--react-blue);
+        }
+
+        .section-title {
+            border-left: 5px solid var(--react-blue);
+            padding-left: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .concept-card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            height: 100%;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Styling for the Step Badges */
+        .step-badge {
+            background-color: var(--react-dark);
+            color: var(--react-blue);
+            padding: 0.25em 0.6em;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-right: 0.5rem;
+            border: 1px solid var(--react-blue);
+        }
+
+        /* JSX warning box */
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Header -->
+    <header class="bg-react py-5 mb-4">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold"><i class="bi bi-filetype-jsx"></i> Guida React</h1>
+            <p class="lead text-white">La libreria JavaScript per creare interfacce utente</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3 mb-4">
+                <div class="list-group sticky-top" style="top: 100px;">
+                    <a href="#intro" class="list-group-item list-group-item-action fw-bold active" style="background-color: var(--react-dark); border-color: var(--react-dark);">Pensare in React</a>
+                    <a href="#components" class="list-group-item list-group-item-action ps-4">Componenti & JSX</a>
+                    <a href="#props" class="list-group-item list-group-item-action ps-4">Props</a>
+                    <a href="#state" class="list-group-item list-group-item-action ps-4">State & Hooks</a>
+                    
+                    <a href="#pratica" class="list-group-item list-group-item-action fw-bold mt-3" style="background-color: var(--react-dark); border-color: var(--react-dark); color: white;">Il Sito della Classe</a>
+                    <a href="#step1" class="list-group-item list-group-item-action ps-4">1. Architettura</a>
+                    <a href="#step2" class="list-group-item list-group-item-action ps-4">2. Dinamicità</a>
+                    <a href="#step3" class="list-group-item list-group-item-action ps-4">3. Interattività</a>
+                    <a href="#step4" class="list-group-item list-group-item-action ps-4">4. Liste</a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                
+                <!-- SEZIONE 1: TEORIA -->
+                <div class="mb-5" id="intro">
+                    <span class="badge bg-primary mb-2">Teoria Essenziale</span>
+                    <h2 class="display-6 fw-bold text-react">Pensare in React</h2>
+                    <hr>
+
+                    <section id="components" class="mb-5">
+                        <h3><i class="bi bi-braces text-react"></i> Cos'è React e il JSX?</h3>
+                        <p class="lead">Dimentica di scrivere HTML in un file e JS in un altro. In React scriviamo <strong>JSX</strong> (JavaScript XML).</p>
+                        <p>Il JSX assomiglia all'HTML, ma in realtà è JavaScript travestito! Ci permette di descrivere l'interfaccia utente direttamente dentro la logica del nostro codice.</p>
+                        
+                        <div class="warning-box mb-4">
+                            <h5><i class="bi bi-exclamation-triangle-fill"></i> Regole d'Oro del JSX</h5>
+                            <ul class="mb-0">
+                                <li><strong>Classi CSS:</strong> In HTML usi <code>class</code>, ma in JSX devi usare <code>className</code> (perché "class" è una parola riservata in JS).</li>
+                                <li><strong>Tag Chiusi:</strong> Tutti i tag devono essere chiusi. <code>&lt;br&gt;</code> diventa <code>&lt;br /&gt;</code>.</li>
+                                <li><strong>IlPortale JS:</strong> Le parentesi graffe <code>{ }</code> sono magiche: ti permettono di inserire variabili o calcoli JavaScript direttamente nel markup.</li>
+                            </ul>
+                        </div>
+
+                        <h4 class="mt-4">I Componenti Funzionali</h4>
+                        <p>Un componente in React non è nient'altro che una <strong>Funzione JavaScript</strong> che restituisce del codice JSX (la UI).</p>
+                        <pre><code class="language-jsx">// Definisco il componente (Iniziale Maiuscola!)
+function Header() {
+    const titolo = "Benvenuti!";
+    return (
+        <header className="bg-dark text-white p-3">
+             <h1>{titolo}</h1>
+        </header>
+    );
+}</code></pre>
+                    </section>
+
+                    <section id="props" class="mb-5">
+                        <h3><i class="bi bi-input-cursor-text text-react"></i> Props (Dati in sola lettura)</h3>
+                        <p>Le <strong>Props</strong> sono come i <strong>parametri di una funzione</strong>. Permettono al componente "genitore" di passare dati al componente "figlio" per configurarlo.</p>
+                        <ul class="list-group list-group-flush mb-3 border-start border-4 border-info">
+                            <li class="list-group-item bg-light">Immagina le Props come gli "ingredienti" che passi alla funzione per cucinare la pagina.</li>
+                            <li class="list-group-item bg-light"><strong>Nota:</strong> Le Props sono di sola lettura. Il figlio non può modificarle!</li>
+                        </ul>
+                    </section>
+
+                    <section id="state" class="mb-5">
+                        <h3><i class="bi bi-memory text-react"></i> State (La memoria del componente)</h3>
+                        <p>A volte un componente ha bisogno di "ricordare" qualcosa, ad esempio se un bottone è stato cliccato o il valore di un contatore. Questa memoria si chiama <strong>Stato</strong>.</p>
+                        <p>Usiamo l'Hook <code>useState</code>:</p>
+                        <pre><code class="language-jsx">import { useState } from 'react';
+
+function Contatore() {
+    // [valoreAttuale, funzionePerCambiarlo] = useState(valoreIniziale)
+    const [contatore, setContatore] = useState(0);
+
+    return (
+        <div>
+            <p>Hai cliccato {contatore} volte</p>
+            <button onClick={() => setContatore(contatore + 1)}>
+                Clicca qui
+            </button>
+        </div>
+    );
+}</code></pre>
+                    </section>
+                </div>
+
+                <!-- SEZIONE 2: PRATICA -->
+                <div class="mb-5" id="pratica">
+                    <span class="badge bg-success mb-2">Laboratorio</span>
+                    <h2 class="display-6 fw-bold text-react">Il Sito della Classe</h2>
+                    <hr>
+                    <p>Costruiamo insieme una piccola pagina per la tua classe. Niente <code>document.getElementById</code>, useremo solo React!</p>
+
+                    <section id="step1" class="mb-5">
+                        <h3><span class="step-badge">Step 1</span> L'Architettura a Mattoncini</h3>
+                        <p>Invece di scrivere tutto in un unico file gigante, dividiamo la pagina in pezzi logici (Componenti):</p>
+                        <pre><code class="language-jsx">function Header() {
+    return <header><h1>Diario di Classe</h1></header>;
+}
+
+function MainContent() {
+    return <main><p>Benvenuti nel nostro sito.</p></main>;
+}
+
+function Footer() {
+    return <footer><p>&copy; 2025 Scuola</p></footer>;
+}
+
+// Componente Principale che assembla tutto
+function App() {
+    return (
+        <div className="container">
+            <Header />
+            <MainContent />
+            <Footer />
+        </div>
+    );
+}</code></pre>
+                        <div class="alert alert-info py-2">
+                             <small><i class="bi bi-info-circle"></i> Ricorda: i nomi dei componenti devono iniziare con la <strong>Lettera Maiuscola</strong>, altrimenti React li confonde con normali tag HTML!</small>
+                        </div>
+                    </section>
+
+                    <section id="step2" class="mb-5">
+                        <h3><span class="step-badge">Step 2</span> Renderlo Dinamico (Props)</h3>
+                        <p>Vogliamo che l'intestazione mostri il nome specifico della nostra classe. Usiamo le <strong>props</strong>.</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Nel componente (Figlio):</h6>
+                                <pre><code class="language-jsx">function Header(props) {
+    return (
+        <header>
+            <h1>Classe {props.title}</h1>
+            <p>Anno: {props.year}</p>
+        </header>
+    );
+}</code></pre>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Nell'App (Genitore):</h6>
+                                <pre><code class="language-jsx">function App() {
+    return (
+        <div className="container">
+            {/* Passiamo i dati come attributi */}
+            <Header title="5^A Informatica" year="2025" />
+            <MainContent />
+        </div>
+    );
+}</code></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="step3" class="mb-5">
+                        <h3><span class="step-badge">Step 3</span> Interattività (useState)</h3>
+                        <p>Aggiungiamo un sistema di votazione. Quando clicchiamo "Mi Piace", il numero deve salire. In React <strong>non modifichi il DOM a mano</strong>. Aggiorni lo stato, e React ridisegna la pagina per te.</p>
+                        <pre><code class="language-jsx">import { useState } from 'react';
+
+function VotoSito() {
+    const [voti, setVoti] = useState(0);
+
+    return (
+        <div className="card p-3 my-3">
+            <h3>Ti piace questo sito?</h3>
+            <p>Voti attuali: <strong>{voti}</strong></p>
+            
+            <button 
+                className="btn btn-primary" 
+                onClick={() => setVoti(voti + 1)}
+            >
+                👍 Mi Piace
+            </button>
+        </div>
+    );
+}</code></pre>
+                    </section>
+
+                    <section id="step4" class="mb-5">
+                        <h3><span class="step-badge">Step 4</span> Le Liste (Map)</h3>
+                        <p>Abbiamo una lista di materie. Non copiare e incollare i tag <code>&lt;li&gt;</code>! Usa il metodo <code>.map()</code> degli array per trasformare i dati in HTML.</p>
+                        <pre><code class="language-jsx">function ElencoMaterie() {
+    const materie = ["Informatica", "Sistemi", "Matematica", "Inglese"];
+
+    return (
+        <ul>
+            {materie.map((materia, index) => (
+                // La 'key' aiuta React a tenere traccia degli elementi
+                <li key={index}>{materia}</li>
+            ))}
+        </ul>
+    );
+}</code></pre>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-0">Manuale Web Design - Guida React &copy; 2026</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- PrismJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    <!-- Navbar Script -->
+    <script src="js/navbar.js"></script>
+</body>
+</html>

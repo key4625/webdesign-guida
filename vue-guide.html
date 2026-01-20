@@ -77,27 +77,8 @@
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="border-bottom: 3px solid var(--vue-green);">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="bi bi-code-slash text-vue"></i> Web Design Guide
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="html-guide.html">HTML</a></li>
-                    <li class="nav-item"><a class="nav-link" href="css-guide.html">CSS</a></li>
-                    <li class="nav-item"><a class="nav-link" href="bootstrap-guide.html">Bootstrap</a></li>
-                    <li class="nav-item"><a class="nav-link" href="javascript-guide.html">JavaScript</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="vue-guide.html">Vue.js</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
 
     <!-- Header -->
     <header class="bg-vue py-5 mb-4">
@@ -541,5 +522,6 @@ export default {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <!-- Theme Toggle (se presente nella cartella js) -->
     <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
 </body>
 </html>
