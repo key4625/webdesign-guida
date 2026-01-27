@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 5 - Ripasso JavaScript</title>
+</head>
+<body>
+    <div id="contenitore"></div>
+<script>
+    let nome = "Michele";
+    let cognome = "Cappannari"
+    let eta = 10; 
+    let messaggio = "Ciao, sono " + nome + " " + cognome + " ed ho " + eta + " anni";
+    //Premendo alt+096 scrivo ` che mi è utile per delimitare le stringhe in maniera più avanzata
+    let messaggio2 = `Ciao sono ${nome} ${cognome} ed ho ${eta} anni`; 
+
+    //Faccio la stessa cosa utilizzando un oggetto
+    let persona1 = {
+        nome: "Michele",
+        cognome: "Cappannari",
+        eta: 10,
+        numBiglie: 5
+    };
+    let messaggio3 = `Ciao sono ${persona1.nome} ${persona1.cognome} ed ho ${persona1.eta} anni`;
+    
+    //Creo ancora altre persone e quindi altri oggetti
+    let persona2 = { nome: "Luca", cognome: "Rossi", eta: 25, numBiglie: 8};
+    let persona3 = { nome: "Giovanni", cognome: "Neri", eta: 12, numBiglie: 3};
+    let persona4 = { nome: "Anselmo", cognome: "Bianchi", eta: 31, numBiglie: 10};
+    let persona5 = { nome: "Girolamo", cognome: "Verdi", eta: 14, numBiglie: 7};
+    
+    //Creo un array di oggetti
+    //Invece che scrivere console.log(persone[0].nome); per ogni persona, uso un ciclo
+    //per stampare i nomi delle persone maggiorenni
+    let persone = [persona1, persona2, persona3, persona4, persona5];
+    let sommaBiglie = 0;
+    for(let variabileNum = 0; variabileNum < persone.length; variabileNum++) {
+        if(persone[variabileNum].eta > 18) {
+            console.log("Ciclo" + variabileNum + ", nome: " + persone[variabileNum].nome);    
+        }
+        sommaBiglie = sommaBiglie + persone[variabileNum].numBiglie;
+    }
+    console.log("La somma delle biglie è: " + sommaBiglie);
+
+
+</script>
+</body>
+</html>

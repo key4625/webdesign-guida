@@ -6,22 +6,18 @@
     <title>Esempi HTML, CSS e JavaScript</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="bi bi-code-square"></i> Esempi di Codice
-            </a>
-        </div>
-    </nav>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
 
     <div class="container my-5">
         <div class="row">
             <div class="col-12">
                 <h1 class="mb-4">Indice degli Esempi</h1>
-                <p class="lead text-muted">Raccolta di esempi HTML, CSS e JavaScript, non dimenticare chea abbiamo realizzato anche questa guida</p>
-                <a class="btn btn-primary" target="blank" href="/wd2/guida">Vai alla guida</a>
+                <p class="lead text-muted">Raccolta di esempi HTML, CSS e JavaScript, non dimenticare che abbiamo realizzato anche questa guida</p>
+                <a class="btn btn-primary" href="../index.html">Vai alla guida</a>
             </div>
         </div>
 
@@ -88,6 +84,23 @@
                 </div>
             </div>
         </div>
+        <!-- Sezione Bootstrap -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <h2 class="mb-3">
+                    <i class="bi bi-filetype-html text-danger"></i> Esempi Bootstrap
+                </h2>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Prima pagina in bootstrap</h5>
+                        </div>
+                        <p class="mb-1 text-muted">I primi passi con Bootstrap</p>
+                        <a href="esercizio1-bootstrap.html" target="_blank">Vedi HTML</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Sezione JavaScript -->
         <div class="row mt-4">
@@ -131,6 +144,56 @@
                         <p class="mb-1 text-muted">Cicli e oggetti e manipolazioni del DOM</p>
                         <a href="esercizio4-ciclo-oggetti-js.html" target="_blank">Vedi HTML</a>
                     </div>
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Quinto esercizio in JS</h5>
+                        </div>
+                        <p class="mb-1 text-muted">Ripasso Javascript</p>
+                        <a href="esercizio5-ripasso-js.html" target="_blank">Vedi HTML</a>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Sesto esercizio in JS</h5>
+                        </div>
+                        <p class="mb-1 text-muted">Ripasso DOM Javascript</p>
+                        <a href="esercizio6-dom-oggetti-js.html" target="_blank">Vedi HTML</a>
+                    </div>
+                    
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Settimo esercizio in JS</h5>
+                        </div>
+                        <p class="mb-1 text-muted">JS - Funzioni ed eventi</p>
+                        <a href="esercizio7-funzioni-eventi-js.html" target="_blank">Vedi HTML</a>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Ottavo esercizio - JS - Scroll Effects</h5>
+                        </div>
+                        <p class="mb-1 text-muted">JS - Scroll Effects</p>
+                        <a href="esercizio8-scroll-effects.html" target="_blank">Vedi HTML</a>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Nono esercizio - JS - Scroll cards</h5>
+                        </div>
+                        <p class="mb-1 text-muted">JS - Scroll cards</p>
+                        <a href="esercizio9-scroll-card.html" target="_blank">Vedi HTML</a>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Decimo esercizio - JS - Move Keyboard</h5>
+                        </div>
+                        <p class="mb-1 text-muted">JS - Move Keyboard</p>
+                        <a href="esercizio10-move-keyboard.html" target="_blank">Vedi HTML</a>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Undicesimo esercizio - JS - Drag & Drop</h5>
+                        </div>
+                        <p class="mb-1 text-muted">JS - Eventi Mouse MouseDown/Up/Move</p>
+                        <a href="esercizio11-drag-drop.html" target="_blank">Vedi HTML</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -142,6 +205,7 @@
         </div>
     </footer>
 
+    <script src="../js/navbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 8 - Scroll Effects</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        height: 500vh; /* Per permettere lo scroll */
+    }
+    .fixed-header {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        width:100%;
+        text-align: center;
+    }
+    #titolo1 {
+        color: purple;
+        transition: color 0.5s, opacity 0.5s;
+    }
+
+</style>
+<body>
+    <div class="fixed-header"><h1 id="titolo1">Questo è il nostro titolo</h1></div>
+  
+    <script>
+        const titolo = document.getElementById("titolo1");
+        //Prendo la posizione massima dello scrollY
+        const scrollMax = document.body.scrollHeight - window.innerHeight;
+        const singleStep = scrollMax / 5;
+        const primoStep = singleStep;
+        const secondoStep = singleStep * 2;
+        const terzoStep = singleStep * 3;
+        const quartoStep = singleStep * 4;
+        const offset = singleStep / 2;
+        console.log("Scroll massimo:", scrollMax);
+        addEventListener("scroll", function(event) {
+            let scrollY = window.scrollY;
+            //cambiare il colore di background dello sfondo, in maniera graduale, in base alla posizione dello scroll
+            //document.body.style.backgroundColor = `rgba(${(scrollY/scrollMax)*255}, 0, 0, 1)`;
+            if(scrollY<(primoStep - offset)){ 
+                titolo.style.color = "purple";
+                titolo.style.opacity = "1"; 
+            } else if (scrollY < primoStep){ 
+                titolo.style.opacity = "0";
+            } else if (scrollY<(secondoStep - offset)){ 
+                console.log("Secondo step");
+                titolo.style.color = "orange";
+                titolo.style.opacity = "1";
+                titolo.textContent = "Sto cambiando colore!";
+            } else if (scrollY < secondoStep){
+                titolo.style.opacity = "0";                 
+            } else if (scrollY < (terzoStep- offset)){
+                console.log("Terzo step");
+                titolo.style.color = "lightgreen";
+                titolo.style.opacity = "1";
+                titolo.textContent = "Ancora un cambio di colore!";
+            } else if (scrollY < terzoStep){
+                titolo.style.opacity = "0";
+            } else if (scrollY < (quartoStep - offset)){
+                console.log("Quarto step");
+                titolo.style.color = "lightblue";
+                titolo.style.opacity = "1";
+                titolo.textContent = "Quasi alla fine!";
+            } else if (scrollY < quartoStep){
+                titolo.style.opacity = "0";
+            } else {
+                console.log("Quinto step");
+                titolo.style.opacity = "1";
+                titolo.style.color = "lightcoral";
+                titolo.textContent = "Ultimo cambio di colore!";     
+            }
+            
+         })
+    </script>
+</body>
+</html>

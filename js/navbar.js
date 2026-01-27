@@ -2,15 +2,20 @@
 document.addEventListener("DOMContentLoaded", function() {
     
     // Configurazione dei link del menu
+    // Rileva se siamo nella cartella esempi per aggiustare i percorsi
+    const isInExamples = window.location.pathname.includes('/esempi/');
+    const pathPrefix = isInExamples ? '../' : '';
+
     const links = [
-        { text: 'Home', url: 'index.html' },
-        { text: 'HTML', url: 'html-guide.html' },
-        { text: 'CSS', url: 'css-guide.html' },
-        { text: 'Bootstrap', url: 'bootstrap-guide.html' },
-        { text: 'JavaScript', url: 'javascript-guide.html' },
-        { text: 'Vue.js', url: 'vue-guide.html' },
-        { text: 'React', url: 'react-guide.html' },
-        { text: 'Best Practices', url: 'best-practices.html' }
+        { text: 'Home', url: pathPrefix + 'index.html' },
+        { text: 'HTML', url: pathPrefix + 'html-guide.html' },
+        { text: 'CSS', url: pathPrefix + 'css-guide.html' },
+        { text: 'Bootstrap', url: pathPrefix + 'bootstrap-guide.html' },
+        { text: 'JavaScript', url: pathPrefix + 'javascript-guide.html' },
+        { text: 'Vue.js', url: pathPrefix + 'vue-guide.html' },
+        { text: 'React', url: pathPrefix + 'react-guide.html' },
+        { text: 'Esercizi', url: pathPrefix + 'esempi/index.html' },
+        { text: 'Best Practices', url: pathPrefix + 'best-practices.html' }
     ];
 
     // Ottieni il nome del file corrente

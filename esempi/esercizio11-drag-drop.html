@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 11 - Drag and Drop JS</title>
+    <style>
+        /* Reset basico per pulire i margini del browser */
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        /* Contenitore per dare un limite al movimento */
+        #area-gioco {
+            width: 800px;
+            height: 500px;
+            background-color: white;
+            border: 2px solid #333;
+            position: relative; /* FONDAMENTALE: definisce il contesto per i figli con position: absolute */
+            margin: 20px auto; /* Centrato */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            user-select: none; /* Evita di selezionare il testo mentre si trascina */
+        }
+
+        /* Il nostro quadrato rosso da muovere */
+        #quadrato {
+            width: 80px;
+            height: 80px;
+            background-color: red;
+            position: absolute; /* Si posiziona relativamente all'area-gioco */
+            top: 210px;  /* Posizione iniziale Y (centrata verticalmente approx) */
+            left: 360px; /* Posizione iniziale X (centrata orizzontalmente approx) */
+            cursor: move; /* Cambia il cursore per indicare che si può muovere */
+            border-radius: 8px; /* Arrotondiamo gli angoli */
+            
+            /* Per centrare il testo dentro il quadrato */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Stile quando l'elemento viene trascinato */
+        #quadrato.trascinamento-attivo {
+            background-color: darkred;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: scale(1.1); /* Leggero ingrandimento */
+        }
+        
+        .istruzioni {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .btn-back {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="istruzioni">
+        <h1>Esercizio 11: Drag and Drop (Mouse)</h1>
+        <p>Clicca sul quadrato rosso e tieni premuto per trascinarlo all'interno dell'area.</p>
+    </div>
+
+    <!-- AREA DI GIOCO -->
+    <div id="area-gioco">
+        <div id="quadrato">MOVIMI</div>
+    </div>
+
+    <div class="istruzioni">
+        <a href="index.html" class="btn-back">← Torna agli esempi</a>
+    </div>
+
+    <script>
+        // 1. SELEZIONE DEGLI ELEMENTI
+        // Prendiamo i riferimenti agli elementi che ci servono dal DOM
+        const quadrato = document.getElementById('quadrato');
+        const areaGioco = document.getElementById('area-gioco');
+
+        // 2. VARIABILI DI STATO
+        // isDragging: "bandierina" che ci dice se stiamo trascinando o no
+        let isDragging = false;
+        
+        // offsetX, offsetY: memorizzano dove abbiamo cliccato ALL'INTERNO del quadrato
+        // Servono per mantenere il mouse nello stesso punto relativo del quadrato durante il trascinamento
+        let offsetX = 0;
+        let offsetY = 0;
+
+        // 3. EVENTI DEL MOUSE
+        
+        // EVENTO 1: MOUSEDOWN (Quando premo il tasto del mouse)
+        quadrato.addEventListener('mousedown', function(evento) {
+            // Attiviamo la modalità trascinamento
+            isDragging = true;
+            
+            // Aggiungiamo una classe grafica per far capire che è attivo
+            quadrato.classList.add('trascinamento-attivo');
+
+            // Calcoliamo la distanza tra il puntatore del mouse e l'angolo in alto a sinistra del quadrato
+            // evento.clientX = posizione mouse nella finestra
+            // quadrato.getBoundingClientRect().left = posizione del quadrato nella finestra
+            const rect = quadrato.getBoundingClientRect();
+            offsetX = evento.clientX - rect.left;
+            offsetY = evento.clientY - rect.top;
+        });
+
+        // EVENTO 2: MOUSEMOVE (Quando muovo il mouse)
+        // Ascoltiamo 'document' invece di 'areaGioco' per gestire movimenti veloci che escono dall'area
+        document.addEventListener('mousemove', function(evento) {
+            
+            // Se non stiamo trascinando, non facciamo nulla e usciamo dalla funzione
+            if (isDragging === false) {
+                return; 
+            }
+
+            // Calcoliamo la posizione dell'area di gioco rispetto alla finestra
+            // Questo ci serve perché mouseMove ci dà coordinate globali, ma noi dobbiamo posizionare
+            // il quadrato (position: absolute) relativamente all'area di gioco.
+            const rectArea = areaGioco.getBoundingClientRect();
+
+            // Calcoliamo la nuova posizione X e Y relativa all'area di gioco
+            // Posizione Mouse - Posizione Area - Offset interno del click
+            let newX = evento.clientX - rectArea.left - offsetX;
+            let newY = evento.clientY - rectArea.top - offsetY;
+
+            // LIMITI (BOUNDARY): Evitiamo che il quadrato esca dall'area
+            
+            // Limite Larghezza (destra)
+            const maxWidth = areaGioco.clientWidth - quadrato.clientWidth;
+            // Limite Altezza (basso)
+            const maxHeight = areaGioco.clientHeight - quadrato.clientHeight;
+
+            // Applichiamo i limiti per la X
+            if (newX < 0) newX = 0; // Non uscire a sinistra
+            if (newX > maxWidth) newX = maxWidth; // Non uscire a destra
+
+            // Applichiamo i limiti per la Y
+            if (newY < 0) newY = 0; // Non uscire in alto
+            if (newY > maxHeight) newY = maxHeight; // Non uscire in basso
+
+            // Applichiamo le nuove coordinate allo stile CSS
+            quadrato.style.left = newX + 'px';
+            quadrato.style.top = newY + 'px';
+        });
+
+        // EVENTO 3: MOUSEUP (Quando rilascio il tasto del mouse)
+        // Anche qui ascoltiamo su 'document' per catturare il rilascio anche se avviene fuori dall'elemento
+        document.addEventListener('mouseup', function() {
+            // Se stavamo trascinando...
+            if (isDragging) {
+                // ...disattiviamo il trascinamento
+                isDragging = false;
+                // ...e rimuoviamo la classe grafica
+                quadrato.classList.remove('trascinamento-attivo');
+            }
+        });
+
+    </script>
+
+</body>
+</html>

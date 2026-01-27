@@ -38,6 +38,7 @@
                         <a class="nav-link" href="#testi">Testi e Font</a>
                         <a class="nav-link" href="#immagini">Immagini</a>
                         <a class="nav-link" href="#effetti">Effetti Visivi</a>
+                        <a class="nav-link" href="#trasformazioni">Trasformazioni</a>
                         <a class="nav-link" href="#animazioni">Animazioni</a>
                         <a class="nav-link" href="#media-queries">Media Queries</a>
                     </nav>
@@ -802,6 +803,96 @@ body {
                     </div>
                 </section>
 
+                <!-- Trasformazioni -->
+                <section id="trasformazioni" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-arrows-move"></i> Trasformazioni (Transform)</h2>
+                    <div class="content-box">
+                        <p>La proprietà <code>transform</code> permette di modificare la forma e la posizione degli elementi senza alterare il flusso del documento. È fondamentale per creare effetti interattivi e animazioni.</p>
+
+                        <h4>Trasformazioni 2D</h4>
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <h6>Translate (Spostamento)</h6>
+                                <p class="small">Sposta l'elemento lungo l'asse X e Y.</p>
+                                <pre><code class="language-css">transform: translate(50px, 20px);
+/* o singolarmente */
+transform: translateX(50px);
+transform: translateY(20px);</code></pre>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Rotate (Rotazione)</h6>
+                                <p class="small">Ruota l'elemento in senso orario (valori positivi) o antiorario.</p>
+                                <pre><code class="language-css">transform: rotate(45deg);
+transform: rotate(-90deg);
+transform: rotate(0.5turn); /* 180deg */</code></pre>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Scale (Ridimensionamento)</h6>
+                                <p class="small">Ingrandisce (>1) o rimpicciolisce (<1) l'elemento.</p>
+                                <pre><code class="language-css">transform: scale(1.5); /* 150% */
+transform: scale(0.5); /* 50% */
+transform: scale(2, 1); /* solo larghezza */</code></pre>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Skew (Inclinazione)</h6>
+                                <p class="small">Inclina l'elemento lungo gli assi.</p>
+                                <pre><code class="language-css">transform: skew(15deg, 10deg);
+transform: skewX(20deg);</code></pre>
+                            </div>
+                        </div>
+
+                        <h4>Trasformazioni 3D e Prospettiva</h4>
+                        <p>Per attivare l'effetto 3D realistico, è necessario definire la <code>perspective</code> sul genitore.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.container-3d {
+    perspective: 1000px; /* Punto di fuga */
+}
+
+.box-3d {
+    transform: rotateX(45deg) rotateY(45deg);
+    transform-style: preserve-3d; /* Per figli 3D */
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Origine della Trasformazione</h4>
+                        <p>Di default le trasformazioni avvengono dal centro (50% 50%). Puoi cambiarlo con <code>transform-origin</code>.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.elemento {
+    transform-origin: top left; /* o 0% 0% */
+    transform-origin: bottom right;
+    transform: rotate(45deg); /* Ruota attorno all'angolo */
+}</code></pre>
+                        </div>
+
+                        <!-- Esempi Visivi -->
+                        <div class="example-result mt-4 p-4 border rounded bg-light">
+                            <h5 class="mb-4">Playground Visivo</h5>
+                            <div class="row text-center g-4">
+                                <div class="col-md-3">
+                                    <div class="bg-primary text-white p-3 d-inline-block shadow" style="transform: rotate(-15deg);">
+                                        Rotate
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="bg-success text-white p-3 d-inline-block shadow" style="transform: scale(1.2);">
+                                        Scale
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="bg-warning text-dark p-3 d-inline-block shadow" style="transform: skewX(-20deg);">
+                                        Skew
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="bg-danger text-white p-3 d-inline-block shadow" style="transform: translateY(-10px);">
+                                        Translate
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Animazioni -->
                 <section id="animazioni" class="mb-5">
                     <h2 class="section-title"><i class="bi bi-lightning"></i> Transizioni e Animazioni</h2>
@@ -842,40 +933,7 @@ body {
 }</code></pre>
                         </div>
 
-                        <h4 class="mt-4">Trasformazioni (Transform)</h4>
-                        <div class="code-example">
-                            <pre><code class="language-css">.elemento {
-    /* Traslazione (spostamento) */
-    transform: translate(50px, 100px);    /* x, y */
-    transform: translateX(50px);
-    transform: translateY(100px);
-    
-    /* Rotazione */
-    transform: rotate(45deg);             /* Gradi */
-    transform: rotateX(45deg);            /* 3D sull'asse X */
-    transform: rotateY(45deg);            /* 3D sull'asse Y */
-    transform: rotateZ(45deg);            /* 3D sull'asse Z */
-    
-    /* Scala (ridimensionamento) */
-    transform: scale(1.5);                /* 150% */
-    transform: scale(2, 0.5);             /* x, y */
-    transform: scaleX(2);
-    transform: scaleY(0.5);
-    
-    /* Inclinazione */
-    transform: skew(10deg, 5deg);         /* x, y */
-    transform: skewX(10deg);
-    transform: skewY(5deg);
-    
-    /* Trasformazioni multiple */
-    transform: rotate(45deg) scale(1.5) translate(50px, 50px);
-    
-    /* Origine trasformazione */
-    transform-origin: center;             /* Default */
-    transform-origin: top left;
-    transform-origin: 50% 50%;
-}</code></pre>
-                        </div>
+
 
                         <h4 class="mt-4">Animazioni Keyframe</h4>
                         <div class="code-example">

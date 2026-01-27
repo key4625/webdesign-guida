@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 10 - Sposta Elemento con Tastiera</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        #game-area {
+            width: 100%;
+            height: 400px;
+            background-color: #f8f9fa;
+            border: 2px solid #dee2e6;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+        #mover {
+            width: 50px;
+            height: 50px;
+            background-color: #dc3545; /* Bootstrap danger red */
+            position: absolute;
+            border-radius: 8px;
+            /* transizione fluida ma rapida */
+            transition: top 0.1s linear, left 0.1s linear; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        #mover i {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-5">
+        <h1 class="mb-4">Esercizio 10: Movimento da Tastiera</h1>
+ 
+        <div id="game-area">
+            <div id="mover">
+                <i class="bi bi-arrows-move"></i>
+            </div>
+        </div>
+ 
+  
+    </div>
+
+    <!-- Script inclusi -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            //Prendo gli elementi dal DOM
+            const mover = document.getElementById('mover');
+            const gameArea = document.getElementById('game-area');
+            // Variabili di stato per la posizione
+            let x = 0;
+            let y = 0;
+            const step = 10; // Pixel per ogni movimento
+            //Prendo larghezza ed altezza area gioco e quadrato
+            const areaWidth = gameArea.clientWidth;
+            const areaHeight = gameArea.clientHeight;
+            const moverWidth = mover.clientWidth;
+            const moverHeight = mover.clientHeight;
+            //Calcolo il centro iniziale dell'area gioco sottraendo la metà della larghezza/altezza del quadrato
+            x = (areaWidth - moverWidth) / 2;
+            y = (areaHeight - moverHeight) / 2;
+            mover.style.left = x + 'px';
+            mover.style.top = y + 'px';
+            //Calcolo il max di x e di y per i limiti
+            const maxX = gameArea.clientWidth - mover.clientWidth;
+            const maxY = gameArea.clientHeight - mover.clientHeight;
+            // Event Listener tastiera
+            document.addEventListener('keydown', (event) => {
+                const key = event.key;
+                // Controllo diretto sui tasti senza array
+                if (key === "ArrowUp") {
+                    y -= step;
+                    if (y < 0) y = 0;
+                    
+                } else if (key === "ArrowDown") {
+                    y += step;
+                    if (y > maxY) y = maxY;
+                    
+                } else if (key === "ArrowLeft") {
+                    x -= step;
+                    if (x < 0) x = 0;
+                    
+                } else if (key === "ArrowRight") {
+                    x += step;
+                    if (x > maxX) x = maxX;
+                }
+                mover.style.left = x + 'px';
+                mover.style.top = y + 'px';
+            });
+
+            // Aggiorna se ridimensionano la finestra per non perdere il quadrato
+            window.addEventListener('resize', () => {
+                // Controlla se fuori limiti e correggi
+                const maxX = gameArea.clientWidth - mover.clientWidth;
+                const maxY = gameArea.clientHeight - mover.clientHeight;
+                if(x > maxX) x = maxX;
+                if(y > maxY) y = maxY;
+                mover.style.left = x + 'px';
+                mover.style.top = y + 'px';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 6 JS - Dom ed oggetti</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1 class="titolo-principale">Anagrafica persone</h1>
+        <div id="divRow" class="row g-3 mt-3"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        // Selezione del contenitore nel DOM
+        let divRow = document.getElementById("divRow");
+        //Creo un array di oggetti persone
+        let persone = [
+            { nome: "Luca", cognome: "Bianchi", età: 12, numBiglie: 5 },
+            { nome: "Anna", cognome: "Verdi", età: 28, numBiglie: 10 },
+            { nome: "Giulia", cognome: "Neri", età: 22, numBiglie: 15 },
+            { nome: "Marco", cognome: "Gialli", età: 15, numBiglie: 8 },
+            { nome: "Sara", cognome: "Rossi", età: 30, numBiglie: 20 },
+            { nome: "Paolo", cognome: "Blu", età: 40, numBiglie: 25 }
+        ];
+
+        //Ciclo l'array di persone
+        for (let i = 0; i < persone.length; i++) {
+            let singPersona = persone[i];
+            //Creo il div per ogni persona
+            let divPersona = document.createElement("div");
+            divPersona.classList.add("col-12", "col-md-4");
+            divPersona.innerHTML = ` 
+            <div class="card bg-light">
+                <div class="card-body">
+                <h2 class="card-title">${singPersona.nome} ${singPersona.cognome}</h2>
+                <p>Età: ${singPersona.età}</p>
+                <p>Numero di biglie: ${singPersona.numBiglie}</p>
+                </div>
+            </div>`;
+            //Attendi 2 secondi prima di aggiungere il div al DOM
+            setTimeout(() => {
+                //Aggiungo il div al contenitore
+                divRow.appendChild(divPersona);
+            }, i * 2000);
+            
+            
+
+        } 
+    </script>
+</body>
+</html>

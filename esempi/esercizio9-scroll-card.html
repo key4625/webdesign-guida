@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 9 - Scroll cards</title>
+    <style>
+        * {
+            box-sizing: border-box; /* Includi padding e border nella larghezza e altezza totali degli elementi */
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+       .scroll-cards {
+            height: 100vh;
+            position: sticky;
+            top:0;
+            padding: 0px 20px;
+            box-shadow: 0px -4px 8px 1px #0000004a;
+            /*
+            top: 30px;
+            width: 80%;
+            margin: 0 auto;
+            border-radius: 25px 25px 0px 0px;
+            */
+        }
+        .contenitore {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card1 {
+            background: linear-gradient(90deg,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+        }
+        .card2 {
+            background-color: lightseagreen;
+        }
+        .card3 {
+            background: linear-gradient(90deg,rgba(25, 68, 69, 1) 0%, rgba(199, 87, 164, 1) 50%, rgba(237, 221, 83, 1) 100%);
+        }
+        .card4 {
+            background-color: lightgoldenrodyellow;
+        }
+        .card5 {
+            background: linear-gradient(168deg,rgba(25, 66, 69, 1) 0%, rgba(177, 199, 87, 1) 50%, rgba(12, 153, 101, 1) 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-cards card1">
+        <div class="contenitore"><h2>Card 1</h2></div>
+    </div>
+    <div class="scroll-cards card2">
+        <div class="contenitore"><h2>Card 2</h2></div>
+    </div>
+    <div class="scroll-cards card3">
+        <div class="contenitore"><h2>Card 3</h2></div>
+    </div>
+    <div class="scroll-cards card4">
+        <div class="contenitore"><h2>Card 4</h2></div>
+    </div>
+    <div class="scroll-cards card5">
+        <div class="contenitore"><h2>Card 5</h2></div>
+    </div>
+</body>
+</html>

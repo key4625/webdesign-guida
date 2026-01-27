@@ -1045,19 +1045,138 @@ input.addEventListener("keydown", (e) => {
     console.log(e.code);     // "KeyA", "Enter", "Escape"
     console.log(e.ctrlKey);  // true se Ctrl premuto
     console.log(e.shiftKey); // true se Shift premuto
+});
+
+// Evento Scroll (Approfondimento)
+// L'evento 'scroll' viene emesso quando il documento o un elemento scorre.
+// Attenzione: Viene chiamato molto frequentemente!
+document.addEventListener("scroll", (event) => {
+    // Ottieni la posizione verticale attuale
+    const position = window.scrollY; // o window.pageYOffset (legacy)
+    
+    // Esempio: Mostra bottone "Torna Su" dopo 200px
+    const backToTopBtn = document.getElementById("backToTop");
+    if (position > 200) {
+        // backToTopBtn.style.display = "block";
+        console.log("Mostra bottone");
+    } else {
+        // backToTopBtn.style.display = "none";
+        console.log("Nascondi bottone");
+    }
+});
+
+// BEST PRACTICE: Ottimizzazione Scroll (Throttling)
+// Poiché l'evento scroll scatta centinaia di volte al secondo,
+// operazioni pesanti qui dentro rallentano la pagina.
+// Usa requestAnimationFrame per ottimizzare.
+let ticking = false;
+
+document.addEventListener("scroll", () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            // Esegui qui la logica pesante
+            console.log("Scroll ottimizzato: " + window.scrollY);
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
+
+// Evento Wheel (Mouse Rotellina) - Diverso da Scroll!
+// 'wheel' rileva l'azione fisica sulla rotellina, anche se la pagina non scorre.
+window.addEventListener("wheel", (e) => {
+    console.log(`Rotazione rotellina: ${e.deltaY}`);
+});
+
+elemento.addEventListener("contextmenu", (e) => {
+    e.preventDefault(); // Disabilita il menu contestuale di default
+    console.log("Click destro rilevato");
+});
+
+elemento.addEventListener("mouseenter", () => {
+    console.log("Mouse entrato nell'area");
+});
+
+elemento.addEventListener("mouseleave", () => {
+    console.log("Mouse uscito dall'area");
+});
+
+// Eventi di Resize Finestra
+window.addEventListener("resize", () => {
+    console.log(`Nuova dimensione: ${window.innerWidth}x${window.innerHeight}`);
+});
+
+// Drag and Drop API
+const draggable = document.getElementById("draggable");
+const dropzone = document.getElementById("dropzone");
+
+draggable.addEventListener("dragstart", (e) => {
+    e.dataTransfer.setData("text/plain", "Sto trascinando questo elemento");
+    console.log("Drag iniziato");
+});
+
+dropzone.addEventListener("dragover", (e) => {
+    e.preventDefault(); // Necessario per permettere il drop
+    console.log("Oggetto sopra la zona");
+});
+
+dropzone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    const data = e.dataTransfer.getData("text/plain");
+    console.log("Oggetto rilasciato:", data);
 });</code></pre>
                         </div>
 
-                        <h3>preventDefault()</h3>
-                        <p>Previene il comportamento di default dell'evento.</p>
+                        <h3><i class="bi bi-phone"></i> Eventi Mobile & Sensori</h3>
+                        <p>I dispositivi mobili offrono eventi unici legati al tocco e ai sensori fisici.</p>
+
+                        <h4>Touch Events</h4>
                         <div class="code-example">
-                            <pre><code class="language-javascript">// Previeni invio form
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    // Valida i dati e invia con JavaScript
+                            <pre><code class="language-javascript">const touchArea = document.getElementById("touchArea");
+
+touchArea.addEventListener("touchstart", (e) => {
+    // Primo dito che tocca lo schermo
+    const tocco = e.touches[0];
+    console.log(`Tocco iniziato a: ${tocco.clientX}, ${tocco.clientY}`);
 });
 
-// Previeni click su link
+touchArea.addEventListener("touchmove", (e) => {
+    e.preventDefault(); // Previene lo scroll della pagina mentre trascini
+    console.log("Dito in movimento...");
+});
+
+touchArea.addEventListener("touchend", () => {
+    console.log("Dito sollevato");
+});</code></pre>
+                        </div>
+
+                        <h4>Sensori (Giroscopio e Orientamento)</h4>
+                        <p>Per accedere a questi dati, spesso è necessario che il sito sia servito via HTTPS.</p>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">// Rileva l'orientamento del dispositivo (Tilt)
+window.addEventListener("deviceorientation", (e) => {
+    console.log(`Alpha (Bussola): ${e.alpha}`);
+    console.log(`Beta (Fronte/Retro): ${e.beta}`);
+    console.log(`Gamma (Sinistra/Destra): ${e.gamma}`);
+});
+
+// Rileva il movimento (Accelerometro)
+window.addEventListener("devicemotion", (e) => {
+    console.log(`Accelerazione X: ${e.acceleration.x}`);
+    console.log(`Accelerazione Y: ${e.acceleration.y}`);
+    console.log(`Accelerazione Z: ${e.acceleration.z}`);
+});</code></pre>
+                        </div>
+
+                        <h4>API Vibrazione</h4>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">// Vibra per 200ms
+if (navigator.vibrate) {
+    navigator.vibrate(200);
+}
+
+// Pattern di vibrazione (vibr, pausa, vibr)
+navigator.vibrate([100, 50, 100]);</code></pre>
 link.addEventListener("click", (e) => {
     e.preventDefault();
     // Fai qualcos'altro invece di seguire il link
