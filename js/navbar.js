@@ -11,10 +11,18 @@ document.addEventListener("DOMContentLoaded", function() {
         { text: 'HTML', url: pathPrefix + 'html-guide.html' },
         { text: 'CSS', url: pathPrefix + 'css-guide.html' },
         { text: 'Bootstrap', url: pathPrefix + 'bootstrap-guide.html' },
-        { text: 'JavaScript', url: pathPrefix + 'javascript-guide.html' },
-        { text: 'Vue.js', url: pathPrefix + 'vue-guide.html' },
-        { text: 'React', url: pathPrefix + 'react-guide.html' },
-        { text: 'GSAP', url: pathPrefix + 'gsap-guide.html' },
+        { 
+            text: 'JavaScript', 
+            id: 'navbarDropdownJS',
+            dropdown: [
+                { text: 'Guida JS Base', url: pathPrefix + 'javascript-guide.html' },
+                { text: 'Web Components', url: pathPrefix + 'web-components-guide.html' },
+                { separator: true },
+                { text: 'Vue.js', url: pathPrefix + 'vue-guide.html' },
+                { text: 'React', url: pathPrefix + 'react-guide.html' },
+                { text: 'GSAP', url: pathPrefix + 'gsap-guide.html' }
+            ]
+        },
         { text: 'Esercizi', url: pathPrefix + 'esempi/index.html' },
         { text: 'Best Practices', url: pathPrefix + 'best-practices.html' }
     ];
@@ -49,12 +57,40 @@ document.addEventListener("DOMContentLoaded", function() {
     // Genera l'HTML dei link
     let navLinksHtml = '';
     links.forEach(link => {
-        const activeClass = (page === link.url) ? ' active' : '';
-        const currentAttr = (page === link.url) ? ' aria-current="page"' : '';
-        navLinksHtml += `
+        if (link.dropdown) {
+            // Dropdown Menu Logic
+            const isActive = link.dropdown.some(item => !item.separator && item.url.endsWith(page));
+            const activeClass = isActive ? ' active' : '';
+
+            navLinksHtml += `
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle${activeClass}" href="#" id="${link.id}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    ${link.text}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="${link.id}">`;
+            
+            link.dropdown.forEach(item => {
+                if (item.separator) {
+                    navLinksHtml += `<li><hr class="dropdown-divider"></li>`;
+                } else {
+                    const itemActive = item.url.endsWith(page) ? ' active' : '';
+                    navLinksHtml += `<li><a class="dropdown-item${itemActive}" href="${item.url}">${item.text}</a></li>`;
+                }
+            });
+
+            navLinksHtml += `
+                </ul>
+            </li>`;
+        } else {
+            // Standard Link Logic
+            const isActive = link.url.endsWith(page);
+            const activeClass = isActive ? ' active' : '';
+            const currentAttr = isActive ? ' aria-current="page"' : '';
+            navLinksHtml += `
             <li class="nav-item">
                 <a class="nav-link${activeClass}" href="${link.url}"${currentAttr}>${link.text}</a>
             </li>`;
+        }
     });
 
     // Template HTML completo della Navbar

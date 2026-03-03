@@ -1,0 +1,98 @@
+[
+	{
+		"titolo": "Nuove tendenze del lavoro ibrido nel 2026",
+		"data": "2026-01-08",
+		"descrizione": "Un'analisi sintetica su come aziende e dipendenti stanno ridefinendo tempi e spazi di lavoro.",
+		"immagine": "https://picsum.photos/seed/lavoro-ibrido/1200/800",
+		"contenuto": "Il lavoro ibrido continua a evolversi con modelli più flessibili e orientati ai risultati. Le organizzazioni investono in strumenti digitali, formazione manageriale e benessere psicologico. L'obiettivo è creare ambienti sostenibili che valorizzino autonomia, collaborazione e produttività nel lungo periodo.",
+		"categoria": "Lavoro"
+	},
+	{
+		"titolo": "Guida rapida alla sicurezza online personale",
+		"data": "2026-01-15",
+		"descrizione": "Pratiche essenziali per proteggere account, dispositivi e dati nella vita quotidiana.",
+		"immagine": "https://picsum.photos/seed/cyber-sicurezza/1200/800",
+		"contenuto": "La sicurezza digitale parte da azioni semplici: password robuste, autenticazione a due fattori e aggiornamenti costanti. È utile anche verificare i permessi delle app e riconoscere i tentativi di phishing. Con poche abitudini corrette si riduce in modo significativo il rischio di compromissione dei propri dati.",
+		"categoria": "Tecnologia"
+	},
+	{
+		"titolo": "Alimentazione stagionale: perché conviene",
+		"data": "2026-01-23",
+		"descrizione": "Mangiare prodotti di stagione può migliorare qualità nutrizionale e sostenibilità.",
+		"immagine": "https://picsum.photos/seed/alimentazione-stagionale/1200/800",
+		"contenuto": "Scegliere frutta e verdura di stagione permette di ottenere alimenti più freschi e spesso più ricchi di sapore. Dal punto di vista ambientale si riducono trasporto e conservazione prolungata. Anche il costo tende a essere più accessibile, rendendo questa scelta conveniente sotto diversi aspetti.",
+		"categoria": "Salute"
+	},
+	{
+		"titolo": "Weekend culturale: 5 mostre da non perdere",
+		"data": "2026-02-01",
+		"descrizione": "Una selezione di eventi artistici perfetti per una breve pausa in città.",
+		"immagine": "https://picsum.photos/seed/mostre-arte/1200/800",
+		"contenuto": "Le mostre temporanee offrono occasioni uniche per scoprire autori emergenti e collezioni rare. In molte città italiane i musei stanno proponendo percorsi immersivi, laboratori e visite guidate serali. Pianificare un itinerario culturale nel weekend è un ottimo modo per unire svago e apprendimento.",
+		"categoria": "Cultura"
+	},
+	{
+		"titolo": "Come organizzare un budget familiare efficace",
+		"data": "2026-02-07",
+		"descrizione": "Metodi pratici per monitorare spese, risparmio e obiettivi economici mensili.",
+		"immagine": "https://picsum.photos/seed/budget-familiare/1200/800",
+		"contenuto": "Un budget ben strutturato parte dalla distinzione tra spese fisse e variabili. Definire una quota di risparmio automatica e verificare periodicamente le uscite aiuta a mantenere l'equilibrio finanziario. Anche piccoli aggiustamenti, come ridurre costi ricorrenti superflui, possono fare grande differenza nel tempo.",
+		"categoria": "Finanza"
+	},
+	{
+		"titolo": "Mobilità urbana: cresce l'uso della bicicletta",
+		"data": "2026-02-14",
+		"descrizione": "Sempre più cittadini scelgono mezzi leggeri per spostamenti brevi e quotidiani.",
+		"immagine": "https://picsum.photos/seed/mobilita-bici/1200/800",
+		"contenuto": "L'espansione delle piste ciclabili e dei servizi di bike sharing sta cambiando le abitudini urbane. La bicicletta riduce traffico, emissioni e tempi di percorrenza nelle aree centrali. Per consolidare questo trend servono infrastrutture sicure e politiche di incentivazione costanti.",
+		"categoria": "Ambiente"
+	},
+	{
+		"titolo": "Cinema indipendente: nuove voci da seguire",
+		"data": "2026-02-20",
+		"descrizione": "Registi emergenti raccontano storie originali con linguaggi visivi sperimentali.",
+		"immagine": "https://picsum.photos/seed/cinema-indie/1200/800",
+		"contenuto": "Il cinema indipendente sta vivendo una fase creativa ricca di contaminazioni tra generi e formati. Festival locali e piattaforme digitali offrono visibilità a produzioni a basso budget ma ad alto valore narrativo. Queste opere ampliano il panorama audiovisivo e stimolano un pubblico sempre più curioso.",
+		"categoria": "Spettacolo"
+	},
+	{
+		"titolo": "Smart home: dispositivi utili senza eccessi",
+		"data": "2026-02-26",
+		"descrizione": "Dai termostati intelligenti alle luci connesse: come scegliere in modo consapevole.",
+		"immagine": "https://picsum.photos/seed/smart-home/1200/800",
+		"contenuto": "La domotica può migliorare comfort ed efficienza energetica, ma è importante partire da bisogni reali. Un ecosistema semplice, interoperabile e sicuro evita costi inutili e problemi di compatibilità. Prima dell'acquisto conviene valutare aggiornamenti software, privacy e facilità d'uso.",
+		"categoria": "Tecnologia"
+	},
+	{
+		"titolo": "Allenamento breve: risultati con 20 minuti al giorno",
+		"data": "2026-03-01",
+		"descrizione": "Routine essenziali per mantenersi attivi anche con poco tempo disponibile.",
+		"immagine": "https://picsum.photos/seed/allenamento-breve/1200/800",
+		"contenuto": "Sessioni brevi e costanti possono offrire benefici significativi su energia, tono muscolare e umore. Alternare esercizi cardiovascolari e di forza aiuta a lavorare su più obiettivi in tempi ridotti. La chiave è la regolarità, supportata da una progressione graduale e realistica.",
+		"categoria": "Benessere"
+	},
+	{
+		"titolo": "Turismo lento: itinerari tra borghi e natura",
+		"data": "2026-03-02",
+		"descrizione": "Una modalità di viaggio più attenta al territorio, alle persone e ai ritmi locali.",
+		"immagine": "https://picsum.photos/seed/turismo-lento/1200/800",
+		"contenuto": "Il turismo lento valorizza esperienze autentiche, produzioni locali e mobilità sostenibile. Cammini, ciclovie e piccoli centri storici diventano protagonisti di una vacanza meno frenetica e più consapevole. Questo approccio genera anche ricadute positive sulle economie locali.",
+		"categoria": "Viaggi"
+	},
+	{
+		"titolo": "Educazione digitale nelle scuole: priorità 2026",
+		"data": "2026-03-03",
+		"descrizione": "Competenze critiche e uso responsabile della rete al centro dei nuovi programmi.",
+		"immagine": "https://picsum.photos/seed/educazione-digitale/1200/800",
+		"contenuto": "L'educazione digitale non riguarda solo strumenti tecnici, ma anche cittadinanza online e pensiero critico. Le scuole stanno integrando moduli su verifica delle fonti, privacy e comportamento responsabile sui social. Coinvolgere famiglie e docenti in percorsi condivisi aumenta l'efficacia dell'intervento educativo.",
+		"categoria": "Istruzione"
+	},
+	{
+		"titolo": "Piccole abitudini green per la casa",
+		"data": "2026-03-03",
+		"descrizione": "Azioni semplici per ridurre sprechi energetici e consumo di risorse ogni giorno.",
+		"immagine": "https://picsum.photos/seed/abitudini-green/1200/800",
+		"contenuto": "Ridurre gli sprechi domestici inizia da scelte quotidiane: elettrodomestici efficienti, uso consapevole dell'acqua e corretta raccolta differenziata. Anche monitorare i consumi aiuta a individuare margini di miglioramento. La sostenibilità in casa diventa concreta quando si trasforma in routine.",
+		"categoria": "Ambiente"
+	}
+]

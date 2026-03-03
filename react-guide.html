@@ -91,7 +91,8 @@
             <!-- Sidebar Navigation -->
             <div class="col-lg-3 mb-4">
                 <div class="list-group sticky-top" style="top: 100px;">
-                    <a href="#intro" class="list-group-item list-group-item-action fw-bold active" style="background-color: var(--react-dark); border-color: var(--react-dark);">Pensare in React</a>
+                    <a href="#getting-started" class="list-group-item list-group-item-action fw-bold active" style="background-color: var(--react-dark); border-color: var(--react-blue);">Cominciamo (Setup)</a>
+                    <a href="#intro" class="list-group-item list-group-item-action fw-bold" style="background-color: var(--react-dark-bg); color: var(--react-blue); border-color: var(--react-dark-bg);">Pensare in React</a>
                     <a href="#components" class="list-group-item list-group-item-action ps-4">Componenti & JSX</a>
                     <a href="#props" class="list-group-item list-group-item-action ps-4">Props</a>
                     <a href="#state" class="list-group-item list-group-item-action ps-4">State & Hooks</a>
@@ -106,7 +107,88 @@
 
             <!-- Main Content -->
             <div class="col-lg-9">
-                
+
+                <!-- SEZIONE 0: GETTING STARTED -->
+                 <div class="mb-5" id="getting-started">
+                    <span class="badge bg-danger mb-2">Primi Passi</span>
+                    <h2 class="display-6 fw-bold text-react">Iniziare con React</h2>
+                    <hr>
+                    
+                    <p class="lead">Per usare React in modo professionale, non basta un singolo file HTML. Abbiamo bisogno di un ambiente di sviluppo completo.</p>
+                    
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> <strong>Prerequisito:</strong> Assicurati di avere <a href="https://nodejs.org/" target="_blank" class="fw-bold">Node.js</a> installato sul tuo computer.
+                    </div>
+
+                    <section class="mb-5">
+                        <h3 class="mt-4"><i class="bi bi-terminal text-react"></i> 1. Creare il Progetto (Create React App)</h3>
+                        <p>Il modo più classico per iniziare (e quello suggerito da molte guide introduttive) è usare il comando ufficiale <code>create-react-app</code>. Questo comando prepara tutto l'ambiente automaticamente.</p>
+                        
+                        <p>Apri il tuo terminale (Prompt dei comandi o PowerShell) e digita:</p>
+                        <div class="bg-dark text-white p-3 rounded mb-3">
+                            <code>npx create-react-app my-react-app</code>
+                        </div>
+                        <p><small class="text-muted">Nota: <code>my-react-app</code> è il nome della cartella che verrà creata. Puoi chiamarla come vuoi.</small></p>
+
+                        <p>Una volta finito (ci vorrà qualche minuto), entra nella cartella e avvia il progetto:</p>
+                        <div class="bg-dark text-white p-3 rounded mb-3">
+                            <code>cd my-react-app</code><br>
+                            <code>npm start</code>
+                        </div>
+                        <p>Se tutto è andato bene, si aprirà automaticamente il browser all'indirizzo <strong>http://localhost:3000</strong> e vedrai il logo di React girare!</p>
+                    </section>
+
+                    <section class="mb-5">
+                        <h3 class="mt-4"><i class="bi bi-folder text-react"></i> 2. Struttura del Progetto</h3>
+                        <p>Apri la cartella del progetto con VS Code. Vedrai diversi file, ma quelli importanti sono pochi:</p>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <strong>node_modules/</strong>: Contiene tutte le librerie (le dipendenze) scaricate. È una cartella pesantissima, non toccarla mai!
+                            </li>
+                            <li class="list-group-item">
+                                <strong>public/</strong>: Contiene i file statici come <code>index.html</code> e le immagini.
+                            </li>
+                            <li class="list-group-item list-group-item-info">
+                                <strong>src/</strong>: Qui è dove lavorerai! Contiene tutto il codice sorgente (JavaScript/JSX e CSS).
+                                <ul>
+                                    <li><code>App.js</code>: Il componente principale della tua applicazione.</li>
+                                    <li><code>index.js</code>: Il punto di ingresso che "monta" React nella pagina HTML.</li>
+                                    <li><code>App.css</code>: Lo stile del componente App.</li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>package.json</strong>: Il file di "identità" del progetto. Elenca le librerie installate e i comandi disponibili.
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="mb-5">
+                        <h3 class="mt-4"><i class="bi bi-pencil-square text-react"></i> 3. La Tua Prima Modifica</h3>
+                        <p>Ora modifichiamo la pagina di benvenuto di React per farla nostra.</p>
+                        
+                        <ol>
+                            <li>Tieni il server in esecuzione (non chiudere il terminale dove hai scritto <code>npm start</code>).</li>
+                            <li>Vai nella cartella <code>src</code> e apri il file <strong>App.js</strong>.</li>
+                            <li>Cerca il codice dentro il <code>return (...)</code>. Sembra HTML.</li>
+                            <li>Cancella tutto quello che c'è dentro il <code>&lt;div className="App"&gt;</code> e scrivi un titolo:</li>
+                        </ol>
+
+                        <p>Il tuo codice dovrebbe apparire così:</p>
+                        <pre><code class="language-jsx">function App() {
+  return (
+    <div className="App">
+      <h1>Ciao Mondo!</h1>
+      <p>Questa è la mia prima applicazione React.</p>
+    </div>
+  );
+}
+
+export default App;</code></pre>
+                        
+                        <p class="mt-3">Salva il file (`Ctrl+S`). Guarda il browser: <strong>si aggiornerà magicamente da solo</strong> senza dover ricaricare la pagina (Hot Reloading)!</p>
+                    </section>
+                 </div>
+
                 <!-- SEZIONE 1: TEORIA -->
                 <div class="mb-5" id="intro">
                     <span class="badge bg-primary mb-2">Teoria Essenziale</span>

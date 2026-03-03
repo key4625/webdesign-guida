@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Components - Manuale Web Design</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Prism Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .web-component-badge {
+            background-color: #e34c26; /* HTML orange */
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-right: 5px;
+        }
+        .js-badge {
+            background-color: #f7df1e; /* JS yellow */
+            color: black;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Page Header -->
+    <div class="page-header bg-danger text-white py-4">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-puzzle"></i> Web Components</h1>
+            <p class="lead">Creare elementi HTML personalizzati e riutilizzabili per Header, Footer e Sidebar</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#introduzione">Cosa sono</a>
+                        <a class="nav-link" href="#perche-usarli">Perché usarli</a>
+                        <a class="nav-link" href="#esempio-pratico">Esempio Pratico</a>
+                        <a class="nav-link" href="#menu-attivo">Gestione Menu Attivo</a>
+                        <a class="nav-link" href="#alternative">Alternative (PHP/Fetch)</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+
+                <!-- Introduzione -->
+                <section id="introduzione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-info-circle"></i> Introduzione ai Web Components</h2>
+                    <div class="content-box">
+                        <p>I <strong>Web Components</strong> sono una suite di tecnologie native del browser che permettono di creare nuovi tag HTML personalizzati, incapsulati e riutilizzabili.</p>
+                        <p>A differenza di framework come React o Vue, i Web Components funzionano nativamente nel browser senza bisogno di build tools o librerie esterne.</p>
+                        
+                        <div class="alert alert-info">
+                            <i class="bi bi-lightbulb"></i>
+                            <strong>Immagina questo:</strong> Invece di copiare e incollare il codice della navbar in ogni pagina HTML (<code>&lt;nav class="..."&gt;...&lt;/nav&gt;</code>), puoi semplicemente scrivere <code>&lt;my-navbar&gt;&lt;/my-navbar&gt;</code>!
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Perché usarli -->
+                <section id="perche-usarli" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-check-circle"></i> Perché usarli per il Layout?</h2>
+                    <div class="content-box">
+                        <p>Uno dei problemi classici nello sviluppo di siti statici multipagina è la gestione delle parti comuni (Header, Footer, Sidebar). Se devi cambiare una voce del menu, devi modificare 10, 20 o 50 file HTML.</p>
+                        <p>I Web Components risolvono questo problema centralizzando il codice in un unico file JavaScript.</p>
+                        <ul>
+                            <li><strong>Centralizzazione:</strong> Modifichi il componente in un punto, si aggiorna ovunque.</li>
+                            <li><strong>Pulizia:</strong> Il tuo file HTML contiene solo il contenuto specifico della pagina.</li>
+                            <li><strong>Nessun Backend:</strong> Funziona anche se apri il file HTML direttamente dal desktop (doppio click), senza bisogno di un server PHP o Node.js.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Esempio Pratico -->
+                <section id="esempio-pratico" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-code-slash"></i> Creare un Header Personalizzato</h2>
+                    <div class="content-box">
+                        <p>Creiamo un componente <code>&lt;site-header&gt;</code>. Per farlo, dobbiamo estendere la classe <code>HTMLElement</code> di JavaScript.</p>
+
+                        <h4>1. Il Codice JavaScript (es. <code>components.js</code>)</h4>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">class SiteHeader extends HTMLElement {
+    // Il metodo connectedCallback viene chiamato quando l'elemento viene aggiunto alla pagina
+    connectedCallback() {
+        this.innerHTML = `
+            &lt;header style="background: #333; color: white; padding: 1rem;"&gt;
+                &lt;nav&gt;
+                    &lt;a href="index.html" style="color: white; margin-right: 15px;"&gt;Home&lt;/a&gt;
+                    &lt;a href="chi-siamo.html" style="color: white; margin-right: 15px;"&gt;Chi Siamo&lt;/a&gt;
+                    &lt;a href="contatti.html" style="color: white;"&gt;Contatti&lt;/a&gt;
+                &lt;/nav&gt;
+            &lt;/header&gt;
+        `;
+    }
+}
+
+// 2. Registrazione del componente (il nome deve contenere un trattino "-")
+customElements.define('site-header', SiteHeader);</code></pre>
+                        </div>
+
+                        <h4>2. Utilizzo nell'HTML</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;script src="js/components.js" defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    
+    &lt;!-- Ecco il nostro componente personalizzato! --&gt;
+    &lt;site-header&gt;&lt;/site-header&gt;
+
+    &lt;main&gt;
+        &lt;h1&gt;Benvenuti&lt;/h1&gt;
+        &lt;p&gt;Contenuto della pagina...&lt;/p&gt;
+    &lt;/main&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gestione Menu Attivo -->
+                <section id="menu-attivo" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-toggle-on"></i> Gestire la Voce di Menu Attiva</h2>
+                    <div class="content-box">
+                        <p>Un problema comune è evidenziare la pagina corrente nel menu. Possiamo risolvere passando un <strong>attributo</strong> al nostro componente.</p>
+
+                        <h4>Nell'HTML</h4>
+                        <p>Indichiamo quale pagina siamo usando un attributo personalizzato, ad esempio <code>active-page</code>.</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Sulla Home Page --&gt;
+&lt;site-header active-page="home"&gt;&lt;/site-header&gt;
+
+&lt;!-- Sulla pagina Chi Siamo --&gt;
+&lt;site-header active-page="chi-siamo"&gt;&lt;/site-header&gt;</code></pre>
+                        </div>
+
+                        <h4>Nel JavaScript</h4>
+                        <p>Leggiamo l'attributo e aggiungiamo una classe CSS (es. <code>active</code>) al link corretto.</p>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">class SiteHeader extends HTMLElement {
+    connectedCallback() {
+        // Leggiamo l'attributo 'active-page'
+        const activePage = this.getAttribute('active-page');
+
+        this.innerHTML = `
+            &lt;header&gt;
+                &lt;nav&gt;
+                    &lt;a href="index.html" class="${activePage === 'home' ? 'active' : ''}"&gt;Home&lt;/a&gt;
+                    &lt;a href="chi-siamo.html" class="${activePage === 'chi-siamo' ? 'active' : ''}"&gt;Chi Siamo&lt;/a&gt;
+                    &lt;a href="contatti.html" class="${activePage === 'contatti' ? 'active' : ''}"&gt;Contatti&lt;/a&gt;
+                &lt;/nav&gt;
+            &lt;/header&gt;
+        `;
+    }
+}
+customElements.define('site-header', SiteHeader);</code></pre>
+                        </div>
+                        
+                        <div class="alert alert-warning">
+                            <small>Nota: Per stili più complessi o isolati, potresti voler utilizzare lo <strong>Shadow DOM</strong> (<code>this.attachShadow({mode: 'open'})</code>), ma per header globali spesso il DOM normale è più semplice perché eredita gli stili CSS (come Bootstrap) della pagina principale.</small>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Alternative -->
+                <section id="alternative" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-sign-turn-right"></i> Alternative e Confronto</h2>
+                    <div class="content-box">
+                        <p>I Web Components non sono l'unico modo per includere parti comuni. Ecco un confronto con altre tecniche popolari:</p>
+
+                        <div class="accordion" id="accordionAlternative">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePhp">
+                                        <span class="badge bg-primary me-2">PHP</span> Include (Server Side)
+                                    </button>
+                                </h2>
+                                <div id="collapsePhp" class="accordion-collapse collapse show" data-bs-parent="#accordionAlternative">
+                                    <div class="accordion-body">
+                                        <p>Se hai un server web (Apache, Nginx), questa è spesso la soluzione più robusta.</p>
+                                        <pre><code class="language-php">&lt;?php include 'header.php'; ?&gt;</code></pre>
+                                        <ul>
+                                            <li><strong>Pro:</strong> L'HTML arriva al browser già completo (ottimo per la SEO).</li>
+                                            <li><strong>Contro:</strong> Richiede un server funzionante (niente doppio click sul file).</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFetch">
+                                        <span class="badge bg-warning text-dark me-2">JS</span> Fetch API (Client Side)
+                                    </button>
+                                </h2>
+                                <div id="collapseFetch" class="accordion-collapse collapse" data-bs-parent="#accordionAlternative">
+                                    <div class="accordion-body">
+                                        <p>Puoi caricare un file HTML esterno e "iniettarlo" in un div vuoto.</p>
+                                        <pre><code class="language-javascript">fetch('header.html')
+  .then(response => response.text())
+  .then(data => {
+      document.getElementById('header-container').innerHTML = data;
+  });</code></pre>
+                                        <ul>
+                                            <li><strong>Pro:</strong> Semplice, tiene il codice HTML separato.</li>
+                                            <li><strong>Contro:</strong> Può causare un leggero "sfarfallio" all'avvio; difficile evidenziare la voce di menu attiva (devi manipolare il DOM dopo il caricamento).</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Manuale Web Design. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Prism Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+    
+    <!-- Navbar Script -->
+    <script src="js/navbar.js"></script>
+</body>
+</html>
