@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         { text: 'JavaScript', url: pathPrefix + 'javascript-guide.html' },
         { text: 'Vue.js', url: pathPrefix + 'vue-guide.html' },
         { text: 'React', url: pathPrefix + 'react-guide.html' },
+        { text: 'GSAP', url: pathPrefix + 'gsap-guide.html' },
         { text: 'Esercizi', url: pathPrefix + 'esempi/index.html' },
         { text: 'Best Practices', url: pathPrefix + 'best-practices.html' }
     ];
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Configurazione specifica per Vue.js e React
     const isVuePage = page === 'vue-guide.html';
     const isReactPage = page === 'react-guide.html';
+    const isGsapPage = page === 'gsap-guide.html';
     
     let navbarClass = 'navbar-dark bg-primary';
     let navbarStyle = '';
@@ -38,6 +40,10 @@ document.addEventListener("DOMContentLoaded", function() {
         navbarClass = 'navbar-dark bg-dark';
         navbarStyle = 'style="border-bottom: 3px solid var(--react-blue);"';
         iconClass = ' text-react';
+    } else if (isGsapPage) {
+        navbarClass = 'navbar-dark bg-dark';
+        navbarStyle = 'style="border-bottom: 3px solid #88ce02;"';
+        iconClass = ' text-success';
     }
 
     // Genera l'HTML dei link

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida GSAP - Manuale Web Design</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Prism Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- GSAP Specific CSS -->
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #88ce02;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Page Header -->
+    <div class="page-header text-white py-4" style="background-color: #0e100f; border-bottom: 5px solid #88ce02;">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-film"></i> Guida GSAP (GreenSock)</h1>
+            <p class="lead">Animazioni web professionali ad alte prestazioni</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#introduzione">Introduzione</a>
+                        <a class="nav-link" href="#installazione">Installazione</a>
+                        <a class="nav-link" href="#interpolazioni">Interpolazioni (Tweens)</a>
+                        <a class="nav-link" href="#proprieta">Proprietà Comuni</a>
+                        <a class="nav-link" href="#easing">Easing</a>
+                        <a class="nav-link" href="#timeline">Timeline</a>
+                        <a class="nav-link" href="#scrolltrigger">ScrollTrigger</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+
+                <!-- Introduzione -->
+                <section id="introduzione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-info-circle"></i> Cos'è GSAP?</h2>
+                    <div class="content-box">
+                        <p><strong>GSAP</strong> (GreenSock Animation Platform) è lo standard industriale per le animazioni web JavaScript. È robusto, veloce e risolve automaticamente le incompatibilità tra browser.</p>
+                        
+                        <div class="alert alert-success">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <strong>Perché usarlo?</strong> Rispetto alle animazioni CSS, GSAP offre un controllo molto più preciso su sequenze complesse (Timeline), performance migliori su animazioni pesanti e plugin potenti come ScrollTrigger.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Installazione -->
+                <section id="installazione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-download"></i> Installazione</h2>
+                    <div class="content-box">
+                        <p>Il modo più semplice per iniziare è includere la CDN nel tuo file HTML, prima della chiusura del body.</p>
+                        
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- GSAP Core --&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- ScrollTrigger (Opzionale, per animazioni allo scroll) --&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"&gt;&lt;/script&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Interpolazioni (Tweens) -->
+                <section id="interpolazioni" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-magic"></i> Interpolazioni (Tweens)</h2>
+                    <div class="content-box">
+                        <p>Il cuore di GSAP è il "Tween" (interpolazione). Un tween modifica le proprietà di un elemento nel tempo.</p>
+
+                        <h3>gsap.to()</h3>
+                        <p>Anima un elemento dallo stato attuale <strong>verso</strong> i valori definiti.</p>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">// Sposta l'elemento con classe .box di 100px a destra in 1 secondo
+gsap.to(".box", { x: 100, duration: 1 });</code></pre>
+                        </div>
+
+                        <h3>gsap.from()</h3>
+                        <p>Anima un elemento <strong>da</strong> valori definiti verso lo stato attuale (ottimo per entrate in scena).</p>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">// L'elemento appare venendo dall'alto con opacità 0
+gsap.from(".box", { y: -100, opacity: 0, duration: 1 });</code></pre>
+                        </div>
+
+                        <h3>gsap.fromTo()</h3>
+                        <p>Definisce sia lo stato di partenza che quello di arrivo.</p>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">gsap.fromTo(".box", 
+    { x: 0, opacity: 0 }, // from
+    { x: 200, opacity: 1, duration: 2 } // to
+);</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Proprietà Comuni -->
+                <section id="proprieta" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-sliders"></i> Proprietà Comuni</h2>
+                    <div class="content-box">
+                        <p>GSAP usa proprietà trasformate per massimizzare le performance. Ecco le più usate:</p>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Proprietà GSAP</th>
+                                    <th>Corrispondente CSS</th>
+                                    <th>Descrizione</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>x</code>, <code>y</code></td>
+                                    <td><code>transform: translateX()</code>, <code>translateY()</code></td>
+                                    <td>Spostamento orizzontale/verticale.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>duration</code></td>
+                                    <td><code>animation-duration</code></td>
+                                    <td>Durata in secondi (default: 0.5).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>rotation</code></td>
+                                    <td><code>transform: rotate()</code></td>
+                                    <td>Rotazione in gradi.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>scale</code></td>
+                                    <td><code>transform: scale()</code></td>
+                                    <td>Scala dell'elemento.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>opacity</code></td>
+                                    <td><code>opacity</code></td>
+                                    <td>Trasparenza (0 a 1).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>delay</code></td>
+                                    <td><code>animation-delay</code></td>
+                                    <td>Ritardo prima dell'inizio.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>stagger</code></td>
+                                    <td>-</td>
+                                    <td>Tempo tra l'inizio dell'animazione di ogni elemento in un gruppo.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="code-example">
+                            <pre><code class="language-javascript">// Esempio con Stagger (animazione a cascata)
+gsap.to(".box", { 
+    y: 50, 
+    opacity: 0, 
+    duration: 0.5, 
+    stagger: 0.2 // 0.2 secondi tra ogni elemento
+});</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Easing -->
+                <section id="easing" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-graph-up"></i> Easing</h2>
+                    <div class="content-box">
+                        <p>L'Easing determina la "personalità" dell'animazione (accelerazione e decelerazione). Il default è <code>"power1.out"</code>.</p>
+                        <ul>
+                            <li><code>"none"</code>: Lineare (velocità costante).</li>
+                            <li><code>"power1", "power2", "power3", "power4"</code>: Curve di accelerazione standard.</li>
+                            <li><code>"back"</code>: Supera leggermente il target e torna indietro.</li>
+                            <li><code>"elastic"</code>: Effetto elastico.</li>
+                            <li><code>"bounce"</code>: Effetto rimbalzo.</li>
+                        </ul>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">gsap.to(".box", { 
+    x: 300, 
+    duration: 1.5, 
+    ease: "bounce.out" 
+});</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Timeline -->
+                <section id="timeline" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-collection-play"></i> Timeline</h2>
+                    <div class="content-box">
+                        <p>Le <strong>Timeline</strong> permettono di concatenare animazioni in sequenza senza dover calcolare manualmente i ritardi (delays).</p>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">let tl = gsap.timeline();
+
+// Le animazioni avvengono una dopo l'altra
+tl.to(".box1", { x: 100, duration: 1 })
+  .to(".box2", { y: 50, duration: 0.5 }) // Parte quando finisce la precedente
+  .to(".box3", { rotation: 360, duration: 1 }, "-=0.5"); // Parte 0.5 secondi PRIMA della fine della precedente</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ScrollTrigger -->
+                <section id="scrolltrigger" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-mouse-scrolling"></i> ScrollTrigger</h2>
+                    <div class="content-box">
+                        <p>ScrollTrigger è il plugin più famoso di GSAP: permette di agganciare le animazioni allo scroll della pagina.</p>
+                        <p>È necessario registrare il plugin prima dell'uso:</p>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".box", {
+    x: 400,
+    rotation: 360,
+    scrollTrigger: {
+        trigger: ".box", // L'elemento che fa scattare l'animazione
+        start: "top center", // Quando la cima dell'elemento raggiunge il centro della finestra
+        end: "bottom 100px",
+        scrub: true, // L'animazione segue lo scroll (se false, parte e basta)
+        markers: true // Mostra marcatori per debug (ricordati di toglierlo in produzione!)
+    }
+});</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Manuale Web Design. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Prism Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    
+    <!-- Navbar Script -->
+    <script src="js/navbar.js"></script>
+</body>
+</html>
