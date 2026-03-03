@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida API & CRUD - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Page Header -->
+    <div class="page-header bg-danger text-white py-4">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-cloud-arrow-up"></i> API & CRUD</h1>
+            <p class="lead">Interfacciarsi con API RESTful: Operazioni Create, Read, Update, Delete in JavaScript</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#introduzione">Introduzione</a>
+                        <a class="nav-link" href="#simple-api">Simple API</a>
+                        <a class="nav-link" href="#autenticazione">Autenticazione</a>
+                        <a class="nav-link" href="#lettura">Lettura (GET)</a>
+                        <a class="nav-link" href="#creazione">Creazione (POST)</a>
+                        <a class="nav-link" href="#aggiornamento">Modifica (PUT)</a>
+                        <a class="nav-link" href="#cancellazione">Eliminazione (DELETE)</a>
+                        <a class="nav-link" href="#altri-servizi">Servizi Esterni</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+
+                <!-- Introduzione -->
+                <section id="introduzione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-info-circle"></i> Introduzione</h2>
+                    <div class="content-box">
+                        <p>Le applicazioni web moderne comunicano costantemente con i server per scambiare dati. Questo avviene tramite <strong>API</strong> (Application Programming Interface), spesso seguendo lo standard <strong>REST</strong>.</p>
+                        
+                        <h4>Cosa significa CRUD?</h4>
+                        <p>CRUD è l'acronimo delle quattro operazioni fondamentali per la gestione persistente dei dati:</p>
+                        <ul>
+                            <li><strong>C</strong>reate (Creazione) - Solitamente metodo HTTP <code>POST</code></li>
+                            <li><strong>R</strong>ead (Lettura) - Solitamente metodo HTTP <code>GET</code></li>
+                            <li><strong>U</strong>pdate (Aggiornamento) - Solitamente metodo HTTP <code>PUT</code> o <code>PATCH</code></li>
+                            <li><strong>D</strong>elete (Cancellazione) - Solitamente metodo HTTP <code>DELETE</code></li>
+                        </ul>
+
+                        <div class="alert alert-info">
+                            <i class="bi bi-lightbulb"></i>
+                            <strong>Nota:</strong> In JavaScript, utilizziamo la <strong>Fetch API</strong> o librerie come <strong>Axios</strong> per eseguire queste operazioni in modo asincrono.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Simple API -->
+                <section id="simple-api" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-server"></i> Simple API</h2>
+                    <div class="content-box">
+                        <p>Per esercitarsi con le operazioni CRUD, utilizzeremo una libreria didattica appositamente creata.</p>
+                        
+                        <div class="card bg-light mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Risorse Simple API</h5>
+                                <p class="card-text">
+                                    <ul>
+                                        <li><strong>Repository GitHub:</strong> <a href="https://github.com/key4625/simple-api" target="_blank">key4625/simple-api</a></li>
+                                        <li><strong>Endpoint Live:</strong> <code>https://micheleabamc.netsons.org/wd2/api/</code></li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+
+                        <p>Questa API permette di gestire utenti e post (articoli). Per le operazioni di modifica (Create, Update, Delete) è necessaria l'autenticazione tramite Token JWT.</p>
+                    </div>
+                </section>
+
+                <!-- Autenticazione -->
+                <section id="autenticazione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-shield-lock"></i> Autenticazione</h2>
+                    <div class="content-box">
+                        <p>Prima di poter modificare i dati, dobbiamo ottenere un token di accesso effettuando il login.</p>
+                        
+                        <h4>Login</h4>
+                        <p>Inviamo le credenziali (email e password) all'endpoint <code>/login</code>.</p>
+
+                        <div class="code-example">
+                            <pre><code class="language-javascript">const API_URL = "https://micheleabamc.netsons.org/wd2/api";
+
+async function login(email, password) {
+    try {
+        const response = await fetch(`${API_URL}/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        
+        if (response.ok) {
+            console.log("Login effettuato con successo!");
+            // Salviamo il token per le chiamate successive
+            localStorage.setItem("token", data.token);
+            return data.token;
+        } else {
+            console.error("Errore login:", data.message);
+        }
+    } catch (error) {
+        console.error("Errore di rete:", error);
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Lettura (GET) -->
+                <section id="lettura" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-eye"></i> Lettura Dati (GET)</h2>
+                    <div class="content-box">
+                        <p>Per recuperare i dati, utilizziamo il metodo <code>GET</code>. Questo endpoint è solitamente pubblico.</p>
+                        
+                        <div class="code-example">
+                            <pre><code class="language-javascript">async function getPosts() {
+    try {
+        const response = await fetch(`${API_URL}/posts`);
+        const posts = await response.json();
+        
+        console.log("Post recuperati:", posts);
+        
+        // Esempio: Visualizzazione nella pagina
+        const container = document.getElementById("posts-container");
+        container.innerHTML = posts.map(post => `
+            &lt;div class="post"&gt;
+                &lt;h3&gt;${post.title}&lt;/h3&gt;
+                &lt;p&gt;${post.content}&lt;/p&gt;
+            &lt;/div&gt;
+        `).join('');
+        
+    } catch (error) {
+        console.error("Errore nel recupero dei post:", error);
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Creazione (POST) -->
+                <section id="creazione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-plus-circle"></i> Creazione (POST)</h2>
+                    <div class="content-box">
+                        <p>Per creare un nuovo post, usiamo il metodo <code>POST</code>. È necessario includere il token nel header <code>Authorization</code>.</p>
+                        <p>Se devi inviare anche file (come immagini), è meglio usare l'oggetto <code>FormData</code> invece di JSON.</p>
+
+                        <div class="code-example">
+                            <pre><code class="language-javascript">async function createPost(title, content, fileInput) {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        console.error("Utente non autenticato!");
+        return;
+    }
+
+    // Usiamo FormData per gestire anche il caricamento file
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('category', 'Generale');
+    if (fileInput && fileInput.files[0]) {
+        formData.append('image', fileInput.files[0]);
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/posts`, {
+            method: "POST",
+            headers: {
+                // Non impostare 'Content-Type' con FormData, il browser lo fa automaticamente
+                "Authorization": `Bearer ${token}`
+            },
+            body: formData
+        });
+
+        const result = await response.json();
+        console.log("Risultato:", result);
+
+    } catch (error) {
+        console.error("Errore creazione post:", error);
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Aggiornamento (PUT) -->
+                <section id="aggiornamento" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-pencil-square"></i> Aggiornamento (PUT)</h2>
+                    <div class="content-box">
+                        <p>Per modificare una risorsa esistente, usiamo <code>PUT</code> specificando l'ID della risorsa nell'URL.</p>
+
+                        <div class="code-example">
+                            <pre><code class="language-javascript">async function updatePost(id, title, content) {
+    const token = localStorage.getItem("token");
+    
+    // Nota: Se usiamo PUT per inviare solo JSON (senza file)
+    const data = new URLSearchParams();
+    data.append('title', title);
+    data.append('content', content);
+    
+    // Alcune API potrebbero richiedere POST con metodo _method=PUT o form-data
+    // Nel caso di Simple API, vediamo se accetta x-www-form-urlencoded o JSON
+    // Qui assumiamo un esempio standard con JSON per semplicità, ma controlla la doc specifica
+    
+    try {
+        const response = await fetch(`${API_URL}/posts/${id}`, {
+            method: "PUT",
+            headers: {
+                 // Spesso con PUT e file siumulati si usa POST + _method, 
+                 // ma qui proviamo l'approccio standard se supportato
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/x-www-form-urlencoded" 
+            },
+            body: data
+        });
+
+        const result = await response.json();
+        console.log("Post aggiornato:", result);
+    } catch (error) {
+        console.error("Errore aggiornamento:", error);
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cancellazione (DELETE) -->
+                <section id="cancellazione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-trash"></i> Eliminazione (DELETE)</h2>
+                    <div class="content-box">
+                        <p>Per eliminare una risorsa, usiamo il metodo <code>DELETE</code> sull'URL specifico della risorsa.</p>
+
+                        <div class="code-example">
+                            <pre><code class="language-javascript">async function deletePost(id) {
+    const token = localStorage.getItem("token");
+    
+    if (!confirm("Sei sicuro di voler eliminare questo post?")) return;
+
+    try {
+        const response = await fetch(`${API_URL}/posts/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const result = await response.json();
+        console.log("Post eliminato:", result);
+        
+        // Aggiorna la UI rimuovendo l'elemento
+        getPosts(); // Ricarica la lista
+    } catch (error) {
+        console.error("Errore eliminazione:", error);
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Altri Servizi -->
+                <section id="altri-servizi" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-globe"></i> Altri Servizi Backend</h2>
+                    <div class="content-box">
+                        <p>Oltre a creare le proprie API, esistono servizi "Backend-as-a-Service" (BaaS) o "Headless CMS" che permettono di avere un backend pronto all'uso in pochi minuti.</p>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-success"><i class="bi bi-database"></i> Supabase</h5>
+                                        <p class="card-text">Una alternativa open source a Firebase. Offre un database PostgreSQL completo, autenticazione, API istantanee e funzionalità real-time.</p>
+                                        <a href="https://supabase.com/" target="_blank" class="btn btn-outline-success btn-sm">Visita Supabase</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-primary"><i class="bi bi-layout-text-window-reverse"></i> Strapi</h5>
+                                        <p class="card-text">Il principale Headless CMS open source. Gestione contenuti tramite pannello admin, esponendo automaticamente API REST e GraphQL.</p>
+                                        <a href="https://strapi.io/" target="_blank" class="btn btn-outline-primary btn-sm">Visita Strapi</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-info"><i class="bi bi-hdd-network"></i> PocketBase</h5>
+                                        <p class="card-text">Backend open source in un singolo file eseguibile (Go). Include database real-time (SQLite), autenticazione e storage file molto performante.</p>
+                                        <a href="https://pocketbase.io/" target="_blank" class="btn btn-outline-info btn-sm">Visita PocketBase</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigazione Pagine -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="javascript-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Guida JS Base
+                    </a>
+                    <a href="web-components-guide.html" class="btn btn-primary">
+                        Web Components <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-code-slash"></i> Web Design Guide</h5>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2025 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Attiva/disattiva tema scuro">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

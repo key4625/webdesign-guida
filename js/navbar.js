@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
             id: 'navbarDropdownJS',
             dropdown: [
                 { text: 'Guida JS Base', url: pathPrefix + 'javascript-guide.html' },
+                { text: 'API & CRUD', url: pathPrefix + 'javascript-api-crud.html' },
                 { text: 'Web Components', url: pathPrefix + 'web-components-guide.html' },
                 { separator: true },
                 { text: 'Vue.js', url: pathPrefix + 'vue-guide.html' },

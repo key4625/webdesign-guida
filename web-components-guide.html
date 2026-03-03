@@ -53,6 +53,7 @@
                         <a class="nav-link" href="#perche-usarli">Perché usarli</a>
                         <a class="nav-link" href="#esempio-pratico">Esempio Pratico</a>
                         <a class="nav-link" href="#menu-attivo">Gestione Menu Attivo</a>
+                        <a class="nav-link" href="#template-slots">Template & Slots</a>
                         <a class="nav-link" href="#alternative">Alternative (PHP/Fetch)</a>
                     </nav>
                 </div>
@@ -179,6 +180,80 @@ customElements.define('site-header', SiteHeader);</code></pre>
                         
                         <div class="alert alert-warning">
                             <small>Nota: Per stili più complessi o isolati, potresti voler utilizzare lo <strong>Shadow DOM</strong> (<code>this.attachShadow({mode: 'open'})</code>), ma per header globali spesso il DOM normale è più semplice perché eredita gli stili CSS (come Bootstrap) della pagina principale.</small>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Template & Slot -->
+                <section id="template-slots" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-intersect"></i> Template & Slots</h2>
+                    <div class="content-box">
+                        <p>Per creare componenti più efficienti e flessibili, possiamo sfruttare due potenti caratteristiche dei Web Components: il tag <code>&lt;template&gt;</code> e gli <strong>Slots</strong>.</p>
+                        
+                        <h4>Il tag Template</h4>
+                        <p>Il tag <code>&lt;template&gt;</code> ci permette di definire frammenti di HTML che non vengono renderizzati immediatamente, ma possono essere clonati e riutilizzati via JavaScript. Questo migliora le prestazioni riducendo il tempo di parsing.</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;template id="my-card-template"&gt;
+    &lt;div class="card"&gt;
+        &lt;h3&gt;Titolo&lt;/h3&gt;
+        &lt;p&gt;Contenuto...&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+                        </div>
+
+                        <h4>Gli Slots e lo Shadow DOM</h4>
+                        <p>Gli <strong>Slots</strong> funzionano come "segnaposto" che permettono di iniettare contenuto personalizzato dall'esterno dentro il componente. Per farli funzionare come previsto, spesso si utilizza lo <strong>Shadow DOM</strong>, che incapsula la struttura interna del componente.</p>
+
+                        <h4>Esempio: Una Card Riutilizzabile</h4>
+                        <p>Immagina di voler creare un componente <code>&lt;info-card&gt;</code> dove il titolo e il contenuto cambiano ogni volta.</p>
+
+                        <div class="code-example">
+                            <pre><code class="language-javascript">class InfoCard extends HTMLElement {
+    constructor() {
+        super();
+        // 1. Attiviamo lo Shadow DOM (modalità open per permettere l'accesso da JS esterno)
+        const shadow = this.attachShadow({ mode: 'open' });
+        
+        // 2. Creiamo il template interno
+        const template = document.createElement('template');
+        template.innerHTML = `
+            &lt;style&gt;
+                .card { border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 10px; background: #fff; }
+                /* ::slotted permette di stilizzare il contenuto proiettato nello slot */
+                ::slotted(h3) { color: #0d6efd; margin-top: 0; }
+            &lt;/style&gt;
+            &lt;div class="card"&gt;
+                &lt;!-- Slot per il titolo --&gt;
+                &lt;slot name="title"&gt;&lt;h3&gt;Titolo Default&lt;/h3&gt;&lt;/slot&gt;
+                &lt;hr&gt;
+                &lt;!-- Slot per il contenuto principale (senza nome = default) --&gt;
+                &lt;slot&gt;&lt;p&gt;Contenuto Default...&lt;/p&gt;&lt;/slot&gt;
+            &lt;/div&gt;
+        `;
+
+        // 3. Cloniamo il template e lo attacchiamo allo Shadow DOM
+        shadow.appendChild(template.content.cloneNode(true));
+    }
+}
+customElements.define('info-card', InfoCard);</code></pre>
+                        </div>
+
+                        <p>Ora possiamo usare il componente nell'HTML iniettando contenuti diversi:</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Card 1 --&gt;
+&lt;info-card&gt;
+    &lt;h3 slot="title"&gt;Benvenuto&lt;/h3&gt;
+    &lt;p&gt;Questo è un paragrafo iniettato nello slot di default.&lt;/p&gt;
+&lt;/info-card&gt;
+
+&lt;!-- Card 2 --&gt;
+&lt;info-card&gt;
+    &lt;h3 slot="title"&gt;Novità&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Punto 1&lt;/li&gt;
+        &lt;li&gt;Punto 2&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/info-card&gt;</code></pre>
                         </div>
                     </div>
                 </section>

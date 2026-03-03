@@ -1,5 +1,5 @@
 // URL dell'API JSONPlaceholder per recuperare una lista di post
-const apiUrl = 'https://micheleabamc.netsons.org/wd2/guida/esempi/esercizio12/articoli.json';
+const apiUrl = 'https://micheleabamc.netsons.org/wd2/api/posts/';
 // Utilizziamo fetch per recuperare i dati dall'API
 fetch(apiUrl).then(response => {
     // Controlliamo se la risposta è stata ricevuta correttamente
@@ -27,10 +27,10 @@ function visualizzaArticoli(listaArticoli) {
         col.classList.add('col-md-4', 'mb-4');
         col.innerHTML = `
             <div class="card h-100">
-                <img src="${singoloArticolo.immagine}" class="card-img-top" alt="${singoloArticolo.titolo}">
+                <img src="${singoloArticolo.image}" class="card-img-top" alt="${singoloArticolo.title}">
                 <div class="card-body">
-                    <h5 class="card-title">${singoloArticolo.titolo}</h5>
-                    <p class="card-text">${singoloArticolo.descrizione}</p>
+                    <h5 class="card-title">${singoloArticolo.title}</h5>
+                    <p class="card-text">${singoloArticolo.content}</p>
                 </div>
             </div>
         `;
