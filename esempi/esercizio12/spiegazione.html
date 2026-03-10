@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Esercizio 12 - Documentazione Progetto</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Stiamo utilizzando il Web Semantico per migliorare l'accessibilità e la SEO del sito -->
+  <site-header></site-header>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-9" id="content">
+        <main class="my-4">
+          <h1 class="mb-4">Come funziona il nostro Blog con API e JS</h1>
+          
+          <div class="alert alert-info shadow-sm" role="alert">
+            <h4 class="alert-heading"><i class="bi bi-info-circle"></i> Obiettivo Didattico</h4>
+            <p>In questo progetto stiamo trasformando un sito statico in una <strong>Applicazione Web Dinamica</strong>. I dati (gli articoli) non sono scritti fissi nell'HTML, ma vengono scaricati da un server esterno tramite <strong>API</strong>.</p>
+          </div>
+
+          <div class="accordion shadow-sm" id="accordionDocs">
+            
+            <!-- 1. Struttura -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <strong>1. La Struttura dei File e Cartelle</strong>
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionDocs">
+                <div class="accordion-body">
+                  <p>Per mantenere il codice ordinato, abbiamo diviso il sito in due macro-aree:</p>
+                  <div class="row">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-success">
+                            <div class="card-header bg-success text-white">Area Pubblica</div>
+                            <div class="card-body">
+                                <ul>
+                                    <li><code>index.html</code>: La Home page accessibile a tutti.</li>
+                                    <li><code>js/ins-content.js</code>: Lo script che scarica e mostra gli articoli.</li>
+                                </ul>
+                                <small class="text-muted">Qui l'utente può solo <strong>LEGGERE</strong> (Richieste GET).</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-danger">
+                            <div class="card-header bg-danger text-white">Area Admin (Privata)</div>
+                            <div class="card-body">
+                                <ul>
+                                    <li><code>admin/</code>: Cartella che contiene login e dashboard.</li>
+                                    <li><code>js/auth.js</code>: Gestisce il Login e il Token.</li>
+                                </ul>
+                                <small class="text-muted">Qui l'amministratore può <strong>SCRIVERE</strong> (POST, PUT, DELETE).</small>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Auth -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                  <strong>2. Autenticazione: Il Login e il Token</strong>
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionDocs">
+                <div class="accordion-body">
+                  <p>Come facciamo a sapere se un utente ha il permesso di cancellare un articolo? Usiamo un sistema basato su <strong>Token</strong> (una sorta di pass digitale).</p>
+                  <ol class="list-group list-group-numbered">
+                    <li class="list-group-item">L'utente inserisce email e password nel form di Login.</li>
+                    <li class="list-group-item">Il JavaScript invia questi dati all'API (<code>POST /login</code>).</li>
+                    <li class="list-group-item">Se i dati sono corretti, l'API risponde con un <strong>Token</strong>.</li>
+                    <li class="list-group-item">
+                        Noi salviamo questo token nel browser usando il <code>localStorage</code>.
+                        <br><code>localStorage.setItem('authToken', token)</code>
+                    </li>
+                  </ol>
+                  <div class="alert alert-warning mt-3">
+                    <strong>Sicurezza:</strong> Le pagine protette (come la Dashboard) controllano subito se questo token esiste. Se non c'è, ti rispediscono al Login!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. CRUD -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                  <strong>3. Le Operazioni CRUD (Create, Read, Update, Delete)</strong>
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionDocs">
+                <div class="accordion-body">
+                  <p>Per interagire con il database, usiamo diversi "verbi" HTTP nella funzione <code>fetch()</code>:</p>
+                  <table class="table table-bordered table-striped">
+                      <thead><tr><th>Azione</th><th>Metodo</th><th>Serve il Token?</th></tr></thead>
+                      <tbody>
+                          <tr><td>Leggere (Home)</td><td><span class="badge bg-success">GET</span></td><td>No</td></tr>
+                          <tr><td>Creare nuovo</td><td><span class="badge bg-primary">POST</span></td><td><strong>Sì</strong></td></tr>
+                          <tr><td>Modificare</td><td><span class="badge bg-warning text-dark">PUT</span></td><td><strong>Sì</strong></td></tr>
+                          <tr><td>Cancellare</td><td><span class="badge bg-danger">DELETE</span></td><td><strong>Sì</strong></td></tr>
+                      </tbody>
+                  </table>
+                  <p><strong>Esempio di codice per creare un articolo:</strong></p>
+                  <div class="p-3 bg-dark text-white rounded">
+<pre><code>fetch(apiUrl + 'posts', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem('authToken') // Alleghiamo il Token!
+  },
+  body: JSON.stringify(datiArticolo)
+})</code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          
+          <!-- NUOVA SEZIONE: GUIDA AL CODICE -->
+          <div class="mt-5 mb-5 pb-5 border-top pt-4">
+              <h2 class="text-primary mb-4"><i class="bi bi-code-slash"></i> Guida Dettagliata ai File</h2>
+              <p class="lead">Ecco cosa fa esattamente ogni file che abbiamo creato:</p>
+
+              <div class="row g-4">
+                  <!-- COLONNA 1: FRONTEND -->
+                  <div class="col-md-6">
+                      <h4 class="text-success border-bottom pb-2">Frontend (Pubblico)</h4>
+                      
+                      <div class="card mb-3 shadow-sm border-0 bg-light">
+                          <div class="card-body">
+                              <h5 class="card-title text-success fw-bold">index.html</h5>
+                              <p class="card-text small">La pagina principale visibile a tutti.</p>
+                              <ul class="small">
+                                  <li>Usa <code>&lt;div id="listaArticoli"&gt;</code> come contenitore vuoto.</li>
+                                  <li>Chiama lo script <code>ins-content.js</code> per riempirsi.</li>
+                              </ul>
+                          </div>
+                      </div>
+
+                      <div class="card mb-3 shadow-sm border-0 bg-light">
+                          <div class="card-body">
+                              <h5 class="card-title text-success fw-bold">js/ins-content.js</h5>
+                              <p class="card-text small">Il "motore" che scarica gli articoli.</p>
+                              <ul class="small">
+                                  <li>Fase 1: <code>fetch(url)</code> chiede i dati all'API (GET).</li>
+                                  <li>Fase 2: Converte la risposta in JSON.</li>
+                                  <li>Fase 3: Usa <code>document.createElement</code> per creare HTML dinamico.</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- COLONNA 2: BACKEND -->
+                  <div class="col-md-6">
+                      <h4 class="text-danger border-bottom pb-2">Backend (Admin)</h4>
+                      
+                      <div class="card mb-3 shadow-sm border-0 bg-light">
+                          <div class="card-body">
+                              <h5 class="card-title text-danger fw-bold">admin/index.html</h5>
+                              <p class="card-text small">La pagina di Login.</p>
+                              <ul class="small">
+                                  <li>Contiene un Form HTML semplice.</li>
+                                  <li>Intercetta l'invio con JS per evitare il ricaricamento della pagina (<code>preventDefault</code>).</li>
+                              </ul>
+                          </div>
+                      </div>
+
+                      <div class="card mb-3 shadow-sm border-0 bg-light">
+                          <div class="card-body">
+                              <h5 class="card-title text-danger fw-bold">js/auth.js</h5>
+                              <p class="card-text small">Gestione Sicurezza e Token.</p>
+                              <ul class="small">
+                                  <li>Invia Email/Password all'API (POST).</li>
+                                  <li>Se OK, riceve un <strong>Token</strong>.</li>
+                                  <li>Salva il Token nel browser usando <code>localStorage.setItem()</code>.</li>
+                                  <li>Reindirizza alla Dashboard.</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+        </main>
+      </div>
+      <site-sidebar class="col-12 col-md-3"></site-sidebar>
+    </div>
+  </div>
+  <site-footer></site-footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script src="js/components.js"></script>
+</body>
+
+</html>

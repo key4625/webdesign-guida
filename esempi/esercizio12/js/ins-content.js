@@ -1,7 +1,7 @@
-// URL dell'API JSONPlaceholder per recuperare una lista di post
-const apiUrl = 'https://micheleabamc.netsons.org/wd2/api/posts/';
-// Utilizziamo fetch per recuperare i dati dall'API
-fetch(apiUrl).then(response => {
+//ApiUrl la prendo da api-config.js
+
+//FASE DI CHIAMATA Utilizziamo fetch per recuperare i dati dall'API
+fetch(apiUrl + "posts").then(response => {
     // Controlliamo se la risposta è stata ricevuta correttamente
     if (!response.ok) {
         console.error('L\'API ha risposto con un errore: ' + response.statusText);
@@ -17,7 +17,8 @@ fetch(apiUrl).then(response => {
     // Gestiamo eventuali errori che si sono verificati durante la richiesta
     console.error('C\'è stato un problema con la fetch operation:', error);
 });
-//Funzione che si occupa di visualizzare gli articoli recuperati dall'API all'interno del div con id listaArticoli
+
+//FASE DI VISUALIZZAZIONE Funzione che si occupa di visualizzare gli articoli recuperati dall'API all'interno del div con id listaArticoli
 function visualizzaArticoli(listaArticoli) {
     //inserisco nel div listaArticoli un elenco degli articoli recuperati dall'API
     const divListaArticoli = document.getElementById('listaArticoli');
