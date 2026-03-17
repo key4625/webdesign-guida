@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Area Admin - Esercizio 12</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+  <!-- Stiamo utilizzando il Web Semantico per migliorare l'accessibilità e la SEO del sito -->
+    <header-backend></header-backend>
+    <div class="container">
+        <div class="card mx-auto my-4" style="max-width:900px;">
+            <div class="card-body">
+                <h1 class="card-title text-center">Crea nuovo articolo</h1>
+                <form id="createArticleForm" action="#" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Titolo</label>
+                        <input type="text" class="form-control" id="title" placeholder="Inserisci il titolo dell'articolo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Contenuto</label>
+                        <textarea class="form-control" id="content" rows="5" placeholder="Inserisci il contenuto dell'articolo"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Immagine</label>
+                        <input type="file" class="form-control" id="image">
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Categoria</label>
+                        <input type="text" class="form-control" id="category" placeholder="Inserisci la categoria dell'articolo">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crea</button>
+                </form>
+            </div>
+        </div>
+    </div>
+  
+    <site-footer></site-footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/api-config.js"></script>
+    <script src="js-admin/admin.js"></script>
+</body>
+
+</html>

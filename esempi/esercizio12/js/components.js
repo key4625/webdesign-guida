@@ -76,9 +76,9 @@ class FooterSito extends HTMLElement {
         <div class="col-12 col-md-4">
           <h3>MENU</h3>
           <ul class="list-unstyled">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Chi siamo</a></li>
-            <li><a href="#">Prodotti</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="spiegazione.html">Spiegazione</a></li>
+            <li><a href="admin/dashboard.html">Area Admin</a></li>
           </ul>
         </div>
       </div>
