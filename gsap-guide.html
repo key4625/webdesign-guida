@@ -30,6 +30,14 @@
         .stagger-container { display: flex; gap: 10px; margin-bottom: 20px; padding: 20px; background: #f8f9fa; border-radius: 8px; justify-content: center; }
         .stagger-box { width: 40px; height: 40px; background: #6c757d; border-radius: 5px; }
         .svg-demo-icon { background: white; border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        /* SVG Shapes Demo */
+        .svg-shapes-demo { background: #f8f9fa; border-radius: 8px; padding: 20px; text-align: center; }
+        /* Text Demo */
+        .text-demo-area { background: #0e100f; border-radius: 8px; padding: 30px; text-align: center; min-height: 120px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; }
+        .text-demo-title { font-size: 2rem; font-weight: 900; color: #88ce02; letter-spacing: 2px; }
+        .text-demo-sub { font-size: 1rem; color: #ffffff; opacity: 0; }
+        .text-split-demo { display: flex; gap: 4px; justify-content: center; }
+        .text-split-demo .char { display: inline-block; font-size: 2rem; font-weight: 900; color: #88ce02; }
     </style>
 </head>
 <body>
@@ -58,6 +66,9 @@
                         <a class="nav-link" href="#easing">Easing</a>
                         <a class="nav-link" href="#staggers">Staggers</a>
                         <a class="nav-link" href="#svg">SVG e GSAP</a>
+                        <a class="nav-link ps-3 small" href="#svg-forme">— Forme SVG</a>
+                        <a class="nav-link ps-3 small" href="#svg-proprieta">— Proprietà animabili</a>
+                        <a class="nav-link" href="#testi">Testi con GSAP</a>
                         <a class="nav-link" href="#timeline">Timeline</a>
                         <a class="nav-link" href="#scrolltrigger">ScrollTrigger</a>
                     </nav>
@@ -255,41 +266,309 @@ gsap.to(".box", {
                 <section id="svg" class="mb-5">
                     <h2 class="section-title"><i class="bi bi-vector-pen"></i> SVG e GSAP</h2>
                     <div class="content-box">
-                        <p>GSAP e SVG sono una combinazione perfetta. A differenza dei <code>div</code>, gli SVG permettono di disegnare forme complesse che scalano all'infinito senza perdere qualità.</p>
+                        <p>GSAP e SVG sono una combinazione perfetta. A differenza dei <code>div</code>, gli SVG permettono di disegnare forme complesse che scalano all'infinito senza perdere qualità. L'SVG (Scalable Vector Graphics) è un formato XML che descrive grafica vettoriale: le forme sono definite matematicamente, quindi non perdono mai qualità ridimensionando.</p>
 
-                        <h3>1. Creare SVG</h3>
+                        <h3>1. Creare e incorporare SVG</h3>
                         <p>Puoi creare SVG con software come <strong>Illustrator</strong>, <strong>Inkscape</strong> o <strong>Figma</strong>. Una volta disegnato:</p>
                         <ol>
-                            <li>Esporta come codice SVG (non immagine).</li>
+                            <li>Esporta come codice SVG (non immagine PNG/JPG).</li>
                             <li>Copia il codice (che inizia con <code>&lt;svg&gt;</code>) e incollalo direttamente nel tuo HTML.</li>
-                            <li>Assicurati di pulire id e classi inutili o aggiungerne di tuoi per selezionarli (es. <code>class="my-circle"</code>).</li>
+                            <li>Assegna <code>class</code> o <code>id</code> agli elementi interni che vuoi animare (es. <code>class="my-circle"</code>).</li>
                         </ol>
+                        <div class="alert alert-warning">
+                            <i class="bi bi-exclamation-triangle"></i> <strong>Importante:</strong> Per poter animare gli elementi interni con GSAP, l'SVG deve essere <strong>inline</strong> nel codice HTML, non un tag <code>&lt;img src="file.svg"&gt;</code>.
+                        </div>
+                    </div>
 
-                        <h3>2. Modificare e Animare</h3>
-                        <p>GSAP può animare quasi ogni attributo SVG: <code>fill</code>, <code>stroke</code>, <code>stroke-width</code>, e attributi geometrici come <code>cx</code>, <code>cy</code>, <code>r</code>.</p>
-                        
-                        <div class="alert alert-light border text-center py-4">
-                            <strong>Demo Live:</strong><br><br>
-                            <svg width="100" height="100" viewBox="0 0 100 100" class="svg-demo-icon">
-                                <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="#88ce02" class="my-svg-demo" />
+                    <!-- Sottosezione: Forme -->
+                    <div class="content-box mt-4" id="svg-forme">
+                        <h3><i class="bi bi-shapes"></i> Forme SVG Principali</h3>
+                        <p>Ogni forma SVG ha attributi geometrici specifici che ne definiscono posizione e dimensioni. Tutti questi attributi sono animabili con GSAP tramite <code>attr: {}</code>.</p>
+
+                        <div class="alert alert-light border svg-shapes-demo">
+                            <strong>Demo Live — tutte le forme:</strong><br><br>
+                            <svg width="520" height="120" viewBox="0 0 520 120" style="max-width:100%;">
+                                <circle  class="svg-shape svg-circle"  cx="50"  cy="60" r="40" fill="#88ce02" stroke="#0e100f" stroke-width="2"/>
+                                <rect    class="svg-shape svg-rect"    x="110" y="20" width="80" height="80" rx="8" fill="#0d6efd" stroke="#0e100f" stroke-width="2"/>
+                                <ellipse class="svg-shape svg-ellipse" cx="260" cy="60" rx="50" ry="30" fill="#dc3545" stroke="#0e100f" stroke-width="2"/>
+                                <line    class="svg-shape svg-line"    x1="330" y1="20" x2="410" y2="100" stroke="#ffc107" stroke-width="4" stroke-linecap="round"/>
+                                <polygon class="svg-shape svg-polygon" points="460,20 500,100 420,100" fill="#6f42c1" stroke="#0e100f" stroke-width="2"/>
                             </svg>
                         </div>
 
+                        <table class="table table-striped mt-3">
+                            <thead>
+                                <tr><th>Elemento</th><th>Attributi geometrici principali</th><th>Descrizione</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>&lt;circle&gt;</code></td>
+                                    <td><code>cx</code>, <code>cy</code>, <code>r</code></td>
+                                    <td>Cerchio. <code>cx/cy</code> = centro, <code>r</code> = raggio.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>&lt;rect&gt;</code></td>
+                                    <td><code>x</code>, <code>y</code>, <code>width</code>, <code>height</code>, <code>rx</code>, <code>ry</code></td>
+                                    <td>Rettangolo. <code>rx/ry</code> arrotondano gli angoli.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>&lt;ellipse&gt;</code></td>
+                                    <td><code>cx</code>, <code>cy</code>, <code>rx</code>, <code>ry</code></td>
+                                    <td>Ellisse. Due raggi separati per orizzontale e verticale.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>&lt;line&gt;</code></td>
+                                    <td><code>x1</code>, <code>y1</code>, <code>x2</code>, <code>y2</code></td>
+                                    <td>Linea retta tra due punti.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>&lt;polyline&gt;</code></td>
+                                    <td><code>points</code></td>
+                                    <td>Serie di segmenti collegati (aperta). Lista di coordinate <code>x,y</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>&lt;polygon&gt;</code></td>
+                                    <td><code>points</code></td>
+                                    <td>Come polyline ma chiusa (l'ultimo punto si ricollega al primo).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>&lt;path&gt;</code></td>
+                                    <td><code>d</code></td>
+                                    <td>Forma libera. Il valore <code>d</code> contiene comandi come <code>M</code> (moveto), <code>L</code> (lineto), <code>C</code> (curveto), <code>Z</code> (closepath).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>&lt;text&gt;</code></td>
+                                    <td><code>x</code>, <code>y</code>, <code>font-size</code>, <code>text-anchor</code></td>
+                                    <td>Testo vettoriale dentro l'SVG.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>&lt;g&gt;</code></td>
+                                    <td>—</td>
+                                    <td>Gruppo. Permette di raggruppare più forme e animarle insieme.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Proprietà di stile comuni a tutte le forme</h4>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr><th>Proprietà</th><th>Valori tipici</th><th>Descrizione</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>fill</code></td><td>colore, <code>none</code></td><td>Colore di riempimento.</td></tr>
+                                <tr><td><code>fill-opacity</code></td><td>0 – 1</td><td>Opacità del riempimento.</td></tr>
+                                <tr><td><code>stroke</code></td><td>colore, <code>none</code></td><td>Colore del bordo.</td></tr>
+                                <tr><td><code>stroke-width</code></td><td>numero px</td><td>Spessore del bordo.</td></tr>
+                                <tr><td><code>stroke-opacity</code></td><td>0 – 1</td><td>Opacità del bordo.</td></tr>
+                                <tr><td><code>stroke-dasharray</code></td><td>es. <code>10 5</code></td><td>Bordo tratteggiato (tratto spazio).</td></tr>
+                                <tr><td><code>stroke-dashoffset</code></td><td>numero</td><td>Offset del tratteggio. Animandolo si ottiene l'effetto "disegna linea".</td></tr>
+                                <tr><td><code>opacity</code></td><td>0 – 1</td><td>Opacità globale dell'elemento.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Sottosezione: Proprietà animabili -->
+                    <div class="content-box mt-4" id="svg-proprieta">
+                        <h3><i class="bi bi-sliders"></i> Cosa si può animare con GSAP</h3>
+                        <p>GSAP suddivide le proprietà animabili degli SVG in tre categorie:</p>
+
+                        <h4>A) Proprietà CSS (dirette, come su un div)</h4>
+                        <p>Si passano direttamente nell'oggetto tween, senza <code>attr</code>:</p>
                         <div class="code-example">
-                            <pre><code class="language-javascript">// Anima attributi SVG direttamente
-gsap.to(".my-svg-demo", {
-    attr: { r: 25 }, // Cambia il raggio (attributo geometrico)
-    fill: "#0d6efd", // Cambia il colore (CSS/attr)
-    scale: 0.8,
-    transformOrigin: "center center", // Punto di origine della trasformazione
-    duration: 1,
-    repeat: -1,
-    yoyo: true
+                            <pre><code class="language-javascript">gsap.to(".mia-forma", {
+    opacity: 0,        // trasparenza
+    fill: "#ff0000",   // colore riempimento
+    stroke: "#000",    // colore bordo
+    strokeWidth: 5,    // in GSAP si usa camelCase
+    x: 100,            // translateX (transform)
+    y: -50,            // translateY (transform)
+    rotation: 45,      // rotate (transform)
+    scale: 1.5,        // scale (transform)
+    transformOrigin: "center center",
+    duration: 1
 });</code></pre>
                         </div>
-                        
+
+                        <h4>B) Attributi geometrici (con <code>attr: {}</code>)</h4>
+                        <p>Per cambiare la forma stessa (raggio, coordinate, dimensioni) si usa l'oggetto <code>attr</code>:</p>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">// Anima il raggio di un cerchio
+gsap.to(".svg-circle", {
+    attr: { r: 20 },
+    duration: 1
+});
+
+// Anima larghezza e angoli di un rettangolo
+gsap.to(".svg-rect", {
+    attr: { width: 150, rx: 40 },
+    duration: 1
+});
+
+// Anima i raggi di un'ellisse
+gsap.to(".svg-ellipse", {
+    attr: { rx: 80, ry: 15 },
+    duration: 1
+});
+
+// Anima i punti di una linea
+gsap.to(".svg-line", {
+    attr: { x2: 500, y2: 20 },
+    duration: 1
+});</code></pre>
+                        </div>
+
+                        <h4>C) Effetto "traccia che si disegna" con <code>stroke-dashoffset</code></h4>
+                        <p>Questa tecnica è molto popolare: impostando <code>stroke-dasharray</code> uguale alla lunghezza del tracciato e animando <code>stroke-dashoffset</code> da quel valore a 0, la linea sembra disegnarsi progressivamente.</p>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">// Prima misura la lunghezza del path con JS
+const path = document.querySelector(".mio-path");
+const length = path.getTotalLength();
+
+// Imposta lo stato iniziale (linea invisibile)
+gsap.set(path, {
+    attr: {
+        strokeDasharray: length,
+        strokeDashoffset: length
+    }
+});
+
+// Anima fino a 0: la linea "si disegna"
+gsap.to(path, {
+    attr: { strokeDashoffset: 0 },
+    duration: 2,
+    ease: "power2.inOut"
+});</code></pre>
+                        </div>
+
+                        <div class="alert alert-light border text-center py-4">
+                            <strong>Demo Live — animazione forme SVG:</strong><br><br>
+                            <svg width="520" height="120" viewBox="0 0 520 120" style="max-width:100%;">
+                                <circle  class="svg-anim svg-anim-circle"  cx="50"  cy="60" r="40" fill="#88ce02" stroke="#0e100f" stroke-width="2"/>
+                                <rect    class="svg-anim svg-anim-rect"    x="110" y="20" width="80" height="80" rx="8" fill="#0d6efd" stroke="#0e100f" stroke-width="2"/>
+                                <ellipse class="svg-anim svg-anim-ellipse" cx="260" cy="60" rx="50" ry="30" fill="#dc3545" stroke="#0e100f" stroke-width="2"/>
+                                <line    class="svg-anim svg-anim-line"    x1="330" y1="20" x2="410" y2="100" stroke="#ffc107" stroke-width="4" stroke-linecap="round"/>
+                                <polygon class="svg-anim svg-anim-polygon" points="460,20 500,100 420,100" fill="#6f42c1" stroke="#0e100f" stroke-width="2"/>
+                            </svg>
+                        </div>
+
                         <div class="alert alert-info">
-                            <i class="bi bi-lightbulb"></i> <strong>Nota:</strong> Per animazioni avanzate sui tracciati (come disegnare una linea progressivamente), si usa spesso il plugin <strong>DrawSVG</strong> (disponibile nel club GreenSock o versioni trial su Codepen).
+                            <i class="bi bi-lightbulb"></i> <strong>Nota:</strong> Per animazioni avanzate sui tracciati (come disegnare un path complesso), esiste il plugin <strong>DrawSVG</strong> (disponibile nel club GreenSock) che semplifica enormemente il calcolo della lunghezza e l'animazione di <code>stroke-dashoffset</code>.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Testi con GSAP -->
+                <section id="testi" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-fonts"></i> Testi con GSAP</h2>
+                    <div class="content-box">
+                        <p>GSAP può animare qualsiasi elemento HTML che contenga testo — titoli, paragrafi, span — esattamente con le stesse proprietà usate per i <code>div</code>. Non è necessario che il testo sia in un SVG.</p>
+
+                        <h3>1. Animare un intero blocco di testo</h3>
+                        <p>Il caso più semplice: muovere, sfumare o scalare un titolo come se fosse una scatola qualunque.</p>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">// Entrata dall'alto con fade-in
+gsap.from("h1", {
+    y: -60,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out"
+});
+
+// Entrata con leggero zoom
+gsap.from(".subtitle", {
+    scale: 0.5,
+    opacity: 0,
+    duration: 0.8,
+    delay: 0.4,
+    ease: "back.out(1.7)"
+});</code></pre>
+                        </div>
+
+                        <h3>2. Animare lettera per lettera (splitting manuale)</h3>
+                        <p>Dividendo il testo in tanti <code>&lt;span&gt;</code> (uno per lettera), GSAP può animare ogni carattere singolarmente con lo stagger. Non serve nessun plugin: lo si fa con poche righe di JavaScript.</p>
+
+                        <div class="alert alert-light border">
+                            <strong>Demo Live:</strong>
+                            <div class="text-demo-area mt-2" id="text-demo-area">
+                                <div class="text-split-demo" id="text-split-target">GSAP</div>
+                                <div class="text-demo-sub" id="text-demo-sub">animazioni web professionali</div>
+                            </div>
+                        </div>
+
+                        <div class="code-example">
+                            <pre><code class="language-javascript">// 1. Suddividi il testo in caratteri
+const el = document.querySelector("#titolo");
+const chars = el.textContent.split("");
+el.innerHTML = chars
+    .map(c => `&lt;span class="char"&gt;${c === " " ? "&amp;nbsp;" : c}&lt;/span&gt;`)
+    .join("");
+
+// 2. Anima tutti gli span con stagger
+gsap.from(".char", {
+    y: 60,
+    opacity: 0,
+    duration: 0.5,
+    stagger: 0.05,  // 50ms tra ogni lettera
+    ease: "back.out(1.7)"
+});</code></pre>
+                        </div>
+
+                        <h3>3. Proprietà CSS tipografiche animabili</h3>
+                        <p>GSAP può interpolare qualsiasi proprietà CSS di un testo, incluse quelle tipografiche:</p>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr><th>Proprietà</th><th>Esempio</th><th>Effetto</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>fontSize</code></td><td><code>fontSize: "3rem"</code></td><td>Cambia la dimensione del testo.</td></tr>
+                                <tr><td><code>letterSpacing</code></td><td><code>letterSpacing: "0.5em"</code></td><td>Spaziatura tra le lettere (effetto espansione).</td></tr>
+                                <tr><td><code>lineHeight</code></td><td><code>lineHeight: 1.8</code></td><td>Interlinea.</td></tr>
+                                <tr><td><code>color</code></td><td><code>color: "#88ce02"</code></td><td>Colore del testo.</td></tr>
+                                <tr><td><code>opacity</code></td><td><code>opacity: 0</code></td><td>Dissolvenza.</td></tr>
+                                <tr><td><code>x</code>, <code>y</code></td><td><code>x: 100</code></td><td>Scorrimento orizzontale/verticale.</td></tr>
+                                <tr><td><code>rotation</code></td><td><code>rotation: 10</code></td><td>Rotazione (utile per effetto "caduta").</td></tr>
+                                <tr><td><code>skewX</code></td><td><code>skewX: 20</code></td><td>Inclinazione orizzontale del testo.</td></tr>
+                                <tr><td><code>scale</code></td><td><code>scale: 1.5</code></td><td>Zoom in/out del testo.</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>4. TextPlugin — animare il contenuto del testo</h3>
+                        <p>Il <strong>TextPlugin</strong> (gratuito, incluso in GSAP) permette di animare il <em>contenuto</em> di un elemento testo: le parole appaiono carattere per carattere come in un effetto macchina da scrivere.</p>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">// Registra il plugin (una sola volta)
+gsap.registerPlugin(TextPlugin);
+
+gsap.to("#titolo", {
+    duration: 2,
+    text: "Ciao, sono GSAP!", // Scrive questo testo carattere per carattere
+    ease: "none"
+});
+
+// Con delimitatore personalizzato (parola per parola invece di lettera per lettera)
+gsap.to("#paragrafo", {
+    duration: 3,
+    text: {
+        value: "Le parole appaiono una alla volta.",
+        delimiter: " " // Spezza per spazi (parole)
+    },
+    ease: "none"
+});</code></pre>
+                        </div>
+                        <div class="alert alert-info">
+                            <i class="bi bi-lightbulb"></i> <strong>CDN TextPlugin:</strong> Aggiungi questo script dopo il core GSAP per usarlo:
+                            <div class="code-example mt-2">
+                                <pre><code class="language-html">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"&gt;&lt;/script&gt;</code></pre>
+                            </div>
+                        </div>
+
+                        <h3>5. Combinare testi e Timeline</h3>
+                        <p>L'abbinamento più potente è mettere le animazioni di testo in una <strong>Timeline</strong>, così le sequenze narrative diventano facili da gestire:</p>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">const tl = gsap.timeline();
+
+tl.from(".hero-title", { y: -80, opacity: 0, duration: 0.8, ease: "power3.out" })
+  .from(".hero-subtitle", { y: 30, opacity: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+  .from(".hero-cta", { scale: 0, opacity: 0, duration: 0.4, ease: "back.out(2)" }, "-=0.2");</code></pre>
                         </div>
                     </div>
                 </section>
@@ -369,17 +648,33 @@ gsap.to(".box", {
                 });
             }
 
-            // SVG Demo Code
-            if(document.querySelector('.my-svg-demo')) {
-                gsap.to(".my-svg-demo", {
-                    attr: { r: 35 }, // Animate attribute
-                    fill: "#0d6efd",
-                    scale: 0.8,
-                    transformOrigin: "center center",
-                    duration: 1,
-                    repeat: -1,
-                    yoyo: true
-                });
+            // SVG Animated Shapes Demo
+            if(document.querySelector('.svg-anim-circle')) {
+                const tl = gsap.timeline({ repeat: -1, yoyo: true });
+                tl.to('.svg-anim-circle',  { attr: { r: 20 }, fill: '#0d6efd', duration: 1 }, 0)
+                  .to('.svg-anim-rect',    { attr: { rx: 40, width: 60 }, fill: '#88ce02', duration: 1 }, 0.15)
+                  .to('.svg-anim-ellipse', { attr: { rx: 25, ry: 45 }, fill: '#ffc107', duration: 1 }, 0.3)
+                  .to('.svg-anim-line',    { attr: { x2: 340, y2: 20 }, stroke: '#dc3545', duration: 1 }, 0.45)
+                  .to('.svg-anim-polygon', { attr: { points: '460,50 500,90 420,90' }, fill: '#0dcaf0', duration: 1 }, 0.6);
+            }
+
+            // Text Split Demo
+            if(document.querySelector('#text-split-target')) {
+                const el = document.querySelector('#text-split-target');
+                const chars = el.textContent.split('');
+                el.innerHTML = chars.map(c => `<span class="char">${c}</span>`).join('');
+
+                const tl2 = gsap.timeline({ repeat: -1, repeatDelay: 1.5 });
+                tl2.from('.char', {
+                    y: 60,
+                    opacity: 0,
+                    duration: 0.5,
+                    stagger: 0.08,
+                    ease: 'back.out(1.7)'
+                })
+                .to('#text-demo-sub', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.2')
+                .to('.char', { y: -60, opacity: 0, duration: 0.4, stagger: 0.05, ease: 'power2.in' }, '+=1')
+                .to('#text-demo-sub', { opacity: 0, duration: 0.3 }, '<');
             }
         });
     </script>

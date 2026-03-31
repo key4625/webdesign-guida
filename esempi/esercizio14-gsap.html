@@ -5,23 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GSAP Esempio</title>
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height:400vh;
+        }
+        .contenitore-centrato {
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: start;
+            height: 100vh;
+        }
         .quadrato {
+            margin: 10px 0px;
             width: 100px;
             height: 100px;
             text-align: center;
             background-color: blue;      
         }
+        .bg-verde {
+            background-color: lightgreen;
+        }
+        .bg-rosa {
+            background-color: lightpink;
+        }
+        .bg-blu {
+            background-color: lightblue;
+        }
     </style>
 </head>
 <body>
-    <div id="box" class="quadrato"></div>
+    <div class="contenitore-centrato bg-verde">  
+        <h1 class="splitText">Questo è uno SplitText</h1>
+        <h3 class="splitText">Infatti appare un pezzo alla volta</h3>
+        <p class="splitText">Negli split text si possono dividere parole, lettere o righe, e animarle in modo indipendente, quando si vuole. In questo esempio abbiamo diviso le parole, e animato ogni parola in modo indipendente, con un delay di 0.2 secondi tra una parola e l'altra. Inoltre, abbiamo fatto in modo che l'animazione parta quando il testo entra in viewport, e che si fermi quando esce dalla viewport.</p>
+        <p class="splitText">Per fare questo, abbiamo usato la proprietà "stagger" di GSAP, che permette di animare più elementi in modo indipendente, con un delay tra una animazione e l'altra. Inoltre, abbiamo usato la proprietà "scrollTrigger" per far partire l'animazione quando il testo entra in viewport, e per farla fermare quando esce dalla viewport.</p>
+    </div>
+    <div class="contenitore-centrato bg-rosa">  
+        <div id="box1a" class="box1 quadrato"></div>
+        <div id="box1b" class="box1 quadrato"></div>
+        <div id="box1c" class="box1 quadrato"></div>
+    </div>
+    <div class="contenitore-centrato bg-blu">  
+        <div id="box2a" class="box2 quadrato"></div>
+        <div id="box2b" class="box2 quadrato"></div>
+        <div id="box2c" class="box2 quadrato"></div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/SplitText.min.js"></script>
+    
     <script>
     // use a script tag or an external JS file
     document.addEventListener("DOMContentLoaded", (event) => {
+        //Registrazione plugin
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(SplitText)
+        
+        let divContainerBox = document.querySelector(".contenitore-centrato.bg-rosa");
         //timeline
-        gsap.from("#box", { x: -300});
-        gsap.to("#box", { x: 300,  rotation: 360, backgroundColor: "red", repeat:4,duration: 4, yoyo:true });
+        gsap.to(".box1",
+            {  
+                x: divContainerBox.clientWidth  - 100,
+                rotation: 360, 
+                backgroundColor: "red", 
+                ease: "none",
+                stagger: 0.2,
+                /*  repeat: Infinity,
+                duration: 4, 
+                yoyo: true , */
+                scrollTrigger: {
+                    trigger: ".box1",
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse", //onEnter, onLeave, onEnterBack, onLeaveBack
+                    scrub: true
+                }
+            }
+        );
+
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".box2",
+                start: "top 80%",
+                end: "bottom 20%",
+            }, //fa partire animazione quando .box2 entra in viewport
+            repeat: -1, //ripete all'infinito
+            repeatDelay: 1, //delay di 1 secondo tra una ripetizione e l'altra
+            yoyo: true //fa tornare indietro l'animazione invece di ripeterla da capo
+        });
+        tl.to("#box2a", { x: divContainerBox.clientWidth - 100, duration: 1 },0); //posizione di partenza
+        tl.to("#box2b", { x: divContainerBox.clientWidth - 100, duration: 1 },2); //posizione di partenza + 2 secondi
+        tl.to("#box2c", { x: divContainerBox.clientWidth - 100, duration: 1 },5); //posizione di partenza + 5 secondi
+
+        //SplitText 
+        SplitText.create(".splitText", {
+            type: "lines, words, chars",
+            onSplit(self) { // runs every time it splits
+                gsap.from(self.chars, {
+                duration: 1, 
+                y: 100, 
+                autoAlpha: 0, 
+                stagger: 0.05
+                });
+            }
+        });
     });
     </script>
 </body>
