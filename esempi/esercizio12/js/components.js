@@ -1,3 +1,31 @@
+// Funzione helper per generare il menu in base al login
+function getMenuItemsHtml(showAuthLinks = false) {
+  const isLoggedIn = localStorage.getItem('authToken') !== null;
+  let homeLink = `<li class="nav-item"><a class="nav-link active" aria-current="page" href="${urlApp}index.html">Home</a></li>`;
+  let spiegazioneLink = `<li class="nav-item"><a class="nav-link" href="${urlApp}spiegazione.html">Spiegazione</a></li>`;
+  
+  let dynamicItems = '';
+  if (showAuthLinks) {
+    if (isLoggedIn) {
+      dynamicItems = `
+      <li class="nav-item"><a class="nav-link" href="${urlApp}admin/dashboard.html">Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" href="#" onclick="performLogout(event)">Logout</a></li>
+    `;
+    } else {
+      dynamicItems = `<li class="nav-item"><a class="nav-link" href="${urlApp}admin/index.html">Login</a></li>`;
+    }
+  }
+  
+  return homeLink + spiegazioneLink + dynamicItems;
+}
+
+// Funzione per gestire il logout
+function performLogout(event) {
+  event.preventDefault();
+  localStorage.removeItem('authToken');
+  window.location.href = `${urlApp}admin/index.html`;
+}
+
 class HeaderSito extends HTMLElement {
     // Il metodo connectedCallback viene chiamato quando l'elemento viene aggiunto alla pagina
     connectedCallback() {
@@ -24,8 +52,7 @@ class HeaderSito extends HTMLElement {
           </button>
           <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav text-uppercase fs-5">
-              <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="spiegazione.html">Spiegazione</a></li>
+              ${getMenuItemsHtml(false)}
             </ul>
           </div>
         </div>
@@ -76,9 +103,7 @@ class FooterSito extends HTMLElement {
         <div class="col-12 col-md-4">
           <h3>MENU</h3>
           <ul class="list-unstyled">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="spiegazione.html">Spiegazione</a></li>
-            <li><a href="admin/dashboard.html">Area Admin</a></li>
+            ${getMenuItemsHtml(true)}
           </ul>
         </div>
       </div>
@@ -114,8 +139,7 @@ class HeaderBackend extends HTMLElement {
           </button>
           <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav text-uppercase fs-5">
-              <li class="nav-item"><a class="nav-link active" aria-current="page" href="../index.html">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="../spiegazione.html">Spiegazione</a></li>
+              ${getMenuItemsHtml(false)}
            </ul>
           </div>
         </div>

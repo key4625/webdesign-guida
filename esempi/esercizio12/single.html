@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Esercizio 12 - Singolo articolo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Stiamo utilizzando il Web Semantico per migliorare l'accessibilità e la SEO del sito -->
+  <site-header></site-header>
+  <div class="container">
+    <div class="mt-4">Ti trovi in <a href="index.html">Home</a> - <span id="breadcrumbTitle">Articolo</span></div>  
+    <div class="row">
+      <div class="col-12 col-md-9" id="content">
+        <main class="my-4 bg-light p-4 shadow">
+            <div id="singoloArticolo">
+                <h1>Titolo articolo</h1>
+                <div class="article-meta text-muted mb-3">
+                  <small>
+                    <strong>Autore:</strong> <span id="articleAuthor">Nome Autore</span> | 
+                    <strong>Data:</strong> <span id="articleDate">01/01/2024</span>
+                  </small>
+                </div>
+                <img src="" alt="Immagine articolo" class="img-fluid mb-3">
+                <p>Contenuto articolo...</p>
+            </div>
+            <div class="share-buttons mb-4">
+                <h5>Condividi questo articolo:</h5>
+                <a href="#" class="btn btn-primary me-2">Facebook</a>
+                <a href="#" class="btn btn-info me-2">Twitter</a>
+                <a href="#" class="btn btn-danger">LinkedIn</a>
+            </div>
+            <div class="d-flex justify-content-between mt-4">
+              <a href="#" id="prevArticle" class="btn btn-secondary">← Articolo Precedente</a>
+              <a href="#" id="nextArticle" class="btn btn-secondary">Articolo Successivo →</a>
+            </div>
+        </main>
+        <div>
+          <h3>Articoli correlati</h3>
+          <div id="articoliCorrelati" class="row"></div>
+        </div>
+      </div>
+      <site-sidebar class="col-12 col-md-3"></site-sidebar>
+    </div>
+  </div>
+  <site-footer></site-footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script src="js/api-config.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/ins-single-content.js"></script>
+</body>
+
+</html>

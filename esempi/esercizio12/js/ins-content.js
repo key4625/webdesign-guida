@@ -37,6 +37,7 @@ function visualizzaArticoli(listaArticoli) {
     listaArticoli.forEach(singoloArticolo => {
         const col = document.createElement('div');
         col.classList.add('col-md-4', 'mb-4');
+        let singolaCard = '';
         let bottoniModifica = '';
         //Se ho authtoken e se sono in dashboard, mostro i bottoni di modifica ed eliminazione
         if (localStorage.getItem('authToken')&& window.location.pathname.includes('admin/dashboard.html')) {
@@ -47,15 +48,24 @@ function visualizzaArticoli(listaArticoli) {
                     <button class="btn btn-danger" data-id="${singoloArticolo.id}"><i class="bi bi-trash"></i> Elimina</button>
                 </div>`;
         }
-        col.innerHTML = `
-            <div class="card h-100">
-                <img src="${singoloArticolo.image}" class="card-img-top" alt="${singoloArticolo.title}">
-                <div class="card-body">
-                    <h5 class="card-title">${singoloArticolo.title}</h5>
-                    <p class="card-text">${singoloArticolo.content.substring(0, 200)}...</p>
-                </div>
-                ${bottoniModifica}
-            </div>`;
+       
+        singolaCard = `<div class="card shadow h-100">
+            <img src="${singoloArticolo.image}" class="card-img-top" alt="${singoloArticolo.title}">
+            <div class="card-body">
+                <h4 class="card-title">${singoloArticolo.title}</h4>
+                <p class="card-text">${singoloArticolo.content.substring(0, 200)}...</p>
+            </div>
+            ${bottoniModifica}
+        </div>`;
+        if (!window.location.pathname.includes('admin/dashboard.html')) {
+           col.innerHTML = `
+            <a href="single.html?id=${singoloArticolo.id}" class="text-decoration-none text-dark">
+                ${singolaCard}
+            </a>`;
+        } else {
+            col.innerHTML = singolaCard;
+        }
+        
         divListaArticoli.appendChild(col);
     });
 }
