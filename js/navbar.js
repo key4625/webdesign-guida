@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 { separator: true },
                 { text: 'Vue.js', url: pathPrefix + 'vue-guide.html' },
                 { text: 'React', url: pathPrefix + 'react-guide.html' },
-                { text: 'GSAP', url: pathPrefix + 'gsap-guide.html' }
+                { text: 'GSAP', url: pathPrefix + 'gsap-guide.html' },
+                { separator: true },
+                { text: 'E dopo? 🗺️', url: pathPrefix + 'roadmap-guide.html' }
             ]
         },
         { text: 'Esercizi', url: pathPrefix + 'esempi/index.html' },
