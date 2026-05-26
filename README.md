@@ -4,7 +4,7 @@ Guida didattica interattiva per il corso **Web Design 2 - Biennio WID** dell'Acc
 
 Il progetto e un sito statico (HTML, CSS, JavaScript) con:
 
-- guide complete su HTML, CSS, JavaScript e argomenti avanzati
+- guide complete su HTML, CSS, JavaScript, PHP e area grafica/interfacce
 - esempi pratici progressivi
 - focus su accessibilita, responsive design, best practices e performance
 
@@ -18,7 +18,14 @@ Dopo l'attivazione di GitHub Pages, il sito sara disponibile su:
 
 - `index.html`: homepage del manuale
 - `html-guide.html`, `css-guide.html`, `javascript-guide.html`: guide principali
-- `javascript-api-crud.html`, `web-components-guide.html`, `react-guide.html`, `nextjs-guide.html`, `gsap-guide.html`: guide avanzate
+- `jquery-guide.html`, `javascript-api-crud.html`, `web-components-guide.html`: JavaScript e integrazioni
+- `react-guide.html`, `nextjs-guide.html`, `gsap-guide.html`: framework e animazioni
+- `ux-interface-guide.html`: hub grafica e progettazione interfacce
+- `web-components-ui-guide.html`, `design-system-guide.html`, `web-typography-guide.html`: moduli design/UI
+- `web-color-contrast-guide.html`, `motion-microinteractions-guide.html`, `web-layout-models-guide.html`: moduli visual e interaction design
+- `wireframe-prototype-handoff-guide.html`: workflow progettuale design-dev
+- `hosting-guide.html`: hosting locale/remoto e deploy base
+- `git-guide.html`: Git e GitHub Pages
 - `vue-guide.html`: guida disponibile ma temporaneamente non mostrata in homepage/navbar
 - `best-practices.html`: buone pratiche di sviluppo web
 - `esempi/`: esercizi ed esempi didattici
@@ -34,6 +41,8 @@ Dopo l'attivazione di GitHub Pages, il sito sara disponibile su:
 - Bootstrap Icons (CDN)
 - Prism.js (CDN)
 - React / Next.js / GSAP (CDN nelle pagine dedicate)
+- jQuery (ripasso didattico)
+- focus esteso su UX/UI, design system e processi di handoff
 - Vue.js disponibile in archivio, temporaneamente sospesa dalla navigazione principale
 
 Nessuna dipendenza npm richiesta.

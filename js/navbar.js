@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
             id: 'navbarDropdownJS',
             dropdown: [
                 { text: 'Guida JS Base', url: pathPrefix + 'javascript-guide.html' },
+                { text: 'jQuery (Ripasso)', url: pathPrefix + 'jquery-guide.html' },
                 { text: 'API & CRUD', url: pathPrefix + 'javascript-api-crud.html' },
                 { text: 'Web Components', url: pathPrefix + 'web-components-guide.html' },
                 { separator: true },
@@ -31,6 +32,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 { text: 'GSAP', url: pathPrefix + 'gsap-guide.html' },
                 { separator: true },
                 { text: 'E dopo? 🗺️', url: pathPrefix + 'roadmap-guide.html' }
+            ]
+        },
+        {
+            text: 'Grafica & Interfacce',
+            id: 'navbarDropdownUI',
+            dropdown: [
+                { text: 'UX e Progettazione Interfaccia', url: pathPrefix + 'ux-interface-guide.html' },
+                { text: 'Componenti Web Interattivi', url: pathPrefix + 'web-components-ui-guide.html' },
+                { text: 'Design System', url: pathPrefix + 'design-system-guide.html' },
+                { text: 'Tipografia per il Web', url: pathPrefix + 'web-typography-guide.html' },
+                { text: 'Colore e Contrasto', url: pathPrefix + 'web-color-contrast-guide.html' },
+                { text: 'Motion e Micro-interazioni', url: pathPrefix + 'motion-microinteractions-guide.html' },
+                { text: 'Wireframe, Prototipi e Handoff', url: pathPrefix + 'wireframe-prototype-handoff-guide.html' },
+                { text: 'Modelli di Layout Web', url: pathPrefix + 'web-layout-models-guide.html' }
             ]
         },
         {
@@ -46,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
             text: 'Altro',
             id: 'navbarDropdownOther',
             dropdown: [
+                { text: 'Hosting Web (Locale e Remoto)', url: pathPrefix + 'hosting-guide.html' },
                 { text: 'Best Practices', url: pathPrefix + 'best-practices.html' },
                 { text: 'Guida Git e GitHub Pages', url: pathPrefix + 'git-guide.html' }
             ]
@@ -62,8 +78,18 @@ document.addEventListener("DOMContentLoaded", function() {
     const isNextPage = page === 'nextjs-guide.html';
     const isGsapPage = page === 'gsap-guide.html';
     const isGitPage = page === 'git-guide.html';
+    const isJqueryPage = page === 'jquery-guide.html';
+    const isUiPage = page === 'ux-interface-guide.html';
+    const isUiComponentsPage = page === 'web-components-ui-guide.html';
+    const isDesignSystemPage = page === 'design-system-guide.html';
+    const isTypographyPage = page === 'web-typography-guide.html';
+    const isColorContrastPage = page === 'web-color-contrast-guide.html';
+    const isMotionPage = page === 'motion-microinteractions-guide.html';
+    const isWireframePage = page === 'wireframe-prototype-handoff-guide.html';
+    const isLayoutModelsPage = page === 'web-layout-models-guide.html';
+    const isHostingPage = page === 'hosting-guide.html';
     
-    let navbarClass = 'navbar-dark bg-primary';
+    let navbarClass = 'navbar-dark bg-dark';
     let navbarStyle = '';
     let iconClass = '';
 
@@ -83,6 +109,18 @@ document.addEventListener("DOMContentLoaded", function() {
         navbarClass = 'navbar-dark bg-dark';
         navbarStyle = 'style="border-bottom: 3px solid #f59e0b;"';
         iconClass = ' text-warning';
+    } else if (isJqueryPage) {
+        navbarClass = 'navbar-dark bg-dark';
+        navbarStyle = 'style="border-bottom: 3px solid #6f42c1;"';
+        iconClass = ' text-primary';
+    } else if (isUiPage || isUiComponentsPage || isDesignSystemPage || isTypographyPage || isColorContrastPage || isMotionPage || isWireframePage || isLayoutModelsPage) {
+        navbarClass = 'navbar-dark bg-dark';
+        navbarStyle = 'style="border-bottom: 3px solid #e83e8c;"';
+        iconClass = ' text-danger';
+    } else if (isHostingPage) {
+        navbarClass = 'navbar-dark bg-dark';
+        navbarStyle = 'style="border-bottom: 3px solid #0dcaf0;"';
+        iconClass = ' text-info';
     }
 
     // Genera l'HTML dei link

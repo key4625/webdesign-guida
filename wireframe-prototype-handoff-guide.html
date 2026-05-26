@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe, Prototipi e Handoff - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #495057 0%, #6c757d 100%); border-bottom: 5px solid #adb5bd;">
+        <div class="container">
+            <h1 class="display-5"><i class="bi bi-vector-pen"></i> Wireframe, Prototipi e Handoff</h1>
+            <p class="lead mb-0">Dall'idea al file pronto per lo sviluppo: metodo operativo per team design/dev</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="alert alert-light border shadow-sm mb-4" role="note">
+            <h5 class="mb-3"><i class="bi bi-mortarboard"></i> Scheda Didattica</h5>
+            <div class="row small">
+                <div class="col-md-4"><strong>Obiettivo:</strong> impostare un flusso design-to-dev chiaro e condivisibile.</div>
+                <div class="col-md-3"><strong>Prerequisiti:</strong> basi UX/UI e uso editor/prototyping tool.</div>
+                <div class="col-md-2"><strong>Durata stimata:</strong> 65 min</div>
+                <div class="col-md-3"><strong>Output:</strong> consegna tecnica pronta per sviluppo frontend.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#wireframe">1. Wireframe</a>
+                        <a class="nav-link" href="#prototipo">2. Prototipazione</a>
+                        <a class="nav-link" href="#ui-kit">3. UI kit minimo</a>
+                        <a class="nav-link" href="#handoff">4. Handoff tecnico</a>
+                        <a class="nav-link" href="#checklist">5. Checklist finale</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <section id="wireframe" class="mb-5">
+                    <h2 class="section-title">1. Wireframe: struttura prima dello stile</h2>
+                    <div class="content-box">
+                        <p>Il wireframe serve a decidere gerarchia, layout e priorita contenuti senza distrarsi con colori e dettagli visivi.</p>
+                        <ul>
+                            <li>Low-fidelity: blocchi base e flussi.</li>
+                            <li>Mid-fidelity: contenuti realistici e struttura definitiva.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="prototipo" class="mb-5">
+                    <h2 class="section-title">2. Prototipazione e test</h2>
+                    <div class="content-box">
+                        <p>Un prototipo cliccabile permette test veloci con utenti/docente prima dello sviluppo.</p>
+                        <ol>
+                            <li>Definisci task utente chiave (es. iscriversi, trovare info, inviare form).</li>
+                            <li>Collega schermate principali.</li>
+                            <li>Raccogli feedback e correggi flussi.</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="ui-kit" class="mb-5">
+                    <h2 class="section-title">3. UI kit minimo per iniziare bene</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li>Token base: colori, tipografia, spacing, radius.</li>
+                            <li>Componenti minimi: button, input, card, navbar, alert.</li>
+                            <li>Stati: default/hover/focus/active/disabled/error.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="handoff" class="mb-5">
+                    <h2 class="section-title">4. Handoff tecnico: cosa consegnare allo sviluppo</h2>
+                    <div class="content-box">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Elemento</th>
+                                    <th>Cosa includere</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Schermate</td><td>Versione desktop/tablet/mobile</td></tr>
+                                <tr><td>Stati</td><td>Hover, focus, error, loading</td></tr>
+                                <tr><td>Misure</td><td>Spaziature, griglia, breakpoints</td></tr>
+                                <tr><td>Asset</td><td>Icone SVG, immagini ottimizzate</td></tr>
+                                <tr><td>Note</td><td>Comportamenti interattivi e casi limite</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="checklist" class="mb-5">
+                    <h2 class="section-title">5. Checklist finale prima del coding</h2>
+                    <div class="content-box">
+                        <ul class="list-group">
+                            <li class="list-group-item">Flusso utente testato su almeno 3 task.</li>
+                            <li class="list-group-item">Coerenza tra componenti e varianti.</li>
+                            <li class="list-group-item">Breakpoints e contenuti critici verificati.</li>
+                            <li class="list-group-item">Nomenclatura chiara e condivisa.</li>
+                            <li class="list-group-item">Specifiche consegnate in modo leggibile e tracciabile.</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container"><p class="mb-0">Manuale Web Design - Wireframe, Prototipi e Handoff &copy; 2026</p></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

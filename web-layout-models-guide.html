@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelli di Layout Web - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #1b5e20 0%, #2f9e44 100%); border-bottom: 5px solid #8ce99a;">
+        <div class="container">
+            <h1 class="display-5"><i class="bi bi-columns-gap"></i> Modelli di Layout Web</h1>
+            <p class="lead mb-0">Strutture compositive per landing, siti editoriali, dashboard e progetti portfolio</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="alert alert-light border shadow-sm mb-4" role="note">
+            <h5 class="mb-3"><i class="bi bi-mortarboard"></i> Scheda Didattica</h5>
+            <div class="row small">
+                <div class="col-md-4"><strong>Obiettivo:</strong> scegliere il modello di layout corretto in base a contenuti e obiettivi.</div>
+                <div class="col-md-3"><strong>Prerequisiti:</strong> basi di grid, container e responsive design.</div>
+                <div class="col-md-2"><strong>Durata stimata:</strong> 60 min</div>
+                <div class="col-md-3"><strong>Output:</strong> scelta motivata di layout per almeno 2 scenari progettuali.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#intro">1. Perche il layout conta</a>
+                        <a class="nav-link" href="#pattern-z">2. Pattern a Z</a>
+                        <a class="nav-link" href="#sidebar">3. Layout con sidebar</a>
+                        <a class="nav-link" href="#fullwidth">4. Full width e container</a>
+                        <a class="nav-link" href="#footer">5. Footer architetturato</a>
+                        <a class="nav-link" href="#selezione">6. Come scegliere il modello</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <section id="intro" class="mb-5">
+                    <h2 class="section-title">1. Perche il layout conta</h2>
+                    <div class="content-box">
+                        <p>Il layout e la griglia invisibile che organizza contenuto, gerarchia e ritmo visivo. Un buon layout riduce lo sforzo cognitivo e aumenta chiarezza e conversione.</p>
+                    </div>
+                </section>
+
+                <section id="pattern-z" class="mb-5">
+                    <h2 class="section-title">2. Pattern a Z</h2>
+                    <div class="content-box">
+                        <p>Adatto a landing e pagine promozionali con pochi blocchi chiave.</p>
+                        <ul>
+                            <li>In alto: logo e navigazione.</li>
+                            <li>Centro: messaggio principale.</li>
+                            <li>Finale: call to action.</li>
+                        </ul>
+                        <div class="alert alert-info">Funziona bene quando il contenuto e sintetico e orientato all'azione.</div>
+                    </div>
+                </section>
+
+                <section id="sidebar" class="mb-5">
+                    <h2 class="section-title">3. Layout con sidebar</h2>
+                    <div class="content-box">
+                        <p>Ideale per guide, documentazione, e-learning e dashboard.</p>
+                        <ul>
+                            <li>Sidebar sinistra: navigazione sezioni.</li>
+                            <li>Area principale: contenuto approfondito.</li>
+                            <li>Sidebar collassabile su mobile.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="fullwidth" class="mb-5">
+                    <h2 class="section-title">4. Full width e container</h2>
+                    <div class="content-box">
+                        <h4>Container</h4>
+                        <p>Per contenuti testuali e leggibilita: imposta larghezza max controllata.</p>
+                        <h4 class="mt-3">Full width</h4>
+                        <p>Per sezioni immersive, gallery, hero visuali e storytelling.</p>
+                        <div class="code-example">
+<pre><code class="language-html">&lt;section class="container"&gt;...contenuto testuale...&lt;/section&gt;
+&lt;section class="container-fluid"&gt;...sezione immersiva...&lt;/section&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="footer" class="mb-5">
+                    <h2 class="section-title">5. Footer architetturato</h2>
+                    <div class="content-box">
+                        <p>Il footer non e solo copyright: e un blocco di orientamento e fiducia.</p>
+                        <ul>
+                            <li>Colonna 1: brand e descrizione.</li>
+                            <li>Colonna 2: link rapidi.</li>
+                            <li>Colonna 3: contatti e social.</li>
+                            <li>Colonna 4: policy e note legali.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="selezione" class="mb-5">
+                    <h2 class="section-title">6. Come scegliere il modello giusto</h2>
+                    <div class="content-box">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Scenario</th>
+                                    <th>Modello consigliato</th>
+                                    <th>Motivo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Landing evento/prodotto</td>
+                                    <td>Z-pattern + full width hero</td>
+                                    <td>Direziona lo sguardo verso CTA</td>
+                                </tr>
+                                <tr>
+                                    <td>Guida didattica</td>
+                                    <td>Sidebar + content column</td>
+                                    <td>Navigazione immediata tra sezioni</td>
+                                </tr>
+                                <tr>
+                                    <td>E-commerce</td>
+                                    <td>Grid prodotti + filtri laterali</td>
+                                    <td>Confronto rapido e ricerca</td>
+                                </tr>
+                                <tr>
+                                    <td>Portfolio creativo</td>
+                                    <td>Full width modulare</td>
+                                    <td>Valorizza immagini e ritmo visivo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="alert alert-success">Compito: disegna due wireframe dello stesso contenuto usando due modelli diversi e confronta i risultati.</div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container"><p class="mb-0">Manuale Web Design - Modelli di Layout Web &copy; 2026</p></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

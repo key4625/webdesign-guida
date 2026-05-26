@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Componenti Web Interattivi - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #9b2242 0%, #c2255c 100%); border-bottom: 5px solid #ff8fab;">
+        <div class="container">
+            <h1 class="display-5"><i class="bi bi-ui-radios-grid"></i> Componenti Web Interattivi</h1>
+            <p class="lead mb-0">Dall'idea visuale ai blocchi UI riutilizzabili: slideshow, accordion, tabs e altro</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="alert alert-light border shadow-sm mb-4" role="note">
+            <h5 class="mb-3"><i class="bi bi-mortarboard"></i> Scheda Didattica</h5>
+            <div class="row small">
+                <div class="col-md-4"><strong>Obiettivo:</strong> saper scegliere e progettare componenti interattivi coerenti con il task utente.</div>
+                <div class="col-md-3"><strong>Prerequisiti:</strong> HTML semantico, basi CSS e Bootstrap.</div>
+                <div class="col-md-2"><strong>Durata stimata:</strong> 70 min</div>
+                <div class="col-md-3"><strong>Output:</strong> set di componenti UI motivati da criteri progettuali.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#intro">1. Cosa sono i componenti</a>
+                        <a class="nav-link" href="#slideshow">2. Slideshow e slideset</a>
+                        <a class="nav-link" href="#accordion">3. Accordion</a>
+                        <a class="nav-link" href="#tabs">4. Tabs e pannelli</a>
+                        <a class="nav-link" href="#cards">5. Cards e micro-pattern</a>
+                        <a class="nav-link" href="#criteri">6. Criteri di scelta</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <section id="intro" class="mb-5">
+                    <h2 class="section-title">1. Cosa sono i componenti UI</h2>
+                    <div class="content-box">
+                        <p>Un componente e un blocco di interfaccia riutilizzabile con una funzione precisa. Esempio: mostrare immagini (slideshow), comprimere testi (accordion), cambiare vista senza ricaricare (tabs).</p>
+                        <div class="alert alert-info mt-3">Regola pratica: ogni componente deve avere una responsabilita chiara e un comportamento prevedibile.</div>
+                    </div>
+                </section>
+
+                <section id="slideshow" class="mb-5">
+                    <h2 class="section-title">2. Slideshow e Slideset</h2>
+                    <div class="content-box">
+                        <h4>Quando usarli</h4>
+                        <ul>
+                            <li>Portfolio visivi e showcase di progetti.</li>
+                            <li>Hero section con 2-4 messaggi principali.</li>
+                            <li>Gallerie prodotto con immagini correlate.</li>
+                        </ul>
+                        <h4 class="mt-4">Best practice</h4>
+                        <ul>
+                            <li>Non superare 5 slide.</li>
+                            <li>Controlli sempre visibili: avanti/indietro e indicatori.</li>
+                            <li>Autoplay lento e con pausa al passaggio mouse.</li>
+                            <li>Testi leggibili anche su mobile.</li>
+                        </ul>
+                        <div class="code-example">
+<pre><code class="language-html">&lt;div id="heroSlider" class="carousel slide" data-bs-ride="carousel"&gt;
+  &lt;div class="carousel-inner"&gt;
+    &lt;div class="carousel-item active"&gt;...&lt;/div&gt;
+    &lt;div class="carousel-item"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="carousel-control-prev" data-bs-target="#heroSlider" data-bs-slide="prev"&gt;&lt;/button&gt;
+  &lt;button class="carousel-control-next" data-bs-target="#heroSlider" data-bs-slide="next"&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="accordion" class="mb-5">
+                    <h2 class="section-title">3. Accordion</h2>
+                    <div class="content-box">
+                        <p>L'accordion e ideale quando hai molte informazioni secondarie da comprimere senza perdere ordine visivo.</p>
+                        <h4>Casi tipici</h4>
+                        <ul>
+                            <li>FAQ</li>
+                            <li>Schede tecniche</li>
+                            <li>Sezioni teoriche lunghe in una guida</li>
+                        </ul>
+                        <h4 class="mt-4">Errori comuni</h4>
+                        <ul>
+                            <li>Usare titoli vaghi nei pannelli.</li>
+                            <li>Nascondere contenuti essenziali.</li>
+                            <li>Nessun indicatore aperto/chiuso.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="tabs" class="mb-5">
+                    <h2 class="section-title">4. Tabs e pannelli</h2>
+                    <div class="content-box">
+                        <p>Le tabs servono a confrontare categorie parallele: stesso livello informativo, viste diverse.</p>
+                        <ul>
+                            <li>Non usarle per flussi sequenziali (meglio stepper).</li>
+                            <li>Evita etichette lunghe.</li>
+                            <li>Mantieni massimo 5 tab visibili.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="cards" class="mb-5">
+                    <h2 class="section-title">5. Cards e micro-pattern utili</h2>
+                    <div class="content-box">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5>Card contenuto</h5>
+                                        <p>Usa titolo, testo breve e call to action unica.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5>Modal</h5>
+                                        <p>Solo per azioni contestuali, non per sostituire pagine intere.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5>Tooltip/Popover</h5>
+                                        <p>Supportano la comprensione, non devono contenere dati fondamentali.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5>Offcanvas</h5>
+                                        <p>Perfetto per menu mobile o filtri su e-commerce.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="criteri" class="mb-5">
+                    <h2 class="section-title">6. Criteri di scelta componente</h2>
+                    <div class="content-box">
+                        <ol>
+                            <li>Obiettivo utente: informare, scegliere, confrontare, inviare.</li>
+                            <li>Quantita contenuti: poco testo, medio testo, testo esteso.</li>
+                            <li>Contesto device: mobile-first o desktop-first.</li>
+                            <li>Accessibilita: tastiera, focus, etichette ARIA.</li>
+                        </ol>
+                        <div class="alert alert-success">Compito pratico: scegli 3 componenti e giustifica perche sono adatti al tuo progetto.</div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container"><p class="mb-0">Manuale Web Design - Componenti Web Interattivi &copy; 2026</p></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

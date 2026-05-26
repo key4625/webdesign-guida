@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #1f4ed8 0%, #3b82f6 100%); border-bottom: 5px solid #93c5fd;">
+        <div class="container">
+            <h1 class="display-5"><i class="bi bi-diagram-3"></i> Design System</h1>
+            <p class="lead mb-0">Cos'e, cosa comprende e come costruirlo in un progetto reale</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="alert alert-light border shadow-sm mb-4" role="note">
+            <h5 class="mb-3"><i class="bi bi-mortarboard"></i> Scheda Didattica</h5>
+            <div class="row small">
+                <div class="col-md-4"><strong>Obiettivo:</strong> capire struttura e logica di un design system applicabile a progetti reali.</div>
+                <div class="col-md-3"><strong>Prerequisiti:</strong> nozioni base di UI design e CSS variables.</div>
+                <div class="col-md-2"><strong>Durata stimata:</strong> 75 min</div>
+                <div class="col-md-3"><strong>Output:</strong> schema iniziale di token + componenti core del progetto.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#intro">1. Definizione</a>
+                        <a class="nav-link" href="#blocchi">2. Cosa comprende</a>
+                        <a class="nav-link" href="#token">3. Design token</a>
+                        <a class="nav-link" href="#componenti">4. Libreria componenti</a>
+                        <a class="nav-link" href="#processo">5. Processo di sviluppo</a>
+                        <a class="nav-link" href="#documentazione">6. Documentazione</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <section id="intro" class="mb-5">
+                    <h2 class="section-title">1. Definizione</h2>
+                    <div class="content-box">
+                        <p>Un design system e un insieme coordinato di regole, componenti e principi che permette a team di progettare e sviluppare interfacce coerenti nel tempo.</p>
+                        <div class="alert alert-info mt-3">Non e solo una libreria UI: include anche linguaggio, comportamento e standard di qualità.</div>
+                    </div>
+                </section>
+
+                <section id="blocchi" class="mb-5">
+                    <h2 class="section-title">2. Cosa comprende</h2>
+                    <div class="content-box">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Fondazioni visive:</strong> colori, tipografia, spacing, griglie.</li>
+                            <li class="list-group-item"><strong>Componenti:</strong> button, card, form, modal, nav, alert.</li>
+                            <li class="list-group-item"><strong>Pattern:</strong> composizioni tipiche (hero, lista, dashboard).</li>
+                            <li class="list-group-item"><strong>Linee guida:</strong> voce del brand, microcopy, stati e interazioni.</li>
+                            <li class="list-group-item"><strong>Accessibilita:</strong> contrasti, focus, tastiera, semantica.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="token" class="mb-5">
+                    <h2 class="section-title">3. Design token</h2>
+                    <div class="content-box">
+                        <p>I token sono variabili astratte che collegano design e codice.</p>
+<pre><code class="language-css">:root {
+  --color-primary: #2563eb;
+  --color-surface: #ffffff;
+  --text-default: #0f172a;
+  --space-1: 4px;
+  --space-2: 8px;
+  --radius-md: 10px;
+}</code></pre>
+                        <p>Con i token puoi aggiornare un intero sistema senza riscrivere ogni componente.</p>
+                    </div>
+                </section>
+
+                <section id="componenti" class="mb-5">
+                    <h2 class="section-title">4. Libreria componenti</h2>
+                    <div class="content-box">
+                        <h4>Schema consigliato per ogni componente</h4>
+                        <ol>
+                            <li>Nome e scopo.</li>
+                            <li>Varianti (primary, secondary, ghost).</li>
+                            <li>Stati (default, hover, active, disabled, error).</li>
+                            <li>Regole di utilizzo corretto/errato.</li>
+                        </ol>
+                        <div class="code-example">
+<pre><code class="language-html">&lt;button class="btn btn-primary"&gt;Conferma&lt;/button&gt;
+&lt;button class="btn btn-outline-primary"&gt;Annulla&lt;/button&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="processo" class="mb-5">
+                    <h2 class="section-title">5. Processo di sviluppo</h2>
+                    <div class="content-box">
+                        <ol>
+                            <li>Audit dell'interfaccia esistente.</li>
+                            <li>Definizione delle fondazioni visive.</li>
+                            <li>Costruzione componenti base.</li>
+                            <li>Composizione in pattern e template pagina.</li>
+                            <li>Versionamento e governance.</li>
+                        </ol>
+                        <div class="alert alert-warning">Parti piccolo: 6-8 componenti core ben fatti valgono piu di una libreria enorme incoerente.</div>
+                    </div>
+                </section>
+
+                <section id="documentazione" class="mb-5">
+                    <h2 class="section-title">6. Documentazione efficace</h2>
+                    <div class="content-box">
+                        <p>Ogni componente deve avere una scheda sintetica con esempi, regole e snippet riutilizzabili.</p>
+                        <ul>
+                            <li>Quando usare il componente.</li>
+                            <li>Quando NON usarlo.</li>
+                            <li>Snippet base in HTML/CSS.</li>
+                            <li>Vincoli responsive e accessibilita.</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container"><p class="mb-0">Manuale Web Design - Design System &copy; 2026</p></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

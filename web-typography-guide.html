@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipografia per il Web - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #212529 0%, #495057 100%); border-bottom: 5px solid #adb5bd;">
+        <div class="container">
+            <h1 class="display-5"><i class="bi bi-type"></i> Tipografia per il Web</h1>
+            <p class="lead mb-0">Gerarchia, leggibilita e ritmo visivo per progettare interfacce efficaci</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="alert alert-light border shadow-sm mb-4" role="note">
+            <h5 class="mb-3"><i class="bi bi-mortarboard"></i> Scheda Didattica</h5>
+            <div class="row small">
+                <div class="col-md-4"><strong>Obiettivo:</strong> costruire gerarchie tipografiche leggibili e coerenti su tutti i breakpoints.</div>
+                <div class="col-md-3"><strong>Prerequisiti:</strong> basi CSS (font-size, line-height, weights).</div>
+                <div class="col-md-2"><strong>Durata stimata:</strong> 60 min</div>
+                <div class="col-md-3"><strong>Output:</strong> sistema tipografico riutilizzabile con token.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#fondamenti">1. Fondamenti tipografici</a>
+                        <a class="nav-link" href="#gerarchia">2. Gerarchia e scala</a>
+                        <a class="nav-link" href="#leggibilita">3. Leggibilita</a>
+                        <a class="nav-link" href="#pairing">4. Font pairing</a>
+                        <a class="nav-link" href="#sistema">5. Sistema tipografico</a>
+                        <a class="nav-link" href="#accessibilita">6. Accessibilita tipografica</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <section id="fondamenti" class="mb-5">
+                    <h2 class="section-title">1. Fondamenti tipografici</h2>
+                    <div class="content-box">
+                        <p>La tipografia non e decorazione: e struttura informativa. Decide cosa si legge prima, quanto velocemente e con quale chiarezza.</p>
+                        <ul>
+                            <li><strong>Font family:</strong> scelta del carattere.</li>
+                            <li><strong>Weight:</strong> spessore (400, 500, 700).</li>
+                            <li><strong>Size:</strong> dimensione testo.</li>
+                            <li><strong>Line-height:</strong> respiro verticale tra righe.</li>
+                            <li><strong>Letter-spacing:</strong> spazio tra lettere.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="gerarchia" class="mb-5">
+                    <h2 class="section-title">2. Gerarchia e scala tipografica</h2>
+                    <div class="content-box">
+                        <p>Usa una scala coerente invece di dimensioni casuali.</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Elemento</th>
+                                        <th>Dimensione consigliata</th>
+                                        <th>Uso</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>H1</td>
+                                        <td>40px-48px</td>
+                                        <td>Titolo pagina</td>
+                                    </tr>
+                                    <tr>
+                                        <td>H2</td>
+                                        <td>30px-36px</td>
+                                        <td>Sezioni principali</td>
+                                    </tr>
+                                    <tr>
+                                        <td>H3</td>
+                                        <td>24px-28px</td>
+                                        <td>Sottosezioni</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Body</td>
+                                        <td>16px-18px</td>
+                                        <td>Testo principale</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Small</td>
+                                        <td>13px-14px</td>
+                                        <td>Meta info/note</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="leggibilita" class="mb-5">
+                    <h2 class="section-title">3. Leggibilita su schermo</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li>Line-height consigliata: 1.4 - 1.7 per testo lungo.</li>
+                            <li>Larghezza riga ideale: 60-80 caratteri.</li>
+                            <li>Contrasto elevato tra testo e sfondo.</li>
+                            <li>Evita paragrafi troppo lunghi senza pause visive.</li>
+                        </ul>
+                        <div class="alert alert-info">Regola pratica: se un blocco non si legge facilmente su smartphone, va ridotto o spezzato.</div>
+                    </div>
+                </section>
+
+                <section id="pairing" class="mb-5">
+                    <h2 class="section-title">4. Font pairing</h2>
+                    <div class="content-box">
+                        <p>Abbina massimo 2 famiglie tipografiche: una per titoli, una per testo.</p>
+                        <ul>
+                            <li>Serif + Sans Serif: look editoriale e contemporaneo.</li>
+                            <li>Sans Serif + Sans Serif: look pulito e digitale.</li>
+                            <li>Display font solo per titoli brevi.</li>
+                        </ul>
+                        <div class="code-example">
+<pre><code class="language-css">h1, h2, h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+body {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="sistema" class="mb-5">
+                    <h2 class="section-title">5. Costruire un sistema tipografico</h2>
+                    <div class="content-box">
+                        <p>Definisci token tipografici riutilizzabili nel progetto:</p>
+                        <div class="code-example">
+<pre><code class="language-css">:root {
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Source Sans 3", sans-serif;
+  --fs-h1: 2.75rem;
+  --fs-h2: 2rem;
+  --fs-h3: 1.5rem;
+  --fs-body: 1rem;
+  --lh-body: 1.6;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="accessibilita" class="mb-5">
+                    <h2 class="section-title">6. Accessibilita tipografica</h2>
+                    <div class="content-box">
+                        <ul class="list-group">
+                            <li class="list-group-item">Dimensione base testo non inferiore a 16px.</li>
+                            <li class="list-group-item">Contrasto testo/sfondo adeguato (WCAG).</li>
+                            <li class="list-group-item">Mai usare solo MAIUSCOLO su paragrafi lunghi.</li>
+                            <li class="list-group-item">Spaziatura sufficiente tra righe e paragrafi.</li>
+                            <li class="list-group-item">Gerarchia heading corretta da h1 a h6.</li>
+                        </ul>
+                        <div class="alert alert-success mt-3">Esercizio: scegli 2 font, crea una scala tipografica e applicala a una landing in 3 breakpoint.</div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container"><p class="mb-0">Manuale Web Design - Tipografia per il Web &copy; 2026</p></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

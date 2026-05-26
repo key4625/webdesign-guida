@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colore e Contrasto - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="page-header text-dark py-4" style="background: linear-gradient(135deg, #ffe066 0%, #ffd43b 100%); border-bottom: 5px solid #f59f00;">
+        <div class="container">
+            <h1 class="display-5"><i class="bi bi-palette"></i> Colore e Contrasto</h1>
+            <p class="lead mb-0">Dalla palette al significato visivo, fino alla leggibilita accessibile</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="alert alert-light border shadow-sm mb-4" role="note">
+            <h5 class="mb-3"><i class="bi bi-mortarboard"></i> Scheda Didattica</h5>
+            <div class="row small">
+                <div class="col-md-4"><strong>Obiettivo:</strong> applicare palette e contrasto in modo strategico e accessibile.</div>
+                <div class="col-md-3"><strong>Prerequisiti:</strong> nozioni base di colore e CSS.</div>
+                <div class="col-md-2"><strong>Durata stimata:</strong> 55 min</div>
+                <div class="col-md-3"><strong>Output:</strong> palette funzionale con controlli contrasto WCAG.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#teoria">1. Teoria del colore</a>
+                        <a class="nav-link" href="#palette">2. Costruire una palette</a>
+                        <a class="nav-link" href="#semantica">3. Semantica colore in UI</a>
+                        <a class="nav-link" href="#contrasto">4. Contrasto e WCAG</a>
+                        <a class="nav-link" href="#workflow">5. Workflow pratico</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <section id="teoria" class="mb-5">
+                    <h2 class="section-title">1. Teoria del colore applicata al web</h2>
+                    <div class="content-box">
+                        <p>Nel design digitale, il colore organizza priorita e percezione: attira l'attenzione, comunica gerarchie e definisce il tono del brand.</p>
+                        <ul>
+                            <li><strong>Hue:</strong> tonalita (rosso, blu, verde).</li>
+                            <li><strong>Saturation:</strong> intensita del colore.</li>
+                            <li><strong>Lightness:</strong> luminosita percepita.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="palette" class="mb-5">
+                    <h2 class="section-title">2. Costruire una palette coerente</h2>
+                    <div class="content-box">
+                        <p>Schema base consigliato per progetti didattici e portfolio:</p>
+                        <ul>
+                            <li>1 colore primario</li>
+                            <li>1 colore secondario</li>
+                            <li>1 colore accento</li>
+                            <li>scala neutri (sfondi, bordi, testo)</li>
+                        </ul>
+<pre><code class="language-css">:root {
+  --color-primary: #0d6efd;
+  --color-secondary: #20c997;
+  --color-accent: #f59f00;
+  --color-bg: #ffffff;
+  --color-surface: #f8f9fa;
+  --color-text: #212529;
+}</code></pre>
+                    </div>
+                </section>
+
+                <section id="semantica" class="mb-5">
+                    <h2 class="section-title">3. Semantica del colore in interfaccia</h2>
+                    <div class="content-box">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Colore</th>
+                                    <th>Significato comune</th>
+                                    <th>Uso tipico</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Verde</td><td>Successo, conferma</td><td>Messaggi positivi, stato completato</td></tr>
+                                <tr><td>Rosso</td><td>Errore, rischio</td><td>Alert, validazione fallita</td></tr>
+                                <tr><td>Blu</td><td>Affidabilita, azione</td><td>CTA principali, link</td></tr>
+                                <tr><td>Giallo/Arancio</td><td>Attenzione</td><td>Warning, highlight</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="alert alert-info">Non affidarti solo al colore: aggiungi icone o testo esplicativo.</div>
+                    </div>
+                </section>
+
+                <section id="contrasto" class="mb-5">
+                    <h2 class="section-title">4. Contrasto e accessibilita (WCAG)</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li>Testo normale: rapporto minimo 4.5:1.</li>
+                            <li>Testo grande (>= 24px o 19px bold): minimo 3:1.</li>
+                            <li>Elementi UI essenziali: contrasto chiaro con lo sfondo.</li>
+                        </ul>
+                        <p>Strumenti utili: WAVE, Lighthouse, contrast checker dedicati.</p>
+                    </div>
+                </section>
+
+                <section id="workflow" class="mb-5">
+                    <h2 class="section-title">5. Workflow pratico per studenti</h2>
+                    <div class="content-box">
+                        <ol>
+                            <li>Scegli un mood (editoriale, tech, minimale, artistico).</li>
+                            <li>Crea 2 varianti palette.</li>
+                            <li>Applica token colore al CSS.</li>
+                            <li>Controlla contrasto su titoli, body e bottoni.</li>
+                            <li>Valida su mobile e desktop.</li>
+                        </ol>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container"><p class="mb-0">Manuale Web Design - Colore e Contrasto &copy; 2026</p></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

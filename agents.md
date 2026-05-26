@@ -96,9 +96,11 @@ Tutte le librerie vengono caricate via CDN, non ci sono dipendenze npm.
 - Ogni pagina ha `<div id="navbar-container"></div>` nel body
 - `navbar.js` genera l'intera navbar via JavaScript al caricamento
 - Rileva automaticamente se la pagina è dentro `esempi/` e adatta i percorsi relativi (`pathPrefix`)
-- La voce "JavaScript" è un dropdown con: Guida JS Base, API & CRUD, Web Components, React, Next.js, GSAP
+- La voce "JavaScript" è un dropdown con: Guida JS Base, jQuery (ripasso), API & CRUD, Web Components, React, Next.js, GSAP
+- La voce "Grafica & Interfacce" è un dropdown con: UX e Progettazione Interfaccia, Componenti Web Interattivi, Design System, Tipografia Web, Colore e Contrasto, Motion e Micro-interazioni, Wireframe/Prototipi/Handoff, Modelli di Layout Web
+- La voce "Altro" contiene: Hosting Web (locale/remoto), Best Practices, Guida Git e GitHub Pages
 - Il link attivo viene evidenziato confrontando `window.location.pathname` con il nome file
-- React, Next.js e GSAP hanno stili navbar personalizzati (bordo inferiore colorato)
+- Le guide principali usano navbar uniforme scura, con bordo inferiore colorato per aree specifiche
 
 ### Dark Mode (`js/theme-toggle.js` + `css/style.css`)
 - Al caricamento legge `localStorage('theme')`, se assente usa `prefers-color-scheme`
@@ -169,6 +171,39 @@ JSX, componenti funzionali, hooks (useState, useEffect, useRef, useContext), pro
 
 ### `nextjs-guide.html`
 Percorso evolutivo da React a Next.js: setup, app router, data fetching, API routes integrate, deploy.
+
+### `jquery-guide.html`
+Ripasso jQuery orientato a progetti legacy: selettori, eventi, manipolazione DOM, Ajax base e confronto con `fetch()`.
+
+### `ux-interface-guide.html`
+Hub metodologico di grafica/interfacce: percorso, metodo, moduli e checklist progettuale.
+
+### `web-components-ui-guide.html`
+Panoramica componenti interattivi (slideshow, accordion, tabs, cards, micro-pattern) e criteri di scelta.
+
+### `design-system-guide.html`
+Fondamenti di design system: token, componenti, processi e documentazione.
+
+### `web-typography-guide.html`
+Tipografia per il web: gerarchie, scale, leggibilità, pairing font e accessibilità tipografica.
+
+### `web-color-contrast-guide.html`
+Palette, semantica del colore, contrasto WCAG e workflow operativo.
+
+### `motion-microinteractions-guide.html`
+Animazioni funzionali e micro-interazioni: timing, feedback, pattern e `prefers-reduced-motion`.
+
+### `wireframe-prototype-handoff-guide.html`
+Workflow design-dev: wireframe, prototipi, UI kit minimo e handoff tecnico.
+
+### `web-layout-models-guide.html`
+Modelli di layout (Z-pattern, sidebar, full-width, footer strutturato) e criteri di scelta.
+
+### `hosting-guide.html`
+Introduzione all'hosting locale/remoto, stack base e deploy essenziale.
+
+### `git-guide.html`
+Versionamento con Git e pubblicazione con GitHub Pages.
 
 ### `vue-guide.html` (in pausa)
 Guida Vue 3 mantenuta nel progetto ma temporaneamente non mostrata in homepage/navbar.

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX e Progettazione Interfaccia - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #d63384 0%, #f06595 100%); border-bottom: 5px solid #ffc9de;">
+        <div class="container">
+            <h1 class="display-5"><i class="bi bi-easel2"></i> UX e Progettazione Interfaccia</h1>
+            <p class="lead mb-0">Hub didattico per il percorso di grafica, interfacce e progettazione web</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="alert alert-light border shadow-sm mb-4" role="note">
+            <h5 class="mb-3"><i class="bi bi-mortarboard"></i> Scheda Didattica</h5>
+            <div class="row small">
+                <div class="col-md-4"><strong>Obiettivo:</strong> impostare metodo e visione progettuale per l'area grafica/interfacce.</div>
+                <div class="col-md-3"><strong>Prerequisiti:</strong> basi HTML/CSS, struttura pagine web.</div>
+                <div class="col-md-2"><strong>Durata stimata:</strong> 50 min</div>
+                <div class="col-md-3"><strong>Output:</strong> roadmap chiara dei moduli UI/UX da approfondire.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#overview">1. Perche questo percorso</a>
+                        <a class="nav-link" href="#metodo">2. Metodo di lavoro</a>
+                        <a class="nav-link" href="#moduli">3. Moduli di approfondimento</a>
+                        <a class="nav-link" href="#checklist">4. Checklist di progetto</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <section id="overview" class="mb-5">
+                    <h2 class="section-title">1. Perche questo percorso</h2>
+                    <div class="content-box">
+                        <p>Per studenti con focus artistico e progettuale, l'interfaccia non e solo "grafica bella": e una struttura che guida l'utente e traduce un concept visivo in un'esperienza concreta.</p>
+                        <p>Questa sezione raccoglie i moduli chiave per passare dal design intuitivo al design sistemico, mantenendo equilibrio tra estetica, gerarchia e usabilita.</p>
+                    </div>
+                </section>
+
+                <section id="metodo" class="mb-5">
+                    <h2 class="section-title">2. Metodo di lavoro consigliato</h2>
+                    <div class="content-box">
+                        <ol>
+                            <li>Definisci obiettivo e pubblico della pagina.</li>
+                            <li>Progetta la gerarchia visiva (titoli, blocchi, call to action).</li>
+                            <li>Scegli i componenti UI in base al compito utente.</li>
+                            <li>Traduci il tutto in layout responsive e griglia coerente.</li>
+                            <li>Valida con micro-test di usabilita prima del polishing grafico.</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="moduli" class="mb-5">
+                    <h2 class="section-title">3. Moduli di approfondimento</h2>
+                    <div class="content-box">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5><i class="bi bi-ui-radios-grid text-danger"></i> Componenti Web Interattivi</h5>
+                                        <p>Slideshow, slideset, accordion, tabs e pattern dinamici per contenuti modulari.</p>
+                                        <a href="web-components-ui-guide.html" class="btn btn-outline-danger btn-sm">Apri modulo</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5><i class="bi bi-diagram-3 text-primary"></i> Design System</h5>
+                                        <p>Token, componenti, regole e documentazione per coerenza visiva e scalabilita.</p>
+                                        <a href="design-system-guide.html" class="btn btn-outline-primary btn-sm">Apri modulo</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5><i class="bi bi-type text-dark"></i> Tipografia per il Web</h5>
+                                        <p>Gerarchie tipografiche, scala modulare, leggibilita e pairing font per interfacce editoriali e prodotto.</p>
+                                        <a href="web-typography-guide.html" class="btn btn-outline-dark btn-sm">Apri modulo</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5><i class="bi bi-palette text-warning"></i> Colore e Contrasto</h5>
+                                        <p>Palette, semantica del colore e contrasto WCAG applicato a interfacce reali.</p>
+                                        <a href="web-color-contrast-guide.html" class="btn btn-outline-warning btn-sm">Apri modulo</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5><i class="bi bi-magic text-info"></i> Motion e Micro-interazioni</h5>
+                                        <p>Animazioni funzionali, feedback UI e timing per migliorare usabilita e chiarezza.</p>
+                                        <a href="motion-microinteractions-guide.html" class="btn btn-outline-info btn-sm">Apri modulo</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5><i class="bi bi-vector-pen text-secondary"></i> Wireframe, Prototipi e Handoff</h5>
+                                        <p>Workflow da idea a consegna tecnica: wireframe, prototipo e documentazione per sviluppo.</p>
+                                        <a href="wireframe-prototype-handoff-guide.html" class="btn btn-outline-secondary btn-sm">Apri modulo</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5><i class="bi bi-columns-gap text-success"></i> Modelli di Layout Web</h5>
+                                        <p>Sidebar, Z-pattern, full-width, container fluid e strutture editoriali/commerciali.</p>
+                                        <a href="web-layout-models-guide.html" class="btn btn-outline-success btn-sm">Apri modulo</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="checklist" class="mb-5">
+                    <h2 class="section-title">4. Checklist di progetto grafico-interattivo</h2>
+                    <div class="content-box">
+                        <ul class="list-group">
+                            <li class="list-group-item">Gerarchia visiva chiara nei primi 5 secondi di lettura.</li>
+                            <li class="list-group-item">Componenti riutilizzabili e nomi coerenti tra pagine.</li>
+                            <li class="list-group-item">Layout adattivo da mobile a desktop con breakpoints ragionati.</li>
+                            <li class="list-group-item">Contrasto, tipografia e spaziature verificati su casi reali.</li>
+                            <li class="list-group-item">Stati interattivi presenti: hover, active, focus, disabled, error.</li>
+                        </ul>
+                        <div class="alert alert-info mt-3">Suggerimento: costruisci prima 2-3 template solidi, poi estendi lo stile agli altri contenuti.</div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container"><p class="mb-0">Manuale Web Design - UX e Interfacce &copy; 2026</p></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

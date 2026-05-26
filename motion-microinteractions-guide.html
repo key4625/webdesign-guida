@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion e Micro-interazioni - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #0b7285 0%, #0dcaf0 100%); border-bottom: 5px solid #66d9e8;">
+        <div class="container">
+            <h1 class="display-5"><i class="bi bi-magic"></i> Motion e Micro-interazioni</h1>
+            <p class="lead mb-0">Animazioni utili, non decorative: feedback, orientamento e chiarezza</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="alert alert-light border shadow-sm mb-4" role="note">
+            <h5 class="mb-3"><i class="bi bi-mortarboard"></i> Scheda Didattica</h5>
+            <div class="row small">
+                <div class="col-md-4"><strong>Obiettivo:</strong> progettare motion funzionale che migliori chiarezza e feedback UI.</div>
+                <div class="col-md-3"><strong>Prerequisiti:</strong> CSS transition/animation base.</div>
+                <div class="col-md-2"><strong>Durata stimata:</strong> 50 min</div>
+                <div class="col-md-3"><strong>Output:</strong> set minimo di micro-interazioni accessibili.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#perche">1. Perche usare motion</a>
+                        <a class="nav-link" href="#tipi">2. Tipi di micro-interazione</a>
+                        <a class="nav-link" href="#timing">3. Timing ed easing</a>
+                        <a class="nav-link" href="#pattern">4. Pattern pratici</a>
+                        <a class="nav-link" href="#access">5. Accessibilita motion</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <section id="perche" class="mb-5">
+                    <h2 class="section-title">1. Perche usare motion</h2>
+                    <div class="content-box">
+                        <p>La motion guida l'attenzione e chiarisce cosa sta succedendo nell'interfaccia: click riuscito, caricamento, cambio stato, errore.</p>
+                        <div class="alert alert-info">Obiettivo: ridurre incertezza utente, non aggiungere rumore visivo.</div>
+                    </div>
+                </section>
+
+                <section id="tipi" class="mb-5">
+                    <h2 class="section-title">2. Tipi di micro-interazione</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li>Hover e focus visibili su bottoni/link.</li>
+                            <li>Feedback submit form (loading, success, error).</li>
+                            <li>Expand/collapse di sezioni (accordion).</li>
+                            <li>Transizioni tra pagine/sezioni.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="timing" class="mb-5">
+                    <h2 class="section-title">3. Timing ed easing</h2>
+                    <div class="content-box">
+                        <p>Range utili:</p>
+                        <ul>
+                            <li>Hover: 120-180ms</li>
+                            <li>UI transizioni semplici: 200-300ms</li>
+                            <li>Entrata elementi: 300-450ms</li>
+                        </ul>
+<pre><code class="language-css">.btn {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}</code></pre>
+                    </div>
+                </section>
+
+                <section id="pattern" class="mb-5">
+                    <h2 class="section-title">4. Pattern pratici</h2>
+                    <div class="content-box">
+                        <h4>Stagger reveal cards</h4>
+<pre><code class="language-css">.card {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: reveal 420ms ease forwards;
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}</code></pre>
+                        <h4 class="mt-4">Feedback stato bottone</h4>
+                        <p>Cambia testo/icona durante il caricamento e mostra chiaramente l'esito.</p>
+                    </div>
+                </section>
+
+                <section id="access" class="mb-5">
+                    <h2 class="section-title">5. Accessibilita motion</h2>
+                    <div class="content-box">
+                        <p>Rispetta utenti sensibili al movimento usando la media query dedicata:</p>
+<pre><code class="language-css">@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}</code></pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container"><p class="mb-0">Manuale Web Design - Motion e Micro-interazioni &copy; 2026</p></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

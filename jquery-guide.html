@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery (Ripasso) - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #4b1f73 0%, #6f42c1 100%); border-bottom: 5px solid #b18cff;">
+        <div class="container">
+            <h1 class="display-5"><i class="bi bi-lightning-charge"></i> jQuery (Ripasso)</h1>
+            <p class="lead mb-0">Selettori, eventi e manipolazione DOM in modo rapido</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#intro">1. Quando usare jQuery</a>
+                        <a class="nav-link" href="#selettori">2. Selettori</a>
+                        <a class="nav-link" href="#eventi">3. Eventi</a>
+                        <a class="nav-link" href="#dom">4. DOM</a>
+                        <a class="nav-link" href="#ajax">5. Ajax base</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <section id="intro" class="mb-5">
+                    <h2 class="section-title">1. Quando usare jQuery</h2>
+                    <div class="content-box">
+                        <p>Oggi JavaScript moderno copre quasi tutto, ma jQuery e ancora utile su progetti legacy o quando devi fare prototipi veloci con poco codice.</p>
+                    </div>
+                </section>
+
+                <section id="selettori" class="mb-5">
+                    <h2 class="section-title">2. Selettori</h2>
+                    <div class="content-box">
+<pre><code class="language-javascript">// Seleziona per id
+$('#titolo').text('Nuovo titolo');
+
+// Seleziona per classe
+$('.card').addClass('evidenza');
+
+// Seleziona elementi annidati
+$('.menu li a').css('color', '#0d6efd');</code></pre>
+                    </div>
+                </section>
+
+                <section id="eventi" class="mb-5">
+                    <h2 class="section-title">3. Eventi</h2>
+                    <div class="content-box">
+<pre><code class="language-javascript">$('#btn-invia').on('click', function () {
+  alert('Click registrato');
+});
+
+$('#email').on('input', function () {
+  console.log($(this).val());
+});</code></pre>
+                    </div>
+                </section>
+
+                <section id="dom" class="mb-5">
+                    <h2 class="section-title">4. Manipolazione DOM</h2>
+                    <div class="content-box">
+<pre><code class="language-javascript">$('.box').hide();
+$('.box').fadeIn(400);
+
+$('#lista').append('&lt;li&gt;Nuovo elemento&lt;/li&gt;');
+$('#messaggio').html('&lt;strong&gt;Salvato!&lt;/strong&gt;');</code></pre>
+                    </div>
+                </section>
+
+                <section id="ajax" class="mb-5">
+                    <h2 class="section-title">5. Ajax base</h2>
+                    <div class="content-box">
+<pre><code class="language-javascript">$.get('https://jsonplaceholder.typicode.com/posts/1', function (data) {
+  $('#output').text(data.title);
+});</code></pre>
+                        <div class="alert alert-info mt-3">Ripasso consigliato: confronta questo esempio con <code>fetch()</code> nella guida JavaScript.</div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container"><p class="mb-0">Manuale Web Design - jQuery (Ripasso) &copy; 2026</p></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>
