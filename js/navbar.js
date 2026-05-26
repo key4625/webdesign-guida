@@ -9,7 +9,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const links = [
         { text: 'Home', url: pathPrefix + 'index.html' },
         { text: 'HTML', url: pathPrefix + 'html-guide.html' },
-        { text: 'CSS', url: pathPrefix + 'css-guide.html' },
+        {
+            text: 'CSS',
+            id: 'navbarDropdownCSS',
+            dropdown: [
+                { text: 'Guida CSS Base', url: pathPrefix + 'css-guide.html' },
+                { text: 'SCSS, SASS e Compilatori', url: pathPrefix + 'scss-sass-guide.html' }
+            ]
+        },
         { text: 'Bootstrap', url: pathPrefix + 'bootstrap-guide.html' },
         { 
             text: 'JavaScript', 
@@ -24,6 +31,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 { text: 'GSAP', url: pathPrefix + 'gsap-guide.html' },
                 { separator: true },
                 { text: 'E dopo? 🗺️', url: pathPrefix + 'roadmap-guide.html' }
+            ]
+        },
+        {
+            text: 'PHP',
+            id: 'navbarDropdownPHP',
+            dropdown: [
+                { text: 'Guida PHP Base', url: pathPrefix + 'php-guide.html' },
+                { text: 'PHP OOP (Programmazione a Oggetti)', url: pathPrefix + 'php-oop-guide.html' },
+                { text: 'PHP MVC (Architettura)', url: pathPrefix + 'php-mvc-guide.html' }
             ]
         },
         { text: 'Esercizi', url: pathPrefix + 'esempi/index.html' },

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCSS, SASS e Compilatori CSS - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Page Header -->
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #198754 0%, #0d6efd 100%);">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-filetype-scss"></i> SCSS, SASS e Compilatori CSS</h1>
+            <p class="lead">Scrivere CSS in modo più veloce, modulare e professionale</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#introduzione">Introduzione</a>
+                        <a class="nav-link" href="#sass-vs-scss">SASS vs SCSS</a>
+                        <a class="nav-link" href="#features">Funzionalita principali</a>
+                        <a class="nav-link" href="#struttura">Struttura file</a>
+                        <a class="nav-link" href="#compilatori">Compilatori CSS</a>
+                        <a class="nav-link" href="#workflow">Workflow consigliato</a>
+                        <a class="nav-link" href="#pro-contro">Pro e Contro</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+
+                <section id="introduzione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-info-circle"></i> Introduzione</h2>
+                    <div class="content-box">
+                        <p>SASS (Syntactically Awesome Stylesheets) e SCSS sono preprocessori CSS: estendono CSS con strumenti che non esistono nel linguaggio base, poi generano un file .css standard leggibile dal browser.</p>
+                        <div class="alert alert-info">
+                            <i class="bi bi-lightbulb"></i>
+                            <strong>Idea chiave:</strong> il browser non legge direttamente SCSS/SASS. Serve sempre una compilazione verso CSS.
+                        </div>
+                        <div class="code-example">
+                            <pre><code class="language-scss">// input: style.scss
+$primary-color: #0d6efd;
+
+.button {
+  background: $primary-color;
+  &:hover {
+    background: darken($primary-color, 8%);
+  }
+}</code></pre>
+                        </div>
+                        <div class="code-example mt-3">
+                            <pre><code class="language-css">/* output: style.css */
+.button {
+  background: #0d6efd;
+}
+
+.button:hover {
+  background: #0a58ca;
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="sass-vs-scss" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-shuffle"></i> Differenza tra SASS e SCSS</h2>
+                    <div class="content-box">
+                        <p>SASS e SCSS usano lo stesso motore, ma una sintassi diversa:</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Formato</th>
+                                        <th>Estensione</th>
+                                        <th>Sintassi</th>
+                                        <th>Consiglio didattico</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>SCSS</strong></td>
+                                        <td>.scss</td>
+                                        <td>Molto simile a CSS (usa {} e ;)</td>
+                                        <td>Scelta migliore per iniziare</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>SASS</strong></td>
+                                        <td>.sass</td>
+                                        <td>Niente parentesi graffe o punto e virgola</td>
+                                        <td>Meno usata nei team moderni</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 class="mt-4">Esempio SCSS</h4>
+                        <div class="code-example">
+                            <pre><code class="language-scss">.card {
+  padding: 1rem;
+  .title {
+    font-size: 1.25rem;
+  }
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Esempio SASS</h4>
+                        <div class="code-example">
+                            <pre><code class="language-sass">.card
+  padding: 1rem
+  .title
+    font-size: 1.25rem</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="features" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-stars"></i> Funzionalita Principali</h2>
+                    <div class="content-box">
+                        <h4>1. Variabili</h4>
+                        <div class="code-example">
+                            <pre><code class="language-scss">$spacing-md: 1rem;
+$brand: #198754;
+
+.alert-success {
+  padding: $spacing-md;
+  border-left: 4px solid $brand;
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">2. Nesting</h4>
+                        <div class="code-example">
+                            <pre><code class="language-scss">.nav {
+  display: flex;
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">3. Mixin</h4>
+                        <div class="code-example">
+                            <pre><code class="language-scss">@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero {
+  @include flex-center;
+  min-height: 50vh;
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">4. Partials e Import moderni</h4>
+                        <div class="code-example">
+                            <pre><code class="language-scss">// _variables.scss
+$primary: #0d6efd;
+
+// main.scss
+@use "variables" as v;
+
+.btn-primary {
+  background-color: v.$primary;
+}</code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-4">
+                            <i class="bi bi-exclamation-triangle"></i>
+                            <strong>Attenzione:</strong> preferisci <code>@use</code> e <code>@forward</code> al vecchio <code>@import</code>, oggi deprecato in Sass.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="struttura" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-diagram-3"></i> Struttura File Consigliata</h2>
+                    <div class="content-box">
+                        <p>Per progetti didattici e reali, separa i file SCSS per responsabilita:</p>
+                        <div class="code-example">
+                            <pre><code class="language-bash">scss/
+  _variables.scss
+  _mixins.scss
+  _base.scss
+  _components.scss
+  _layout.scss
+  main.scss</code></pre>
+                        </div>
+                        <p>In <strong>main.scss</strong> importi tutto in ordine logico:</p>
+                        <div class="code-example">
+                            <pre><code class="language-scss">@use "variables";
+@use "mixins";
+@use "base";
+@use "layout";
+@use "components";</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="compilatori" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-gear"></i> Compilatori CSS</h2>
+                    <div class="content-box">
+                        <p>I compilatori trasformano SCSS/SASS in CSS. I piu usati oggi:</p>
+
+                        <h4>Dart Sass (standard ufficiale)</h4>
+                        <p>E il compilatore di riferimento mantenuto dal team Sass.</p>
+                        <div class="code-example">
+                            <pre><code class="language-bash"># installazione globale
+npm install -g sass
+
+# compilazione singola
+sass scss/main.scss css/style.css
+
+# watch mode (consigliato in sviluppo)
+sass --watch scss/main.scss:css/style.css</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Live Sass Compiler (estensione VS Code)</h4>
+                        <p>Compila automaticamente al salvataggio senza configurazioni complesse. Utile in contesti didattici.</p>
+
+                        <h4 class="mt-4">Vite / Webpack / Parcel</h4>
+                        <p>Nei progetti moderni il compilatore e integrato nel bundler, insieme a autoprefixer, minificazione e gestione moduli.</p>
+
+                        <div class="alert alert-success mt-3">
+                            <i class="bi bi-check-circle"></i>
+                            <strong>Best practice:</strong> mantieni SCSS in una cartella separata e committa sia i sorgenti SCSS sia il CSS compilato se il progetto e statico.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="workflow" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-arrow-repeat"></i> Workflow Consigliato in Classe</h2>
+                    <div class="content-box">
+                        <ol>
+                            <li>Scrivi componenti e layout in SCSS.</li>
+                            <li>Compila in CSS con watch mode durante lo sviluppo.</li>
+                            <li>Verifica il risultato nel browser e in DevTools.</li>
+                            <li>Ottimizza il CSS finale per la produzione (minify).</li>
+                        </ol>
+
+                        <div class="code-example">
+                            <pre><code class="language-bash"># esempio workflow rapido
+sass --watch scss/main.scss:css/style.css</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="pro-contro" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-bar-chart"></i> Pro e Contro</h2>
+                    <div class="content-box">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="text-success">Vantaggi</h4>
+                                <ul>
+                                    <li>Codice piu modulare e riusabile</li>
+                                    <li>Design system coerente grazie alle variabili</li>
+                                    <li>Riduce duplicazioni con mixin e funzioni</li>
+                                    <li>Workflow professionale simile ai team reali</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="text-danger">Svantaggi</h4>
+                                <ul>
+                                    <li>Passaggio di compilazione in piu</li>
+                                    <li>Nesting eccessivo puo complicare il debug</li>
+                                    <li>Richiede ordine nella struttura dei file</li>
+                                    <li>Se usato male genera CSS inutile o troppo specifico</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigazione Pagine -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="css-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Guida CSS
+                    </a>
+                    <a href="bootstrap-guide.html" class="btn btn-primary">
+                        Bootstrap <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-code-slash"></i> Web Design Guide</h5>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2025 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Attiva/disattiva tema scuro">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-scss.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sass.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

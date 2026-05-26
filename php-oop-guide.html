@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP OOP - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #4f5b93 0%, #6070ad 100%);">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-boxes"></i> PHP OOP - Programmazione a Oggetti</h1>
+            <p class="lead">Classi, oggetti, ereditarieta e principi per scrivere codice riusabile</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#introduzione">Introduzione</a>
+                        <a class="nav-link" href="#classi-oggetti">Classi e Oggetti</a>
+                        <a class="nav-link" href="#costruttore">Costruttore</a>
+                        <a class="nav-link" href="#visibilita">Visibilita</a>
+                        <a class="nav-link" href="#ereditarieta">Ereditarieta</a>
+                        <a class="nav-link" href="#interfacce">Interfacce e Trait</a>
+                        <a class="nav-link" href="#statico">Metodi statici</a>
+                        <a class="nav-link" href="#js-confronto">Confronto con JavaScript</a>
+                        <a class="nav-link" href="#best-practice">Best Practice</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+
+                <section id="introduzione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-info-circle"></i> Perche OOP in PHP</h2>
+                    <div class="content-box">
+                        <p>La programmazione a oggetti (OOP) aiuta a organizzare progetti grandi: separa responsabilita, rende il codice riusabile e facilita manutenzione e test.</p>
+                        <div class="alert alert-primary">
+                            <i class="bi bi-lightbulb"></i>
+                            <strong>Idea chiave:</strong> un oggetto combina dati (proprieta) e comportamenti (metodi).
+                        </div>
+                    </div>
+                </section>
+
+                <section id="classi-oggetti" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-box"></i> Classi e Oggetti</h2>
+                    <div class="content-box">
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+class Studente {
+    public string $nome;
+
+    public function saluta(): string {
+        return "Ciao, sono " . $this-&gt;nome;
+    }
+}
+
+$studente = new Studente();
+$studente-&gt;nome = "Giulia";
+
+echo $studente-&gt;saluta();
+?&gt;</code></pre>
+                        </div>
+                        <p class="mt-3">La classe e un modello. L'oggetto e una istanza concreta creata con <code>new</code>.</p>
+                    </div>
+                </section>
+
+                <section id="costruttore" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-hammer"></i> Costruttore e Inizializzazione</h2>
+                    <div class="content-box">
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+class Corso {
+    public function __construct(
+        public string $titolo,
+        public int $anno
+    ) {}
+}
+
+$corso = new Corso("Web Design 2", 2026);
+echo $corso-&gt;titolo;
+?&gt;</code></pre>
+                        </div>
+                        <p class="mt-3">Il costruttore <code>__construct</code> viene eseguito quando crei un oggetto.</p>
+                    </div>
+                </section>
+
+                <section id="visibilita" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-shield-lock"></i> Visibilita: public, protected, private</h2>
+                    <div class="content-box">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Keyword</th>
+                                        <th>Accessibile da</th>
+                                        <th>Uso tipico</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>public</strong></td>
+                                        <td>Ovunque</td>
+                                        <td>API della classe</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>protected</strong></td>
+                                        <td>Classe e sottoclassi</td>
+                                        <td>Dettagli condivisi in ereditarieta</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>private</strong></td>
+                                        <td>Solo nella classe stessa</td>
+                                        <td>Incapsulamento dati sensibili</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+class Account {
+    private float $saldo = 0;
+
+    public function deposita(float $importo): void {
+        if ($importo &gt; 0) {
+            $this-&gt;saldo += $importo;
+        }
+    }
+
+    public function getSaldo(): float {
+        return $this-&gt;saldo;
+    }
+}
+?&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="ereditarieta" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-diagram-3"></i> Ereditarieta e Polimorfismo</h2>
+                    <div class="content-box">
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+class Utente {
+    public function ruolo(): string {
+        return "utente";
+    }
+}
+
+class Admin extends Utente {
+    public function ruolo(): string {
+        return "admin";
+    }
+}
+
+function stampaRuolo(Utente $u): void {
+    echo $u-&gt;ruolo();
+}
+
+stampaRuolo(new Utente());
+stampaRuolo(new Admin());
+?&gt;</code></pre>
+                        </div>
+                        <p class="mt-3">Con il polimorfismo usi lo stesso contratto su oggetti diversi.</p>
+                    </div>
+                </section>
+
+                <section id="interfacce" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-link-45deg"></i> Interfacce e Trait</h2>
+                    <div class="content-box">
+                        <h4>Interfacce</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+interface Renderable {
+    public function render(): string;
+}
+
+class Card implements Renderable {
+    public function render(): string {
+        return "&lt;div&gt;Card&lt;/div&gt;";
+    }
+}
+?&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Trait</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+trait Loggable {
+    public function log(string $msg): void {
+        echo "[LOG] " . $msg;
+    }
+}
+
+class Servizio {
+    use Loggable;
+}
+?&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="statico" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-gear"></i> Metodi e Proprieta Statiche</h2>
+                    <div class="content-box">
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+class Config {
+    public static string $env = "production";
+
+    public static function isProd(): bool {
+        return self::$env === "production";
+    }
+}
+
+echo Config::isProd() ? "Prod" : "Dev";
+?&gt;</code></pre>
+                        </div>
+                        <p class="mt-3">Gli elementi statici appartengono alla classe, non alla singola istanza.</p>
+                    </div>
+                </section>
+
+                <section id="js-confronto" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-columns-gap"></i> Confronto OOP: JavaScript vs PHP</h2>
+                    <div class="content-box">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>JavaScript</h5>
+                                <div class="code-example">
+                                    <pre><code class="language-javascript">class Studente {
+  constructor(nome) {
+    this.nome = nome;
+  }
+
+  saluta() {
+    return `Ciao ${this.nome}`;
+  }
+}</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>PHP</h5>
+                                <div class="code-example">
+                                    <pre><code class="language-php">&lt;?php
+class Studente {
+    public function __construct(public string $nome) {}
+
+    public function saluta(): string {
+        return "Ciao " . $this-&gt;nome;
+    }
+}
+?&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <i class="bi bi-info-circle"></i>
+                            <strong>Nota didattica:</strong> in JavaScript gli studenti hanno gia visto classi lato browser; in PHP le applichiamo a logica server, modelli dati e servizi.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="best-practice" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-check2-square"></i> Best Practice OOP</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li>Una classe, una responsabilita chiara.</li>
+                            <li>Preferisci composizione a ereditarieta quando possibile.</li>
+                            <li>Tipizza parametri e ritorni (strict typing quando adatto).</li>
+                            <li>Evita classi monolitiche con troppi compiti.</li>
+                            <li>Struttura il progetto con cartelle dedicate (Models, Services, Controllers).</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="php-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> PHP Base
+                    </a>
+                    <a href="php-mvc-guide.html" class="btn btn-primary">
+                        PHP MVC <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-code-slash"></i> Web Design Guide</h5>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2025 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="theme-toggle" class="theme-toggle" aria-label="Attiva/disattiva tema scuro">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

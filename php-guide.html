@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida PHP - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Page Header -->
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #4f5b93 0%, #7a86b8 100%);">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-filetype-php"></i> Guida PHP</h1>
+            <p class="lead">Backend web da zero: sintassi, server-side e confronto con JavaScript</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#introduzione">Introduzione</a>
+                        <a class="nav-link" href="#setup">Setup locale</a>
+                        <a class="nav-link" href="#sintassi">Sintassi base</a>
+                        <a class="nav-link" href="#array-oggetti">Array e Strutture dati</a>
+                        <a class="nav-link" href="#form">Form e Request</a>
+                        <a class="nav-link" href="#sessioni">Sessioni e Cookie</a>
+                        <a class="nav-link" href="#db">PHP e Database</a>
+                        <a class="nav-link" href="#api">API in PHP</a>
+                        <a class="nav-link" href="#js-vs-php">JavaScript vs PHP</a>
+                        <a class="nav-link" href="#pro-contro">Pro e Contro</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+
+                <section id="introduzione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-info-circle"></i> Introduzione a PHP</h2>
+                    <div class="content-box">
+                        <p>PHP e un linguaggio server-side: il codice viene eseguito sul server e il browser riceve solo il risultato (HTML, JSON, file, ecc.).</p>
+                        <div class="alert alert-primary">
+                            <i class="bi bi-diagram-2"></i>
+                            <strong>Flusso base:</strong> Browser invia richiesta -> PHP elabora -> server risponde con contenuto.
+                        </div>
+
+                        <h4>Dove si usa PHP oggi</h4>
+                        <ul>
+                            <li>Siti dinamici e pannelli admin</li>
+                            <li>WordPress (gran parte del web)</li>
+                            <li>Applicazioni MVC con Laravel o Symfony</li>
+                            <li>API REST e servizi backend</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="setup" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-hdd-network"></i> Setup con Hosting (Netsons) e Sviluppo Locale</h2>
+                    <div class="content-box">
+                        <p>Nel vostro percorso avete lavorato su hosting gratuito Netsons: ottimo per vedere subito PHP in ambiente reale.</p>
+                        <div class="code-example">
+                            <pre><code class="language-bash"># esempio URL su hosting (indicativo)
+https://tuo-sito.netsons.org/esempio.php</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Alternativa consigliata: server locale per sviluppo</h4>
+                        <p>Per sviluppare e testare piu velocemente, puoi usare un server locale con XAMPP, MAMP, Laragon o stack equivalente.</p>
+                        <div class="code-example">
+                            <pre><code class="language-bash"># esempio URL locale
+http://localhost/progetto-php/esempio.php</code></pre>
+                        </div>
+
+                        <h4>Primo file PHP</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+// esempio.php
+echo "Ciao dal server PHP!";
+?&gt;</code></pre>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="bi bi-lightbulb"></i>
+                            <strong>Nota:</strong> un file .php aperto direttamente con doppio click non esegue PHP. Deve passare da un server (hosting o locale).
+                        </div>
+                    </div>
+                </section>
+
+                <section id="sintassi" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-braces"></i> Sintassi Base</h2>
+                    <div class="content-box">
+                        <h4>Variabili e tipi</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+$nome = "Mario";       // string
+$eta = 25;              // int
+$altezza = 1.75;        // float
+$isStudente = true;     // bool
+
+// concatenazione stringhe
+echo "Nome: " . $nome;
+?&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Condizionali e cicli</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+if ($eta >= 18) {
+    echo "Maggiorenne";
+} else {
+    echo "Minorenne";
+}
+
+for ($i = 0; $i < 3; $i++) {
+    echo "Numero: $i &lt;br&gt;";
+}
+?&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Funzioni</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+function saluta(string $nome): string {
+    return "Ciao " . $nome;
+}
+
+echo saluta("Sara");
+?&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="array-oggetti" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-collection"></i> Array e Strutture Dati</h2>
+                    <div class="content-box">
+                        <h4>Array indicizzati</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+$colori = ["rosso", "verde", "blu"];
+echo $colori[1]; // verde
+?&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Array associativi (simili agli oggetti JS)</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+$studente = [
+    "nome" =&gt; "Luca",
+    "corso" =&gt; "Web Design 2",
+    "anno" =&gt; 2
+];
+
+echo $studente["nome"];
+?&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Loop foreach</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+foreach ($studente as $chiave =&gt; $valore) {
+    echo "$chiave: $valore &lt;br&gt;";
+}
+?&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="form" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-ui-checks"></i> Form e Request HTTP</h2>
+                    <div class="content-box">
+                        <p>PHP gestisce facilmente i dati inviati da form HTML tramite <code>$_GET</code> e <code>$_POST</code>.</p>
+
+                        <h4>HTML form</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;form action="salva.php" method="post"&gt;
+  &lt;input type="text" name="nome" /&gt;
+  &lt;button type="submit"&gt;Invia&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">salva.php</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+$nome = $_POST["nome"] ?? "";
+$nomePulito = htmlspecialchars(trim($nome));
+
+echo "Hai inviato: " . $nomePulito;
+?&gt;</code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-3">
+                            <i class="bi bi-shield-exclamation"></i>
+                            <strong>Sicurezza:</strong> valida sempre input utente e sanitizza output HTML per prevenire XSS.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="sessioni" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-person-lock"></i> Sessioni e Cookie</h2>
+                    <div class="content-box">
+                        <h4>Sessione</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+session_start();
+
+$_SESSION["utente"] = "admin";
+echo $_SESSION["utente"];
+?&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Cookie</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+setcookie("tema", "dark", time() + 3600, "/");
+
+echo $_COOKIE["tema"] ?? "cookie non impostato";
+?&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="db" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-database"></i> PHP e Database (PDO)</h2>
+                    <div class="content-box">
+                        <p>Con PDO puoi connetterti a MySQL in modo sicuro e moderno.</p>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+$pdo = new PDO("mysql:host=localhost;dbname=scuola;charset=utf8mb4", "root", "");
+$pdo-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$stmt = $pdo-&gt;prepare("SELECT id, nome FROM studenti WHERE corso = :corso");
+$stmt-&gt;execute(["corso" =&gt; "Web Design 2"]);
+$studenti = $stmt-&gt;fetchAll(PDO::FETCH_ASSOC);
+
+header("Content-Type: application/json");
+echo json_encode($studenti);
+?&gt;</code></pre>
+                        </div>
+
+                        <div class="alert alert-success mt-3">
+                            <i class="bi bi-check-circle"></i>
+                            <strong>Best practice:</strong> usa sempre query preparate per prevenire SQL Injection.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="api" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-cloud-arrow-up"></i> Mini API con PHP</h2>
+                    <div class="content-box">
+                        <p>PHP puo rispondere in JSON, quindi puo essere backend di app frontend in JavaScript.</p>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+header("Content-Type: application/json");
+
+$data = [
+    "status" =&gt; "ok",
+    "messaggio" =&gt; "API PHP attiva",
+    "timestamp" =&gt; date("c")
+];
+
+echo json_encode($data);
+?&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Fetch da JavaScript</h4>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">fetch("/api/stato.php")
+  .then(res => res.json())
+  .then(data => console.log(data));</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="js-vs-php" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-columns-gap"></i> JavaScript vs PHP</h2>
+                    <div class="content-box">
+                        <p>Gli studenti conoscono gia JavaScript: qui la differenza principale e <strong>dove gira il codice</strong>.</p>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Aspetto</th>
+                                        <th>JavaScript</th>
+                                        <th>PHP</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Esecuzione</strong></td>
+                                        <td>Browser (client-side) oppure server con Node.js</td>
+                                        <td>Server-side (Apache/Nginx + PHP runtime)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Uso tipico nel corso</strong></td>
+                                        <td>Interattivita UI, DOM, fetch API</td>
+                                        <td>Form processing, auth, DB, pagine dinamiche</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Accesso diretto al DOM</strong></td>
+                                        <td>Si, nativo</td>
+                                        <td>No, genera output HTML prima dell'invio</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Deploy semplice</strong></td>
+                                        <td>Molto semplice per siti statici</td>
+                                        <td>Semplice su hosting condiviso (molto diffuso)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mercato locale agenzie</strong></td>
+                                        <td>Molto richiesto su frontend moderno</td>
+                                        <td>Molto richiesto con WordPress/Laravel</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 class="mt-4">Esempio equivalente</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>JavaScript (client)</h5>
+                                <div class="code-example">
+                                    <pre><code class="language-javascript">const nome = "Marta";
+document.getElementById("out").textContent = `Ciao ${nome}`;</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>PHP (server)</h5>
+                                <div class="code-example">
+                                    <pre><code class="language-php">&lt;?php
+$nome = "Marta";
+echo "&lt;p&gt;Ciao $nome&lt;/p&gt;";
+?&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="pro-contro" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-bar-chart"></i> Pro e Contro di PHP</h2>
+                    <div class="content-box">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="text-success">Vantaggi</h4>
+                                <ul>
+                                    <li>Hosting economico e diffusissimo</li>
+                                    <li>Stack maturo per CMS e siti dinamici</li>
+                                    <li>Curva iniziale accessibile</li>
+                                    <li>Framework solidi come Laravel</li>
+                                    <li>Ottimo per CRUD e pannelli admin</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="text-danger">Svantaggi</h4>
+                                <ul>
+                                    <li>Storicamente codice legacy eterogeneo</li>
+                                    <li>Qualita del progetto dipende molto dalle pratiche adottate</li>
+                                    <li>Meno uniforme tra versioni vecchie e moderne</li>
+                                    <li>Esperienza realtime meno immediata rispetto a stack JS dedicati</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <i class="bi bi-compass"></i>
+                            <strong>Conclusione didattica:</strong> JavaScript e PHP non sono rivali assoluti. In molti progetti lavorano insieme: JS per l'interfaccia, PHP per logica server e database.
+                        </div>
+
+                        <div class="alert alert-primary mt-3">
+                            <i class="bi bi-bookmark-star"></i>
+                            <strong>Approfondimenti consigliati:</strong>
+                            <a href="php-oop-guide.html" class="alert-link">PHP OOP</a> e
+                            <a href="php-mvc-guide.html" class="alert-link">PHP MVC</a>.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigazione Pagine -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="javascript-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> JavaScript
+                    </a>
+                    <a href="php-oop-guide.html" class="btn btn-primary">
+                        PHP OOP <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-code-slash"></i> Web Design Guide</h5>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2025 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Attiva/disattiva tema scuro">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

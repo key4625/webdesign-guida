@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP MVC - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #3d4a82 0%, #5968a5 100%);">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-diagram-2"></i> PHP MVC - Architettura Model View Controller</h1>
+            <p class="lead">Organizzare un progetto PHP in livelli chiari e manutenibili</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#introduzione">Introduzione</a>
+                        <a class="nav-link" href="#cos-e-mvc">Cos'e MVC</a>
+                        <a class="nav-link" href="#ruoli">Ruoli M V C</a>
+                        <a class="nav-link" href="#flusso">Flusso richiesta</a>
+                        <a class="nav-link" href="#struttura">Struttura cartelle</a>
+                        <a class="nav-link" href="#mini-esempio">Mini esempio completo</a>
+                        <a class="nav-link" href="#routing">Routing base</a>
+                        <a class="nav-link" href="#pro-contro">Pro e Contro</a>
+                        <a class="nav-link" href="#js-confronto">Confronto con JavaScript</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+
+                <section id="introduzione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-info-circle"></i> Introduzione</h2>
+                    <div class="content-box">
+                        <p>MVC e un pattern architetturale che separa dati, logica e interfaccia. In PHP e fondamentale quando il progetto cresce oltre pagine sparse con codice misto.</p>
+                        <div class="alert alert-primary">
+                            <i class="bi bi-lightbulb"></i>
+                            <strong>Obiettivo:</strong> evitare file "tutto in uno" difficili da mantenere.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="cos-e-mvc" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-layers"></i> Cos'e MVC</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li><strong>Model:</strong> rappresenta i dati e dialoga con il database.</li>
+                            <li><strong>View:</strong> mostra HTML all'utente.</li>
+                            <li><strong>Controller:</strong> riceve la richiesta, coordina model e view.</li>
+                        </ul>
+
+                        <div class="code-example">
+                            <pre><code class="language-text">Browser -> Router -> Controller -> Model -> Controller -> View -> Browser</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="ruoli" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-person-workspace"></i> Ruoli di Model, View e Controller</h2>
+                    <div class="content-box">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Layer</th>
+                                        <th>Responsabilita</th>
+                                        <th>Non dovrebbe fare</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Model</strong></td>
+                                        <td>Query DB, regole dati, validazioni dominio</td>
+                                        <td>Stampare HTML</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>View</strong></td>
+                                        <td>Render HTML e output</td>
+                                        <td>Fare query SQL</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Controller</strong></td>
+                                        <td>Gestire request/response e orchestrare flusso</td>
+                                        <td>Contenere logica SQL estesa</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="flusso" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-arrow-repeat"></i> Flusso di una Richiesta</h2>
+                    <div class="content-box">
+                        <ol>
+                            <li>L'utente visita <code>/studenti</code>.</li>
+                            <li>Il router invia la richiesta a <code>StudenteController@index</code>.</li>
+                            <li>Il controller chiede i dati al model <code>Studente</code>.</li>
+                            <li>Il controller passa i dati alla view.</li>
+                            <li>La view genera HTML e lo invia al browser.</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="struttura" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-folder2-open"></i> Struttura Cartelle Consigliata</h2>
+                    <div class="content-box">
+                        <div class="code-example">
+                            <pre><code class="language-bash">progetto-php/
+  public/
+    index.php
+  app/
+    Controllers/
+      StudenteController.php
+    Models/
+      Studente.php
+    Views/
+      studenti-index.php
+  routes/
+    web.php</code></pre>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <i class="bi bi-info-circle"></i>
+                            <strong>Nota:</strong> la cartella public contiene il punto di ingresso, il resto del codice rimane separato e ordinato.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="mini-esempio" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-code-square"></i> Mini Esempio Completo</h2>
+                    <div class="content-box">
+                        <h4>Model</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+class Studente {
+    public static function all(): array {
+        return [
+            ["nome" =&gt; "Anna"],
+            ["nome" =&gt; "Marco"],
+            ["nome" =&gt; "Luca"]
+        ];
+    }
+}
+?&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Controller</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+class StudenteController {
+    public function index(): void {
+        $studenti = Studente::all();
+        require __DIR__ . '/../Views/studenti-index.php';
+    }
+}
+?&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">View</h4>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;h2&gt;Elenco Studenti&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;?php foreach ($studenti as $s): ?&gt;
+    &lt;li&gt;&lt;?= htmlspecialchars($s['nome']) ?&gt;&lt;/li&gt;
+  &lt;?php endforeach; ?&gt;
+&lt;/ul&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="routing" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-signpost-split"></i> Routing Base</h2>
+                    <div class="content-box">
+                        <p>Un router minimale puo basarsi su path della URL:</p>
+                        <div class="code-example">
+                            <pre><code class="language-php">&lt;?php
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+if ($path === '/studenti') {
+    (new StudenteController())-&gt;index();
+} else {
+    http_response_code(404);
+    echo 'Pagina non trovata';
+}
+?&gt;</code></pre>
+                        </div>
+                        <p class="mt-3">Nei framework (Laravel, Symfony) il routing e molto piu potente ma il principio resta lo stesso.</p>
+                    </div>
+                </section>
+
+                <section id="pro-contro" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-bar-chart"></i> Pro e Contro di MVC</h2>
+                    <div class="content-box">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="text-success">Vantaggi</h4>
+                                <ul>
+                                    <li>Codice piu ordinato e leggibile</li>
+                                    <li>Facile manutenzione in team</li>
+                                    <li>Separazione netta delle responsabilita</li>
+                                    <li>Scalabilita migliore nei progetti medi/grandi</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="text-danger">Svantaggi</h4>
+                                <ul>
+                                    <li>Setup iniziale piu lungo</li>
+                                    <li>Piu file da gestire rispetto a script semplici</li>
+                                    <li>Serve disciplina architetturale</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="js-confronto" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-columns-gap"></i> Confronto con JavaScript</h2>
+                    <div class="content-box">
+                        <p>Gli studenti hanno gia visto separazione logica/UI in JavaScript (componenti, moduli, fetch). MVC in PHP applica lo stesso principio lato server.</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Concetto</th>
+                                        <th>Frontend JS</th>
+                                        <th>Backend PHP MVC</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>UI</strong></td>
+                                        <td>Componenti HTML/JSX</td>
+                                        <td>View PHP/Blade/Twig</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Dati</strong></td>
+                                        <td>State, API response</td>
+                                        <td>Model e query DB</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Coordinamento</strong></td>
+                                        <td>Event handler / store</td>
+                                        <td>Controller e routing</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="php-oop-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> PHP OOP
+                    </a>
+                    <a href="best-practices.html" class="btn btn-primary">
+                        Best Practices <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-code-slash"></i> Web Design Guide</h5>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2025 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="theme-toggle" class="theme-toggle" aria-label="Attiva/disattiva tema scuro">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>
