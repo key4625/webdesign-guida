@@ -20,15 +20,6 @@
     </div>
 
     <div class="container my-5">
-        <div class="alert alert-light border shadow-sm mb-4" role="note">
-            <h5 class="mb-3"><i class="bi bi-mortarboard"></i> Scheda Didattica</h5>
-            <div class="row small">
-                <div class="col-md-4"><strong>Obiettivo:</strong> scegliere il modello di layout corretto in base a contenuti e obiettivi.</div>
-                <div class="col-md-3"><strong>Prerequisiti:</strong> basi di grid, container e responsive design.</div>
-                <div class="col-md-2"><strong>Durata stimata:</strong> 60 min</div>
-                <div class="col-md-3"><strong>Output:</strong> scelta motivata di layout per almeno 2 scenari progettuali.</div>
-            </div>
-        </div>
         <div class="row">
             <div class="col-lg-3">
                 <div class="sticky-sidebar">
@@ -36,10 +27,14 @@
                     <nav class="nav flex-column nav-pills">
                         <a class="nav-link" href="#intro">1. Perche il layout conta</a>
                         <a class="nav-link" href="#pattern-z">2. Pattern a Z</a>
-                        <a class="nav-link" href="#sidebar">3. Layout con sidebar</a>
-                        <a class="nav-link" href="#fullwidth">4. Full width e container</a>
-                        <a class="nav-link" href="#footer">5. Footer architetturato</a>
-                        <a class="nav-link" href="#selezione">6. Come scegliere il modello</a>
+                        <a class="nav-link" href="#pattern-f">3. Pattern a F e layer-cake</a>
+                        <a class="nav-link" href="#sidebar">4. Layout con sidebar</a>
+                        <a class="nav-link" href="#split">5. Split-screen layout</a>
+                        <a class="nav-link" href="#card-grid">6. Card grid e bento</a>
+                        <a class="nav-link" href="#fullwidth">7. Full width e container</a>
+                        <a class="nav-link" href="#footer">8. Footer architetturato</a>
+                        <a class="nav-link" href="#tecnica">9. Tecniche CSS layout</a>
+                        <a class="nav-link" href="#selezione">10. Come scegliere il modello</a>
                     </nav>
                 </div>
             </div>
@@ -65,8 +60,25 @@
                     </div>
                 </section>
 
+                <section id="pattern-f" class="mb-5">
+                    <h2 class="section-title">3. Pattern a F e layer-cake</h2>
+                    <div class="content-box">
+                        <p>Le ricerche UX mostrano che molti utenti scansionano i contenuti in modo rapido. Due pattern utili da conoscere:</p>
+                        <ul>
+                            <li><strong>F-pattern:</strong> attenzione forte su prime righe e lato sinistro; rischio di perdita contenuti sulla destra.</li>
+                            <li><strong>Layer-cake:</strong> scansione per heading/subheading ben visibili, molto piu efficiente per testi lunghi.</li>
+                        </ul>
+                        <h4 class="mt-3">Implicazione progettuale</h4>
+                        <ul>
+                            <li>Inserisci le informazioni chiave nelle prime sezioni.</li>
+                            <li>Usa sottotitoli descrittivi e non generici.</li>
+                            <li>Segmenta il testo in blocchi brevi con liste e richiami visivi.</li>
+                        </ul>
+                    </div>
+                </section>
+
                 <section id="sidebar" class="mb-5">
-                    <h2 class="section-title">3. Layout con sidebar</h2>
+                    <h2 class="section-title">4. Layout con sidebar</h2>
                     <div class="content-box">
                         <p>Ideale per guide, documentazione, e-learning e dashboard.</p>
                         <ul>
@@ -77,8 +89,32 @@
                     </div>
                 </section>
 
+                <section id="split" class="mb-5">
+                    <h2 class="section-title">5. Split-screen layout</h2>
+                    <div class="content-box">
+                        <p>Divide lo schermo in due aree principali (testo/immagine o opzione A/opzione B).</p>
+                        <ul>
+                            <li>Ottimo per storytelling visuale e brand narrative.</li>
+                            <li>Funziona bene in hero section e pagine portfolio.</li>
+                            <li>Su mobile deve trasformarsi in stack verticale.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="card-grid" class="mb-5">
+                    <h2 class="section-title">6. Card grid e bento layout</h2>
+                    <div class="content-box">
+                        <p>Modello modulare adatto a contenuti eterogenei (servizi, articoli, feature, casi studio).</p>
+                        <ul>
+                            <li><strong>Card grid classico:</strong> ordinato, facile da scansionare, forte consistenza.</li>
+                            <li><strong>Bento layout:</strong> blocchi di dimensioni diverse, piu espressivo ma da gestire con attenzione.</li>
+                            <li>Richiede ritmo visivo: spaziature e allineamenti devono restare coerenti.</li>
+                        </ul>
+                    </div>
+                </section>
+
                 <section id="fullwidth" class="mb-5">
-                    <h2 class="section-title">4. Full width e container</h2>
+                    <h2 class="section-title">7. Full width e container</h2>
                     <div class="content-box">
                         <h4>Container</h4>
                         <p>Per contenuti testuali e leggibilita: imposta larghezza max controllata.</p>
@@ -92,7 +128,7 @@
                 </section>
 
                 <section id="footer" class="mb-5">
-                    <h2 class="section-title">5. Footer architetturato</h2>
+                    <h2 class="section-title">8. Footer architetturato</h2>
                     <div class="content-box">
                         <p>Il footer non e solo copyright: e un blocco di orientamento e fiducia.</p>
                         <ul>
@@ -104,8 +140,42 @@
                     </div>
                 </section>
 
+                                <section id="tecnica" class="mb-5">
+                                        <h2 class="section-title">9. Tecniche CSS layout (approfondimento)</h2>
+                                        <div class="content-box">
+                                                <h4>Grid responsiva auto-fit</h4>
+                                                <p>Pattern molto utile per creare griglie elastiche senza molte media query manuali.</p>
+                                                <div class="code-example">
+<pre><code class="language-css">.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}</code></pre>
+                                                </div>
+
+                                                <h4 class="mt-4">Layout editoriale con aree nominate</h4>
+                                                <div class="code-example">
+<pre><code class="language-css">.layout {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar content"
+        "footer footer";
+    grid-template-columns: 1fr 3fr;
+    gap: 20px;
+}
+
+.header  { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.content { grid-area: content; }
+.footer  { grid-area: footer; }</code></pre>
+                                                </div>
+                                                <p class="mt-3">Questo approccio aiuta molto quando il team deve leggere e mantenere la struttura nel tempo.</p>
+                                        </div>
+                                </section>
+
                 <section id="selezione" class="mb-5">
-                    <h2 class="section-title">6. Come scegliere il modello giusto</h2>
+                                        <h2 class="section-title">10. Come scegliere il modello giusto</h2>
                     <div class="content-box">
                         <table class="table table-bordered table-hover">
                             <thead class="table-dark">
@@ -136,9 +206,24 @@
                                     <td>Full width modulare</td>
                                     <td>Valorizza immagini e ritmo visivo</td>
                                 </tr>
+                                <tr>
+                                    <td>Blog o long-form content</td>
+                                    <td>Layer-cake con heading forti</td>
+                                    <td>Migliora scansione e accesso rapido alle sezioni</td>
+                                </tr>
+                                <tr>
+                                    <td>Homepage SaaS / prodotto</td>
+                                    <td>Card grid + blocchi bento</td>
+                                    <td>Mostra feature multiple con gerarchia visiva</td>
+                                </tr>
+                                <tr>
+                                    <td>Campagna visual / branding</td>
+                                    <td>Split-screen + full-width sezioni</td>
+                                    <td>Massimizza impatto visivo e storytelling</td>
+                                </tr>
                             </tbody>
                         </table>
-                        <div class="alert alert-success">Compito: disegna due wireframe dello stesso contenuto usando due modelli diversi e confronta i risultati.</div>
+                        <div class="alert alert-success">Approccio consigliato: seleziona layout in base a obiettivo utente, densita contenuto e priorita mobile.</div>
                     </div>
                 </section>
             </div>
@@ -152,6 +237,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="js/navbar.js"></script>
 </body>
 </html>
