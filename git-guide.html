@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida Git e GitHub Pages - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #1f2937 0%, #0f172a 100%); border-bottom: 5px solid #f59e0b;">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-git"></i> Guida Git e GitHub Pages</h1>
+            <p class="lead">Versionare il codice, lavorare meglio in team e pubblicare i progetti online</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#cos-e-git">1. Cos'e Git</a>
+                        <a class="nav-link" href="#perche-serve">2. Perche e utile</a>
+                        <a class="nav-link" href="#workflow-base">3. Workflow base</a>
+                        <a class="nav-link" href="#primo-repo">4. Primo repository</a>
+                        <a class="nav-link" href="#github-pages">5. GitHub Pages</a>
+                        <a class="nav-link" href="#consigli">6. Consigli pratici</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <section id="cos-e-git" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-question-circle"></i> 1. Cos'e Git</h2>
+                    <div class="content-box">
+                        <p><strong>Git</strong> e un sistema di controllo versione. In pratica, salva la storia del tuo progetto nel tempo.</p>
+                        <p>Ogni volta che fai un cambiamento importante, puoi creare uno "snapshot" del codice. Se qualcosa si rompe, puoi tornare indietro in modo sicuro.</p>
+                        <div class="alert alert-info mt-3">
+                            <i class="bi bi-lightbulb"></i>
+                            Pensa a Git come a una macchina del tempo per i tuoi file.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="perche-serve" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-check2-circle"></i> 2. Perche e utile nei progetti</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li>Ti permette di lavorare senza paura di perdere versioni funzionanti.</li>
+                            <li>Aiuta il lavoro di gruppo: ognuno puo lavorare su parti diverse.</li>
+                            <li>Rende chiaro cosa e cambiato e quando.</li>
+                            <li>Si integra con GitHub per avere backup online e collaborazione.</li>
+                            <li>Ti permette di pubblicare facilmente progetti statici con GitHub Pages.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="workflow-base" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-arrow-repeat"></i> 3. Workflow base: add, commit, push</h2>
+                    <div class="content-box">
+                        <p>Il ciclo minimo che userai piu spesso e questo:</p>
+<pre class="mb-3"><code class="language-bash">git add .
+git commit -m "Messaggio chiaro del cambiamento"
+git push origin master</code></pre>
+                        <p><strong>git add</strong>: prepara i file modificati.</p>
+                        <p><strong>git commit</strong>: salva localmente una versione con descrizione.</p>
+                        <p><strong>git push</strong>: invia i commit su GitHub.</p>
+                    </div>
+                </section>
+
+                <section id="primo-repo" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-folder-plus"></i> 4. Avviare il primo repository</h2>
+                    <div class="content-box">
+                        <p>Se parti da un progetto locale, questi sono i passaggi base:</p>
+<pre class="mb-3"><code class="language-bash">git init
+git add .
+git commit -m "Primo commit"
+git branch -M master
+git remote add origin https://github.com/USERNAME/NOME-REPO.git
+git push -u origin master</code></pre>
+                        <p>Dopo il primo push, il tuo progetto e online su GitHub.</p>
+                    </div>
+                </section>
+
+                <section id="github-pages" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-globe"></i> 5. Pubblicare con GitHub Pages</h2>
+                    <div class="content-box">
+                        <p>GitHub Pages ti permette di pubblicare un sito statico direttamente da un repository.</p>
+                        <ol>
+                            <li>Rendi il repository pubblico su GitHub.</li>
+                            <li>Vai in Settings > Pages.</li>
+                            <li>In Build and deployment scegli Deploy from a branch.</li>
+                            <li>Seleziona branch master (o main) e cartella root.</li>
+                            <li>Salva e attendi 1-3 minuti.</li>
+                        </ol>
+                        <p>URL tipico di pubblicazione:</p>
+<pre><code class="language-text">https://username.github.io/nome-repository/</code></pre>
+                        <div class="alert alert-success mt-3">
+                            <i class="bi bi-rocket-takeoff"></i>
+                            Ottimo per portfolio, progetti di corso, esercitazioni e demo per colloqui.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="consigli" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-journal-check"></i> 6. Consigli pratici per studenti</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li>Fai commit piccoli e frequenti, non uno solo a fine giornata.</li>
+                            <li>Scrivi messaggi commit chiari: cosa hai fatto e perche.</li>
+                            <li>Prima di iniziare una nuova lezione, fai pull per allinearti.</li>
+                            <li>Usa GitHub Pages per mostrare i progetti senza bisogno di server.</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-0">Manuale Web Design - Guida Git e GitHub Pages &copy; 2026</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", function() {
             id: 'navbarDropdownCSS',
             dropdown: [
                 { text: 'Guida CSS Base', url: pathPrefix + 'css-guide.html' },
+                { text: 'Bootstrap', url: pathPrefix + 'bootstrap-guide.html' },
                 { text: 'SCSS, SASS e Compilatori', url: pathPrefix + 'scss-sass-guide.html' }
             ]
         },
-        { text: 'Bootstrap', url: pathPrefix + 'bootstrap-guide.html' },
         { 
             text: 'JavaScript', 
             id: 'navbarDropdownJS',
@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 { text: 'API & CRUD', url: pathPrefix + 'javascript-api-crud.html' },
                 { text: 'Web Components', url: pathPrefix + 'web-components-guide.html' },
                 { separator: true },
-                { text: 'Vue.js', url: pathPrefix + 'vue-guide.html' },
                 { text: 'React', url: pathPrefix + 'react-guide.html' },
+                { text: 'Next.js', url: pathPrefix + 'nextjs-guide.html' },
                 { text: 'GSAP', url: pathPrefix + 'gsap-guide.html' },
                 { separator: true },
                 { text: 'E dopo? 🗺️', url: pathPrefix + 'roadmap-guide.html' }
@@ -42,35 +42,47 @@ document.addEventListener("DOMContentLoaded", function() {
                 { text: 'PHP MVC (Architettura)', url: pathPrefix + 'php-mvc-guide.html' }
             ]
         },
+        {
+            text: 'Altro',
+            id: 'navbarDropdownOther',
+            dropdown: [
+                { text: 'Best Practices', url: pathPrefix + 'best-practices.html' },
+                { text: 'Guida Git e GitHub Pages', url: pathPrefix + 'git-guide.html' }
+            ]
+        },
         { text: 'Esercizi', url: pathPrefix + 'esempi/index.html' },
-        { text: 'Best Practices', url: pathPrefix + 'best-practices.html' }
     ];
 
     // Ottieni il nome del file corrente
     const path = window.location.pathname;
     const page = path.split("/").pop() || 'index.html'; // Default a index.html se root
 
-    // Configurazione specifica per Vue.js e React
-    const isVuePage = page === 'vue-guide.html';
+    // Configurazione specifica per alcune guide
     const isReactPage = page === 'react-guide.html';
+    const isNextPage = page === 'nextjs-guide.html';
     const isGsapPage = page === 'gsap-guide.html';
+    const isGitPage = page === 'git-guide.html';
     
     let navbarClass = 'navbar-dark bg-primary';
     let navbarStyle = '';
     let iconClass = '';
 
-    if (isVuePage) {
-        navbarClass = 'navbar-dark bg-dark';
-        navbarStyle = 'style="border-bottom: 3px solid var(--vue-green);"';
-        iconClass = ' text-vue';
-    } else if (isReactPage) {
+    if (isReactPage) {
         navbarClass = 'navbar-dark bg-dark';
         navbarStyle = 'style="border-bottom: 3px solid var(--react-blue);"';
         iconClass = ' text-react';
+    } else if (isNextPage) {
+        navbarClass = 'navbar-dark bg-dark';
+        navbarStyle = 'style="border-bottom: 3px solid #00c2ff;"';
+        iconClass = ' text-info';
     } else if (isGsapPage) {
         navbarClass = 'navbar-dark bg-dark';
         navbarStyle = 'style="border-bottom: 3px solid #88ce02;"';
         iconClass = ' text-success';
+    } else if (isGitPage) {
+        navbarClass = 'navbar-dark bg-dark';
+        navbarStyle = 'style="border-bottom: 3px solid #f59e0b;"';
+        iconClass = ' text-warning';
     }
 
     // Genera l'HTML dei link

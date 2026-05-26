@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida Next.js - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --next-black: #111111;
+            --next-gray: #1f1f1f;
+            --next-accent: #00c2ff;
+        }
+
+        .bg-next {
+            background: linear-gradient(135deg, #0e0e0e 0%, #202020 100%);
+            color: #ffffff;
+            border-bottom: 3px solid var(--next-accent);
+        }
+
+        .text-next {
+            color: #0b7fc0;
+        }
+
+        [data-bs-theme="dark"] .text-next {
+            color: var(--next-accent);
+        }
+
+        .next-badge {
+            background-color: var(--next-black);
+            color: var(--next-accent);
+            border: 1px solid var(--next-accent);
+            padding: 0.25em 0.6em;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-right: 0.5rem;
+        }
+
+        .next-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <header class="bg-next py-5 mb-4">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold"><i class="bi bi-triangle"></i> Guida Next.js</h1>
+            <p class="lead mb-0">Primi passi pratici: installazione, avvio e sviluppo della prima mini-app</p>
+        </div>
+    </header>
+
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-lg-3 mb-4">
+                <div class="list-group sticky-top" style="top: 100px;">
+                                        <a href="#intro" class="list-group-item list-group-item-action fw-bold active">Cos'e Next.js</a>
+                                        <a href="#prerequisiti" class="list-group-item list-group-item-action">Prerequisiti</a>
+                                        <a href="#setup" class="list-group-item list-group-item-action">Creazione App</a>
+                                        <a href="#prima-modifica" class="list-group-item list-group-item-action">Prima Modifica</a>
+                                        <a href="#primo-componente" class="list-group-item list-group-item-action">Primo Componente</a>
+                                        <a href="#prima-pagina" class="list-group-item list-group-item-action">Prima Nuova Pagina</a>
+                                        <a href="#next-step" class="list-group-item list-group-item-action">Passo Successivo</a>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <section id="intro" class="mb-5">
+                                        <span class="badge bg-dark mb-2">Lezione 1</span>
+                                        <h2 class="display-6 fw-bold text-next">Cos'e Next.js (in parole semplici)</h2>
+                    <hr>
+                                        <p class="lead">Next.js e React con una struttura gia pronta per lavorare meglio su progetti reali.</p>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card next-card h-100">
+                                <div class="card-body">
+                                                                        <h5><i class="bi bi-folder2-open"></i> Struttura ordinata</h5>
+                                                                        <p class="mb-0">Cartelle e file seguono regole semplici: capisci subito dove mettere pagine e componenti.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card next-card h-100">
+                                <div class="card-body">
+                                                                        <h5><i class="bi bi-lightning-charge"></i> Avvio rapido</h5>
+                                                                        <p class="mb-0">Con un solo comando ottieni un progetto funzionante e puoi iniziare a sviluppare subito.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                                <section id="prerequisiti" class="mb-5">
+                                        <h3><span class="next-badge">Step 0</span>Prerequisiti</h3>
+                                        <p>Prima di iniziare ti servono solo due strumenti:</p>
+                                        <ul>
+                                                <li><strong>Node.js LTS</strong> installato (include npm)</li>
+                                                <li><strong>VS Code</strong> come editor</li>
+                                        </ul>
+                                        <div class="alert alert-info">
+                                                <i class="bi bi-info-circle"></i> Verifica da terminale: <code>node -v</code> e <code>npm -v</code>.
+                                        </div>
+                                </section>
+
+                <section id="setup" class="mb-5">
+                                        <h3><span class="next-badge">Step 1</span>Creazione progetto guidata</h3>
+                                        <p>Apri il terminale e crea la prima app:</p>
+<pre><code class="language-bash">npx create-next-app@latest my-next-app
+cd my-next-app
+npm run dev</code></pre>
+                                        <p>Durante la creazione puoi rispondere cosi (impostazione base per studenti):</p>
+<pre><code class="language-bash">TypeScript? No
+ESLint? Yes
+Tailwind CSS? No
+Use src/ directory? No
+Use App Router? Yes
+Customize import alias? No</code></pre>
+                                        <p>Quando parte il server, apri <strong>http://localhost:3000</strong>.</p>
+                </section>
+
+                                <section id="prima-modifica" class="mb-5">
+                                        <h3><span class="next-badge">Step 2</span>Prima modifica della homepage</h3>
+                                        <p>Apri il file <code>app/page.js</code> e sostituisci il contenuto con questo:</p>
+<pre><code class="language-javascript">export default function HomePage() {
+    return (
+        &lt;main style={{ padding: '2rem' }}&gt;
+            &lt;h1&gt;Ciao classe, questa e la nostra prima app Next.js&lt;/h1&gt;
+            &lt;p&gt;Sto modificando app/page.js e vedo subito il risultato.&lt;/p&gt;
+        &lt;/main&gt;
+    );
+}</code></pre>
+                                        <p>Salva il file e guarda il browser: aggiornamento immediato.</p>
+                                </section>
+
+                                <section id="primo-componente" class="mb-5">
+                                        <h3><span class="next-badge">Step 3</span>Crea il primo componente</h3>
+                                        <p>1. Crea una cartella <code>components</code>.</p>
+                                        <p>2. Crea il file <code>components/Saluto.js</code>:</p>
+<pre><code class="language-javascript">export default function Saluto({ nome }) {
+    return &lt;p&gt;Benvenuto, {nome}!&lt;/p&gt;;
+}</code></pre>
+                                        <p>3. Importalo in <code>app/page.js</code>:</p>
+<pre><code class="language-javascript">import Saluto from '../components/Saluto';
+
+export default function HomePage() {
+    return (
+        &lt;main style={{ padding: '2rem' }}&gt;
+            &lt;h1&gt;Prima pagina Next.js&lt;/h1&gt;
+            &lt;Saluto nome="Studente" /&gt;
+        &lt;/main&gt;
+    );
+}</code></pre>
+                                        <div class="alert alert-info">
+                                                <i class="bi bi-lightbulb"></i> Hai appena usato un componente React dentro Next.js.
+                    </div>
+                </section>
+
+                                <section id="prima-pagina" class="mb-5">
+                                        <h3><span class="next-badge">Step 4</span>Prima nuova pagina</h3>
+                                        <p>In Next.js una pagina nasce da una cartella + file <code>page.js</code>.</p>
+                                        <p>Crea il file <code>app/contatti/page.js</code>:</p>
+<pre><code class="language-javascript">export default function ContattiPage() {
+  return (
+        &lt;main style={{ padding: '2rem' }}&gt;
+            &lt;h2&gt;Pagina Contatti&lt;/h2&gt;
+            &lt;p&gt;Questa pagina e raggiungibile su /contatti&lt;/p&gt;
+        &lt;/main&gt;
+  );
+}</code></pre>
+                                        <p>Apri nel browser: <strong>http://localhost:3000/contatti</strong></p>
+                </section>
+
+                                <section id="next-step" class="mb-5">
+                                        <h3><span class="next-badge">Step 5</span>Primo mini-progetto per esercitarti</h3>
+                                        <p>Per consolidare, assegna questo esercizio agli studenti:</p>
+                                        <ol>
+                                                <li>Homepage con titolo del corso e breve descrizione.</li>
+                                                <li>Componente <code>CardStudente</code> riutilizzabile con nome e email.</li>
+                                                <li>Pagina <code>/contatti</code> con form base (solo UI).</li>
+                                        </ol>
+                    <div class="alert alert-success">
+                                                <i class="bi bi-check-circle"></i> Obiettivo lezione: saper avviare il progetto e costruire 2 pagine con componenti base.
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-0">Manuale Web Design - Guida Next.js &copy; 2026</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

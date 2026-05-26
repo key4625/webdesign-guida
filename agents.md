@@ -83,8 +83,8 @@ Manuale Web Design/
 | Bootstrap Icons | 1.11.1 | Icone SVG in tutto il sito |
 | Prism.js | 1.29.0 | Syntax highlighting negli esempi di codice |
 | GSAP | CDN latest | Animazioni nella guida GSAP |
-| Vue.js | CDN | Esempi nella guida Vue |
 | React + Babel | CDN | Esempi nella guida React |
+| Next.js | Guida didattica (concettuale) | Continuita del percorso React e meta-framework |
 
 Tutte le librerie vengono caricate via CDN, non ci sono dipendenze npm.
 
@@ -96,9 +96,9 @@ Tutte le librerie vengono caricate via CDN, non ci sono dipendenze npm.
 - Ogni pagina ha `<div id="navbar-container"></div>` nel body
 - `navbar.js` genera l'intera navbar via JavaScript al caricamento
 - Rileva automaticamente se la pagina è dentro `esempi/` e adatta i percorsi relativi (`pathPrefix`)
-- La voce "JavaScript" è un dropdown con: Guida JS Base, API & CRUD, Web Components, Vue.js, React, GSAP
+- La voce "JavaScript" è un dropdown con: Guida JS Base, API & CRUD, Web Components, React, Next.js, GSAP
 - Il link attivo viene evidenziato confrontando `window.location.pathname` con il nome file
-- Vue, React e GSAP hanno stili navbar personalizzati (bordo inferiore colorato)
+- React, Next.js e GSAP hanno stili navbar personalizzati (bordo inferiore colorato)
 
 ### Dark Mode (`js/theme-toggle.js` + `css/style.css`)
 - Al caricamento legge `localStorage('theme')`, se assente usa `prefers-color-scheme`
@@ -164,11 +164,14 @@ Custom Elements, Shadow DOM, HTML Templates, slot, lifecycle callbacks, attribut
 ### `bootstrap-guide.html`
 Grid system, breakpoint, componenti (navbar, card, modal, alert, badge, accordion, carousel), utilities, form Bootstrap, icone.
 
-### `vue-guide.html`
-Vue 3 Options API e Composition API, reattività, direttive (v-bind, v-model, v-if, v-for), componenti, props, emit, lifecycle hooks.
-
 ### `react-guide.html`
 JSX, componenti funzionali, hooks (useState, useEffect, useRef, useContext), props, event handling, rendering condizionale, liste.
+
+### `nextjs-guide.html`
+Percorso evolutivo da React a Next.js: setup, app router, data fetching, API routes integrate, deploy.
+
+### `vue-guide.html` (in pausa)
+Guida Vue 3 mantenuta nel progetto ma temporaneamente non mostrata in homepage/navbar.
 
 ### `gsap-guide.html`
 `gsap.to()`, `gsap.from()`, `gsap.fromTo()`, Timeline (`gsap.timeline()`), stagger, ScrollTrigger, easing, plugin.

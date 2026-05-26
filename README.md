@@ -18,7 +18,8 @@ Dopo l'attivazione di GitHub Pages, il sito sara disponibile su:
 
 - `index.html`: homepage del manuale
 - `html-guide.html`, `css-guide.html`, `javascript-guide.html`: guide principali
-- `javascript-api-crud.html`, `web-components-guide.html`, `vue-guide.html`, `react-guide.html`, `gsap-guide.html`: guide avanzate
+- `javascript-api-crud.html`, `web-components-guide.html`, `react-guide.html`, `nextjs-guide.html`, `gsap-guide.html`: guide avanzate
+- `vue-guide.html`: guida disponibile ma temporaneamente non mostrata in homepage/navbar
 - `best-practices.html`: buone pratiche di sviluppo web
 - `esempi/`: esercizi ed esempi didattici
 - `css/style.css`: stile globale e gestione tema
@@ -32,7 +33,8 @@ Dopo l'attivazione di GitHub Pages, il sito sara disponibile su:
 - Bootstrap 5 (CDN)
 - Bootstrap Icons (CDN)
 - Prism.js (CDN)
-- Vue / React / GSAP (CDN nelle pagine dedicate)
+- React / Next.js / GSAP (CDN nelle pagine dedicate)
+- Vue.js disponibile in archivio, temporaneamente sospesa dalla navigazione principale
 
 Nessuna dipendenza npm richiesta.
 
