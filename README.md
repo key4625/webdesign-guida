@@ -4,7 +4,7 @@ Guida didattica interattiva per il corso **Web Design 2 - Biennio WID** dell'Acc
 
 Il progetto e un sito statico (HTML, CSS, JavaScript) con:
 
-- guide complete su HTML, CSS, JavaScript, PHP e area grafica/interfacce
+- guide complete su HTML, CSS, JavaScript, PHP, area grafica/interfacce e intelligenza artificiale
 - esempi pratici progressivi
 - focus su accessibilita, responsive design, best practices e performance
 
@@ -18,12 +18,14 @@ Dopo l'attivazione di GitHub Pages, il sito sara disponibile su:
 
 - `index.html`: homepage del manuale
 - `html-guide.html`, `css-guide.html`, `javascript-guide.html`: guide principali
+- `css-modern-guide.html`: novità del CSS moderno
 - `jquery-guide.html`, `javascript-api-crud.html`, `web-components-guide.html`: JavaScript e integrazioni
 - `react-guide.html`, `nextjs-guide.html`, `gsap-guide.html`: framework e animazioni
 - `ux-interface-guide.html`: hub grafica e progettazione interfacce
 - `web-components-ui-guide.html`, `design-system-guide.html`, `web-typography-guide.html`: moduli design/UI
 - `web-color-contrast-guide.html`, `motion-microinteractions-guide.html`, `web-layout-models-guide.html`: moduli visual e interaction design
 - `wireframe-prototype-handoff-guide.html`: workflow progettuale design-dev
+- `ai-fondamenti-guide.html`, `ai-uso-guide.html`, `ai-sviluppo-guide.html`: sezione Intelligenza Artificiale (funzionamento, uso consapevole, AI per sviluppatori) con esercizi in `esempi/esercizi-ai.html`
 - `hosting-guide.html`: hosting locale/remoto e deploy base
 - `git-guide.html`: Git e GitHub Pages
 - `vue-guide.html`: guida disponibile ma temporaneamente non mostrata in homepage/navbar

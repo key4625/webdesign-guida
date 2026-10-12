@@ -141,7 +141,8 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.example-result h5 {
+.example-result h5,
+.example-result h3.h5 {
     color: var(--primary-color);
     margin-bottom: 15px;
     font-weight: 600;
@@ -572,6 +573,7 @@ body {
     img[src*="placeholder"] {
         filter: brightness(0.8);
     }
+    }
 }
 
 /* Accessibility */
@@ -664,13 +666,18 @@ html {
     border-left-color: #667eea;
 }
 
-:root[data-theme="dark"] .example-result h5 {
+:root[data-theme="dark"] .example-result h5,
+:root[data-theme="dark"] .example-result h3.h5 {
     color: #667eea;
 }
 
 :root[data-theme="dark"] .table {
     color: var(--text-color);
     border-color: var(--border-color);
+    /* Bootstrap 5.3 colora le celle tramite queste variabili */
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--text-color);
+    --bs-table-border-color: var(--border-color);
 }
 
 :root[data-theme="dark"] .table-bordered,
@@ -857,4 +864,170 @@ html {
         width: 45px;
         height: 45px;
     }
+}
+
+/* ==============================
+   SEZIONE AI (ai-*-guide.html)
+   ============================== */
+:root {
+    --ai-accent: #0f766e;
+    --ai-accent-2: #4f46e5;
+    --ai-soft: #f0fdfa;
+}
+
+:root[data-theme="dark"] {
+    --ai-accent: #2dd4bf;
+    --ai-accent-2: #818cf8;
+    --ai-soft: #10302d;
+}
+
+.page-header.page-header--ai {
+    background: linear-gradient(135deg, #0f766e 0%, #4f46e5 100%);
+}
+
+/* Timeline verticale */
+.ai-timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 1.75rem;
+    border-left: 3px solid var(--ai-accent);
+}
+
+.ai-timeline__item {
+    position: relative;
+    margin-bottom: 1.25rem;
+}
+
+.ai-timeline__item::before {
+    content: "";
+    position: absolute;
+    left: calc(-1.75rem - 9px);
+    top: 0.35rem;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--content-bg);
+    border: 3px solid var(--ai-accent);
+}
+
+.ai-timeline__item--highlight::before {
+    background: var(--ai-accent);
+}
+
+.ai-timeline__year {
+    display: inline-block;
+    font-weight: 700;
+    color: var(--ai-accent);
+    margin-right: 0.5rem;
+}
+
+/* Riquadro "da ricordare" */
+.ai-keybox {
+    border: 2px solid var(--ai-accent);
+    border-radius: 0.75rem;
+    background: var(--ai-soft);
+    padding: 1.25rem 1.5rem;
+}
+
+.ai-keybox h3 {
+    font-size: 1.25rem;
+    color: var(--ai-accent);
+}
+
+/* Demo interattive */
+.ai-demo {
+    border: 1px dashed var(--ai-accent);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    background: var(--example-bg);
+}
+
+.ai-token {
+    display: inline-block;
+    padding: 0.1rem 0.25rem;
+    margin: 0.1rem 0.05rem;
+    border-radius: 0.25rem;
+    font-family: Consolas, Monaco, monospace;
+    white-space: pre;
+    color: #1f2937;
+}
+
+.ai-token--0 { background: #fde68a; }
+.ai-token--1 { background: #a7f3d0; }
+.ai-token--2 { background: #bfdbfe; }
+.ai-token--3 { background: #fbcfe8; }
+.ai-token--4 { background: #ddd6fe; }
+
+.ai-bar {
+    display: grid;
+    grid-template-columns: 7rem 1fr 3.5rem;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+    font-size: 0.9rem;
+}
+
+.ai-bar__track {
+    height: 1rem;
+    border-radius: 0.5rem;
+    background: var(--border-color);
+    overflow: hidden;
+}
+
+.ai-bar__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--ai-accent), var(--ai-accent-2));
+    transition: width 0.3s ease;
+}
+
+/* Confronto prompt debole / efficace */
+.ai-prompt {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    height: 100%;
+    border-left: 5px solid;
+    background: var(--example-bg);
+}
+
+.ai-prompt--weak { border-left-color: #dc3545; }
+.ai-prompt--strong { border-left-color: #198754; }
+
+.ai-prompt__label {
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.ai-prompt p:last-child { margin-bottom: 0; }
+
+/* Riquadro "Stato al..." (informazioni che invecchiano) */
+.ai-status {
+    border: 2px solid #f59e0b;
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(245, 158, 11, 0.08);
+}
+
+/* Diagrammi SVG: testo leggibile in entrambi i temi */
+.ai-diagram {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.ai-diagram text {
+    fill: var(--text-color);
+    font-family: inherit;
+}
+
+.ai-diagram .ai-diagram__on-color {
+    fill: #ffffff;
+}
+
+@media (max-width: 576px) {
+    .ai-bar { grid-template-columns: 5rem 1fr 3rem; }
 }

@@ -30,11 +30,14 @@
                     <nav class="nav flex-column nav-pills">
                         <a class="nav-link" href="#introduzione">Introduzione</a>
                         <a class="nav-link" href="#selettori">Selettori</a>
+                        <a class="nav-link" href="#cascata">Cascata e Specificità</a>
+                        <a class="nav-link" href="#unita">Unità di Misura</a>
                         <a class="nav-link" href="#box-model">Box Model</a>
                         <a class="nav-link" href="#posizionamento">Posizionamento</a>
                         <a class="nav-link" href="#flexbox">Flexbox</a>
                         <a class="nav-link" href="#grid">CSS Grid</a>
                         <a class="nav-link" href="#colori">Colori</a>
+                        <a class="nav-link" href="#variabili">Variabili CSS</a>
                         <a class="nav-link" href="#testi">Testi e Font</a>
                         <a class="nav-link" href="#immagini">Immagini</a>
                         <a class="nav-link" href="#effetti">Effetti Visivi</a>
@@ -228,6 +231,240 @@ img[src$=".jpg"] { border: 2px solid red; }</code></pre>
                     </div>
                 </section>
 
+                <!-- Cascata, Specificità ed Ereditarietà -->
+                <section id="cascata" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-layers"></i> Cascata, Specificità ed Ereditarietà</h2>
+                    <div class="content-box">
+                        <p>Spesso più regole CSS colpiscono lo stesso elemento con valori diversi. Il browser decide quale vince seguendo tre meccanismi: la <strong>cascata</strong>, la <strong>specificità</strong> e l'<strong>ereditarietà</strong>. Capirli risponde alla domanda più frequente: <em>"perché il mio stile non funziona?"</em></p>
+
+                        <h4>1. La Cascata: l'ordine conta</h4>
+                        <p>A parità di specificità, <strong>vince la regola scritta per ultima</strong>. Questo vale anche tra file diversi: conta l'ordine in cui i fogli di stile sono collegati nell'HTML.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">p { color: blue; }
+p { color: red; }   /* Vince questa: stessa specificità, scritta dopo */</code></pre>
+                        </div>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- style.css viene letto dopo bootstrap.css: a parità di specificità vince style.css --&gt;
+&lt;link rel="stylesheet" href="bootstrap.min.css"&gt;
+&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">2. La Specificità: il "peso" del selettore</h4>
+                        <p>Ogni selettore ha un peso calcolato su tre colonne <strong>(ID, Classi, Elementi)</strong>. Si confronta da sinistra a destra: un solo ID batte qualsiasi numero di classi.</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Selettore</th>
+                                        <th>ID</th>
+                                        <th>Classi, attributi, pseudo-classi</th>
+                                        <th>Elementi, pseudo-elementi</th>
+                                        <th>Specificità</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>p</code></td>
+                                        <td>0</td><td>0</td><td>1</td>
+                                        <td><code>0-0-1</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>article p</code></td>
+                                        <td>0</td><td>0</td><td>2</td>
+                                        <td><code>0-0-2</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>.testo</code></td>
+                                        <td>0</td><td>1</td><td>0</td>
+                                        <td><code>0-1-0</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>p.testo:hover</code></td>
+                                        <td>0</td><td>2</td><td>1</td>
+                                        <td><code>0-2-1</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>.card .titolo a</code></td>
+                                        <td>0</td><td>2</td><td>1</td>
+                                        <td><code>0-2-1</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>#header</code></td>
+                                        <td>1</td><td>0</td><td>0</td>
+                                        <td><code>1-0-0</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>style="..."</code> (inline)</td>
+                                        <td colspan="3">Batte qualsiasi selettore nel foglio di stile</td>
+                                        <td><strong>massima</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* HTML: &lt;p id="intro" class="testo"&gt;Ciao&lt;/p&gt; */
+
+#intro   { color: green; }  /* 1-0-0 → VINCE */
+.testo   { color: red; }    /* 0-1-0 */
+p        { color: blue; }   /* 0-0-1 */
+
+/* Il selettore universale * e i combinatori (&gt;, +, ~) valgono 0 */</code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-3">
+                            <strong><i class="bi bi-exclamation-triangle"></i> Attenzione a <code>!important</code>:</strong> scavalca cascata e specificità, ma per batterlo serve un altro <code>!important</code>, e il CSS diventa presto ingestibile. Usalo solo in casi eccezionali (es. classi di utilità). Se uno stile "non prende", prima controlla la specificità.
+                        </div>
+
+                        <h4 class="mt-4">3. L'Ereditarietà: cosa passa ai figli</h4>
+                        <p>Alcune proprietà si trasmettono automaticamente dagli elementi genitori ai figli, altre no.</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6><i class="bi bi-check-circle text-success"></i> Ereditate (soprattutto testo)</h6>
+                                <ul>
+                                    <li><code>color</code></li>
+                                    <li><code>font-family</code>, <code>font-size</code>, <code>font-weight</code></li>
+                                    <li><code>line-height</code>, <code>text-align</code></li>
+                                    <li><code>letter-spacing</code>, <code>visibility</code>, <code>cursor</code></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><i class="bi bi-x-circle text-danger"></i> Non ereditate (soprattutto box)</h6>
+                                <ul>
+                                    <li><code>margin</code>, <code>padding</code>, <code>border</code></li>
+                                    <li><code>width</code>, <code>height</code></li>
+                                    <li><code>background</code></li>
+                                    <li><code>display</code>, <code>position</code></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Impostando il font sul body, tutta la pagina lo eredita */
+body {
+    font-family: 'Inter', sans-serif;
+    color: #222;
+}
+
+/* Parole chiave per controllare l'ereditarietà */
+button {
+    font: inherit;      /* Eredita dal genitore (i bottoni di default non lo fanno) */
+}
+.reset {
+    color: initial;     /* Torna al valore iniziale della specifica CSS */
+    margin: unset;      /* inherit se la proprietà è ereditata, altrimenti initial */
+}
+a {
+    color: currentColor; /* Usa il valore di color dell'elemento stesso */
+}</code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-lightbulb"></i> Debug con DevTools:</strong> fai clic destro sull'elemento → <em>Ispeziona</em>. Nel pannello <em>Stili</em> le regole sono ordinate per specificità e quelle battute appaiono <del>barrate</del>: vedi subito quale regola vince e perché. Passando il mouse sul selettore, Chrome mostra anche la sua specificità.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Unità di Misura -->
+                <section id="unita" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-rulers"></i> Unità di Misura</h2>
+                    <div class="content-box">
+                        <p>Le dimensioni in CSS si esprimono con unità <strong>assolute</strong> (fisse) o <strong>relative</strong> (che dipendono da qualcos'altro: il font, il genitore, la finestra). Per un design responsive e accessibile le unità relative sono quasi sempre la scelta migliore.</p>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Unità</th>
+                                        <th>Relativa a</th>
+                                        <th>Uso tipico</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>px</code></td>
+                                        <td>Fissa (pixel CSS)</td>
+                                        <td>Bordi, ombre, dettagli sottili</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>rem</code></td>
+                                        <td>Font-size dell'elemento radice <code>&lt;html&gt;</code> (di default 16px)</td>
+                                        <td><strong>Font-size, spaziature, layout</strong>: la scelta predefinita</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>em</code></td>
+                                        <td>Font-size dell'elemento stesso (o del genitore, se usata su <code>font-size</code>)</td>
+                                        <td>Padding di bottoni e componenti che devono scalare col proprio testo</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>%</code></td>
+                                        <td>Dimensione del genitore</td>
+                                        <td>Larghezze fluide (<code>width: 50%</code>)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>vw</code> / <code>vh</code></td>
+                                        <td>1% della larghezza / altezza della finestra</td>
+                                        <td>Sezioni a tutto schermo, titoli fluidi</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>dvh</code> / <code>svh</code></td>
+                                        <td>Altezza "reale" della finestra su mobile (con o senza barra del browser)</td>
+                                        <td>Hero a schermo intero su smartphone</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>ch</code></td>
+                                        <td>Larghezza del carattere "0" del font</td>
+                                        <td>Lunghezza ottimale delle righe di testo (<code>max-width: 65ch</code>)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>fr</code></td>
+                                        <td>Frazione dello spazio libero (solo in Grid)</td>
+                                        <td>Colonne di una griglia</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 class="mt-4">em vs rem: la differenza che conta</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">html { font-size: 100%; }   /* = 16px, rispetta le preferenze dell'utente */
+
+.card { font-size: 1.25rem; } /* 20px */
+
+.card p {
+    font-size: 1.5em;   /* 1.5 × 20px = 30px  → dipende dal genitore */
+    font-size: 1.5rem;  /* 1.5 × 16px = 24px  → sempre uguale, prevedibile */
+}
+
+/* Con em le dimensioni si moltiplicano negli annidamenti:
+   un elenco dentro un elenco dentro un elenco diventa sempre più grande */</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">calc(): mescolare unità diverse</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">.sidebar-layout main {
+    width: calc(100% - 300px);       /* Tutto lo spazio meno la sidebar */
+}
+.hero {
+    min-height: calc(100dvh - 4rem); /* Schermo intero meno la navbar */
+}</code></pre>
+                        </div>
+
+                        <div class="example-result mt-4">
+                            <h5>Esempio - stessa scatola, unità diverse:</h5>
+                            <div class="d-flex flex-wrap gap-3 align-items-end">
+                                <div class="bg-primary text-white p-2 rounded" style="width: 120px;">120px</div>
+                                <div class="bg-success text-white p-2 rounded" style="width: 10rem;">10rem</div>
+                                <div class="bg-info text-white p-2 rounded" style="width: 25%;">25%</div>
+                                <div class="bg-warning p-2 rounded" style="width: 20ch;">20ch</div>
+                            </div>
+                            <p class="small mt-3 mb-0">Prova a ridimensionare la finestra: solo la scatola in <code>%</code> cambia larghezza. Prova anche a ingrandire il testo del browser (Ctrl +): le scatole in <code>rem</code> e <code>ch</code> crescono con il testo, quella in <code>px</code> no.</p>
+                        </div>
+
+                        <div class="alert alert-success mt-3">
+                            <strong><i class="bi bi-lightbulb"></i> Regola pratica:</strong> usa <code>rem</code> per font e spaziature, <code>%</code>/<code>fr</code> per le larghezze del layout, <code>px</code> solo per dettagli come bordi e ombre. Per titoli che scalano in modo fluido c'è <code>clamp()</code>, spiegata nella guida <a href="css-modern-guide.html#funzioni">CSS Moderno</a>.
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Box Model -->
                 <section id="box-model" class="mb-5">
                     <h2 class="section-title"><i class="bi bi-box"></i> Box Model</h2>
@@ -287,6 +524,57 @@ img[src$=".jpg"] { border: 2px solid red; }</code></pre>
 
                         <div class="alert alert-info mt-3">
                             <strong><i class="bi bi-lightbulb"></i> Tip:</strong> Usa <code>box-sizing: border-box;</code> per calcoli più intuitivi delle dimensioni. È una best practice applicarlo a tutti gli elementi con <code>* { box-sizing: border-box; }</code>
+                        </div>
+
+                        <h4 class="mt-4">content-box vs border-box</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">.box {
+    width: 300px;
+    padding: 20px;
+    border: 5px solid;
+}
+/* content-box (default):  larghezza reale = 300 + 20×2 + 5×2 = 350px  😕 */
+/* border-box:             larghezza reale = 300px, il contenuto si restringe  ✅ */</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Reset: un punto di partenza pulito</h4>
+                        <p>Ogni browser applica stili predefiniti (margini sui titoli, padding sulle liste, immagini inline...). Un piccolo <strong>reset</strong> all'inizio del foglio di stile rende il comportamento prevedibile. Questo è un reset moderno e minimo:</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* 1. Box model intuitivo per tutto */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* 2. Niente margini predefiniti */
+* {
+    margin: 0;
+}
+
+/* 3. Testo leggibile e altezza minima della pagina */
+body {
+    min-height: 100dvh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 4. Media che non escono mai dal contenitore */
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* 5. I campi dei form ereditano il font della pagina */
+input, button, textarea, select {
+    font: inherit;
+}
+
+/* 6. Le parole lunghe vanno a capo invece di uscire dal box */
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}</code></pre>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-info-circle"></i> Nota:</strong> framework come Bootstrap includono già il proprio reset (<em>Reboot</em>). Se usi Bootstrap non serve aggiungerne un altro.
                         </div>
                     </div>
                 </section>
@@ -370,6 +658,35 @@ img[src$=".jpg"] { border: 2px solid red; }</code></pre>
     overflow-x: auto;   /* Solo orizzontale */
     overflow-y: auto;   /* Solo verticale */
 }</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">z-index e Contesto di Sovrapposizione (Stacking Context)</h4>
+                        <p><code>z-index</code> decide chi sta "sopra" quando gli elementi si sovrappongono, ma ha due regole che confondono spesso:</p>
+                        <ol>
+                            <li>Funziona solo su elementi <strong>posizionati</strong> (<code>position</code> diverso da <code>static</code>) oppure figli di flex/grid.</li>
+                            <li>Il confronto avviene solo <strong>tra elementi dello stesso contesto</strong>. Alcune proprietà creano un nuovo contesto "chiuso": un figlio con <code>z-index: 9999</code> non può uscire dal contesto del suo genitore.</li>
+                        </ol>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Proprietà che creano un nuovo stacking context */
+.contesto {
+    position: relative; z-index: 1;  /* position + z-index */
+    opacity: 0.99;                   /* opacity minore di 1 */
+    transform: translateX(0);        /* qualsiasi transform */
+    filter: blur(0);                 /* filter, backdrop-filter */
+    isolation: isolate;              /* crea un contesto senza effetti collaterali */
+}
+
+/* Esempio del problema classico */
+.header { position: relative; z-index: 1; }
+.main   { position: relative; z-index: 2; }
+
+.header .menu-dropdown {
+    position: absolute;
+    z-index: 9999;   /* Resta comunque SOTTO .main: è chiuso nel contesto di .header (z-index 1) */
+}</code></pre>
+                        </div>
+                        <div class="alert alert-success mt-3">
+                            <strong><i class="bi bi-lightbulb"></i> Consiglio:</strong> definisci pochi livelli con nomi chiari (es. variabili <code>--z-dropdown: 100; --z-modal: 1000;</code>) invece di numeri a caso come 9999. Se un elemento "non va sopra", cerca quale antenato ha creato un nuovo contesto.
                         </div>
                     </div>
                 </section>
@@ -507,6 +824,39 @@ img[src$=".jpg"] { border: 2px solid red; }</code></pre>
 }</code></pre>
                         </div>
 
+                        <h4 class="mt-4">Aree Nominate (grid-template-areas)</h4>
+                        <p>Il modo più visivo di costruire un layout: si "disegna" la griglia con dei nomi, poi si assegna ogni elemento alla sua area. Ogni stringa è una riga, ogni parola una colonna; il punto <code>.</code> indica una cella vuota.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.pagina {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header  header"
+        "sidebar main"
+        "footer  footer";
+    gap: 1rem;
+    min-height: 100dvh;
+}
+
+.pagina header { grid-area: header; }
+.pagina aside  { grid-area: sidebar; }
+.pagina main   { grid-area: main; }
+.pagina footer { grid-area: footer; }
+
+/* Su mobile basta ridisegnare la mappa: l'HTML non cambia */
+@media (max-width: 768px) {
+    .pagina {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "main"
+            "sidebar"
+            "footer";
+    }
+}</code></pre>
+                        </div>
+
                         <div class="example-result mt-4">
                             <h5>Esempio Grid - Layout Dashboard:</h5>
                             <div class="demo-grid">
@@ -578,6 +928,108 @@ img[src$=".jpg"] { border: 2px solid red; }</code></pre>
                                     <small>Nero 50%</small>
                                 </div>
                             </div>
+                        </div>
+                        <p class="small mt-3 mb-0">Per le notazioni moderne (<code>oklch()</code>, <code>color-mix()</code>) vedi la guida <a href="css-modern-guide.html#colore">CSS Moderno</a>; per palette e contrasto vedi <a href="web-color-contrast-guide.html">Colore e Contrasto</a>.</p>
+                    </div>
+                </section>
+
+                <!-- Variabili CSS -->
+                <section id="variabili" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-sliders"></i> Variabili CSS (Custom Properties)</h2>
+                    <div class="content-box">
+                        <p>Le variabili CSS permettono di dare un <strong>nome</strong> a un valore (un colore, una spaziatura, un font) e riusarlo ovunque. Cambiando la variabile in un solo punto, cambia tutto il sito. Sono la base dei <a href="design-system-guide.html">design token</a> e dei temi chiaro/scuro.</p>
+
+                        <h4>Dichiarare e usare</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Si dichiarano con due trattini, di solito su :root (= l'elemento html) */
+:root {
+    --colore-primario: #6f42c1;
+    --colore-testo: #222;
+    --spazio: 1rem;
+    --raggio: 0.5rem;
+    --font-titoli: 'Playfair Display', serif;
+}
+
+/* Si leggono con var() */
+.bottone {
+    background: var(--colore-primario);
+    padding: var(--spazio) calc(var(--spazio) * 2);
+    border-radius: var(--raggio);
+}
+
+h1, h2 {
+    font-family: var(--font-titoli);
+}
+
+/* Valore di riserva (fallback) se la variabile non esiste */
+.box {
+    color: var(--colore-accento, orange);
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Le variabili seguono la cascata</h4>
+                        <p>A differenza delle variabili di SASS, quelle CSS sono "vive" nel browser: si ereditano e si possono <strong>ridefinire</strong> in un contesto più piccolo. Così si creano varianti di un componente senza riscriverlo.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.bottone {
+    --bg: var(--colore-primario);
+    background: var(--bg);
+    color: white;
+}
+
+/* La variante cambia solo la variabile */
+.bottone--pericolo { --bg: #dc3545; }
+.bottone--successo { --bg: #198754; }</code></pre>
+                        </div>
+
+                        <div class="example-result mt-4">
+                            <h5>Esempio - un solo componente, tre varianti:</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="d-inline-block px-3 py-2 rounded text-white" style="--bg: #6f42c1; background: var(--bg);">--bg: #6f42c1</span>
+                                <span class="d-inline-block px-3 py-2 rounded text-white" style="--bg: #dc3545; background: var(--bg);">--bg: #dc3545</span>
+                                <span class="d-inline-block px-3 py-2 rounded text-white" style="--bg: #198754; background: var(--bg);">--bg: #198754</span>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">Tema chiaro / scuro</h4>
+                        <p>È esattamente il meccanismo usato da questo manuale (prova il bottone <i class="bi bi-moon-fill"></i> in basso a destra): i componenti usano solo variabili, e il tema scuro le ridefinisce.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">:root {
+    --bg-color: #ffffff;
+    --text-color: #212529;
+}
+
+/* Tema scuro scelto dall'utente con un bottone (data-theme sull'html) */
+:root[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+}
+
+/* Oppure automatico, in base alle impostazioni del sistema operativo */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --text-color: #e0e0e0;
+    }
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Modificarle con JavaScript</h4>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">// Leggere
+const primario = getComputedStyle(document.documentElement)
+    .getPropertyValue('--colore-primario');
+
+// Scrivere: tutti gli elementi che usano la variabile si aggiornano
+document.documentElement.style.setProperty('--colore-primario', '#e83e8c');</code></pre>
+                        </div>
+
+                        <div class="alert alert-success mt-3">
+                            <strong><i class="bi bi-lightbulb"></i> Best Practice:</strong> raccogli in <code>:root</code> i valori ricorrenti del progetto (colori, font, spaziature, raggi, ombre) con nomi che descrivono il <em>ruolo</em> (<code>--colore-primario</code>) e non il valore (<code>--viola</code>): se domani il primario diventa verde, il nome resta corretto.
                         </div>
                     </div>
                 </section>
@@ -653,6 +1105,50 @@ img[src$=".jpg"] { border: 2px solid red; }</code></pre>
 body {
     font-family: 'Roboto', sans-serif;
 }</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Font Locali con @font-face</h4>
+                        <p>Per usare un font acquistato o scaricato (o per non dipendere da Google), si carica il file direttamente dal proprio sito. Il formato da usare è <strong>WOFF2</strong>: compresso e supportato da tutti i browser moderni.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">@font-face {
+    font-family: 'Mio Font';                 /* Nome a scelta, da usare poi in font-family */
+    src: url('../fonts/mio-font-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;   /* Mostra subito un font di sistema, poi lo sostituisce */
+}
+
+@font-face {
+    font-family: 'Mio Font';                 /* Stesso nome, peso diverso */
+    src: url('../fonts/mio-font-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+body { font-family: 'Mio Font', system-ui, sans-serif; }
+strong { font-weight: 700; }  /* Il browser userà automaticamente il file bold */</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Font Variabili</h4>
+                        <p>Un <strong>font variabile</strong> contiene in un solo file tutti i pesi (e a volte larghezze, inclinazioni...). Meno file da scaricare e pesi intermedi come 450 o 650.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-Variable.woff2') format('woff2');
+    font-weight: 100 900;    /* Intervallo di pesi disponibili */
+    font-display: swap;
+}
+
+h1 { font-weight: 750; }     /* Qualsiasi valore nell'intervallo */
+
+/* Assi personalizzati del font (dipendono dal font scelto) */
+.titolo-largo {
+    font-variation-settings: "wdth" 125;
+}</code></pre>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-info-circle"></i> Approfondisci:</strong> gerarchie, scale tipografiche e abbinamenti tra font sono trattati nella guida <a href="web-typography-guide.html">Tipografia per il Web</a>.
                         </div>
                     </div>
                 </section>
@@ -1154,8 +1650,8 @@ transform: skewX(20deg);</code></pre>
                     <a href="html-guide.html" class="btn btn-outline-secondary">
                         <i class="bi bi-arrow-left"></i> Guida HTML
                     </a>
-                    <a href="best-practices.html" class="btn btn-primary">
-                        Best Practices <i class="bi bi-arrow-right"></i>
+                    <a href="css-modern-guide.html" class="btn btn-primary">
+                        CSS Moderno <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
 
@@ -1172,7 +1668,7 @@ transform: skewX(20deg);</code></pre>
                     <p class="text-muted">Guida completa per studenti di web design</p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <p class="text-muted mb-0">© 2025 - Materiale didattico per studenti</p>
+                    <p class="text-muted mb-0">© 2026 - Materiale didattico per studenti</p>
                 </div>
             </div>
         </div>

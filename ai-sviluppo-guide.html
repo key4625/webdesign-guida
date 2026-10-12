@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI per Sviluppatori - Manuale Web Design</title>
+    <meta name="description" content="Modello e harness, memoria e file di istruzioni, tool, MCP, agenti di coding e confronto tra assistenti AI.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Page Header -->
+    <div class="page-header page-header--ai text-white py-4">
+        <div class="container">
+            <p class="mb-1 text-uppercase small fw-bold opacity-75">Intelligenza Artificiale · 3 di 3</p>
+            <h1 class="display-5"><i class="bi bi-robot"></i> AI per Sviluppatori</h1>
+            <p class="lead mb-0">Harness, memoria, tool, MCP e agenti di coding</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <p class="h5 mb-3">Indice Argomenti</p>
+                    <nav class="nav flex-column nav-pills" aria-label="Indice della pagina">
+                        <a class="nav-link" href="#harness">1. Modello e harness</a>
+                        <a class="nav-link" href="#ciclo">1.1 Il ciclo agentico</a>
+                        <a class="nav-link" href="#memoria">2. La memoria</a>
+                        <a class="nav-link" href="#tool">3. I tool</a>
+                        <a class="nav-link" href="#mcp">4. MCP</a>
+                        <a class="nav-link" href="#agenti">5. Agenti di coding</a>
+                        <a class="nav-link" href="#vibe-coding">5.1 Vibe coding e limiti</a>
+                        <a class="nav-link" href="#confronto">6. Confronto tra assistenti</a>
+                        <a class="nav-link" href="#stato">6.1 Stato attuale</a>
+                        <a class="nav-link" href="#open">6.2 Modelli open-weight</a>
+                        <a class="nav-link" href="#esercizi">Esercizi</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+
+                <!-- 1. Modello e harness -->
+                <section id="harness" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-car-front"></i> 1. Il Modello è il Motore, l'Harness è l'Auto</h2>
+                    <div class="content-box">
+                        <p>Nella <a href="ai-fondamenti-guide.html#principi">prima pagina</a> abbiamo visto che un modello, da solo, non naviga sul web, non ricorda e non agisce. Eppure gli assistenti che usiamo fanno tutte queste cose. Il motivo è che ciò che usiamo non è mai il modello "nudo".</p>
+                        <div class="row g-3 my-2">
+                            <div class="col-md-6">
+                                <div class="card h-100 border-primary">
+                                    <div class="card-body">
+                                        <h3 class="h5 card-title"><i class="bi bi-gear-wide-connected text-primary"></i> Il modello = il motore</h3>
+                                        <p class="card-text mb-0">La "mente" che legge testo e genera testo. Un motore potentissimo, ma da solo su un banco di prova non va da nessuna parte.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 border-success">
+                                    <div class="card-body">
+                                        <h3 class="h5 card-title"><i class="bi bi-car-front text-success"></i> L'harness = l'auto</h3>
+                                        <p class="card-text mb-0">Il software costruito attorno al modello: <strong>istruzioni di sistema</strong>, <strong>strumenti</strong>, <strong>permessi</strong>, <strong>memoria</strong> e il <strong>ciclo di lavoro</strong>. Volante, ruote, freni e navigatore che trasformano la potenza in movimento utile.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Per questo <strong>lo stesso modello si comporta in modo diverso</strong> a seconda di dove lo usi:</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">Dove</th>
+                                        <th scope="col">Cosa può fare l'harness</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">App di chat (web o telefono)</th>
+                                        <td>Conversare, cercare sul web, leggere file caricati, generare immagini o documenti. Non tocca il tuo computer.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Editor di codice con AI</th>
+                                        <td>Vede i file del progetto aperto, suggerisce completamenti mentre scrivi, modifica più file su richiesta.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Agente da terminale</th>
+                                        <td>Esplora tutta la cartella, esegue comandi, avvia test, usa Git: lavora su un compito per molti passaggi in autonomia, chiedendo il permesso per le azioni rischiose.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 1.1 Ciclo agentico -->
+                <section id="ciclo" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-arrow-repeat"></i> 1.1 Il Ciclo Agentico</h2>
+                    <div class="content-box">
+                        <p>Un <strong>agente</strong> è un modello che lavora in un ciclo: invece di rispondere una volta sola, ragiona, agisce con uno strumento, guarda cosa è successo e decide il passo successivo. Ripete finché il compito non è completato.</p>
+
+                        <svg class="ai-diagram my-4" viewBox="0 0 560 400" role="img" aria-labelledby="cicloTitolo cicloDesc">
+                            <title id="cicloTitolo">Il ciclo agentico</title>
+                            <desc id="cicloDesc">La richiesta entra nel ciclo. Il modello pensa, usa uno strumento, osserva il risultato e valuta se il compito è completato. Se no, ricomincia dal pensare; se sì, consegna la risposta.</desc>
+                            <defs>
+                                <marker id="freccia" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                    <path d="M0,0 L10,5 L0,10 z" fill="#64748b" />
+                                </marker>
+                            </defs>
+                            <!-- Ingresso -->
+                            <text x="280" y="22" text-anchor="middle" font-size="15">Richiesta dell'utente</text>
+                            <line x1="280" y1="30" x2="280" y2="62" stroke="#64748b" stroke-width="2.5" marker-end="url(#freccia)" />
+                            <!-- Nodi -->
+                            <rect x="200" y="66" width="160" height="50" rx="25" fill="#0f766e" />
+                            <text class="ai-diagram__on-color" x="280" y="97" text-anchor="middle" font-size="16" font-weight="700">1. Pensa</text>
+                            <rect x="380" y="175" width="170" height="50" rx="25" fill="#0e7490" />
+                            <text class="ai-diagram__on-color" x="465" y="206" text-anchor="middle" font-size="16" font-weight="700">2. Usa uno strumento</text>
+                            <rect x="200" y="284" width="160" height="50" rx="25" fill="#4338ca" />
+                            <text class="ai-diagram__on-color" x="280" y="315" text-anchor="middle" font-size="16" font-weight="700">3. Osserva</text>
+                            <rect x="10" y="175" width="170" height="50" rx="25" fill="#7c3aed" />
+                            <text class="ai-diagram__on-color" x="95" y="206" text-anchor="middle" font-size="16" font-weight="700">4. Finito?</text>
+                            <!-- Frecce del ciclo -->
+                            <path d="M360,95 Q450,105 462,170" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#freccia)" />
+                            <path d="M462,228 Q450,300 365,310" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#freccia)" />
+                            <path d="M200,310 Q110,300 98,230" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#freccia)" />
+                            <path d="M98,172 Q110,105 195,95" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#freccia)" />
+                            <text x="100" y="125" text-anchor="middle" font-size="13">no: ripeti</text>
+                            <!-- Uscita -->
+                            <line x1="95" y1="228" x2="95" y2="372" stroke="#198754" stroke-width="2.5" marker-end="url(#freccia)" />
+                            <text x="105" y="392" font-size="15">sì: risposta finale</text>
+                            <text x="280" y="205" text-anchor="middle" font-size="14" font-style="italic">ciclo agentico</text>
+                        </svg>
+
+                        <div class="example-result">
+                            <h3 class="h5">Esempio: "La pagina contatti non è responsive, sistemala"</h3>
+                            <ol class="mb-0 small">
+                                <li><strong>Pensa:</strong> devo trovare i file della pagina contatti.</li>
+                                <li><strong>Strumento:</strong> cerca i file → trova <code>contatti.html</code> e <code>css/style.css</code>. <strong>Osserva:</strong> la griglia ha larghezze fisse in px.</li>
+                                <li><strong>Pensa:</strong> sostituisco con una griglia fluida e una media query. <strong>Strumento:</strong> modifica il file.</li>
+                                <li><strong>Strumento:</strong> apre la pagina in un browser a 375px di larghezza. <strong>Osserva:</strong> il form ora va su una colonna, ma un bottone esce dal bordo.</li>
+                                <li><strong>Pensa → Strumento → Osserva:</strong> corregge il bottone, ricontrolla. <strong>Finito?</strong> Sì: riassume le modifiche fatte.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. Memoria -->
+                <section id="memoria" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-memory"></i> 2. La Memoria, su Tre Livelli</h2>
+                    <div class="content-box">
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><span class="badge bg-primary me-1">1</span> Context window</h3>
+                                        <p class="card-text small mb-0">Memoria a <strong>breve termine</strong>: la conversazione e i file letti in questa sessione. Si riempie: gli harness la riassumono o la "compattano" quando è piena, e qualche dettaglio si perde. Per i compiti lunghi conviene aprire sessioni nuove e mirate.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><span class="badge bg-primary me-1">2</span> Memoria persistente</h3>
+                                        <p class="card-text small mb-0">Le app di chat possono salvare fatti su di te (studi web design, preferisci risposte brevi…) e rimetterli nel contesto delle chat successive. Di solito puoi vederli, modificarli e cancellarli dalle impostazioni.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><span class="badge bg-primary me-1">3</span> File di istruzioni</h3>
+                                        <p class="card-text small mb-0">Un file di testo nella cartella del progetto, come <code>CLAUDE.md</code> o <code>AGENTS.md</code>, che l'agente legge <strong>all'inizio di ogni sessione</strong>: il "manuale del progetto" per un collaboratore che ogni mattina arriva senza ricordare nulla.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="h4">Esempio di CLAUDE.md per un progetto del corso</h3>
+                        <p>È scritto in Markdown, conciso e concreto. Contiene ciò che l'agente <strong>non può dedurre</strong> leggendo il codice: scopo, convenzioni, comandi, divieti.</p>
+                        <div class="code-example">
+                            <pre><code class="language-markdown"># Sito "Obiettivo Aperto" – associazione fotografica
+
+## Progetto
+Sito vetrina di un'associazione che organizza corsi e mostre di fotografia.
+Pubblico: adulti 30-65 anni, poco esperti di tecnologia → chiarezza prima di tutto.
+Progetto d'esame di Web Design 2 (ABA Macerata).
+
+## Stack
+- HTML5, CSS3, JavaScript ES6+ (niente framework JS)
+- Bootstrap 5.3 da CDN, Bootstrap Icons
+- PHP 8 solo per il form contatti (contatti.php)
+- Sviluppo locale con WAMP: http://localhost/obiettivo-aperto/
+
+## Struttura
+- *.html nella root, una pagina per sezione
+- css/style.css: stili custom, variabili CSS in :root
+- js/main.js: menu, galleria, validazione form
+- img/: immagini ottimizzate in WebP, max 300 KB
+
+## Convenzioni
+- lang="it", HTML semantico (header, nav, main, footer)
+- Classi custom in BEM: .galleria__foto--attiva
+- Mobile-first: media query solo con min-width
+- Ogni immagine ha alt descrittivo; i link esterni hanno rel="noopener noreferrer"
+- Testi in italiano, tono caldo, si dà del tu
+
+## Verifiche prima di dire "fatto"
+- HTML valido su validator.w3.org
+- Controllo a 375px, 768px e 1280px
+- Navigazione da tastiera funzionante
+
+## Cosa NON fare
+- Non aggiungere librerie o npm senza chiedere
+- Non modificare i testi delle pagine: sono approvati dal cliente
+- Non scrivere credenziali nel codice: stanno in config.php, escluso da Git
+- Non fare commit o push senza mia richiesta esplicita</code></pre>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-info-circle"></i> Curiosità:</strong> anche questo manuale ha i suoi file <code>AGENTS.md</code> e <code>CLAUDE.md</code>. Puoi leggerli nel <a href="https://github.com/key4625/webdesign-guida" target="_blank" rel="noopener noreferrer">repository su GitHub</a>.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. Tool -->
+                <section id="tool" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-tools"></i> 3. I Tool (Strumenti)</h2>
+                    <div class="content-box">
+                        <p>I tool sono le "mani" dell'agente: <strong>ricerca web</strong>, <strong>esecuzione di codice</strong>, <strong>lettura e scrittura di file</strong>, <strong>browser</strong>, <strong>terminale</strong>, e qualsiasi servizio esterno gli venga collegato.</p>
+                        <p>Punto chiave: <strong>il modello non esegue nulla direttamente</strong>. Produce solo testo. Quando vuole usare uno strumento, scrive una <em>richiesta strutturata</em> (una <strong>tool call</strong>); è l'harness che la esegue davvero, magari dopo aver chiesto il tuo permesso, e gli restituisce il risultato. È come un architetto che non va in cantiere ma scrive istruzioni precise all'impresa e legge il rapporto di ritorno.</p>
+
+                        <h3 class="h4 mt-4">Una tool call passo per passo</h3>
+                        <p class="small text-muted">Esempio semplificato a scopo didattico: ogni piattaforma usa un formato leggermente diverso, ma la logica è la stessa.</p>
+
+                        <h4 class="h6 mt-3">1. L'harness descrive al modello lo strumento disponibile</h4>
+                        <div class="code-example">
+                            <pre><code class="language-json">{
+  "name": "meteo_attuale",
+  "description": "Restituisce il meteo attuale di una città italiana",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "citta": { "type": "string", "description": "Nome della città" }
+    },
+    "required": ["citta"]
+  }
+}</code></pre>
+                        </div>
+
+                        <h4 class="h6 mt-3">2. L'utente chiede: "Domani faccio foto all'aperto a Macerata, com'è il tempo?" e il modello risponde con una tool call</h4>
+                        <div class="code-example">
+                            <pre><code class="language-json">{
+  "type": "tool_use",
+  "name": "meteo_attuale",
+  "input": { "citta": "Macerata" }
+}</code></pre>
+                        </div>
+
+                        <h4 class="h6 mt-3">3. L'harness esegue la richiesta (es. chiama un'API meteo) e restituisce il risultato</h4>
+                        <div class="code-example">
+                            <pre><code class="language-json">{
+  "type": "tool_result",
+  "content": "Macerata: 18°C, nuvoloso, vento debole"
+}</code></pre>
+                        </div>
+
+                        <h4 class="h6 mt-3">4. Il modello usa il risultato per rispondere</h4>
+                        <div class="example-result">
+                            <p class="mb-0">"Ora a Macerata ci sono 18°C con cielo nuvoloso: una luce morbida, ottima per i ritratti. Per domani, però, ti conviene controllare le previsioni: io vedo solo il meteo attuale."</p>
+                        </div>
+                        <p class="small mt-2 mb-0">Nota il formato: è JSON, lo stesso che hai usato con le API nella guida <a href="javascript-api-crud.html">API &amp; CRUD</a>.</p>
+                    </div>
+                </section>
+
+                <!-- 4. MCP -->
+                <section id="mcp" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-usb-c"></i> 4. MCP: Model Context Protocol</h2>
+                    <div class="content-box">
+                        <p>Ogni assistente ha bisogno di collegarsi a molti servizi (GitHub, Figma, Google Drive, database…). Senza uno standard, ogni app dovrebbe costruire un collegamento diverso per ogni servizio. L'<strong>MCP</strong> è uno <strong>standard aperto</strong>, proposto da Anthropic a fine 2024 e oggi supportato dai principali assistenti ed editor, che definisce un unico modo di farlo.</p>
+                        <div class="ai-keybox my-3">
+                            <p class="mb-0"><i class="bi bi-usb-c"></i> <strong>Metafora:</strong> l'MCP è la <strong>porta USB-C dell'AI</strong>. Prima ogni dispositivo aveva il suo caricatore; con una porta standard, qualsiasi accessorio funziona con qualsiasi dispositivo. Un server MCP scritto per Figma funziona con tutti gli assistenti compatibili.</p>
+                        </div>
+
+                        <h3 class="h4 mt-4">Architettura client–server</h3>
+                        <p>È la stessa architettura <strong>client–server</strong> del web che conosci (il browser chiede, il server risponde), applicata all'AI:</p>
+                        <div class="row g-2 align-items-stretch text-center my-3">
+                            <div class="col-md-4">
+                                <div class="card h-100 border-primary">
+                                    <div class="card-body">
+                                        <h4 class="h6 card-title"><i class="bi bi-window text-primary"></i> Host + client MCP</h4>
+                                        <p class="card-text small mb-0">L'app di AI che usi (un assistente, un editor, un agente da terminale). Contiene il client che parla con i server.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100 border-success">
+                                    <div class="card-body">
+                                        <h4 class="h6 card-title"><i class="bi bi-hdd-network text-success"></i> Server MCP</h4>
+                                        <p class="card-text small mb-0">Piccoli programmi, uno per servizio, che espongono <strong>tool</strong> (azioni), <strong>risorse</strong> (dati da leggere) e <strong>prompt</strong> predefiniti.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100 border-secondary">
+                                    <div class="card-body">
+                                        <h4 class="h6 card-title"><i class="bi bi-cloud text-secondary"></i> Servizi e dati</h4>
+                                        <p class="card-text small mb-0">GitHub, Figma, Google Drive, un database, le cartelle del tuo computer…</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="h4 mt-4">Esempi d'uso</h3>
+                        <ul>
+                            <li><strong>GitHub</strong>: "Leggi le issue aperte del progetto e proponi come risolvere la più urgente."</li>
+                            <li><strong>Figma</strong>: "Leggi le variabili colore e tipografiche di questo file e generale come variabili CSS."</li>
+                            <li><strong>Database</strong>: "Quante iscrizioni ai corsi abbiamo ricevuto questo mese?"</li>
+                            <li><strong>Google Drive</strong>: "Trova il brief del cliente e riassumi i requisiti."</li>
+                            <li><strong>Filesystem</strong>: "Rinomina le foto della cartella mostra seguendo lo schema anno-titolo."</li>
+                        </ul>
+
+                        <div class="alert alert-warning">
+                            <strong><i class="bi bi-exclamation-triangle"></i> Sicurezza:</strong> un server MCP agisce con i <strong>tuoi permessi</strong> e può leggere i tuoi dati. Installa solo server di fonti affidabili (ufficiali o molto diffusi), concedi il minimo accesso necessario (es. una sola cartella, non tutto il disco) e fai attenzione ai contenuti esterni: una pagina web o un documento potrebbero contenere istruzioni nascoste rivolte all'AI (<em>prompt injection</em>).
+                        </div>
+
+                        <h3 class="h4 mt-4">Le skill</h3>
+                        <p>Le <strong>skill</strong> sono pacchetti di istruzioni riutilizzabili (spesso un file Markdown con eventuali script e modelli) che insegnano all'agente <em>come</em> svolgere un compito specifico: creare una presentazione con il layout dello studio, applicare le regole del design system, preparare il deploy del sito. Se l'MCP dà all'agente nuove <em>mani</em>, le skill gli danno nuove <em>competenze</em>. L'agente le carica solo quando servono, per non riempire la context window.</p>
+                    </div>
+                </section>
+
+                <!-- 5. Agenti di coding -->
+                <section id="agenti" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-terminal"></i> 5. Agenti di Coding</h2>
+                    <div class="content-box">
+                        <h3 class="h4">Le categorie</h3>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Esempi</th>
+                                        <th scope="col">Ideale per</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Agenti da terminale</th>
+                                        <td>Claude Code, Codex CLI, Gemini CLI</td>
+                                        <td>Compiti su tutto il progetto: modifiche a più file, comandi, test, Git</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Editor con AI integrata</th>
+                                        <td>Cursor, GitHub Copilot (in VS Code), estensioni degli agenti per gli editor</td>
+                                        <td>Lavorare sul codice con suggerimenti e chat, vedendo le modifiche riga per riga</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Generatori di app e prototipi</th>
+                                        <td>v0, Lovable, Bolt</td>
+                                        <td>Prototipi rapidi da una descrizione o da uno screenshot, anche senza saper programmare</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 class="h4 mt-4">Il workflow consigliato</h3>
+                        <ol class="list-group list-group-numbered mb-3">
+                            <li class="list-group-item"><strong>Esplorare</strong>: chiedi all'agente di leggere il progetto e spiegarti come è organizzato, senza modificare nulla.</li>
+                            <li class="list-group-item"><strong>Pianificare</strong>: fatti proporre un piano (quali file, quali modifiche) e correggilo prima che inizi.</li>
+                            <li class="list-group-item"><strong>Implementare a piccoli passi</strong>: una funzionalità alla volta, non "tutto il sito" in un colpo.</li>
+                            <li class="list-group-item"><strong>Rivedere il diff</strong>: leggi le modifiche riga per riga, come faresti con il lavoro di un collega.</li>
+                            <li class="list-group-item"><strong>Testare</strong>: apri la pagina, prova su mobile, con la tastiera, nei casi limite.</li>
+                            <li class="list-group-item"><strong>Commit</strong>: salva un punto di ripristino con un messaggio chiaro. Se il passo successivo va male, torni indietro. Vedi la <a href="git-guide.html">Guida Git e GitHub</a>.</li>
+                        </ol>
+                        <div class="alert alert-success">
+                            <strong><i class="bi bi-lightbulb"></i> Consiglio:</strong> lavora sempre in un progetto sotto Git. È la tua rete di sicurezza: qualsiasi cosa faccia l'agente, puoi vedere esattamente cosa è cambiato e annullarla.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5.1 Vibe coding -->
+                <section id="vibe-coding" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-music-note-beamed"></i> 5.1 Vibe Coding e i suoi Limiti</h2>
+                    <div class="content-box">
+                        <p>Il <strong>vibe coding</strong> è il modo di programmare "a sensazione": descrivi quello che vuoi, accetti il codice generato senza leggerlo e correggi solo guardando il risultato a schermo. È fantastico per <strong>prototipare</strong> un'idea in un pomeriggio, sperimentare, creare strumenti usa e getta.</p>
+                        <p>Ma un sito che consegni a un cliente o all'esame è un'altra cosa: <strong>il codice consegnato va capito e revisionato</strong>. Un sito che "sembra funzionare" può nascondere problemi che a schermo non si vedono:</p>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><i class="bi bi-universal-access text-primary"></i> Accessibilità e semantica</h3>
+                                        <p class="card-text small mb-0"><code>&lt;div&gt;</code> cliccabili al posto di <code>&lt;button&gt;</code>, immagini senza <code>alt</code>, form senza <code>&lt;label&gt;</code>, contrasti insufficienti, titoli fuori ordine.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><i class="bi bi-shield-exclamation text-danger"></i> Sicurezza</h3>
+                                        <p class="card-text small mb-0">Query SQL costruite concatenando l'input dell'utente (<em>SQL injection</em>), input non validati lato server, password e chiavi API scritte nel codice e pubblicate su GitHub.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><i class="bi bi-wrench text-warning"></i> Manutenibilità</h3>
+                                        <p class="card-text small mb-0">Codice duplicato, stili inline ovunque, librerie inutili, file enormi che nessuno (nemmeno l'AI, la volta dopo) riesce più a modificare.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><i class="bi bi-speedometer2 text-success"></i> Performance</h3>
+                                        <p class="card-text small mb-0">Immagini pesantissime, script caricati in modo bloccante, animazioni che rallentano i telefoni economici.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="code-example mt-4">
+                            <pre><code class="language-php">// ❌ Generato "a sensazione": funziona, ma è vulnerabile a SQL injection
+$sql = "SELECT * FROM utenti WHERE email = '" . $_POST['email'] . "'";
+
+// ✅ Revisionato: query preparata, l'input non può diventare codice SQL
+$stmt = $pdo-&gt;prepare('SELECT * FROM utenti WHERE email = ?');
+$stmt-&gt;execute([$_POST['email']]);</code></pre>
+                        </div>
+                        <p class="mt-3 mb-0">Usa le <a href="best-practices.html">Best Practices</a> come checklist di revisione e la sezione <a href="html-guide.html#accessibilita">Accessibilità di Base</a> della guida HTML. Un buon metodo: chiedi a un <em>secondo</em> agente, in una sessione nuova, di fare la code review del codice scritto dal primo.</p>
+                    </div>
+                </section>
+
+                <!-- 6. Confronto -->
+                <section id="confronto" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-columns-gap"></i> 6. Confronto tra gli Assistenti</h2>
+                    <div class="content-box">
+                        <p>I modelli cambiano ogni pochi mesi e le classifiche si ribaltano di continuo. Più utile e più stabile è conoscere la <strong>filosofia</strong> e l'<strong>ecosistema</strong> di ciascun produttore.</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">Assistente</th>
+                                        <th scope="col">Filosofia e punti di forza</th>
+                                        <th scope="col">Ecosistema</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">ChatGPT<br><small class="fw-normal text-muted">OpenAI</small></th>
+                                        <td>Il più generalista e diffuso. Punta su moltissime funzioni per il pubblico: voce, generazione di immagini, ricerca, agenti che navigano per te.</td>
+                                        <td>App per tutti i dispositivi, piattaforma per sviluppatori molto usata, agente di coding Codex.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Gemini<br><small class="fw-normal text-muted">Google</small></th>
+                                        <td>Integrazione profonda con i servizi Google, forte multimodalità (video, immagini) e context window molto ampie.</td>
+                                        <td>Workspace (Gmail, Docs, Drive), Ricerca, Android; strumenti per sviluppatori come Gemini CLI.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Claude<br><small class="fw-normal text-muted">Anthropic</small></th>
+                                        <td>Forte nella scrittura, nel ragionamento su documenti lunghi e nel coding. Grande attenzione alla sicurezza. Orientato agli agenti.</td>
+                                        <td>App di chat, Claude Code, ideatore dello standard MCP.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Modelli open-weight<br><small class="fw-normal text-muted">vari</small></th>
+                                        <td>Scaricabili ed eseguibili sul proprio computer o server: controllo, privacy, personalizzazione.</td>
+                                        <td>Hugging Face, Ollama, LM Studio (vedi <a href="#open">6.2</a>).</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6.1 Stato attuale: DA AGGIORNARE OGNI ANNO ACCADEMICO -->
+                <section id="stato" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-calendar-check"></i> 6.1 Stato Attuale dei Modelli</h2>
+                    <div class="content-box">
+                        <!--
+                            RIQUADRO DA AGGIORNARE A OGNI ANNO ACCADEMICO.
+                            Contiene TUTTE le informazioni che invecchiano (nomi dei modelli, versioni).
+                            Verificare sulle fonti ufficiali dei produttori prima di modificare.
+                            Ultima verifica: ottobre 2026.
+                        -->
+                        <div class="ai-status">
+                            <h3 class="h5"><i class="bi bi-clock-history"></i> Stato a ottobre 2026</h3>
+                            <p class="small">Queste informazioni cambiano ogni pochi mesi: verificale sempre sui siti ufficiali.</p>
+                            <ul class="mb-0">
+                                <li class="mb-2"><strong>OpenAI:</strong> in ChatGPT è appena arrivata la famiglia <strong>GPT-6</strong>: <em>GPT-6 Luna</em> per gli utenti gratuiti, <em>GPT-6 Sol</em> per i piani a pagamento, <em>GPT-6 Astra</em> come opzione di ragionamento avanzato. Per il coding, l'agente <em>Codex</em>.</li>
+                                <li class="mb-2"><strong>Google:</strong> la famiglia <strong>Gemini 3.x</strong>, con <em>Gemini 3.8 Flash</em> come modello rapido più recente, e <em>Nano Banana</em> per le immagini. Il nuovo <em>Gemini 4 Argon</em> è stato annunciato a fine settembre 2026, per ora con accesso limitato ad alcuni partner.</li>
+                                <li class="mb-2"><strong>Anthropic:</strong> la famiglia <strong>Claude 5</strong>: <em>Fable 5.1</em> (il più capace, per ragionamenti complessi e lavori lunghi), <em>Opus 5.5</em> (il consigliato per la maggior parte dei compiti e per il coding), <em>Sonnet 5.5</em> (equilibrio tra velocità e intelligenza) e <em>Haiku 5.5</em> (il più veloce ed economico).</li>
+                                <li><strong>Open-weight:</strong> tra le famiglie più usate <em>DeepSeek V4</em>, <em>Qwen 3.x</em> (Alibaba), <em>Mistral</em> (europea), <em>Llama 4</em> (Meta) e <em>gpt-oss</em> (OpenAI).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6.2 Open-weight -->
+                <section id="open" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-unlock"></i> 6.2 Modelli Open-Weight ed Esecuzione Locale</h2>
+                    <div class="content-box">
+                        <p>Un modello <strong>open-weight</strong> ("a pesi aperti") è un modello di cui il produttore pubblica i <a href="ai-fondamenti-guide.html#addestramento">parametri</a>: chiunque può scaricarlo ed eseguirlo sul proprio computer o server, nei limiti della licenza. Si dice <em>open-weight</em> e non <em>open source</em> perché di solito non vengono pubblicati i dati e il codice di addestramento.</p>
+                        <p>Tra i produttori più noti: <strong>Mistral</strong> (francese, quindi europea), <strong>Meta</strong> (Llama), <strong>Alibaba</strong> (Qwen), <strong>DeepSeek</strong>, e anche OpenAI e Google con alcuni modelli più piccoli.</p>
+
+                        <h3 class="h4 mt-4">Eseguire un modello in locale</h3>
+                        <p>Programmi come <a href="https://ollama.com/" target="_blank" rel="noopener noreferrer">Ollama</a> o LM Studio rendono semplice scaricare e usare un modello sul proprio computer:</p>
+                        <div class="code-example">
+                            <pre><code class="language-bash"># Dopo aver installato Ollama, da terminale:
+ollama pull mistral       # scarica il modello (alcuni GB)
+ollama run mistral        # apre una chat nel terminale, tutto in locale</code></pre>
+                        </div>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6">
+                                <div class="alert alert-success h-100 mb-0">
+                                    <strong><i class="bi bi-plus-circle"></i> Vantaggi</strong>
+                                    <ul class="mb-0 mt-2">
+                                        <li><strong>Privacy</strong>: i dati non lasciano il tuo computer;</li>
+                                        <li><strong>costi</strong>: nessun abbonamento o costo per richiesta;</li>
+                                        <li>funziona <strong>offline</strong>;</li>
+                                        <li>si può personalizzare e integrare liberamente.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="alert alert-warning h-100 mb-0">
+                                    <strong><i class="bi bi-dash-circle"></i> Limiti</strong>
+                                    <ul class="mb-0 mt-2">
+                                        <li>i modelli che girano su un portatile sono più piccoli e meno capaci di quelli in cloud;</li>
+                                        <li>servono molta RAM e possibilmente una buona scheda grafica;</li>
+                                        <li>niente ricerca web o strumenti, se non li configuri tu;</li>
+                                        <li>aggiornamenti e configurazione sono a tuo carico.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ai-keybox mt-4">
+                            <h3><i class="bi bi-signpost-split"></i> Quale scegliere?</h3>
+                            <p class="mb-0">Non esiste "il migliore" in assoluto: si sceglie <strong>in base al compito</strong>. Un modello veloce per le domande rapide, uno più potente per i ragionamenti complessi, un agente di coding per il progetto, un modello locale per i dati riservati. Prova gli stessi compiti su assistenti diversi (è il primo esercizio qui sotto) e costruisci la tua esperienza.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Esercizi -->
+                <section id="esercizi" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-pencil-square"></i> Esercizi</h2>
+                    <div class="content-box">
+                        <p>Per mettere in pratica le tre pagine della sezione AI ci sono sei esercizi guidati: confronto tra assistenti, caccia alle allucinazioni, riscrittura dei prompt, scrittura di un <code>CLAUDE.md</code>, code review di codice generato e collegamento di un server MCP.</p>
+                        <a href="esempi/esercizi-ai.html" class="btn btn-primary"><i class="bi bi-journal-check"></i> Vai agli esercizi AI</a>
+                    </div>
+                </section>
+
+                <!-- Navigazione Pagine -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="ai-uso-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Usare bene l'AI
+                    </a>
+                    <a href="esempi/esercizi-ai.html" class="btn btn-primary">
+                        Esercizi AI <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="h5"><i class="bi bi-code-slash"></i> Web Design Guide</p>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2026 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Cambia tema">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup-templating.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

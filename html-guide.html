@@ -29,6 +29,8 @@
                     <h5 class="mb-3">Indice Argomenti</h5>
                     <nav class="nav flex-column nav-pills">
                         <a class="nav-link" href="#struttura-base">Struttura Base</a>
+                        <a class="nav-link" href="#head">Head e Metadati</a>
+                        <a class="nav-link" href="#concetti">Concetti Fondamentali</a>
                         <a class="nav-link" href="#titoli">Titoli</a>
                         <a class="nav-link" href="#testo">Testo e Paragrafi</a>
                         <a class="nav-link" href="#link">Link (Ancore)</a>
@@ -38,6 +40,9 @@
                         <a class="nav-link" href="#form">Form</a>
                         <a class="nav-link" href="#semantic">Tag Semantici</a>
                         <a class="nav-link" href="#multimedia">Multimedia</a>
+                        <a class="nav-link" href="#interattivi">Elementi Interattivi</a>
+                        <a class="nav-link" href="#svg">SVG</a>
+                        <a class="nav-link" href="#accessibilita">Accessibilità di Base</a>
                     </nav>
                 </div>
             </div>
@@ -71,6 +76,170 @@
                                 <li><code>&lt;head&gt;</code> - Contiene metadati e riferimenti esterni</li>
                                 <li><code>&lt;body&gt;</code> - Contiene il contenuto visibile della pagina</li>
                             </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Head e Metadati -->
+                <section id="head" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-gear"></i> Il &lt;head&gt; e i Metadati</h2>
+                    <div class="content-box">
+                        <p>Il <code>&lt;head&gt;</code> non si vede nella pagina, ma è fondamentale: dice al browser come leggere il documento, quali file caricare e come presentare la pagina su Google e sui social.</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;head&gt;
+    &lt;!-- 1. Codifica dei caratteri (sempre per prima) --&gt;
+    &lt;meta charset="UTF-8"&gt;
+
+    &lt;!-- 2. Viewport: indispensabile per il responsive su mobile --&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+
+    &lt;!-- 3. Titolo: appare nella scheda del browser e nei risultati di Google --&gt;
+    &lt;title&gt;Portfolio di Anna Rossi - Illustratrice&lt;/title&gt;
+
+    &lt;!-- 4. Descrizione: il testo sotto il titolo nei risultati di ricerca --&gt;
+    &lt;meta name="description" content="Illustrazioni editoriali e character design. Scopri progetti, contatti e commissioni."&gt;
+
+    &lt;!-- 5. Favicon: l'icona nella scheda del browser --&gt;
+    &lt;link rel="icon" href="favicon.svg" type="image/svg+xml"&gt;
+    &lt;link rel="apple-touch-icon" href="apple-touch-icon.png"&gt;
+
+    &lt;!-- 6. Fogli di stile --&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+
+    &lt;!-- 7. JavaScript: defer = scarica subito ma esegui dopo aver letto l'HTML --&gt;
+    &lt;script src="js/main.js" defer&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Anteprima sui Social (Open Graph)</h4>
+                        <p>Quando un link viene condiviso su WhatsApp, Facebook, LinkedIn o Telegram, l'anteprima (immagine, titolo, descrizione) viene letta da questi meta tag:</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;meta property="og:title" content="Portfolio di Anna Rossi"&gt;
+&lt;meta property="og:description" content="Illustrazioni editoriali e character design."&gt;
+&lt;meta property="og:image" content="https://www.annarossi.it/img/anteprima.jpg"&gt;
+&lt;meta property="og:url" content="https://www.annarossi.it/"&gt;
+&lt;meta property="og:type" content="website"&gt;</code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-info-circle"></i> Script: dove e come caricarli</strong>
+                            <ul class="mb-0 mt-2">
+                                <li><code>&lt;script src="..."&gt;</code> senza attributi blocca la lettura della pagina finché non è scaricato ed eseguito.</li>
+                                <li><code>defer</code>: scaricato in parallelo, eseguito in ordine dopo l'HTML. <strong>La scelta giusta nella maggior parte dei casi.</strong></li>
+                                <li><code>async</code>: eseguito appena pronto, senza ordine garantito. Adatto a script indipendenti (es. statistiche).</li>
+                            </ul>
+                        </div>
+                        <p class="small mb-0">Approfondimenti su SEO e Twitter Card nelle <a href="best-practices.html">Best Practices</a>.</p>
+                    </div>
+                </section>
+
+                <!-- Concetti Fondamentali -->
+                <section id="concetti" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-puzzle"></i> Concetti Fondamentali</h2>
+                    <div class="content-box">
+                        <h4>Anatomia di un elemento</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;a href="contatti.html" class="link-menu"&gt;Contatti&lt;/a&gt;
+&lt;!-- │  └──── attributo ────┘ └─ attributo ─┘ │        │
+     tag di apertura                       contenuto  tag di chiusura --&gt;
+
+&lt;img src="foto.jpg" alt="Tramonto sul mare"&gt;
+&lt;!-- Elemento "vuoto": non ha contenuto né tag di chiusura --&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Elementi Block e Inline</h4>
+                        <p>Ogni elemento HTML ha un comportamento predefinito nel flusso della pagina:</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6><strong>Block</strong> (blocco)</h6>
+                                <ul>
+                                    <li>Inizia su una nuova riga</li>
+                                    <li>Occupa tutta la larghezza disponibile</li>
+                                    <li>Accetta <code>width</code>, <code>height</code>, margini verticali</li>
+                                    <li>Es: <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;section&gt;</code></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><strong>Inline</strong> (in linea)</h6>
+                                <ul>
+                                    <li>Resta sulla stessa riga del testo</li>
+                                    <li>Occupa solo lo spazio del suo contenuto</li>
+                                    <li>Ignora <code>width</code>, <code>height</code> e margini verticali</li>
+                                    <li>Es: <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;img&gt;</code>*</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <div class="p-2 mb-2 border border-primary rounded">div (block)</div>
+                            <div class="p-2 mb-2 border border-primary rounded">altro div (block): va a capo</div>
+                            <span class="p-1 border border-success rounded">span (inline)</span>
+                            <span class="p-1 border border-success rounded">altro span: stessa riga</span>
+                        </div>
+                        <p class="small mt-2">* <code>&lt;img&gt;</code> è un caso particolare (<em>inline-block</em>): sta in linea ma accetta dimensioni. Il comportamento si può sempre cambiare con la proprietà CSS <code>display</code>.</p>
+
+                        <h4 class="mt-4">Attributi Globali</h4>
+                        <p>Questi attributi si possono usare su <strong>qualsiasi</strong> elemento:</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Attributo</th>
+                                        <th>A cosa serve</th>
+                                        <th>Esempio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>id</code></td>
+                                        <td>Identificatore <strong>unico</strong> nella pagina (ancore, label, JavaScript)</td>
+                                        <td><code>&lt;section id="contatti"&gt;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>class</code></td>
+                                        <td>Una o più classi, riusabili, per CSS e JavaScript</td>
+                                        <td><code>&lt;div class="card card--evidenza"&gt;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>data-*</code></td>
+                                        <td>Dati personalizzati da leggere con JavaScript</td>
+                                        <td><code>&lt;button data-colore="rosso"&gt;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>title</code></td>
+                                        <td>Testo che appare passando il mouse (non affidarci informazioni importanti)</td>
+                                        <td><code>&lt;abbr title="..."&gt;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>lang</code></td>
+                                        <td>Lingua di una parte del testo (pronuncia corretta degli screen reader)</td>
+                                        <td><code>&lt;span lang="en"&gt;design&lt;/span&gt;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>hidden</code></td>
+                                        <td>Nasconde l'elemento (a tutti, anche agli screen reader)</td>
+                                        <td><code>&lt;div hidden&gt;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>style</code></td>
+                                        <td>CSS inline (da evitare, meglio le classi)</td>
+                                        <td><code>&lt;p style="color:red"&gt;</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 class="mt-4">Caratteri Speciali (Entità) e Commenti</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Questo è un commento: il browser lo ignora --&gt;
+
+&lt;p&gt;Il tag &amp;lt;p&amp;gt; crea un paragrafo&lt;/p&gt;   &lt;!-- Mostra: Il tag &lt;p&gt; crea un paragrafo --&gt;
+&lt;p&gt;Rossi &amp;amp; Bianchi&lt;/p&gt;                    &lt;!-- &amp;  --&gt;
+&lt;p&gt;&amp;copy; 2026 Studio Grafico&lt;/p&gt;              &lt;!-- ©  --&gt;
+&lt;p&gt;Prezzo:&amp;nbsp;20&amp;nbsp;€&lt;/p&gt;               &lt;!-- spazio che non va a capo --&gt;</code></pre>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-info-circle"></i> Nota:</strong> con <code>charset="UTF-8"</code> lettere accentate e simboli come €, ©, « » si possono scrivere direttamente. Le entità servono soprattutto per <code>&amp;lt;</code>, <code>&amp;gt;</code> e <code>&amp;amp;</code>, che altrimenti il browser interpreterebbe come codice.
                         </div>
                     </div>
                 </section>
@@ -141,6 +310,56 @@
 &lt;br&gt; &lt;!-- Interruzione di riga --&gt;
 &lt;span&gt;Nuova linea dopo il br&lt;/span&gt;</code></pre>
                         </div>
+
+                        <h4 class="mt-4">Citazioni, Abbreviazioni e Contatti</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Citazione lunga (blocco) con la fonte --&gt;
+&lt;blockquote cite="https://esempio.it/intervista"&gt;
+    &lt;p&gt;Il design non è solo come appare. Il design è come funziona.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;— Steve Jobs, &lt;cite&gt;The New York Times&lt;/cite&gt;&lt;/p&gt;
+
+&lt;!-- Citazione breve dentro il testo (aggiunge le virgolette) --&gt;
+&lt;p&gt;Come diceva Munari: &lt;q&gt;Complicare è facile, semplificare è difficile&lt;/q&gt;.&lt;/p&gt;
+
+&lt;!-- Abbreviazione con significato completo --&gt;
+&lt;p&gt;Il sito rispetta le &lt;abbr title="Web Content Accessibility Guidelines"&gt;WCAG&lt;/abbr&gt;.&lt;/p&gt;
+
+&lt;!-- Informazioni di contatto --&gt;
+&lt;address&gt;
+    Studio Grafico Rossi&lt;br&gt;
+    Via Roma 1, Macerata&lt;br&gt;
+    &lt;a href="mailto:info@studiorossi.it"&gt;info@studiorossi.it&lt;/a&gt;
+&lt;/address&gt;</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <blockquote class="blockquote border-start border-4 ps-3">
+                                <p>Il design non è solo come appare. Il design è come funziona.</p>
+                            </blockquote>
+                            <p>— Steve Jobs, <cite>The New York Times</cite></p>
+                            <p>Come diceva Munari: <q>Complicare è facile, semplificare è difficile</q>.</p>
+                            <p>Il sito rispetta le <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> (passa il mouse sulla sigla).</p>
+                        </div>
+
+                        <h4 class="mt-4">Codice e Tastiera</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Codice dentro una frase --&gt;
+&lt;p&gt;Usa la proprietà &lt;code&gt;display: flex&lt;/code&gt; per allineare.&lt;/p&gt;
+
+&lt;!-- Blocco di codice: pre mantiene spazi e a capo --&gt;
+&lt;pre&gt;&lt;code&gt;body {
+    margin: 0;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!-- Tasti da premere --&gt;
+&lt;p&gt;Salva con &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;&lt;/p&gt;</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <p>Usa la proprietà <code>display: flex</code> per allineare.</p>
+                            <p class="mb-0">Salva con <kbd>Ctrl</kbd> + <kbd>S</kbd></p>
+                        </div>
                     </div>
                 </section>
 
@@ -210,7 +429,60 @@
 
                         <div class="example-result">
                             <h5>Esempio Pratico:</h5>
-                            <img src="https://via.placeholder.com/400x200/0d6efd/ffffff?text=Immagine+Esempio" alt="Immagine di esempio" class="img-fluid rounded shadow-sm">
+                            <img src="https://placehold.co/400x200/0d6efd/ffffff?text=Immagine+Esempio" alt="Immagine di esempio" width="400" height="200" class="img-fluid rounded shadow-sm">
+                        </div>
+
+                        <h4 class="mt-4">Prestazioni: dimensioni e caricamento differito</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;img src="foto.jpg" alt="Laboratorio di stampa"
+     width="1200" height="800"
+     loading="lazy"
+     decoding="async"&gt;</code></pre>
+                        </div>
+                        <ul>
+                            <li><code>width</code> e <code>height</code>: anche se poi il CSS ridimensiona l'immagine, permettono al browser di <strong>riservare lo spazio</strong> giusto prima del caricamento, evitando che la pagina "salti" mentre si carica.</li>
+                            <li><code>loading="lazy"</code>: l'immagine viene scaricata solo quando sta per entrare nello schermo. Da <strong>non</strong> usare per le immagini visibili subito (es. l'immagine principale in cima alla pagina).</li>
+                        </ul>
+
+                        <h4 class="mt-4">Immagini Responsive: srcset e sizes</h4>
+                        <p>Uno smartphone non ha bisogno della stessa immagine da 2000px di un monitor grande. Con <code>srcset</code> si offrono più versioni e il browser sceglie la più adatta allo schermo e alla densità di pixel.</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;img src="opera-800.jpg"
+     srcset="opera-400.jpg 400w,
+             opera-800.jpg 800w,
+             opera-1600.jpg 1600w"
+     sizes="(max-width: 768px) 100vw,
+            50vw"
+     alt="Dipinto ad olio, paesaggio marchigiano"
+     width="1600" height="1000"&gt;
+
+&lt;!--
+  srcset: elenco dei file con la loro larghezza reale (w)
+  sizes:  quanto sarà larga l'immagine nella pagina
+          → su schermi fino a 768px tutta la larghezza (100vw)
+          → altrimenti metà schermo (50vw)
+  Il browser incrocia questi dati e scarica il file più leggero sufficiente.
+--&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">L'elemento &lt;picture&gt;</h4>
+                        <p>Con <code>&lt;picture&gt;</code> si controlla <strong>quale immagine</strong> mostrare: formati moderni più leggeri (AVIF, WebP) con fallback, oppure ritagli diversi per mobile e desktop (<em>art direction</em>).</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Formati moderni con fallback --&gt;
+&lt;picture&gt;
+    &lt;source srcset="foto.avif" type="image/avif"&gt;
+    &lt;source srcset="foto.webp" type="image/webp"&gt;
+    &lt;img src="foto.jpg" alt="Ritratto in studio" width="800" height="600"&gt;
+&lt;/picture&gt;
+
+&lt;!-- Art direction: ritaglio verticale su mobile, orizzontale su desktop --&gt;
+&lt;picture&gt;
+    &lt;source media="(max-width: 600px)" srcset="hero-verticale.jpg"&gt;
+    &lt;img src="hero-orizzontale.jpg" alt="Studenti in aula di disegno"&gt;
+&lt;/picture&gt;</code></pre>
+                        </div>
+                        <div class="alert alert-success mt-3">
+                            <strong><i class="bi bi-lightbulb"></i> Suggerimento:</strong> il tag <code>&lt;img&gt;</code> dentro <code>&lt;picture&gt;</code> è obbligatorio: è il fallback e porta <code>alt</code>, <code>width</code> e <code>height</code>. Per convertire le immagini in WebP/AVIF puoi usare strumenti gratuiti come <a href="https://squoosh.app/" target="_blank" rel="noopener noreferrer">Squoosh</a>.
                         </div>
                     </div>
                 </section>
@@ -468,6 +740,101 @@ Testo predefinito...
                                 <button type="submit" class="btn btn-primary">Invia</button>
                             </form>
                         </div>
+
+                        <h4 class="mt-4">Raggruppare i Campi: fieldset e legend</h4>
+                        <p><code>&lt;fieldset&gt;</code> raggruppa campi correlati e <code>&lt;legend&gt;</code> ne dà il titolo. È indispensabile per i gruppi di radio e checkbox: lo screen reader legge la domanda prima delle opzioni.</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;fieldset&gt;
+    &lt;legend&gt;Come preferisci essere contattato?&lt;/legend&gt;
+
+    &lt;input type="radio" id="c-email" name="contatto" value="email" checked&gt;
+    &lt;label for="c-email"&gt;Email&lt;/label&gt;
+
+    &lt;input type="radio" id="c-tel" name="contatto" value="telefono"&gt;
+    &lt;label for="c-tel"&gt;Telefono&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Validazione Nativa</h4>
+                        <p>HTML può controllare i dati <strong>prima dell'invio</strong>, senza JavaScript: se un campo non è valido il browser blocca il form e mostra un messaggio.</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Campo obbligatorio --&gt;
+&lt;input type="text" name="nome" required&gt;
+
+&lt;!-- Lunghezza minima e massima --&gt;
+&lt;input type="password" name="pwd" minlength="8" maxlength="64" required&gt;
+
+&lt;!-- Intervallo numerico con passo --&gt;
+&lt;input type="number" name="eta" min="18" max="99" step="1"&gt;
+
+&lt;!-- Formato personalizzato (espressione regolare): CAP italiano di 5 cifre --&gt;
+&lt;input type="text" name="cap" pattern="[0-9]{5}" title="Inserisci 5 cifre"&gt;
+
+&lt;!-- Il tipo stesso valida il formato --&gt;
+&lt;input type="email" name="email" required&gt;
+&lt;input type="url" name="sito" placeholder="https://"&gt;</code></pre>
+                        </div>
+                        <div class="alert alert-warning mt-3">
+                            <strong><i class="bi bi-exclamation-triangle"></i> Attenzione:</strong> la validazione HTML migliora l'esperienza utente ma <strong>non è una protezione</strong>: chiunque può aggirarla. I dati vanno sempre ricontrollati sul server (vedi la guida <a href="php-guide.html">PHP</a>).
+                        </div>
+
+                        <h4 class="mt-4">Aiutare chi compila</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- autocomplete: il browser propone i dati salvati dell'utente --&gt;
+&lt;input type="text" name="nome" autocomplete="given-name"&gt;
+&lt;input type="email" name="email" autocomplete="email"&gt;
+&lt;input type="tel" name="tel" autocomplete="tel"&gt;
+
+&lt;!-- inputmode: su mobile mostra la tastiera giusta --&gt;
+&lt;input type="text" name="cap" inputmode="numeric"&gt;
+
+&lt;!-- datalist: suggerimenti, ma l'utente può scrivere altro --&gt;
+&lt;label for="corso"&gt;Corso&lt;/label&gt;
+&lt;input list="corsi" id="corso" name="corso"&gt;
+&lt;datalist id="corsi"&gt;
+    &lt;option value="Grafica"&gt;
+    &lt;option value="Fotografia"&gt;
+    &lt;option value="Web Design"&gt;
+&lt;/datalist&gt;
+
+&lt;!-- Testo di aiuto collegato al campo --&gt;
+&lt;label for="pwd"&gt;Password&lt;/label&gt;
+&lt;input type="password" id="pwd" aria-describedby="pwd-aiuto" minlength="8"&gt;
+&lt;small id="pwd-aiuto"&gt;Almeno 8 caratteri.&lt;/small&gt;</code></pre>
+                        </div>
+
+                        <div class="example-result">
+                            <h5>Prova la validazione: premi "Invia" lasciando i campi vuoti o errati</h5>
+                            <form class="border p-4 rounded" onsubmit="event.preventDefault(); this.querySelector('.esito').hidden = false;">
+                                <fieldset class="mb-3">
+                                    <legend class="fs-6 fw-bold">Iscrizione al workshop</legend>
+                                    <div class="mb-3">
+                                        <label for="valNome" class="form-label">Nome *</label>
+                                        <input type="text" class="form-control" id="valNome" name="nome" autocomplete="given-name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="valEmail" class="form-label">Email *</label>
+                                        <input type="email" class="form-control" id="valEmail" name="email" autocomplete="email" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="valCap" class="form-label">CAP</label>
+                                        <input type="text" class="form-control" id="valCap" name="cap" inputmode="numeric" pattern="[0-9]{5}" title="Inserisci 5 cifre" aria-describedby="valCapAiuto">
+                                        <small id="valCapAiuto" class="text-muted">5 cifre, es. 62100</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="valCorso" class="form-label">Corso</label>
+                                        <input class="form-control" list="valCorsi" id="valCorso" name="corso">
+                                        <datalist id="valCorsi">
+                                            <option value="Grafica">
+                                            <option value="Fotografia">
+                                            <option value="Web Design">
+                                        </datalist>
+                                    </div>
+                                </fieldset>
+                                <button type="submit" class="btn btn-primary">Invia</button>
+                                <p class="esito text-success mt-3 mb-0" hidden><i class="bi bi-check-circle"></i> Tutti i campi sono validi! (In un sito reale ora i dati verrebbero inviati.)</p>
+                            </form>
+                        </div>
                     </div>
                 </section>
 
@@ -565,6 +932,250 @@ Testo predefinito...
                         <div class="alert alert-success mt-4">
                             <strong><i class="bi bi-lightbulb"></i> Suggerimento:</strong> Usa sempre l'attributo <code>controls</code> per permettere agli utenti di controllare la riproduzione. Fornisci formati alternativi per compatibilità cross-browser.
                         </div>
+
+                        <h4 class="mt-4">Sottotitoli per i Video</h4>
+                        <p>I sottotitoli rendono il video accessibile a persone sorde e a chi guarda senza audio (sui social, la maggioranza). Si scrivono in un file di testo <code>.vtt</code>.</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;video controls width="640" poster="anteprima.jpg"&gt;
+    &lt;source src="showreel.mp4" type="video/mp4"&gt;
+    &lt;track src="sottotitoli-it.vtt" kind="subtitles" srclang="it" label="Italiano" default&gt;
+&lt;/video&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Elementi Interattivi Nativi -->
+                <section id="interattivi" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-hand-index"></i> Elementi Interattivi Nativi</h2>
+                    <div class="content-box">
+                        <p>Fisarmoniche, finestre modali e popup un tempo richiedevano JavaScript o librerie. Oggi HTML li offre già pronti, accessibili da tastiera e con screen reader.</p>
+
+                        <h4>details e summary (fisarmonica)</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;details&gt;
+    &lt;summary&gt;Quali sono gli orari del corso?&lt;/summary&gt;
+    &lt;p&gt;Le lezioni si tengono il martedì e il giovedì dalle 14 alle 18.&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;!-- open: aperto di default. Stesso name: se ne apre uno, gli altri si chiudono --&gt;
+&lt;details name="faq" open&gt; ... &lt;/details&gt;
+&lt;details name="faq"&gt; ... &lt;/details&gt;</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato (clicca sulle domande):</h5>
+                            <details name="faq-demo" class="mb-2 p-2 border rounded" open>
+                                <summary class="fw-bold">Quali sono gli orari del corso?</summary>
+                                <p class="mt-2 mb-0">Le lezioni si tengono il martedì e il giovedì dalle 14 alle 18.</p>
+                            </details>
+                            <details name="faq-demo" class="p-2 border rounded">
+                                <summary class="fw-bold">Serve un computer personale?</summary>
+                                <p class="mt-2 mb-0">Sì, con un editor di codice come VS Code installato.</p>
+                            </details>
+                        </div>
+
+                        <h4 class="mt-4">dialog (finestra modale)</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;button id="apri"&gt;Apri finestra&lt;/button&gt;
+
+&lt;dialog id="finestra"&gt;
+    &lt;h2&gt;Iscrizione completata&lt;/h2&gt;
+    &lt;p&gt;Riceverai una email di conferma.&lt;/p&gt;
+    &lt;!-- method="dialog": il bottone chiude la finestra senza JavaScript --&gt;
+    &lt;form method="dialog"&gt;
+        &lt;button&gt;Chiudi&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/dialog&gt;
+
+&lt;script&gt;
+    const finestra = document.querySelector('#finestra');
+    document.querySelector('#apri').addEventListener('click', () =&gt; finestra.showModal());
+&lt;/script&gt;</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <button type="button" class="btn btn-primary" id="demoDialogApri">Apri finestra</button>
+                            <dialog id="demoDialog" class="border-0 rounded-3 shadow p-4">
+                                <h3 class="h5">Iscrizione completata</h3>
+                                <p>Riceverai una email di conferma. Puoi chiudere anche con il tasto <kbd>Esc</kbd>.</p>
+                                <form method="dialog">
+                                    <button class="btn btn-secondary">Chiudi</button>
+                                </form>
+                            </dialog>
+                        </div>
+                        <p class="small mt-2"><code>showModal()</code> blocca il resto della pagina, scurisce lo sfondo (stilizzabile con il pseudo-elemento <code>::backdrop</code>), sposta il focus nella finestra e la chiude con <kbd>Esc</kbd>: tutto gratis.</p>
+
+                        <h4 class="mt-4">popover (popup senza JavaScript)</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;button popovertarget="info"&gt;Info&lt;/button&gt;
+
+&lt;div id="info" popover&gt;
+    &lt;p&gt;Si chiude cliccando fuori o premendo Esc.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <button type="button" class="btn btn-outline-primary" popovertarget="demoPopover">Info</button>
+                            <div id="demoPopover" popover class="border rounded-3 shadow p-3">
+                                <p class="mb-0">Sono un popover: si chiude cliccando fuori o premendo <kbd>Esc</kbd>.</p>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">progress e meter</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Avanzamento di un'operazione --&gt;
+&lt;label for="upload"&gt;Caricamento:&lt;/label&gt;
+&lt;progress id="upload" value="70" max="100"&gt;70%&lt;/progress&gt;
+
+&lt;!-- Misura in un intervallo noto (spazio su disco, punteggio...) --&gt;
+&lt;label for="disco"&gt;Spazio usato:&lt;/label&gt;
+&lt;meter id="disco" value="0.8" min="0" max="1" low="0.5" high="0.75"&gt;80%&lt;/meter&gt;</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <p class="mb-2"><label for="demoProgress">Caricamento:</label> <progress id="demoProgress" value="70" max="100">70%</progress></p>
+                            <p class="mb-0"><label for="demoMeter">Spazio usato:</label> <meter id="demoMeter" value="0.8" min="0" max="1" low="0.5" high="0.75">80%</meter></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SVG -->
+                <section id="svg" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-vector-pen"></i> SVG: Grafica Vettoriale nel Codice</h2>
+                    <div class="content-box">
+                        <p><strong>SVG</strong> (Scalable Vector Graphics) è un formato vettoriale scritto in codice simile all'HTML: è lo stesso tipo di grafica che esporti da Illustrator, Figma o Inkscape. Resta nitido a qualsiasi dimensione, pesa pochissimo e, se inserito direttamente nell'HTML, si può modificare con CSS e animare.</p>
+
+                        <h4>Forme di base</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;svg viewBox="0 0 200 100" width="200" height="100"&gt;
+    &lt;rect x="10" y="10" width="60" height="60" rx="8" fill="#0d6efd" /&gt;
+    &lt;circle cx="110" cy="40" r="30" fill="#e83e8c" /&gt;
+    &lt;polygon points="160,70 190,70 175,10" fill="#ffc107" /&gt;
+    &lt;line x1="10" y1="90" x2="190" y2="90" stroke="#198754" stroke-width="4" /&gt;
+&lt;/svg&gt;</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <svg viewBox="0 0 200 100" width="200" height="100" role="img" aria-label="Quadrato blu, cerchio rosa, triangolo giallo e linea verde">
+                                <rect x="10" y="10" width="60" height="60" rx="8" fill="#0d6efd" />
+                                <circle cx="110" cy="40" r="30" fill="#e83e8c" />
+                                <polygon points="160,70 190,70 175,10" fill="#ffc107" />
+                                <line x1="10" y1="90" x2="190" y2="90" stroke="#198754" stroke-width="4" />
+                            </svg>
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-info-circle"></i> Il viewBox:</strong> <code>viewBox="0 0 200 100"</code> definisce il sistema di coordinate interno (una tavola da disegno di 200×100 unità). Le dimensioni reali sullo schermo le decidono <code>width</code>/<code>height</code> o il CSS: il disegno si adatta in proporzione.
+                        </div>
+
+                        <h4 class="mt-4">Tre modi per inserire un SVG</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- 1. Come immagine: semplice, ma non modificabile con CSS --&gt;
+&lt;img src="logo.svg" alt="Logo Studio Rossi" width="120" height="40"&gt;
+
+&lt;!-- 2. Inline: codice nell'HTML, controllabile con CSS e JavaScript --&gt;
+&lt;svg viewBox="0 0 24 24" ...&gt; ... &lt;/svg&gt;
+
+&lt;!-- 3. Come sfondo CSS: per decorazioni --&gt;
+&lt;!-- .hero { background-image: url('pattern.svg'); } --&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Icone che prendono il colore del testo</h4>
+                        <p>Con <code>fill="currentColor"</code> l'icona usa il <code>color</code> del suo contenitore: cambia colore insieme al testo, anche in hover e nel tema scuro.</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;a href="#" class="link-icona"&gt;
+    &lt;svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true"&gt;
+        &lt;path d="M8 .2a8 8 0 1 0 0 16A8 8 0 0 0 8 .2zM7 11.5 3.5 8l1-1L7 9.5l4.5-4.5 1 1z"/&gt;
+    &lt;/svg&gt;
+    Completato
+&lt;/a&gt;
+
+&lt;style&gt;
+    .link-icona { color: #198754; }
+    .link-icona:hover { color: #0d6efd; }  /* Testo e icona cambiano insieme */
+&lt;/style&gt;</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <p class="mb-0 fs-5">
+                                <span class="text-success me-3"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M8 .2a8 8 0 1 0 0 16A8 8 0 0 0 8 .2zM7 11.5 3.5 8l1-1L7 9.5l4.5-4.5 1 1z"/></svg> Completato</span>
+                                <span class="text-danger me-3"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M8 .2a8 8 0 1 0 0 16A8 8 0 0 0 8 .2zM7 11.5 3.5 8l1-1L7 9.5l4.5-4.5 1 1z"/></svg> Stessa icona</span>
+                                <span class="text-primary"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M8 .2a8 8 0 1 0 0 16A8 8 0 0 0 8 .2zM7 11.5 3.5 8l1-1L7 9.5l4.5-4.5 1 1z"/></svg> Colore diverso</span>
+                            </p>
+                        </div>
+
+                        <div class="alert alert-success mt-3">
+                            <strong><i class="bi bi-lightbulb"></i> Accessibilità:</strong> un SVG decorativo (accanto a un testo che dice già tutto) va nascosto con <code>aria-hidden="true"</code>. Un SVG che comunica qualcosa da solo va descritto con <code>role="img"</code> e <code>aria-label="..."</code>, come l'<code>alt</code> di un'immagine. Prima di pubblicare, ottimizza i file esportati con <a href="https://jakearchibald.github.io/svgomg/" target="_blank" rel="noopener noreferrer">SVGOMG</a>.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Accessibilità di Base -->
+                <section id="accessibilita" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-universal-access"></i> Accessibilità di Base</h2>
+                    <div class="content-box">
+                        <p>Un sito accessibile può essere usato da tutti: da chi naviga solo con la tastiera, da chi usa uno screen reader, da chi ha difficoltà visive. Gran parte del lavoro si fa <strong>scegliendo l'elemento HTML giusto</strong>. Queste sono le regole minime da applicare sempre.</p>
+
+                        <h4>1. Usa l'elemento giusto per il compito</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- ❌ Un div cliccabile: non raggiungibile con Tab, non si attiva con Invio,
+        lo screen reader non sa che è un bottone --&gt;
+&lt;div class="btn" onclick="salva()"&gt;Salva&lt;/div&gt;
+
+&lt;!-- ✅ Un bottone vero: tastiera, focus e annuncio gratis --&gt;
+&lt;button type="button" onclick="salva()"&gt;Salva&lt;/button&gt;
+
+&lt;!-- Regola: porta in un'altra pagina? → &lt;a href&gt;. Esegue un'azione? → &lt;button&gt; --&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">2. Titoli in ordine gerarchico</h4>
+                        <p>Gli utenti di screen reader navigano saltando da un titolo all'altro, come un indice. I livelli non si scelgono per la dimensione (quella si cambia con il CSS) ma per la struttura: un <code>&lt;h1&gt;</code>, poi <code>&lt;h2&gt;</code>, dentro di essi <code>&lt;h3&gt;</code>, senza saltare livelli.</p>
+
+                        <h4 class="mt-4">3. Bottoni e link solo-icona hanno bisogno di un nome</h4>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- ❌ Lo screen reader legge solo "bottone" --&gt;
+&lt;button&gt;&lt;i class="bi bi-search"&gt;&lt;/i&gt;&lt;/button&gt;
+
+&lt;!-- ✅ aria-label dà un nome leggibile; aria-hidden nasconde l'icona decorativa --&gt;
+&lt;button aria-label="Cerca"&gt;&lt;i class="bi bi-search" aria-hidden="true"&gt;&lt;/i&gt;&lt;/button&gt;
+
+&lt;!-- ❌ "Clicca qui" fuori contesto non dice nulla --&gt;
+&lt;a href="bando.pdf"&gt;Clicca qui&lt;/a&gt;
+&lt;!-- ✅ Il testo del link descrive la destinazione --&gt;
+&lt;a href="bando.pdf"&gt;Scarica il bando 2026 (PDF, 2 MB)&lt;/a&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">4. Navigazione da tastiera e tabindex</h4>
+                        <p>Prova a usare il tuo sito solo con <kbd>Tab</kbd>, <kbd>Shift</kbd>+<kbd>Tab</kbd>, <kbd>Invio</kbd> e <kbd>Spazio</kbd>: devi raggiungere tutto e vedere sempre dove sei (il <em>focus</em>).</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- tabindex="0": rende raggiungibile un elemento personalizzato --&gt;
+&lt;div role="tabpanel" tabindex="0"&gt;...&lt;/div&gt;
+
+&lt;!-- tabindex="-1": raggiungibile solo via JavaScript (es. focus dopo un errore) --&gt;
+&lt;h2 id="errori" tabindex="-1"&gt;Correggi i campi evidenziati&lt;/h2&gt;
+
+&lt;!-- ❌ Mai valori positivi: stravolgono l'ordine naturale della pagina --&gt;
+&lt;a href="#" tabindex="5"&gt;...&lt;/a&gt;
+
+&lt;!-- Link per saltare direttamente al contenuto (primo elemento del body) --&gt;
+&lt;a href="#contenuto" class="skip-link"&gt;Vai al contenuto principale&lt;/a&gt;
+...
+&lt;main id="contenuto"&gt;...&lt;/main&gt;</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">5. Checklist rapida</h4>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item"><i class="bi bi-check2-square text-success"></i> <code>&lt;html lang="it"&gt;</code> impostato</li>
+                            <li class="list-group-item"><i class="bi bi-check2-square text-success"></i> Ogni immagine informativa ha un <code>alt</code> descrittivo; le decorative hanno <code>alt=""</code></li>
+                            <li class="list-group-item"><i class="bi bi-check2-square text-success"></i> Ogni campo del form ha una <code>&lt;label&gt;</code> collegata</li>
+                            <li class="list-group-item"><i class="bi bi-check2-square text-success"></i> Struttura con <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code></li>
+                            <li class="list-group-item"><i class="bi bi-check2-square text-success"></i> Titoli in ordine, un solo <code>&lt;h1&gt;</code></li>
+                            <li class="list-group-item"><i class="bi bi-check2-square text-success"></i> Tutto utilizzabile da tastiera, focus sempre visibile</li>
+                            <li class="list-group-item"><i class="bi bi-check2-square text-success"></i> Contrasto sufficiente tra testo e sfondo (vedi <a href="web-color-contrast-guide.html">Colore e Contrasto</a>)</li>
+                        </ul>
+
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-info-circle"></i> La prima regola di ARIA:</strong> se esiste un elemento HTML nativo che fa già quello che serve, usa quello. Gli attributi <code>aria-*</code> servono a completare l'HTML, non a sostituirlo. Approfondimenti su WCAG e strumenti di verifica nelle <a href="best-practices.html">Best Practices</a>.
+                        </div>
                     </div>
                 </section>
 
@@ -591,7 +1202,7 @@ Testo predefinito...
                     <p class="text-muted">Guida completa per studenti di web design</p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <p class="text-muted mb-0">© 2025 - Materiale didattico per studenti</p>
+                    <p class="text-muted mb-0">© 2026 - Materiale didattico per studenti</p>
                 </div>
             </div>
         </div>
@@ -605,5 +1216,12 @@ Testo predefinito...
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-    <script src="js/theme-toggle.js"></script>    <script src="js/navbar.js"></script></body>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+        // Demo della sezione "Elementi Interattivi": apertura del <dialog>
+        const demoDialog = document.querySelector('#demoDialog');
+        document.querySelector('#demoDialogApri').addEventListener('click', () => demoDialog.showModal());
+    </script>
+</body>
 </html>

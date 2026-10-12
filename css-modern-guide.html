@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Moderno - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ===== Stili delle demo di questa pagina ===== */
+
+        /* clamp(): titolo fluido */
+        .demo-fluido {
+            font-size: clamp(1.25rem, 1rem + 3vw, 3rem);
+            line-height: 1.1;
+            margin: 0;
+        }
+
+        /* :has() */
+        .demo-has {
+            border: 2px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+        .demo-has:has(input:checked) {
+            border-color: #198754;
+            background-color: rgba(25, 135, 84, 0.1);
+        }
+        .demo-has:has(input:checked) .demo-has__stato::after {
+            content: " selezionata ✓";
+            color: #198754;
+            font-weight: bold;
+        }
+
+        /* ::marker */
+        .demo-marker li::marker {
+            content: "✦ ";
+            color: #e83e8c;
+        }
+
+        /* Container queries */
+        .demo-cq-wrapper {
+            container-type: inline-size;
+            resize: horizontal;
+            overflow: auto;
+            width: 100%;
+            min-width: 220px;
+            max-width: 100%;
+            border: 2px dashed var(--border-color);
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+        }
+        .demo-cq-card {
+            display: grid;
+            gap: 0.75rem;
+            background: var(--example-bg);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+        }
+        .demo-cq-card__img {
+            aspect-ratio: 16 / 9;
+            border-radius: 0.5rem;
+            background: linear-gradient(135deg, #6f42c1, #e83e8c);
+        }
+        @container (min-width: 450px) {
+            .demo-cq-card {
+                grid-template-columns: 180px 1fr;
+                align-items: center;
+            }
+            .demo-cq-card__img { aspect-ratio: 1; }
+        }
+
+        /* aspect-ratio */
+        .demo-ratio {
+            background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+            color: #fff;
+            border-radius: 0.5rem;
+            display: grid;
+            place-items: center;
+            font-weight: bold;
+        }
+
+        /* scroll-snap */
+        .demo-snap {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 0.5rem;
+        }
+        .demo-snap__slide {
+            flex: 0 0 80%;
+            scroll-snap-align: center;
+            aspect-ratio: 16 / 9;
+            border-radius: 0.75rem;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Colore moderno */
+        .demo-swatch {
+            height: 70px;
+            border-radius: 0.5rem;
+            display: grid;
+            place-items: end start;
+            padding: 0.4rem;
+            font-size: 0.7rem;
+            font-family: monospace;
+            color: #000;
+        }
+        .demo-swatch--chiaro { color: #fff; }
+        .demo-accent {
+            accent-color: #e83e8c;
+        }
+
+        /* Effetti creativi */
+        .demo-clip {
+            width: 120px;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #fd7e14, #e83e8c);
+        }
+        .demo-clip--triangolo { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+        .demo-clip--cerchio   { clip-path: circle(45%); }
+        .demo-clip--esagono   { clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
+        .demo-clip--onda      { clip-path: polygon(0 0, 100% 0, 100% 75%, 75% 85%, 50% 75%, 25% 85%, 0 75%); }
+
+        .demo-blend {
+            position: relative;
+            height: 140px;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background: linear-gradient(90deg, #0d6efd, #20c997, #ffc107);
+            display: grid;
+            place-items: center;
+        }
+        .demo-blend__testo {
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 900;
+            color: #fff;
+            mix-blend-mode: difference;
+            margin: 0;
+        }
+
+        .demo-mask {
+            height: 120px;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #6f42c1, #0dcaf0);
+            mask-image: linear-gradient(to right, black 40%, transparent);
+            -webkit-mask-image: linear-gradient(to right, black 40%, transparent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Page Header -->
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #198754 0%, #6f42c1 100%);">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-stars"></i> CSS Moderno</h1>
+            <p class="lead mb-0">Le novità del CSS che oggi funzionano in tutti i browser: meno codice, meno JavaScript, più creatività</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#introduzione">1. Introduzione</a>
+                        <a class="nav-link" href="#funzioni">2. clamp(), min(), max()</a>
+                        <a class="nav-link" href="#selettori">3. Selettori Moderni</a>
+                        <a class="nav-link" href="#nesting">4. Nesting Nativo</a>
+                        <a class="nav-link" href="#container-queries">5. Container Queries</a>
+                        <a class="nav-link" href="#layout">6. Layout Moderno</a>
+                        <a class="nav-link" href="#scroll">7. Scroll</a>
+                        <a class="nav-link" href="#colore">8. Colore Moderno</a>
+                        <a class="nav-link" href="#effetti">9. Effetti Creativi</a>
+                        <a class="nav-link" href="#layer">10. Cascade Layers</a>
+                        <a class="nav-link" href="#novita">11. Novità da Seguire</a>
+                        <a class="nav-link" href="#riepilogo">12. Riepilogo</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+
+                <!-- 1. Introduzione -->
+                <section id="introduzione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-info-circle"></i> 1. Introduzione</h2>
+                    <div class="content-box">
+                        <p>Negli ultimi anni il CSS è cambiato più che nei dieci anni precedenti. Molte cose che prima richiedevano JavaScript, SASS o trucchi complicati oggi si scrivono in una riga. Questa guida raccoglie le novità più utili, dando per scontate le basi della <a href="css-guide.html">Guida CSS</a>.</p>
+
+                        <h4>Come sapere se posso usare una proprietà?</h4>
+                        <ul>
+                            <li><a href="https://caniuse.com/" target="_blank" rel="noopener noreferrer">caniuse.com</a>: cerca una proprietà e vedi in quali browser e versioni funziona.</li>
+                            <li><strong>Baseline</strong>: è l'etichetta che trovi su <a href="https://developer.mozilla.org/it/" target="_blank" rel="noopener noreferrer">MDN</a>. <em>"Baseline: ampiamente disponibile"</em> significa che funziona in tutti i browser principali da almeno due anni e puoi usarla senza pensieri.</li>
+                        </ul>
+
+                        <h4 class="mt-4">@supports: usare una novità in sicurezza</h4>
+                        <p>Con <code>@supports</code> si applica uno stile solo se il browser lo capisce. Chi ha un browser vecchio vede la versione base, chi ha un browser moderno quella migliorata (<em>progressive enhancement</em>).</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Versione base per tutti */
+.galleria {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Versione migliorata solo dove funziona */
+@supports (grid-template-rows: subgrid) {
+    .galleria {
+        display: grid;
+        grid-template-rows: subgrid;
+    }
+}
+
+/* Anche per i selettori */
+@supports selector(:has(a)) {
+    /* ... */
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. Funzioni matematiche -->
+                <section id="funzioni" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-calculator"></i> 2. clamp(), min() e max()</h2>
+                    <div class="content-box">
+                        <p>Queste funzioni permettono a una dimensione di adattarsi da sola allo schermo, entro limiti che decidi tu. Spesso sostituiscono intere serie di media query.</p>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Funzione</th>
+                                        <th>Cosa fa</th>
+                                        <th>Esempio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>min(a, b)</code></td>
+                                        <td>Usa il valore <strong>più piccolo</strong> (= fa da tetto massimo)</td>
+                                        <td><code>width: min(90%, 1200px);</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>max(a, b)</code></td>
+                                        <td>Usa il valore <strong>più grande</strong> (= fa da soglia minima)</td>
+                                        <td><code>padding: max(1rem, 3vw);</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>clamp(min, ideale, max)</code></td>
+                                        <td>Valore ideale, ma mai sotto il minimo né sopra il massimo</td>
+                                        <td><code>font-size: clamp(1.5rem, 4vw, 3rem);</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 class="mt-4">Tipografia fluida</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">h1 {
+    /* Mai sotto 1.25rem, mai sopra 3rem, in mezzo cresce con lo schermo */
+    font-size: clamp(1.25rem, 1rem + 3vw, 3rem);
+}
+
+/* Contenitore centrato: 90% su mobile, massimo 1200px su desktop.
+   Una riga invece di width + max-width + media query */
+.contenitore {
+    width: min(90%, 1200px);
+    margin-inline: auto;
+}
+
+/* Spaziature che respirano con lo schermo */
+section {
+    padding-block: clamp(2rem, 8vw, 6rem);
+}</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato: ridimensiona la finestra del browser</h5>
+                            <p class="demo-fluido">Titolo che scala in modo fluido</p>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-info-circle"></i> Perché "1rem + 3vw" e non solo "3vw"?</strong> Con solo <code>vw</code> il testo non reagisce allo zoom del browser, un problema di accessibilità. Sommare una parte in <code>rem</code> mantiene lo zoom funzionante. Strumenti come <a href="https://utopia.fyi/" target="_blank" rel="noopener noreferrer">Utopia</a> calcolano i valori per un'intera scala tipografica.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. Selettori moderni -->
+                <section id="selettori" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-cursor"></i> 3. Selettori Moderni</h2>
+                    <div class="content-box">
+                        <h4>:has() — il "selettore genitore"</h4>
+                        <p>Per anni è stato il selettore più richiesto: permette di stilizzare un elemento <strong>in base a ciò che contiene</strong>. Prima serviva JavaScript.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Una card che contiene un'immagine ha un layout diverso */
+.card:has(img) {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+}
+
+/* Evidenzia l'opzione quando il suo checkbox è spuntato */
+.opzione:has(input:checked) {
+    border-color: green;
+    background: #e8f5e9;
+}
+
+/* Un campo del form con errore colora anche la sua label */
+.campo:has(input:user-invalid) label {
+    color: #dc3545;
+}
+
+/* Blocca lo scroll della pagina quando un dialog è aperto */
+body:has(dialog[open]) {
+    overflow: hidden;
+}</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato: spunta le opzioni (nessun JavaScript)</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="demo-has d-block">
+                                        <input type="checkbox" class="form-check-input me-2"> Workshop di tipografia <span class="demo-has__stato"></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="demo-has d-block">
+                                        <input type="checkbox" class="form-check-input me-2"> Workshop di illustrazione <span class="demo-has__stato"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">:is() e :where() — raggruppare selettori</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Prima */
+header a:hover, nav a:hover, footer a:hover { color: red; }
+
+/* Dopo */
+:is(header, nav, footer) a:hover { color: red; }
+
+/* :where() fa lo stesso ma ha specificità ZERO:
+   perfetto per stili di base facili da sovrascrivere */
+:where(ul, ol)[class] {
+    list-style: none;
+    padding: 0;
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">:focus-visible — focus solo quando serve</h4>
+                        <p>Mostra l'anello di focus quando l'utente naviga con la tastiera, ma non quando clicca con il mouse. Così non c'è più motivo di rimuovere il focus (un grave errore di accessibilità).</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* ❌ Mai così: chi usa la tastiera non vede più dove si trova */
+button:focus { outline: none; }
+
+/* ✅ Così */
+button:focus-visible {
+    outline: 3px solid #e83e8c;
+    outline-offset: 3px;
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Altri selettori utili</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Personalizzare il pallino degli elenchi */
+li::marker {
+    content: "✦ ";
+    color: #e83e8c;
+}
+
+/* :not() con più selettori */
+.menu a:not(.attivo, .disabilitato) { opacity: 0.7; }
+
+/* Errore mostrato solo DOPO che l'utente ha interagito con il campo
+   (:invalid invece colora di rosso i campi vuoti già al caricamento) */
+input:user-invalid {
+    border-color: #dc3545;
+}
+
+/* Contenitore che contiene il focus (es. evidenziare il gruppo del form) */
+fieldset:focus-within {
+    background: #f8f9fa;
+}</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato ::marker:</h5>
+                            <ul class="demo-marker mb-0">
+                                <li>Ricerca</li>
+                                <li>Concept</li>
+                                <li>Prototipo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. Nesting -->
+                <section id="nesting" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-diagram-2"></i> 4. Nesting Nativo</h2>
+                    <div class="content-box">
+                        <p>Annidare le regole una dentro l'altra era il motivo principale per usare SASS. Oggi il CSS lo fa da solo, direttamente nel browser, senza compilazione.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.card {
+    padding: 1rem;
+    border-radius: 0.5rem;
+
+    /* = .card h3 */
+    h3 {
+        margin-top: 0;
+    }
+
+    /* &amp; = l'elemento stesso → .card:hover */
+    &amp;:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* → .card.card--evidenza */
+    &amp;.card--evidenza {
+        border: 2px solid gold;
+    }
+
+    /* Media query dentro il componente */
+    @media (min-width: 768px) {
+        padding: 2rem;
+    }
+}</code></pre>
+                        </div>
+                        <div class="alert alert-warning mt-3">
+                            <strong><i class="bi bi-exclamation-triangle"></i> Differenza con SASS:</strong> nel CSS nativo <code>&amp;__titolo</code> (concatenare testo per creare classi BEM) <strong>non funziona</strong>: <code>&amp;</code> rappresenta un selettore, non una stringa. Per questo e per mixin, funzioni e partial SASS resta utile (vedi <a href="scss-sass-guide.html">SCSS e SASS</a>).
+                        </div>
+                        <div class="alert alert-success">
+                            <strong><i class="bi bi-lightbulb"></i> Consiglio:</strong> non annidare più di 2-3 livelli. Ogni livello aumenta la specificità e rende il CSS più difficile da sovrascrivere.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. Container Queries -->
+                <section id="container-queries" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-bounding-box"></i> 5. Container Queries</h2>
+                    <div class="content-box">
+                        <p>Le media query guardano la larghezza della <strong>finestra</strong>. Ma un componente (una card, per esempio) può trovarsi in una colonna stretta su uno schermo grande. Le <strong>container queries</strong> guardano la larghezza del <strong>contenitore</strong>: il componente si adatta ovunque lo metti.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* 1. Dichiaro che questo elemento è un "contenitore" da osservare */
+.colonna {
+    container-type: inline-size;
+}
+
+/* 2. Stile di base della card: verticale */
+.card {
+    display: grid;
+    gap: 1rem;
+}
+
+/* 3. Se il contenitore è largo almeno 450px, la card diventa orizzontale */
+@container (min-width: 450px) {
+    .card {
+        grid-template-columns: 180px 1fr;
+    }
+}</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato: trascina l'angolo in basso a destra del riquadro tratteggiato</h5>
+                            <div class="demo-cq-wrapper">
+                                <div class="demo-cq-card">
+                                    <div class="demo-cq-card__img" role="img" aria-label="Immagine segnaposto"></div>
+                                    <div>
+                                        <strong>Mostra di fine anno</strong>
+                                        <p class="small mb-0">Sotto i 450px di contenitore la card è verticale, sopra diventa orizzontale. La finestra del browser non c'entra.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-info-circle"></i> Quando usare cosa:</strong> <em>media query</em> per il layout generale della pagina (quante colonne, menu mobile); <em>container query</em> per i componenti riutilizzabili (card, widget, form).
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. Layout moderno -->
+                <section id="layout" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-columns-gap"></i> 6. Layout Moderno</h2>
+                    <div class="content-box">
+                        <h4>aspect-ratio</h4>
+                        <p>Fissa le proporzioni di un elemento. Addio al vecchio trucco del <code>padding-top: 56.25%</code> per i video 16:9.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.video   { aspect-ratio: 16 / 9; width: 100%; }
+.avatar  { aspect-ratio: 1; width: 80px; border-radius: 50%; object-fit: cover; }
+.poster  { aspect-ratio: 2 / 3; }</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <div class="row g-3 align-items-start">
+                                <div class="col-6 col-md-4"><div class="demo-ratio" style="aspect-ratio: 16 / 9;">16:9</div></div>
+                                <div class="col-3 col-md-2"><div class="demo-ratio" style="aspect-ratio: 1;">1:1</div></div>
+                                <div class="col-3 col-md-2"><div class="demo-ratio" style="aspect-ratio: 2 / 3;">2:3</div></div>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">Proprietà Logiche</h4>
+                        <p>Invece di sinistra/destra/sopra/sotto si ragiona in base alla direzione del testo: <em>inline</em> (la riga, orizzontale in italiano) e <em>block</em> (verticale). Il layout funziona automaticamente anche in lingue scritte da destra a sinistra, come l'arabo.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.box {
+    margin-inline: auto;        /* = margin-left + margin-right */
+    padding-block: 2rem;        /* = padding-top + padding-bottom */
+    padding-inline-start: 1rem; /* = padding-left (in italiano) */
+    border-block-end: 1px solid #ddd; /* = border-bottom */
+    inline-size: 100%;          /* = width */
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;                   /* = top: 0; right: 0; bottom: 0; left: 0; */
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Subgrid</h4>
+                        <p>Un problema classico: in una fila di card, titoli e bottoni non sono allineati perché i testi hanno lunghezze diverse. Con <code>subgrid</code> le card "prendono in prestito" le righe della griglia genitore, e gli elementi si allineano tra card diverse.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.griglia-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    display: grid;
+    grid-row: span 3;               /* La card occupa 3 righe: immagine, testo, bottone */
+    grid-template-rows: subgrid;    /* ...e usa le righe della griglia genitore */
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. Scroll -->
+                <section id="scroll" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-arrow-down-up"></i> 7. Scroll</h2>
+                    <div class="content-box">
+                        <h4>Scorrimento fluido e ancore che non finiscono sotto la navbar</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Scorrimento animato verso le ancore (#sezione) */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Rispetta chi ha disattivato le animazioni nel sistema */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+}
+
+/* Le sezioni si fermano 80px sotto il bordo: la navbar fissa non copre il titolo */
+section[id] {
+    scroll-margin-top: 80px;
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Scroll Snap: caroselli senza JavaScript</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">.carosello {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;  /* Asse x, aggancio obbligatorio */
+}
+
+.slide {
+    flex: 0 0 80%;
+    scroll-snap-align: center;      /* Ogni slide si ferma centrata */
+}</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato: scorri orizzontalmente (trackpad, Shift + rotella o touch)</h5>
+                            <div class="demo-snap" tabindex="0" aria-label="Carosello dimostrativo">
+                                <div class="demo-snap__slide" style="background: #0d6efd;">1</div>
+                                <div class="demo-snap__slide" style="background: #6f42c1;">2</div>
+                                <div class="demo-snap__slide" style="background: #e83e8c;">3</div>
+                                <div class="demo-snap__slide" style="background: #fd7e14;">4</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. Colore moderno -->
+                <section id="colore" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-palette2"></i> 8. Colore Moderno</h2>
+                    <div class="content-box">
+                        <h4>oklch(): colori pensati per l'occhio umano</h4>
+                        <p><code>oklch(L C H)</code> descrive un colore con <strong>Luminosità</strong> (0-100%), <strong>Croma</strong> (intensità, 0-0.37 circa) e <strong>Tonalità</strong> (0-360°). A differenza di HSL, due colori con la stessa L <em>appaiono</em> davvero ugualmente luminosi: generare palette coerenti diventa semplice.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">:root {
+    /* Stessa luminosità e intensità, cambia solo la tonalità */
+    --rosso:  oklch(65% 0.2 25);
+    --verde:  oklch(65% 0.2 145);
+    --blu:    oklch(65% 0.2 255);
+
+    /* Scala di un colore: cambia solo la luminosità */
+    --viola-chiaro: oklch(85% 0.12 300);
+    --viola:        oklch(60% 0.2 300);
+    --viola-scuro:  oklch(35% 0.15 300);
+}</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato: stessa L e C, tonalità diverse</h5>
+                            <div class="row g-2">
+                                <div class="col-4 col-md-2"><div class="demo-swatch" style="background: oklch(65% 0.2 25);">H 25</div></div>
+                                <div class="col-4 col-md-2"><div class="demo-swatch" style="background: oklch(65% 0.2 85);">H 85</div></div>
+                                <div class="col-4 col-md-2"><div class="demo-swatch" style="background: oklch(65% 0.2 145);">H 145</div></div>
+                                <div class="col-4 col-md-2"><div class="demo-swatch" style="background: oklch(65% 0.2 200);">H 200</div></div>
+                                <div class="col-4 col-md-2"><div class="demo-swatch" style="background: oklch(65% 0.2 255);">H 255</div></div>
+                                <div class="col-4 col-md-2"><div class="demo-swatch" style="background: oklch(65% 0.2 320);">H 320</div></div>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">color-mix(): mescolare colori</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">:root { --primario: #6f42c1; }
+
+.bottone {
+    background: var(--primario);
+}
+.bottone:hover {
+    /* 80% primario + 20% nero = versione più scura, senza scegliere un nuovo colore */
+    background: color-mix(in oklch, var(--primario), black 20%);
+}
+.sfondo-tenue {
+    /* Primario al 15% su trasparente */
+    background: color-mix(in srgb, var(--primario) 15%, transparent);
+}</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato: tinte e ombre generate da un solo colore</h5>
+                            <div class="row g-2">
+                                <div class="col"><div class="demo-swatch" style="background: color-mix(in oklch, #6f42c1, white 70%);">+70% bianco</div></div>
+                                <div class="col"><div class="demo-swatch" style="background: color-mix(in oklch, #6f42c1, white 40%);">+40% bianco</div></div>
+                                <div class="col"><div class="demo-swatch demo-swatch--chiaro" style="background: #6f42c1;">#6f42c1</div></div>
+                                <div class="col"><div class="demo-swatch demo-swatch--chiaro" style="background: color-mix(in oklch, #6f42c1, black 30%);">+30% nero</div></div>
+                                <div class="col"><div class="demo-swatch demo-swatch--chiaro" style="background: color-mix(in oklch, #6f42c1, black 60%);">+60% nero</div></div>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">accent-color e light-dark()</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Colora checkbox, radio, range e progress nativi con una riga */
+:root {
+    accent-color: #e83e8c;
+}
+
+/* light-dark(): un valore per il tema chiaro e uno per lo scuro.
+   Richiede color-scheme */
+:root {
+    color-scheme: light dark;
+    --sfondo: light-dark(#ffffff, #1a1a1a);
+    --testo:  light-dark(#222222, #eeeeee);
+}</code></pre>
+                        </div>
+                        <div class="example-result demo-accent">
+                            <h5>Risultato accent-color:</h5>
+                            <label class="me-3"><input type="checkbox" checked> Checkbox</label>
+                            <label class="me-3"><input type="radio" name="demoAccent" checked> Radio</label>
+                            <label><input type="range" aria-label="Cursore dimostrativo"> Range</label>
+                        </div>
+                        <p class="small mt-2 mb-0">Per palette, semantica del colore e contrasto vedi <a href="web-color-contrast-guide.html">Colore e Contrasto</a>.</p>
+                    </div>
+                </section>
+
+                <!-- 9. Effetti creativi -->
+                <section id="effetti" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-brush"></i> 9. Effetti Creativi</h2>
+                    <div class="content-box">
+                        <p>Ritagli, maschere e metodi di fusione: gli stessi concetti di Photoshop e Illustrator, applicati direttamente agli elementi HTML.</p>
+
+                        <h4>clip-path: ritagliare le forme</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">.triangolo { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.cerchio   { clip-path: circle(45%); }
+.esagono   { clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
+
+/* Bordo inferiore "a onda" per una sezione hero */
+.hero { clip-path: polygon(0 0, 100% 0, 100% 75%, 75% 85%, 50% 75%, 25% 85%, 0 75%); }</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <div class="d-flex flex-wrap gap-4">
+                                <div class="demo-clip demo-clip--triangolo"></div>
+                                <div class="demo-clip demo-clip--cerchio"></div>
+                                <div class="demo-clip demo-clip--esagono"></div>
+                                <div class="demo-clip demo-clip--onda"></div>
+                            </div>
+                        </div>
+                        <p class="small mt-2">Generatore visuale: <a href="https://bennettfeely.com/clippy/" target="_blank" rel="noopener noreferrer">Clippy</a>. <code>clip-path</code> si può anche animare con <code>transition</code>, purché le forme abbiano lo stesso numero di punti.</p>
+
+                        <h4 class="mt-4">mix-blend-mode: metodi di fusione</h4>
+                        <p>Gli stessi metodi di fusione dei livelli di Photoshop: <code>multiply</code>, <code>screen</code>, <code>overlay</code>, <code>difference</code>...</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.titolo-sopra-immagine {
+    color: white;
+    mix-blend-mode: difference;   /* Si inverte rispetto allo sfondo sottostante */
+}
+
+/* background-blend-mode: fonde tra loro gli sfondi dello stesso elemento */
+.duotone {
+    background: url('foto.jpg'), #e83e8c;
+    background-blend-mode: multiply;
+}</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <div class="demo-blend">
+                                <p class="demo-blend__testo">DIFFERENCE</p>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">mask-image: sfumare un elemento</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Dove la maschera è nera l'elemento si vede, dove è trasparente sparisce */
+.sfuma-a-destra {
+    mask-image: linear-gradient(to right, black 40%, transparent);
+}
+
+/* Anche con un'immagine: l'elemento prende la forma del PNG/SVG */
+.forma-pennellata {
+    mask-image: url('pennellata.svg');
+    mask-size: cover;
+}</code></pre>
+                        </div>
+                        <div class="example-result">
+                            <h5>Risultato:</h5>
+                            <div class="demo-mask"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 10. Cascade Layers -->
+                <section id="layer" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-stack"></i> 10. Cascade Layers (@layer)</h2>
+                    <div class="content-box">
+                        <p>Nei progetti grandi è difficile controllare quale regola vince (vedi <a href="css-guide.html#cascata">Cascata e Specificità</a>). Con <code>@layer</code> si dichiarano dei "livelli" in ordine di priorità: <strong>un livello successivo vince sempre</strong> su uno precedente, qualunque sia la specificità dei selettori.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* 1. Dichiaro l'ordine: l'ultimo vince */
+@layer reset, librerie, base, componenti, utility;
+
+/* 2. Inserisco le regole nei livelli, in qualsiasi ordine nel file */
+@layer componenti {
+    .bottone { background: purple; }
+}
+
+@layer librerie {
+    #app .bottone { background: gray; }  /* Specificità alta... */
+}
+/* ...ma vince .bottone viola: "componenti" viene dopo "librerie" */
+
+/* Anche un intero file esterno in un livello */
+@import url('bootstrap.css') layer(librerie);</code></pre>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-info-circle"></i> A cosa serve in pratica:</strong> mettere un framework (Bootstrap, ecc.) in un livello basso e i propri stili in uno alto. Così si sovrascrive il framework con selettori semplici, senza <code>!important</code> e senza gare di specificità. Gli stili scritti fuori da qualsiasi layer vincono su tutti i layer.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 11. Novità da seguire -->
+                <section id="novita" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-rocket-takeoff"></i> 11. Novità da Seguire</h2>
+                    <div class="content-box">
+                        <p>Queste funzionalità sono recenti: alcune funzionano già in tutti i browser principali, altre sono in arrivo. Verifica sempre il supporto su <a href="https://caniuse.com/" target="_blank" rel="noopener noreferrer">caniuse.com</a> e usale come miglioramento progressivo (il sito deve funzionare anche senza).</p>
+
+                        <h4>View Transitions: animare il cambio di pagina</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Dissolvenza automatica tra le pagine di un sito multipagina */
+@view-transition {
+    navigation: auto;
+}
+
+/* Un elemento presente in entrambe le pagine si "trasforma" da una all'altra */
+.foto-progetto {
+    view-transition-name: foto-principale;
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Animazioni guidate dallo scroll</h4>
+                        <p>Animazioni legate alla posizione di scroll, senza JavaScript (oggi spesso si usa <a href="gsap-guide.html">GSAP ScrollTrigger</a>):</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Barra di avanzamento della lettura */
+.barra-lettura {
+    position: fixed;
+    top: 0; left: 0;
+    height: 4px;
+    width: 100%;
+    background: #e83e8c;
+    transform-origin: left;
+    animation: cresci linear;
+    animation-timeline: scroll();   /* Il "tempo" dell'animazione è lo scroll */
+}
+
+@keyframes cresci {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+/* Elementi che appaiono entrando nello schermo */
+.appare {
+    animation: dissolvenza linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">@property: variabili animabili</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Registrando il tipo, il browser sa come animare la variabile */
+@property --angolo {
+    syntax: '&lt;angle&gt;';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.bordo-rotante {
+    background: conic-gradient(from var(--angolo), #e83e8c, #6f42c1, #e83e8c);
+    animation: ruota 3s linear infinite;
+}
+
+@keyframes ruota {
+    to { --angolo: 360deg; }
+}</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Anchor Positioning: tooltip agganciati</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Un elemento si posiziona rispetto a un altro, ovunque si trovi nella pagina */
+.bottone-info {
+    anchor-name: --info;
+}
+
+.tooltip {
+    position: absolute;
+    position-anchor: --info;
+    position-area: top;   /* Sopra il bottone */
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 12. Riepilogo -->
+                <section id="riepilogo" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-list-check"></i> 12. Riepilogo: cosa sostituisce cosa</h2>
+                    <div class="content-box">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Funzionalità</th>
+                                        <th>Prima si faceva con...</th>
+                                        <th>Supporto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>clamp()</code>, <code>min()</code>, <code>max()</code></td><td>Tante media query</td><td><span class="badge bg-success">Ovunque</span></td></tr>
+                                    <tr><td><code>:has()</code></td><td>JavaScript</td><td><span class="badge bg-success">Ovunque</span></td></tr>
+                                    <tr><td><code>:is()</code>, <code>:where()</code>, <code>:focus-visible</code></td><td>Selettori ripetuti, librerie</td><td><span class="badge bg-success">Ovunque</span></td></tr>
+                                    <tr><td>Nesting nativo</td><td>SASS</td><td><span class="badge bg-success">Ovunque</span></td></tr>
+                                    <tr><td>Container queries</td><td>JavaScript (ResizeObserver)</td><td><span class="badge bg-success">Ovunque</span></td></tr>
+                                    <tr><td><code>aspect-ratio</code></td><td>Trucco del padding-top</td><td><span class="badge bg-success">Ovunque</span></td></tr>
+                                    <tr><td><code>subgrid</code></td><td>Altezze fisse, JavaScript</td><td><span class="badge bg-success">Ovunque</span></td></tr>
+                                    <tr><td>Scroll snap</td><td>Librerie di caroselli</td><td><span class="badge bg-success">Ovunque</span></td></tr>
+                                    <tr><td><code>oklch()</code>, <code>color-mix()</code></td><td>Funzioni di SASS (<code>darken</code>, <code>mix</code>)</td><td><span class="badge bg-success">Ovunque</span></td></tr>
+                                    <tr><td><code>@layer</code></td><td><code>!important</code>, specificità gonfiata</td><td><span class="badge bg-success">Ovunque</span></td></tr>
+                                    <tr><td><code>@property</code>, <code>light-dark()</code></td><td>JavaScript, regole duplicate</td><td><span class="badge bg-success">Ovunque</span> (recente)</td></tr>
+                                    <tr><td>View Transitions</td><td>Librerie JS, framework SPA</td><td><span class="badge bg-warning text-dark">Verificare</span></td></tr>
+                                    <tr><td>Animazioni guidate dallo scroll</td><td>GSAP ScrollTrigger, IntersectionObserver</td><td><span class="badge bg-warning text-dark">Verificare</span></td></tr>
+                                    <tr><td>Anchor positioning</td><td>Popper.js, Floating UI</td><td><span class="badge bg-warning text-dark">Verificare</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="alert alert-success mt-3">
+                            <strong><i class="bi bi-lightbulb"></i> Come restare aggiornati:</strong> le novità escono ogni pochi mesi. Fonti affidabili: <a href="https://web.dev/blog" target="_blank" rel="noopener noreferrer">web.dev</a>, <a href="https://developer.mozilla.org/it/" target="_blank" rel="noopener noreferrer">MDN</a>, <a href="https://css-tricks.com/" target="_blank" rel="noopener noreferrer">CSS-Tricks</a> e l'iniziativa annuale <em>Interop</em>, in cui i produttori dei browser concordano le funzionalità da allineare.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigazione Pagine -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="css-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Guida CSS
+                    </a>
+                    <a href="best-practices.html" class="btn btn-primary">
+                        Best Practices <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-code-slash"></i> Web Design Guide</h5>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2026 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Cambia tema">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

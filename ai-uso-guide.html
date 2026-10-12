@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usare bene l'AI - Manuale Web Design</title>
+    <meta name="description" content="Prompting efficace, uso quotidiano dell'AI e nel lavoro del designer, verifica delle risposte, etica, privacy e AI Act.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Page Header -->
+    <div class="page-header page-header--ai text-white py-4">
+        <div class="container">
+            <p class="mb-1 text-uppercase small fw-bold opacity-75">Intelligenza Artificiale · 2 di 3</p>
+            <h1 class="display-5"><i class="bi bi-chat-dots"></i> Usare bene l'AI</h1>
+            <p class="lead mb-0">Prompting efficace, uso quotidiano e per il design, verifica, etica</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <p class="h5 mb-3">Indice Argomenti</p>
+                    <nav class="nav flex-column nav-pills" aria-label="Indice della pagina">
+                        <a class="nav-link" href="#prompting">1. Prompting efficace</a>
+                        <a class="nav-link" href="#struttura-prompt">1.1 Struttura di un prompt</a>
+                        <a class="nav-link" href="#usi">2. Usi quotidiani</a>
+                        <a class="nav-link" href="#designer">3. L'AI per il designer</a>
+                        <a class="nav-link" href="#verificare">4. Verificare sempre</a>
+                        <a class="nav-link" href="#etica">5. Etica, privacy e normativa</a>
+                        <a class="nav-link" href="#trasparenza">5.1 Trasparenza</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+
+                <!-- 1. Prompting -->
+                <section id="prompting" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-pencil-square"></i> 1. Prompting Efficace</h2>
+                    <div class="content-box">
+                        <p>Il <strong>prompt</strong> è il testo con cui chiedi qualcosa all'AI. Pensa di scrivere a un collaboratore bravissimo ma appena arrivato: non conosce te, il progetto, il cliente, né i tuoi gusti. Tutto quello che non scrivi, lo deve indovinare, e quando indovina tende a scegliere la risposta più generica.</p>
+                        <p>Ecco sette principi, ciascuno con un confronto tra un prompt debole e uno efficace.</p>
+
+                        <h3 class="h4 mt-4">1. Dai contesto: chi sei, a cosa serve, per chi è</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--weak">
+                                    <div class="ai-prompt__label text-danger">❌ Prompt debole</div>
+                                    <p>Scrivi un testo per la homepage.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--strong">
+                                    <div class="ai-prompt__label text-success">✅ Prompt efficace</div>
+                                    <p>Sono uno studente di web design e sto progettando il sito di una piccola ceramica artigianale di Deruta. Il pubblico sono turisti stranieri tra i 35 e i 60 anni, interessati all'artigianato autentico. Scrivi il testo di benvenuto della homepage.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="h4 mt-4">2. Definisci obiettivo e vincoli</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--weak">
+                                    <div class="ai-prompt__label text-danger">❌ Prompt debole</div>
+                                    <p>Migliora questo CSS.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--strong">
+                                    <div class="ai-prompt__label text-success">✅ Prompt efficace</div>
+                                    <p>Rendi responsive questo CSS: sotto i 768px le tre colonne devono diventare una. Non usare framework, non cambiare i nomi delle classi e mantieni l'approccio mobile-first.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="h4 mt-4">3. Mostra esempi del risultato che vuoi</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--weak">
+                                    <div class="ai-prompt__label text-danger">❌ Prompt debole</div>
+                                    <p>Proponi dei nomi per un'app di ricette.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--strong">
+                                    <div class="ai-prompt__label text-success">✅ Prompt efficace</div>
+                                    <p>Proponi 10 nomi per un'app di ricette di recupero degli avanzi. Mi piacciono nomi brevi e giocosi come "Avanzi Pop" o "Rifrigo"; evita nomi generici come "Ricette Facili".</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="h4 mt-4">4. Specifica il formato della risposta</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--weak">
+                                    <div class="ai-prompt__label text-danger">❌ Prompt debole</div>
+                                    <p>Confronta Figma e Penpot.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--strong">
+                                    <div class="ai-prompt__label text-success">✅ Prompt efficace</div>
+                                    <p>Confronta Figma e Penpot in una tabella con queste righe: prezzo per studenti, collaborazione, prototipazione, esportazione del codice, open source. Chiudi con una raccomandazione di massimo tre righe.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="h4 mt-4">5. Itera e correggi invece di ripartire da zero</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--weak">
+                                    <div class="ai-prompt__label text-danger">❌ Prompt debole</div>
+                                    <p>(Apri una nuova chat e riscrivi tutta la richiesta da capo, sperando in un risultato diverso.)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--strong">
+                                    <div class="ai-prompt__label text-success">✅ Prompt efficace</div>
+                                    <p>Buona la struttura. Il tono però è troppo formale: rendilo più caldo e diretto, dai del tu al lettore e accorcia il secondo paragrafo della metà.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="h4 mt-4">6. Chiedi al modello di farti domande</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--weak">
+                                    <div class="ai-prompt__label text-danger">❌ Prompt debole</div>
+                                    <p>Crea la palette colori per il mio brand.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--strong">
+                                    <div class="ai-prompt__label text-success">✅ Prompt efficace</div>
+                                    <p>Devo definire la palette per il brand di una libreria indipendente. Prima di proporre i colori, fammi le domande che ti servono per capire il progetto, una alla volta.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="h4 mt-4">7. Spezza i compiti complessi in passaggi</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--weak">
+                                    <div class="ai-prompt__label text-danger">❌ Prompt debole</div>
+                                    <p>Fammi il sito completo per un festival di cinema.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--strong">
+                                    <div class="ai-prompt__label text-success">✅ Prompt efficace</div>
+                                    <p>Lavoriamo al sito di un festival di cinema per passi. Primo passo: proponi l'architettura delle informazioni (pagine e sezioni principali). Aspetta la mia conferma prima di passare ai contenuti.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 1.1 Struttura -->
+                <section id="struttura-prompt" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-layout-text-sidebar"></i> 1.1 La Struttura di un Buon Prompt</h2>
+                    <div class="content-box">
+                        <p>Non serve una formula magica, ma per le richieste importanti questo schema aiuta a non dimenticare nulla. Si possono usare titoli o tag per separare le parti: aiutano il modello a distinguere le istruzioni dal materiale da elaborare.</p>
+                        <div class="code-example">
+                            <pre><code class="language-markdown"># Contesto
+Sono uno studente del biennio di Web e Interaction Design.
+Sto progettando il sito di un'associazione che organizza laboratori di fotografia per ragazzi.
+
+# Compito
+Scrivi i microcopy per il form di iscrizione a un laboratorio.
+
+# Vincoli
+- Tono amichevole, dai del tu
+- Messaggi di errore che spiegano come correggere, senza colpevolizzare
+- Massimo 8 parole per etichetta
+
+# Formato
+Una tabella con le colonne: campo, etichetta, testo di aiuto, messaggio di errore.
+
+# Materiale
+Campi del form: nome, email, età, laboratorio scelto, consenso privacy.</code></pre>
+                        </div>
+                        <div class="alert alert-success mt-3">
+                            <strong><i class="bi bi-lightbulb"></i> Suggerimento:</strong> salva i prompt che funzionano bene in un file di testo. Diventano i tuoi "modelli" riutilizzabili, proprio come i componenti di un design system.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. Usi quotidiani -->
+                <section id="usi" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-grid-3x3-gap"></i> 2. Usi Quotidiani</h2>
+                    <div class="content-box">
+                        <p>Alcuni usi in cui l'AI è davvero utile, con un esempio di richiesta per ciascuno.</p>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><i class="bi bi-pen text-primary"></i> Scrivere e rivedere testi</h3>
+                                        <p class="card-text small mb-0"><em>"Correggi errori e ripetizioni di questa mail al docente senza cambiarne il tono. Elenca le modifiche che hai fatto."</em></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><i class="bi bi-file-earmark-text text-primary"></i> Riassumere documenti</h3>
+                                        <p class="card-text small mb-0"><em>"Riassumi questo bando in 5 punti: requisiti, scadenze, materiali da consegnare, criteri di valutazione, contatti."</em></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><i class="bi bi-globe2 text-primary"></i> Ricerca con fonti</h3>
+                                        <p class="card-text small mb-0"><em>"Cerca sul web le linee guida attuali sul contrasto dei colori per il testo. Indica per ogni affermazione la fonte con il link."</em> (Serve un assistente con la ricerca web attiva.)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><i class="bi bi-table text-primary"></i> Analisi di file e dati</h3>
+                                        <p class="card-text small mb-0"><em>"Questo CSV contiene le risposte al questionario sugli utenti del sito. Quali sono i tre problemi più segnalati? Crea un grafico."</em></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><i class="bi bi-translate text-primary"></i> Traduzione</h3>
+                                        <p class="card-text small mb-0"><em>"Traduci in inglese la pagina 'Chi siamo'. Mantieni il tono informale e segnalami le espressioni che non hanno un equivalente diretto."</em></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><i class="bi bi-lightning-charge text-primary"></i> Brainstorming</h3>
+                                        <p class="card-text small mb-0"><em>"Dammi 15 idee di interazione per la pagina di una mostra sul suono. Mescola idee semplici e idee sperimentali, e segnala quali sono realizzabili solo con HTML e CSS."</em></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><i class="bi bi-mortarboard text-primary"></i> Studio: spiegazioni, quiz, flashcard</h3>
+                                        <p class="card-text small mb-2"><em>"Spiegami la differenza tra flexbox e grid come se fossi al primo anno, con un esempio pratico. Poi fammi 5 domande per verificare se ho capito, una alla volta, senza darmi subito la soluzione."</em></p>
+                                        <p class="card-text small mb-0">Usata così l'AI è un ottimo tutor. Ma se le fai fare gli esercizi al posto tuo, all'esame (e al lavoro) non saprai farli: la fatica di capire è il punto dello studio.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. Designer -->
+                <section id="designer" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-vector-pen"></i> 3. L'AI nel Lavoro del Designer</h2>
+                    <div class="content-box">
+                        <p>Nelle fasi di progettazione del corso l'AI può accelerare il lavoro, a patto di restare tu a decidere. Il suo contributo migliore è produrre <strong>tante alternative</strong> e <strong>prime bozze</strong>; la scelta, la sintesi e la qualità finale restano compito del designer.</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle">
+                                <caption class="small">L'AI nelle fasi di progetto: possibili usi e attenzioni</caption>
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">Fase</th>
+                                        <th scope="col">Come può aiutare</th>
+                                        <th scope="col">Attenzione a…</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Analisi preliminare</th>
+                                        <td>Analisi dei competitor (punti di forza e debolezza dei siti concorrenti), elenco dei requisiti e loro priorità con il metodo <strong>MoSCoW</strong> (<em>Must, Should, Could, Won't have</em>).</td>
+                                        <td>Verifica che i competitor esistano davvero e visita i loro siti: l'AI potrebbe descrivere versioni vecchie o inventarle.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Brand identity</th>
+                                        <td>Liste di nomi (naming), payoff, proposte di tone of voice, prime formulazioni di vision e mission.</td>
+                                        <td>Controlla che il nome non sia già registrato o usato. Le formulazioni tendono al generico: usale come materiale grezzo da riscrivere.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Copywriting e microcopy</th>
+                                        <td>Testi delle pagine, etichette dei bottoni, messaggi di errore e di conferma, stati vuoti, testi alternativi delle immagini.</td>
+                                        <td>Il tono deve essere coerente con il brand; leggi tutto ad alta voce. Gli <code>alt</code> vanno scritti guardando l'immagine nel contesto della pagina.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Architettura e wireframe</th>
+                                        <td>Mappe del sito, struttura delle pagine, elenco dei contenuti per sezione, primi wireframe testuali o in HTML grezzo.</td>
+                                        <td>Valida la struttura con utenti reali: l'AI propone schemi "medi", non conosce i tuoi utenti. Vedi <a href="wireframe-prototype-handoff-guide.html">Wireframe e Prototipi</a>.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Immagini e strumenti di design</th>
+                                        <td>I generatori di immagini e le funzioni AI integrate nei software di grafica e di prototipazione aiutano con moodboard, varianti, rimozione di sfondi, estensione di immagini, prime bozze di layout.</td>
+                                        <td>Diritti d'uso delle immagini generate, stili riconoscibili di artisti viventi, bias nella rappresentazione delle persone (vedi <a href="#etica">Etica</a>).</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="code-example">
+                            <pre><code class="language-markdown"># Esempio: analisi MoSCoW
+Contesto: sito per una scuola di musica di quartiere, budget limitato,
+gestito da due insegnanti senza competenze tecniche.
+
+Compito: elenca i requisiti funzionali del sito e classificali con il metodo
+MoSCoW. Per ogni requisito "Must" spiega in una riga perché è essenziale.
+
+Formato: quattro elenchi puntati, uno per categoria.</code></pre>
+                        </div>
+                        <p class="small mb-0">Per il metodo progettuale completo vedi <a href="ux-interface-guide.html">UX e Progettazione Interfaccia</a>.</p>
+                    </div>
+                </section>
+
+                <!-- 4. Verificare -->
+                <section id="verificare" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-check2-circle"></i> 4. Verificare Sempre</h2>
+                    <div class="content-box">
+                        <h3 class="h4">Riconoscere le allucinazioni</h3>
+                        <p>Le <a href="ai-fondamenti-guide.html#allucinazioni">allucinazioni</a> non si riconoscono dal tono, che è sempre sicuro. Ci sono però segnali di allarme:</p>
+                        <ul>
+                            <li>dettagli molto precisi (date, numeri, nomi, citazioni tra virgolette) su argomenti poco noti;</li>
+                            <li>link che non si aprono o portano a pagine che non parlano di quell'argomento;</li>
+                            <li>proprietà CSS, funzioni o librerie che non trovi nella documentazione ufficiale;</li>
+                            <li>risposte diverse alla stessa domanda posta in due chat separate.</li>
+                        </ul>
+
+                        <h3 class="h4 mt-4">Controllare le fonti</h3>
+                        <ol>
+                            <li>Chiedi fonti <strong>verificabili</strong>: link, titolo e autore.</li>
+                            <li><strong>Apri ogni link</strong> e controlla che la pagina esista e dica davvero quello che l'AI le attribuisce.</li>
+                            <li>Per il codice, la fonte di riferimento è la documentazione ufficiale (per HTML e CSS: <a href="https://developer.mozilla.org/it/" target="_blank" rel="noopener noreferrer">MDN</a>).</li>
+                            <li>Per informazioni recenti (prezzi, versioni, normative) usa un assistente con ricerca web o verifica tu.</li>
+                        </ol>
+
+                        <h3 class="h4 mt-4">La piaggeria (sycophancy)</h3>
+                        <p>I modelli tendono ad <strong>assecondare l'utente</strong>: a dargli ragione, a lodare il suo lavoro, a cambiare idea appena vengono contraddetti. È un effetto dell'addestramento, perché alle persone piacciono le risposte che le confermano. Per ottenere un parere utile, chiedilo esplicitamente critico:</p>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--weak">
+                                    <div class="ai-prompt__label text-danger">❌ Invita alla lode</div>
+                                    <p>Ho fatto questo logo, ti piace?</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ai-prompt ai-prompt--strong">
+                                    <div class="ai-prompt__label text-success">✅ Chiede una critica</div>
+                                    <p>Valuta questo logo come un direttore creativo esigente. Elenca i tre problemi principali per leggibilità, riconoscibilità e uso a piccole dimensioni. Non dirmi cosa funziona.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ai-keybox mt-4">
+                            <h3><i class="bi bi-people"></i> Collaboratore, non oracolo</h3>
+                            <p class="mb-0">Tratta l'AI come un collega veloce, colto e instancabile, che però a volte sbaglia con grande sicurezza e tende a darti ragione. Le dai lavoro, discuti le sue proposte, controlli i risultati. <strong>La responsabilità di ciò che consegni resta tua.</strong></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. Etica -->
+                <section id="etica" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-shield-lock"></i> 5. Etica, Privacy e Normativa</h2>
+                    <div class="content-box">
+                        <p>Clicca sui titoli per aprire ciascun argomento.</p>
+
+                        <details class="mb-3 p-3 border rounded" open>
+                            <summary class="fw-bold"><i class="bi bi-incognito"></i> Cosa non incollare in una chat</summary>
+                            <div class="mt-3">
+                                <p>Ciò che scrivi in una chat viene inviato ai server del fornitore e, a seconda del servizio e delle impostazioni, può essere conservato o usato per migliorare i modelli. Non incollare mai:</p>
+                                <ul>
+                                    <li><strong>dati personali</strong> tuoi o di altri: documenti d'identità, dati sanitari, indirizzi, numeri di telefono;</li>
+                                    <li><strong>dati dei clienti</strong> e documenti riservati: contratti, preventivi, progetti non pubblicati, database;</li>
+                                    <li><strong>credenziali</strong>: password, chiavi API, file <code>.env</code>, token di accesso (anche dentro uno snippet di codice!).</li>
+                                </ul>
+                                <p class="mb-0">Se devi far analizzare un documento, togli prima nomi e dati sensibili. Controlla nelle impostazioni dell'app se l'uso delle conversazioni per l'addestramento è attivo, e per il lavoro preferisci i piani aziendali, che di norma lo escludono.</p>
+                            </div>
+                        </details>
+
+                        <details class="mb-3 p-3 border rounded">
+                            <summary class="fw-bold"><i class="bi bi-c-circle"></i> Copyright e opere generate</summary>
+                            <div class="mt-3">
+                                <ul class="mb-0">
+                                    <li><strong>Chi è l'autore?</strong> In generale il diritto d'autore protegge le opere frutto della creatività umana. Un'immagine generata con un semplice prompt rischia di non essere protetta; un'opera in cui il contributo creativo umano è determinante (selezione, rielaborazione, composizione) sì. In Italia la legge sull'intelligenza artificiale del 2025 ha ribadito questo principio.</li>
+                                    <li><strong>Diritti dei dati di addestramento</strong>: molti modelli sono stati addestrati su opere protette senza il consenso degli autori. È oggetto di cause legali e del dibattito pubblico: un tema che riguarda direttamente illustratori, fotografi e designer.</li>
+                                    <li><strong>Termini d'uso</strong>: ogni servizio stabilisce cosa puoi fare con ciò che generi, anche commercialmente. Leggili prima di usare un'immagine in un lavoro per un cliente.</li>
+                                    <li><strong>Stile e identità</strong>: imitare lo stile riconoscibile di un artista vivente, o generare immagini di persone reali, pone problemi etici e legali anche quando è tecnicamente possibile.</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details class="mb-3 p-3 border rounded">
+                            <summary class="fw-bold"><i class="bi bi-people"></i> Bias nei dati</summary>
+                            <div class="mt-3">
+                                <p>I modelli imparano dai dati, e i dati riflettono i pregiudizi della società che li ha prodotti. Chiedi a un generatore di immagini "un medico" o "un'infermiera" e osserva genere, età ed etnia dei risultati; chiedi "una casa tipica" e guarda in quale paese sembra trovarsi.</p>
+                                <p class="mb-0">Per un designer questo è un tema concreto: personas, illustrazioni e immagini di stock generate possono rafforzare stereotipi. Specifica la diversità che desideri e rivedi i risultati con occhio critico.</p>
+                            </div>
+                        </details>
+
+                        <details class="mb-3 p-3 border rounded">
+                            <summary class="fw-bold"><i class="bi bi-tree"></i> Impatto ambientale</summary>
+                            <div class="mt-3">
+                                <p>Addestrare e far funzionare i modelli richiede data center che consumano molta energia elettrica e acqua per il raffreddamento. Il costo di una singola richiesta è piccolo, ma moltiplicato per miliardi di utenti diventa rilevante; generare immagini, video e usare i modelli che "ragionano" costa più di una breve risposta testuale.</p>
+                                <p class="mb-0">Buone abitudini: usa l'AI quando porta un vantaggio reale, preferisci modelli piccoli e veloci per i compiti semplici, evita di rigenerare decine di volte la stessa cosa senza cambiare il prompt.</p>
+                            </div>
+                        </details>
+
+                        <details class="mb-3 p-3 border rounded">
+                            <summary class="fw-bold"><i class="bi bi-bank"></i> L'AI Act europeo</summary>
+                            <div class="mt-3">
+                                <p>L'<strong>AI Act</strong> (Regolamento UE 2024/1689) è la prima legge organica al mondo sull'intelligenza artificiale. È in vigore dal 2024 e si applica in modo graduale. Classifica i sistemi di AI in base al <strong>rischio</strong>:</p>
+                                <ul>
+                                    <li><strong>Inaccettabile</strong> (vietati): ad esempio il "punteggio sociale" dei cittadini o la manipolazione di persone vulnerabili;</li>
+                                    <li><strong>Alto rischio</strong> (regole severe): AI usata per selezionare il personale, valutare studenti, concedere prestiti;</li>
+                                    <li><strong>Rischio limitato</strong> (obblighi di trasparenza): chi parla con un chatbot deve saperlo; i contenuti generati o manipolati (es. <em>deepfake</em>) vanno segnalati come tali;</li>
+                                    <li><strong>Rischio minimo</strong>: la maggior parte delle applicazioni, come i filtri antispam.</li>
+                                </ul>
+                                <p class="mb-0"><strong>Alfabetizzazione AI:</strong> dal febbraio 2025 aziende ed enti che usano sistemi di AI devono garantire che il proprio personale abbia un livello sufficiente di competenza sull'AI. Anche per questo un corso di web design ne parla.</p>
+                            </div>
+                        </details>
+                    </div>
+                </section>
+
+                <!-- 5.1 Trasparenza -->
+                <section id="trasparenza" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-eye"></i> 5.1 Trasparenza: Dichiarare l'Uso dell'AI</h2>
+                    <div class="content-box">
+                        <p>Quando l'AI ha contribuito in modo significativo a un lavoro (un testo, un progetto, un sito, una tesi), è corretto dichiararlo: chi legge ha il diritto di sapere come è stato prodotto. Le regole di molte università, riviste e committenti lo richiedono, e in diversi casi lo impone la legge.</p>
+                        <p>Questa stessa guida lo fa. Ecco l'informativa che trovi in fondo alla <a href="index.html">homepage</a>:</p>
+                        <blockquote class="blockquote border-start border-4 ps-3 fs-6">
+                            <p class="mb-0">"Questa guida didattica è stata sviluppata in HTML, CSS e JavaScript, con l'utilizzo di Bootstrap per la gestione delle classi e dei componenti; il processo di sviluppo è stato supportato da strumenti di intelligenza artificiale."</p>
+                        </blockquote>
+                        <p>Una buona dichiarazione dice <strong>quale strumento</strong> è stato usato, <strong>per cosa</strong>, e chi ha <strong>verificato</strong> il risultato. Un modello per i tuoi progetti d'esame:</p>
+                        <div class="code-example">
+                            <pre><code class="language-markdown">Dichiarazione sull'uso dell'AI
+Per questo progetto ho usato [nome dell'assistente] per:
+- generare una prima lista di nomi per il brand (poi selezionati e modificati da me);
+- correggere il codice CSS della sezione galleria;
+- rivedere ortografia e punteggiatura dei testi.
+Concept, scelte progettuali, grafica e testi definitivi sono miei.
+Ho verificato e revisionato tutto il materiale generato.</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigazione Pagine -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="ai-fondamenti-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> AI: Storia e Funzionamento
+                    </a>
+                    <a href="ai-sviluppo-guide.html" class="btn btn-primary">
+                        AI per Sviluppatori <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="h5"><i class="bi bi-code-slash"></i> Web Design Guide</p>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2026 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Cambia tema">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

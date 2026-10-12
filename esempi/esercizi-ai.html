@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizi AI - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Page Header -->
+    <div class="page-header page-header--ai text-white py-4">
+        <div class="container">
+            <p class="mb-1 text-uppercase small fw-bold opacity-75">Intelligenza Artificiale · Esercizi</p>
+            <h1 class="display-5"><i class="bi bi-journal-check"></i> Esercizi sull'AI</h1>
+            <p class="lead mb-0">Sei attività pratiche per usare l'AI con metodo e spirito critico</p>
+        </div>
+    </div>
+
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-lg-9 mx-auto">
+
+                <div class="alert alert-info mb-4">
+                    <strong><i class="bi bi-info-circle"></i> Come consegnare:</strong> raccogli i risultati di ogni esercizio in un documento (o in una pagina HTML, se vuoi esercitarti anche con il codice). Quando incolli risposte dell'AI, indica sempre quale assistente hai usato e la data. Rivedi le pagine <a href="../ai-fondamenti-guide.html">AI: Storia e Funzionamento</a>, <a href="../ai-uso-guide.html">Usare bene l'AI</a> e <a href="../ai-sviluppo-guide.html">AI per Sviluppatori</a>.
+                </div>
+
+                <!-- Esercizio 1 -->
+                <section id="es1" class="mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <h2 class="h5 mb-0"><span class="badge bg-primary me-2">1</span>Stesso prompt, tre assistenti</h2>
+                            <span class="badge bg-secondary">Pagina 3 · Confronto</span>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Obiettivo:</strong> capire per esperienza diretta che non esiste "il migliore", ma lo strumento più adatto al compito.</p>
+                            <ol>
+                                <li>Scegli tre compiti diversi: uno di scrittura (es. il testo "Chi siamo" di uno studio grafico), uno di codice (es. una card prodotto responsive in HTML e CSS) e uno di ragionamento (es. l'analisi MoSCoW di un sito).</li>
+                                <li>Scrivi per ciascuno un prompt efficace e invialo, identico, a ChatGPT, Gemini e Claude (bastano le versioni gratuite).</li>
+                                <li>Confronta le risposte in una tabella.</li>
+                            </ol>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-sm mb-3">
+                                    <caption class="small">Tabella da compilare per ogni compito (voti da 1 a 5)</caption>
+                                    <thead class="table-dark">
+                                        <tr><th scope="col">Criterio</th><th scope="col">ChatGPT</th><th scope="col">Gemini</th><th scope="col">Claude</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><th scope="row">Qualità del contenuto</th><td></td><td></td><td></td></tr>
+                                        <tr><th scope="row">Tono adeguato</th><td></td><td></td><td></td></tr>
+                                        <tr><th scope="row">Accuratezza (verificata)</th><td></td><td></td><td></td></tr>
+                                        <tr><th scope="row">Rispetto del formato richiesto</th><td></td><td></td><td></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="mb-0"><strong>Consegna:</strong> i prompt, le tre tabelle e un commento finale di 10 righe: quale assistente useresti per quale tipo di compito, e perché.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Esercizio 2 -->
+                <section id="es2" class="mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <h2 class="h5 mb-0"><span class="badge bg-primary me-2">2</span>Caccia all'allucinazione</h2>
+                            <span class="badge bg-secondary">Pagine 1 e 2 · Verifica</span>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Obiettivo:</strong> imparare a non fidarsi del tono sicuro e a verificare le fonti una per una.</p>
+                            <ol>
+                                <li>Scegli un argomento di nicchia legato al design: un graphic designer marchigiano poco noto, una tipografia storica locale, una mostra di qualche anno fa.</li>
+                                <li>Chiedi a un assistente <strong>senza ricerca web</strong> una breve biografia e cinque fonti (libri, articoli, link).</li>
+                                <li>Verifica ogni fonte: il libro esiste (cerca su catalogo SBN o Google Libri)? Il link si apre? La pagina dice davvero quello che l'AI le attribuisce?</li>
+                                <li>Ripeti la richiesta con un assistente <strong>con ricerca web attiva</strong> e confronta.</li>
+                            </ol>
+                            <p class="mb-0"><strong>Consegna:</strong> una tabella con ogni fonte classificata come <em>vera e pertinente</em>, <em>vera ma non pertinente</em> o <em>inventata</em>, più tre righe sulle differenze tra le due modalità.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Esercizio 3 -->
+                <section id="es3" class="mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <h2 class="h5 mb-0"><span class="badge bg-primary me-2">3</span>Da prompt debole a prompt efficace</h2>
+                            <span class="badge bg-secondary">Pagina 2 · Prompting</span>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Obiettivo:</strong> applicare i sette principi del prompting.</p>
+                            <p>Riscrivi questi tre prompt:</p>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-4"><div class="ai-prompt ai-prompt--weak"><p>"Fammi un logo."</p></div></div>
+                                <div class="col-md-4"><div class="ai-prompt ai-prompt--weak"><p>"Il mio sito non funziona su mobile, aiutami."</p></div></div>
+                                <div class="col-md-4"><div class="ai-prompt ai-prompt--weak"><p>"Scrivi la descrizione del mio portfolio."</p></div></div>
+                            </div>
+                            <ol>
+                                <li>Per ciascuno, invia prima la versione debole e salva la risposta.</li>
+                                <li>Riscrivilo indicando accanto a ogni parte quale principio stai applicando (contesto, obiettivo e vincoli, esempi, formato, domande, passaggi).</li>
+                                <li>Invia la nuova versione e confronta i risultati.</li>
+                            </ol>
+                            <p class="mb-0"><strong>Consegna:</strong> le tre coppie di prompt e risposte, con una breve nota su cosa è migliorato e cosa no.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Esercizio 4 -->
+                <section id="es4" class="mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <h2 class="h5 mb-0"><span class="badge bg-primary me-2">4</span>Scrivere il CLAUDE.md di un progetto</h2>
+                            <span class="badge bg-secondary">Pagina 3 · Memoria</span>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Obiettivo:</strong> descrivere un progetto in modo che un collaboratore (umano o AI) possa lavorarci senza fare domande.</p>
+                            <ol>
+                                <li>Scegli un progetto del corso a cui stai lavorando.</li>
+                                <li>Scrivi il suo <code>CLAUDE.md</code> (o <code>AGENTS.md</code>) partendo dall'<a href="../ai-sviluppo-guide.html#memoria">esempio della guida</a>: progetto e pubblico, stack, struttura delle cartelle, convenzioni, verifiche, cosa non fare.</li>
+                                <li>Mettilo alla prova: apri un agente di coding nella cartella del progetto e chiedigli "Spiegami questo progetto e le sue regole". Ha capito tutto? Correggi il file dove ha frainteso.</li>
+                            </ol>
+                            <p class="mb-0"><strong>Consegna:</strong> il file finale e un elenco delle correzioni fatte dopo il test. Ricorda: deve essere conciso, non una documentazione completa.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Esercizio 5 -->
+                <section id="es5" class="mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <h2 class="h5 mb-0"><span class="badge bg-primary me-2">5</span>Code review di codice generato</h2>
+                            <span class="badge bg-secondary">Pagina 3 · Vibe coding</span>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Obiettivo:</strong> leggere il codice generato con occhio critico, come se fosse quello di un collega.</p>
+                            <ol>
+                                <li>Fai generare a un agente un componente UI: una card prodotto o un form di contatto con validazione.</li>
+                                <li>Revisionalo con la checklist qui sotto, <strong>senza</strong> chiedere aiuto all'AI.</li>
+                                <li>Correggi tu i problemi trovati (o chiedi all'agente di correggerli, indicando esattamente cosa).</li>
+                            </ol>
+                            <ul class="list-group mb-3">
+                                <li class="list-group-item"><i class="bi bi-square"></i> <strong>Semantica:</strong> elementi giusti (<code>&lt;button&gt;</code>, <code>&lt;label&gt;</code>, <code>&lt;fieldset&gt;</code>, titoli in ordine)?</li>
+                                <li class="list-group-item"><i class="bi bi-square"></i> <strong>Accessibilità:</strong> <code>alt</code>, contrasto, focus visibile, uso da tastiera?</li>
+                                <li class="list-group-item"><i class="bi bi-square"></i> <strong>Responsive:</strong> funziona a 375px, 768px e 1280px? Unità relative?</li>
+                                <li class="list-group-item"><i class="bi bi-square"></i> <strong>Sicurezza:</strong> input validato anche lato server? Nessuna credenziale nel codice? <code>textContent</code> invece di <code>innerHTML</code> per i dati dell'utente?</li>
+                                <li class="list-group-item"><i class="bi bi-square"></i> <strong>Pulizia:</strong> niente stili inline, nomi di classe chiari, niente codice inutile?</li>
+                                <li class="list-group-item"><i class="bi bi-square"></i> <strong>Validità:</strong> HTML valido su <a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">validator.w3.org</a>?</li>
+                            </ul>
+                            <p class="mb-0"><strong>Consegna:</strong> il codice originale, la checklist compilata con i problemi trovati e il codice corretto.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Esercizio 6 -->
+                <section id="es6" class="mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <h2 class="h5 mb-0"><span class="badge bg-primary me-2">6</span>Collegare un server MCP</h2>
+                            <span class="badge bg-secondary">Pagina 3 · MCP</span>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Obiettivo:</strong> vedere concretamente come un harness acquista nuove capacità.</p>
+                            <ol>
+                                <li>Scegli un server MCP <strong>ufficiale</strong> o molto diffuso: ad esempio <em>filesystem</em> (limitato a una cartella di prova!) o quello di Figma.</li>
+                                <li>Prima di collegarlo, chiedi all'assistente di fare qualcosa che richiede quel servizio (es. "Elenca i file della cartella <em>prova-mcp</em>") e annota la risposta.</li>
+                                <li>Collega il server seguendo la documentazione del tuo assistente.</li>
+                                <li>Ripeti la stessa richiesta e altre due più complesse. Osserva quali tool vengono chiamati e quando ti viene chiesto il permesso.</li>
+                            </ol>
+                            <p class="mb-0"><strong>Consegna:</strong> una pagina con le risposte prima e dopo, l'elenco dei tool che il server mette a disposizione e una riflessione sui permessi: cosa potrebbe andare storto se il server fosse malevolo?</p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="../ai-sviluppo-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> AI per Sviluppatori
+                    </a>
+                    <a href="index.html" class="btn btn-primary">
+                        Indice degli esempi <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Cambia tema">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/theme-toggle.js"></script>
+    <script src="../js/navbar.js"></script>
+</body>
+</html>

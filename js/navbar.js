@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
             id: 'navbarDropdownCSS',
             dropdown: [
                 { text: 'Guida CSS Base', url: pathPrefix + 'css-guide.html' },
+                { text: 'CSS Moderno', url: pathPrefix + 'css-modern-guide.html' },
                 { text: 'Bootstrap', url: pathPrefix + 'bootstrap-guide.html' },
                 { text: 'SCSS, SASS e Compilatori', url: pathPrefix + 'scss-sass-guide.html' }
             ]
@@ -58,6 +59,17 @@ document.addEventListener("DOMContentLoaded", function() {
             ]
         },
         {
+            text: 'AI',
+            id: 'navbarDropdownAI',
+            dropdown: [
+                { text: 'AI: Storia e Funzionamento', url: pathPrefix + 'ai-fondamenti-guide.html' },
+                { text: "Usare bene l'AI", url: pathPrefix + 'ai-uso-guide.html' },
+                { text: 'AI per Sviluppatori', url: pathPrefix + 'ai-sviluppo-guide.html' },
+                { separator: true },
+                { text: 'Esercizi AI', url: pathPrefix + 'esempi/esercizi-ai.html' }
+            ]
+        },
+        {
             text: 'Altro',
             id: 'navbarDropdownOther',
             dropdown: [
@@ -88,6 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const isWireframePage = page === 'wireframe-prototype-handoff-guide.html';
     const isLayoutModelsPage = page === 'web-layout-models-guide.html';
     const isHostingPage = page === 'hosting-guide.html';
+    const isAiPage = ['ai-fondamenti-guide.html', 'ai-uso-guide.html', 'ai-sviluppo-guide.html', 'esercizi-ai.html'].includes(page);
     
     let navbarClass = 'navbar-dark bg-dark';
     let navbarStyle = '';
@@ -117,6 +130,10 @@ document.addEventListener("DOMContentLoaded", function() {
         navbarClass = 'navbar-dark bg-dark';
         navbarStyle = 'style="border-bottom: 3px solid #e83e8c;"';
         iconClass = ' text-danger';
+    } else if (isAiPage) {
+        navbarClass = 'navbar-dark bg-dark';
+        navbarStyle = 'style="border-bottom: 3px solid #14b8a6;"';
+        iconClass = ' text-info';
     } else if (isHostingPage) {
         navbarClass = 'navbar-dark bg-dark';
         navbarStyle = 'style="border-bottom: 3px solid #0dcaf0;"';
@@ -166,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const navbarHtml = `
     <nav class="navbar navbar-expand-lg ${navbarClass} sticky-top" ${navbarStyle}>
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="${pathPrefix}index.html">
                 <i class="bi bi-code-slash${iconClass}"></i> Web Design Guide
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

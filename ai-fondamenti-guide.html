@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI: Storia e Funzionamento - Manuale Web Design</title>
+    <meta name="description" content="Cos'è l'intelligenza artificiale, la sua storia e come funziona un Large Language Model: token, addestramento, context window, temperatura e allucinazioni.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Page Header -->
+    <div class="page-header page-header--ai text-white py-4">
+        <div class="container">
+            <p class="mb-1 text-uppercase small fw-bold opacity-75">Intelligenza Artificiale · 1 di 3</p>
+            <h1 class="display-5"><i class="bi bi-cpu"></i> AI: Storia e Funzionamento</h1>
+            <p class="lead mb-0">Dalle origini ai Large Language Model: token, addestramento, limiti</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <p class="h5 mb-3">Indice Argomenti</p>
+                    <nav class="nav flex-column nav-pills" aria-label="Indice della pagina">
+                        <a class="nav-link" href="#cos-e">1. Cos'è l'AI</a>
+                        <a class="nav-link" href="#storia">2. Breve storia</a>
+                        <a class="nav-link" href="#llm">3. Come funziona un LLM</a>
+                        <a class="nav-link" href="#token">3.1 Token</a>
+                        <a class="nav-link" href="#addestramento">3.2 Addestramento e parametri</a>
+                        <a class="nav-link" href="#contesto">3.3 Context window</a>
+                        <a class="nav-link" href="#temperatura">3.4 Temperatura</a>
+                        <a class="nav-link" href="#allucinazioni">3.5 Allucinazioni</a>
+                        <a class="nav-link" href="#capacita">3.6 Multimodalità e ragionamento</a>
+                        <a class="nav-link" href="#rag">3.7 Embeddings e RAG</a>
+                        <a class="nav-link" href="#principi">4. Principi da ricordare</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+
+                <!-- 1. Cos'è l'AI -->
+                <section id="cos-e" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-lightbulb"></i> 1. Cos'è l'Intelligenza Artificiale</h2>
+                    <div class="content-box">
+                        <p>L'<strong>Intelligenza Artificiale</strong> (AI, dall'inglese <em>Artificial Intelligence</em>) è l'insieme delle tecniche che permettono a un computer di svolgere compiti che, fatti da una persona, richiederebbero intelligenza: riconoscere un volto in una foto, tradurre un testo, rispondere a una domanda, generare un'immagine.</p>
+                        <p>Il termine è molto ampio e spesso usato in modo impreciso. Conviene immaginarlo come una serie di <strong>cerchi concentrici</strong>, dal più generale al più specifico:</p>
+
+                        <div class="row align-items-center g-4 my-2">
+                            <div class="col-md-6">
+                                <svg class="ai-diagram" viewBox="0 0 420 420" role="img" aria-labelledby="cerchiTitolo cerchiDesc">
+                                    <title id="cerchiTitolo">Cerchi concentrici dell'intelligenza artificiale</title>
+                                    <desc id="cerchiDesc">Il cerchio più grande è l'AI; dentro c'è il machine learning; dentro ancora il deep learning; al centro l'AI generativa.</desc>
+                                    <circle cx="210" cy="210" r="205" fill="#0f766e" />
+                                    <circle cx="210" cy="260" r="155" fill="#0e7490" />
+                                    <circle cx="210" cy="310" r="105" fill="#4338ca" />
+                                    <circle cx="210" cy="355" r="58" fill="#7c3aed" />
+                                    <text class="ai-diagram__on-color" x="210" y="40" text-anchor="middle" font-size="20" font-weight="700">Intelligenza Artificiale</text>
+                                    <text class="ai-diagram__on-color" x="210" y="140" text-anchor="middle" font-size="18" font-weight="700">Machine Learning</text>
+                                    <text class="ai-diagram__on-color" x="210" y="240" text-anchor="middle" font-size="17" font-weight="700">Deep Learning</text>
+                                    <text class="ai-diagram__on-color" x="210" y="350" text-anchor="middle" font-size="15" font-weight="700">AI</text>
+                                    <text class="ai-diagram__on-color" x="210" y="370" text-anchor="middle" font-size="15" font-weight="700">Generativa</text>
+                                </svg>
+                            </div>
+                            <div class="col-md-6">
+                                <dl class="mb-0">
+                                    <dt>Intelligenza Artificiale</dt>
+                                    <dd>Tutto il campo: anche programmi scritti a mano con regole "se succede X, fai Y" (come l'avversario di un videogioco).</dd>
+                                    <dt>Machine Learning</dt>
+                                    <dd>Il computer non riceve le regole: le <strong>impara dagli esempi</strong>. Gli mostri migliaia di email etichettate "spam" e "non spam" e impara a distinguerle.</dd>
+                                    <dt>Deep Learning</dt>
+                                    <dd>Machine learning con <strong>reti neurali</strong> a molti strati ("profonde"), ispirate molto alla lontana al cervello. Funziona benissimo con immagini, suono e linguaggio.</dd>
+                                    <dt>AI Generativa</dt>
+                                    <dd>Modelli che non si limitano a classificare ma <strong>creano contenuti nuovi</strong>: testo, immagini, musica, codice, video.</dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-info-circle"></i> Esempio:</strong> il filtro antispam della posta è machine learning; il riconoscimento dei volti nella galleria del telefono è deep learning; ChatGPT, Gemini e Claude, che scrivono testi, e i generatori di immagini sono AI generativa.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. Storia -->
+                <section id="storia" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-clock-history"></i> 2. Breve Storia dell'AI</h2>
+                    <div class="content-box">
+                        <p>L'AI non è nata con ChatGPT: è un'idea di oltre settant'anni, fatta di grandi entusiasmi e lunghe delusioni.</p>
+                        <ol class="ai-timeline mt-4">
+                            <li class="ai-timeline__item">
+                                <span class="ai-timeline__year">1950</span><strong>Alan Turing e il "gioco dell'imitazione"</strong>
+                                <p class="mb-0">Turing si chiede se una macchina possa pensare e propone un test: se in una conversazione scritta non riusciamo a distinguere la macchina da una persona, possiamo dire che "pensa". È il <em>Test di Turing</em>.</p>
+                            </li>
+                            <li class="ai-timeline__item">
+                                <span class="ai-timeline__year">1956</span><strong>Conferenza di Dartmouth</strong>
+                                <p class="mb-0">Un gruppo di ricercatori si riunisce negli Stati Uniti e conia il termine <em>Artificial Intelligence</em>. Pensavano di risolvere il problema in pochi anni.</p>
+                            </li>
+                            <li class="ai-timeline__item">
+                                <span class="ai-timeline__year">Anni '60–'80</span><strong>AI simbolica, sistemi esperti e "inverni"</strong>
+                                <p class="mb-0">Si cerca di scrivere a mano tutte le regole del ragionamento (ad esempio per la diagnosi medica). Funziona in ambiti ristretti, ma il mondo reale ha troppe eccezioni. Le promesse non mantenute portano a tagli dei fondi: gli <em>inverni dell'AI</em>.</p>
+                            </li>
+                            <li class="ai-timeline__item">
+                                <span class="ai-timeline__year">1997</span><strong>Deep Blue batte Kasparov</strong>
+                                <p class="mb-0">Il computer di IBM sconfigge il campione del mondo di scacchi. Ma è soprattutto forza di calcolo: esamina milioni di mosse al secondo.</p>
+                            </li>
+                            <li class="ai-timeline__item">
+                                <span class="ai-timeline__year">Anni 2000–2010</span><strong>Il machine learning decolla</strong>
+                                <p class="mb-0">Internet produce enormi quantità di dati (<em>big data</em>) e le schede grafiche (GPU), nate per i videogiochi, si rivelano perfette per addestrare le reti neurali.</p>
+                            </li>
+                            <li class="ai-timeline__item ai-timeline__item--highlight">
+                                <span class="ai-timeline__year">2012</span><strong>AlexNet: la svolta del deep learning</strong>
+                                <p class="mb-0">Una rete neurale profonda stravince una gara di riconoscimento di immagini. Da qui il deep learning diventa la tecnica dominante.</p>
+                            </li>
+                            <li class="ai-timeline__item">
+                                <span class="ai-timeline__year">2016</span><strong>AlphaGo</strong>
+                                <p class="mb-0">L'AI di DeepMind (Google) batte il campione Lee Sedol a Go, un gioco troppo complesso per il calcolo "a forza bruta": il sistema ha imparato giocando milioni di partite.</p>
+                            </li>
+                            <li class="ai-timeline__item ai-timeline__item--highlight">
+                                <span class="ai-timeline__year">2017</span><strong>"Attention Is All You Need"</strong>
+                                <p class="mb-0">Un articolo di ricercatori Google introduce l'architettura <strong>Transformer</strong>, capace di considerare tutte le parole di un testo insieme e capire quali sono collegate. È la "T" di GPT ed è alla base di tutti i modelli linguistici attuali.</p>
+                            </li>
+                            <li class="ai-timeline__item">
+                                <span class="ai-timeline__year">2020</span><strong>GPT-3</strong>
+                                <p class="mb-0">OpenAI mostra che un Transformer molto grande, addestrato su moltissimo testo, sa scrivere, tradurre e programmare in modo sorprendente.</p>
+                            </li>
+                            <li class="ai-timeline__item ai-timeline__item--highlight">
+                                <span class="ai-timeline__year">Nov. 2022</span><strong>ChatGPT</strong>
+                                <p class="mb-0">Un'interfaccia a chat semplice porta l'AI generativa al grande pubblico: 100 milioni di utenti in due mesi.</p>
+                            </li>
+                            <li class="ai-timeline__item">
+                                <span class="ai-timeline__year">2023–2024</span><strong>Concorrenza e multimodalità</strong>
+                                <p class="mb-0">Si diffondono Claude (Anthropic), Gemini (Google) e i modelli "aperti" scaricabili. I modelli diventano <em>multimodali</em>: leggono immagini, ascoltano e parlano.</p>
+                            </li>
+                            <li class="ai-timeline__item">
+                                <span class="ai-timeline__year">Fine 2024</span><strong>MCP (Model Context Protocol)</strong>
+                                <p class="mb-0">Anthropic pubblica uno standard aperto per collegare le AI a strumenti e dati esterni, poi adottato da tutto il settore (vedi <a href="ai-sviluppo-guide.html#mcp">AI per Sviluppatori</a>).</p>
+                            </li>
+                            <li class="ai-timeline__item ai-timeline__item--highlight">
+                                <span class="ai-timeline__year">2025–2026</span><strong>Ragionamento e agenti</strong>
+                                <p class="mb-0">Arrivano modelli che "ragionano" prima di rispondere e <strong>agenti</strong> che svolgono compiti lunghi in autonomia: cercano, scrivono codice, lo provano e lo correggono.</p>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- 3. Come funziona un LLM -->
+                <section id="llm" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-chat-square-text"></i> 3. Come Funziona un Large Language Model</h2>
+                    <div class="content-box">
+                        <p>ChatGPT, Gemini e Claude sono <strong>Large Language Model</strong> (LLM), cioè "grandi modelli del linguaggio". L'idea di fondo è sorprendentemente semplice:</p>
+                        <div class="ai-keybox my-3">
+                            <p class="mb-0 fs-5">Un LLM fa una cosa sola: <strong>dato un testo, prevede come continua</strong>, un pezzetto alla volta. È un completamento automatico, come quello della tastiera del telefono, ma enormemente più sofisticato.</p>
+                        </div>
+                        <p>Quando chiedi "Scrivimi una poesia sul mare", il modello genera il primo pezzo della risposta, lo aggiunge al testo, prevede il pezzo successivo, e così via fino alla fine. Tutto quello che sembra "comprensione" emerge da questa previsione ripetuta, addestrata su una quantità di testo che nessun essere umano potrebbe leggere in mille vite.</p>
+                    </div>
+                </section>
+
+                <!-- 3.1 Token -->
+                <section id="token" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-puzzle"></i> 3.1 I Token</h2>
+                    <div class="content-box">
+                        <p>Il modello non legge lettere né parole intere, ma <strong>token</strong>: pezzi di testo che possono essere una parola corta, un pezzo di parola, uno spazio con la parola successiva, un segno di punteggiatura. Le parole comuni sono spesso un token solo, quelle rare o lunghe vengono spezzate.</p>
+                        <p>I token sono l'"unità di misura" dell'AI: la lunghezza massima di una conversazione, i limiti di utilizzo e i costi si contano in token. In italiano, in media, una parola vale poco più di un token.</p>
+
+                        <div class="ai-demo mt-4">
+                            <h3 class="h5"><i class="bi bi-scissors"></i> Prova: dividi una frase in token</h3>
+                            <label for="tokenInput" class="form-label">Scrivi una frase:</label>
+                            <textarea id="tokenInput" class="form-control mb-3" rows="2">Il web designer progetta interfacce accessibili e responsive.</textarea>
+                            <div id="tokenOutput" class="mb-2" aria-live="polite"></div>
+                            <p id="tokenCount" class="small mb-2"></p>
+                            <p class="small text-muted mb-0"><i class="bi bi-exclamation-circle"></i> <strong>Simulazione didattica:</strong> la divisione è approssimata con regole semplici. I tokenizer veri sono costruiti statisticamente sul testo di addestramento e cambiano da modello a modello.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3.2 Addestramento -->
+                <section id="addestramento" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-mortarboard"></i> 3.2 Addestramento e Parametri</h2>
+                    <div class="content-box">
+                        <p>Un assistente come quelli che usiamo nasce in più fasi:</p>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><span class="badge bg-primary me-1">1</span> Pre-training</h3>
+                                        <p class="card-text small mb-0">Il modello legge una quantità enorme di testo (libri, siti, codice) e impara a prevedere la parola successiva. Ne esce un "completatore" che conosce lingue, fatti e stili, ma non sa fare l'assistente: alla domanda "Qual è la capitale della Francia?" potrebbe rispondere con altre domande, come in un quiz.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><span class="badge bg-primary me-1">2</span> Fine-tuning</h3>
+                                        <p class="card-text small mb-0">Viene poi addestrato su migliaia di esempi di conversazioni ben fatte (domanda → risposta utile). Impara il "mestiere" dell'assistente: seguire istruzioni, rispondere in modo ordinato.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h3 class="h6 card-title"><span class="badge bg-primary me-1">3</span> Allineamento (RLHF)</h3>
+                                        <p class="card-text small mb-0">Persone valutano più risposte alternative indicando la migliore (<em>Reinforcement Learning from Human Feedback</em>). Il modello impara a preferire risposte utili, oneste e sicure. Esistono varianti in cui parte del giudizio è affidata a principi scritti o ad altri modelli.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="h4 mt-4">Cosa sono i parametri</h3>
+                        <p>Immagina un mixer audio con <strong>miliardi di manopole</strong>. All'inizio sono girate a caso e il modello produce frasi senza senso. Durante l'addestramento, a ogni esempio, ogni manopola viene ruotata di pochissimo nella direzione che rende la previsione un po' più giusta. Dopo migliaia di miliardi di esempi, la posizione di tutte le manopole contiene, in forma distribuita, quello che il modello ha "imparato".</p>
+                        <p>Quelle manopole sono i <strong>parametri</strong> (o "pesi"). I modelli attuali ne hanno da qualche miliardo a migliaia di miliardi. Più parametri significano in genere più capacità, ma anche più costi di calcolo ed energia.</p>
+                        <div class="alert alert-info">
+                            <strong><i class="bi bi-info-circle"></i> Nota:</strong> il modello <strong>non contiene una copia</strong> dei testi letti, come un archivio. Contiene regolarità statistiche. Per questo ricorda bene le cose molto frequenti e male quelle rare.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3.3 Context window -->
+                <section id="contesto" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-window"></i> 3.3 La Context Window</h2>
+                    <div class="content-box">
+                        <p>La <strong>context window</strong> (finestra di contesto) è la quantità di testo che il modello "vede" in un dato momento: le istruzioni, tutta la conversazione fin lì, i file allegati e la risposta che sta scrivendo. Si misura in token.</p>
+                        <p>È come il <strong>banco di lavoro</strong> di un artigiano: tutto ciò che è sul banco si può usare, ciò che non c'è non esiste. I modelli attuali hanno banchi enormi (centinaia di migliaia o milioni di token, l'equivalente di diversi libri), ma restano limitati.</p>
+                        <ul>
+                            <li>In una conversazione molto lunga i messaggi più vecchi possono essere riassunti o tagliati: il modello sembra "dimenticare" le prime istruzioni.</li>
+                            <li>Anche se tutto entra nella finestra, un contesto pieno di materiale irrilevante peggiora la qualità delle risposte: meglio dare solo ciò che serve.</li>
+                            <li>Ogni nuova chat parte con il banco vuoto.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 3.4 Temperatura -->
+                <section id="temperatura" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-thermometer-half"></i> 3.4 Temperatura e Casualità</h2>
+                    <div class="content-box">
+                        <p>Per ogni pezzo di testo il modello non ha una sola risposta, ma una <strong>lista di candidati con la loro probabilità</strong>. Poi ne <strong>estrae</strong> uno, un po' come tirare un dado truccato. Per questo la stessa domanda, fatta due volte, dà risposte diverse.</p>
+                        <p>La <strong>temperatura</strong> regola quanto è "truccato" il dado:</p>
+                        <ul>
+                            <li><strong>Bassa</strong>: vince quasi sempre il candidato più probabile. Risposte prevedibili e coerenti (utile per codice e dati).</li>
+                            <li><strong>Alta</strong>: anche i candidati meno probabili hanno una possibilità. Risposte più varie e creative, ma anche più strane.</li>
+                        </ul>
+
+                        <div class="ai-demo mt-4">
+                            <h3 class="h5"><i class="bi bi-dice-5"></i> Prova: completa la frase "Il gatto dorme sul…"</h3>
+                            <label for="tempRange" class="form-label">Temperatura: <strong id="tempValue">1.0</strong></label>
+                            <input type="range" class="form-range mb-3" id="tempRange" min="0.1" max="2" step="0.1" value="1">
+                            <div id="tempBars" class="mb-3"></div>
+                            <button type="button" class="btn btn-primary btn-sm" id="tempGenera"><i class="bi bi-play-fill"></i> Genera 5 completamenti</button>
+                            <p class="mt-3 mb-2" id="tempRisultati" aria-live="polite"></p>
+                            <p class="small text-muted mb-0"><i class="bi bi-exclamation-circle"></i> <strong>Simulazione didattica:</strong> candidati e probabilità sono inventati a scopo dimostrativo, ma il meccanismo (probabilità → estrazione) è quello reale.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3.5 Allucinazioni -->
+                <section id="allucinazioni" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-cloud-fog2"></i> 3.5 Le Allucinazioni</h2>
+                    <div class="content-box">
+                        <p>Si chiama <strong>allucinazione</strong> una risposta inventata ma presentata con sicurezza: una citazione mai detta, un libro inesistente, una funzione CSS che non c'è, un link che porta a una pagina vuota.</p>
+                        <p>Succede perché il modello è addestrato a produrre testo <strong>plausibile</strong>, non testo <strong>vero</strong>. Se gli chiedi la bibliografia su un artista poco noto, "sa" che una bibliografia ha autori, titoli, anni ed editori, e ne genera una con quell'aspetto, anche se i libri non esistono. Non sta mentendo: non ha un meccanismo interno che distingua "ricordo" da "invento".</p>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="alert alert-warning h-100 mb-0">
+                                    <strong><i class="bi bi-exclamation-triangle"></i> Più probabili quando:</strong>
+                                    <ul class="mb-0 mt-2">
+                                        <li>l'argomento è di nicchia o molto recente;</li>
+                                        <li>chiedi dettagli precisi: date, numeri, citazioni, URL;</li>
+                                        <li>la domanda presuppone qualcosa di falso ("Perché Leonardo usava Photoshop?").</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="alert alert-success h-100 mb-0">
+                                    <strong><i class="bi bi-shield-check"></i> Si riducono quando:</strong>
+                                    <ul class="mb-0 mt-2">
+                                        <li>il modello può cercare sul web o leggere i tuoi documenti;</li>
+                                        <li>gli dai il permesso esplicito di dire "non lo so";</li>
+                                        <li>chiedi fonti verificabili e poi le verifichi davvero.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">Come riconoscerle e difendersi è spiegato in <a href="ai-uso-guide.html#verificare">Usare bene l'AI → Verificare sempre</a>.</p>
+                    </div>
+                </section>
+
+                <!-- 3.6 Multimodalità e ragionamento -->
+                <section id="capacita" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-collection"></i> 3.6 Multimodalità e Modelli che Ragionano</h2>
+                    <div class="content-box">
+                        <h3 class="h4">Multimodalità</h3>
+                        <p>I primi LLM lavoravano solo con il testo. I modelli <strong>multimodali</strong> accettano e producono più tipi di contenuto: puoi caricare la foto di uno schizzo e chiedere il codice HTML corrispondente, mostrare uno screenshot di un sito e chiedere un'analisi di usabilità, dettare a voce, generare immagini o audio. Internamente anche immagini e suoni vengono trasformati in token.</p>
+
+                        <h3 class="h4 mt-4">Modelli che "ragionano"</h3>
+                        <p>Alcuni modelli, prima di rispondere, producono un <strong>ragionamento intermedio</strong> (il "thinking"): scompongono il problema, provano strade, controllano i passaggi, come chi fa i conti sul foglio di brutta prima di scrivere il risultato. Le app spesso mostrano questa fase in forma riassunta, a volte con una scritta tipo "Sto pensando…".</p>
+                        <ul>
+                            <li><strong>Vantaggi</strong>: risposte migliori su matematica, logica, programmazione e compiti in più passaggi.</li>
+                            <li><strong>Costi</strong>: più lenti e più costosi. Per domande semplici non servono.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 3.7 Embeddings e RAG -->
+                <section id="rag" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-search"></i> 3.7 Embeddings e RAG: Consultare Documenti</h2>
+                    <div class="content-box">
+                        <p>Come fa un'AI a rispondere su documenti che non ha mai visto durante l'addestramento, come il regolamento dell'Accademia o il manuale di un'azienda?</p>
+                        <p><strong>Embeddings.</strong> Ogni testo può essere trasformato in una lista di numeri che ne rappresenta il <em>significato</em>, come una coordinata su una mappa. Testi con significato simile finiscono vicini sulla mappa, anche se usano parole diverse: "lezione annullata" e "il corso oggi non si tiene" sono vicini.</p>
+                        <p><strong>RAG</strong> (<em>Retrieval-Augmented Generation</em>, generazione aumentata dal recupero) funziona come uno studente che fa l'esame a libro aperto:</p>
+                        <ol>
+                            <li>i documenti vengono divisi in paragrafi e "mappati" con gli embeddings;</li>
+                            <li>quando fai una domanda, il sistema trova i paragrafi più vicini per significato;</li>
+                            <li>li mette nella context window insieme alla domanda;</li>
+                            <li>il modello risponde basandosi su quei testi, e può citarli.</li>
+                        </ol>
+                        <div class="alert alert-info mb-0">
+                            <strong><i class="bi bi-info-circle"></i> Lo usi già:</strong> quando carichi un PDF in una chat o crei un "progetto" con dei documenti, l'app usa tecniche di questo tipo.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. Principi -->
+                <section id="principi" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-bookmark-star"></i> 4. Principi Fondamentali da Ricordare</h2>
+                    <div class="content-box">
+                        <div class="ai-keybox">
+                            <h3><i class="bi bi-pin-angle"></i> Un modello linguistico, da solo…</h3>
+                            <ol class="mb-0">
+                                <li class="mb-2"><strong>non "sa", genera testo plausibile.</strong> La sicurezza del tono non dice nulla sulla correttezza del contenuto.</li>
+                                <li class="mb-2"><strong>non accede al web</strong> se non gli viene dato uno strumento per farlo. Senza ricerca, risponde solo con ciò che ha appreso in addestramento.</li>
+                                <li class="mb-2"><strong>non ricorda le conversazioni precedenti</strong> senza un sistema di memoria. Ogni chat riparte da zero, tranne ciò che l'app gli rimette nel contesto.</li>
+                                <li><strong>ha una data di cutoff</strong>: le sue conoscenze si fermano al momento in cui sono stati raccolti i dati di addestramento. Degli eventi successivi non sa nulla.</li>
+                            </ol>
+                        </div>
+                        <p class="mt-4 mb-0">Questi limiti appartengono al <em>modello</em>. Il software che gli costruiamo attorno (strumenti, memoria, ricerca) serve proprio a superarli: lo vediamo in <a href="ai-sviluppo-guide.html">AI per Sviluppatori</a>. Prima, però, impariamo a usarlo bene.</p>
+                    </div>
+                </section>
+
+                <!-- Navigazione Pagine -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="index.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Torna alla Home
+                    </a>
+                    <a href="ai-uso-guide.html" class="btn btn-primary">
+                        Usare bene l'AI <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="h5"><i class="bi bi-code-slash"></i> Web Design Guide</p>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2026 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Cambia tema">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+        // ===== Demo 1: divisione in token (simulazione didattica) =====
+        const tokenInput = document.querySelector('#tokenInput');
+        const tokenOutput = document.querySelector('#tokenOutput');
+        const tokenCount = document.querySelector('#tokenCount');
+
+        const tokenizza = (testo) => {
+            // Pezzi = eventuale spazio iniziale + parola, oppure un simbolo singolo
+            const pezzi = testo.match(/\s*[\p{L}\p{N}]+|\s*[^\s\p{L}\p{N}]/gu) || [];
+            const token = [];
+            pezzi.forEach((pezzo) => {
+                const parola = pezzo.trim();
+                // Le parole lunghe vengono spezzate in blocchi, come fanno i tokenizer reali con le parole rare
+                if (parola.length > 7) {
+                    const spazio = pezzo.slice(0, pezzo.length - parola.length);
+                    for (let i = 0; i < parola.length; i += 4) {
+                        token.push((i === 0 ? spazio : '') + parola.slice(i, i + 4));
+                    }
+                } else {
+                    token.push(pezzo);
+                }
+            });
+            return token;
+        };
+
+        const mostraToken = () => {
+            const token = tokenizza(tokenInput.value);
+            tokenOutput.replaceChildren();
+            token.forEach((t, i) => {
+                const span = document.createElement('span');
+                span.className = `ai-token ai-token--${i % 5}`;
+                span.textContent = t.replace(/ /g, '·'); // Lo spazio diventa visibile
+                tokenOutput.append(span);
+            });
+            const parole = tokenInput.value.trim() ? tokenInput.value.trim().split(/\s+/).length : 0;
+            tokenCount.textContent = `${token.length} token · ${parole} parole · ${tokenInput.value.length} caratteri (il punto · indica uno spazio)`;
+        };
+
+        tokenInput.addEventListener('input', mostraToken);
+        mostraToken();
+
+        // ===== Demo 2: temperatura (simulazione didattica) =====
+        const candidati = [
+            { parola: 'divano', punteggio: 3.0 },
+            { parola: 'letto', punteggio: 2.6 },
+            { parola: 'tappeto', punteggio: 1.9 },
+            { parola: 'tetto', punteggio: 1.5 },
+            { parola: 'computer', punteggio: 0.7 },
+            { parola: 'frigorifero', punteggio: -0.6 }
+        ];
+        const tempRange = document.querySelector('#tempRange');
+        const tempValue = document.querySelector('#tempValue');
+        const tempBars = document.querySelector('#tempBars');
+        const tempRisultati = document.querySelector('#tempRisultati');
+
+        // Trasforma i punteggi in probabilità: la temperatura li "schiaccia" o li "allarga"
+        const probabilita = (temperatura) => {
+            const esponenziali = candidati.map((c) => Math.exp(c.punteggio / temperatura));
+            const totale = esponenziali.reduce((somma, e) => somma + e, 0);
+            return esponenziali.map((e) => e / totale);
+        };
+
+        const disegnaBarre = () => {
+            const temperatura = Number(tempRange.value);
+            tempValue.textContent = temperatura.toFixed(1);
+            const prob = probabilita(temperatura);
+            tempBars.replaceChildren();
+            candidati.forEach((c, i) => {
+                const riga = document.createElement('div');
+                riga.className = 'ai-bar';
+                const etichetta = document.createElement('span');
+                etichetta.textContent = c.parola;
+                const traccia = document.createElement('div');
+                traccia.className = 'ai-bar__track';
+                const riempimento = document.createElement('div');
+                riempimento.className = 'ai-bar__fill';
+                riempimento.style.width = `${(prob[i] * 100).toFixed(1)}%`;
+                traccia.append(riempimento);
+                const valore = document.createElement('span');
+                valore.className = 'text-end';
+                valore.textContent = `${Math.round(prob[i] * 100)}%`;
+                riga.append(etichetta, traccia, valore);
+                tempBars.append(riga);
+            });
+        };
+
+        const estrai = (prob) => {
+            let r = Math.random();
+            for (let i = 0; i < prob.length; i++) {
+                r -= prob[i];
+                if (r <= 0) return candidati[i].parola;
+            }
+            return candidati[candidati.length - 1].parola;
+        };
+
+        document.querySelector('#tempGenera').addEventListener('click', () => {
+            const prob = probabilita(Number(tempRange.value));
+            const frasi = Array.from({ length: 5 }, () => `"Il gatto dorme sul ${estrai(prob)}"`);
+            tempRisultati.textContent = frasi.join(' · ');
+        });
+
+        tempRange.addEventListener('input', disegnaBarre);
+        disegnaBarre();
+    </script>
+</body>
+</html>
