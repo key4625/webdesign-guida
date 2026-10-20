@@ -8,6 +8,63 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ===== Demo della sezione Liste ===== */
+        .demo-lista-marker li::marker {
+            color: #e83e8c;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .demo-lista-check li::marker {
+            content: "✓  ";
+            color: #198754;
+            font-weight: bold;
+        }
+        .demo-lista-pallini {
+            list-style: none;
+            padding: 0;
+        }
+        .demo-lista-pallini li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .demo-lista-pallini li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.45em;
+            width: 0.6rem;
+            height: 0.6rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0d6efd, #e83e8c);
+        }
+        .demo-passi {
+            list-style: none;
+            padding: 0;
+            counter-reset: passo;
+        }
+        .demo-passi li {
+            counter-increment: passo;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .demo-passi li::before {
+            content: counter(passo, decimal-leading-zero);
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: #0d6efd;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar (Generated via JS) -->
@@ -39,6 +96,7 @@
                         <a class="nav-link" href="#colori">Colori</a>
                         <a class="nav-link" href="#variabili">Variabili CSS</a>
                         <a class="nav-link" href="#testi">Testi e Font</a>
+                        <a class="nav-link" href="#liste">Liste</a>
                         <a class="nav-link" href="#immagini">Immagini</a>
                         <a class="nav-link" href="#effetti">Effetti Visivi</a>
                         <a class="nav-link" href="#trasformazioni">Trasformazioni</a>
@@ -777,6 +835,9 @@ p, h1, h2, h3, h4, h5, h6 {
                                 <div class="bg-warning p-3 rounded">Elemento Centrato</div>
                             </div>
                         </div>
+                        <div class="alert alert-info mt-3 mb-0">
+                            <strong><i class="bi bi-book"></i> Approfondisci:</strong> tutte le proprietà con il poster di CSS-Tricks e un playground interattivo nella guida <a href="css-flexbox-guide.html">Flexbox in dettaglio</a>. Tutti i modi di centrare un elemento sono in <a href="css-problemi-comuni-guide.html#centrare">Problemi di tutti i giorni</a>.
+                        </div>
                     </div>
                 </section>
 
@@ -865,6 +926,9 @@ p, h1, h2, h3, h4, h5, h6 {
                                 <div class="grid-item main">Main Content</div>
                                 <div class="grid-item footer">Footer</div>
                             </div>
+                        </div>
+                        <div class="alert alert-info mt-3 mb-0">
+                            <strong><i class="bi bi-book"></i> Approfondisci:</strong> linee, aree, allineamenti, <code>auto-fit</code> vs <code>auto-fill</code> e un playground interattivo nella guida <a href="css-grid-guide.html">Grid in dettaglio</a>.
                         </div>
                     </div>
                 </section>
@@ -1153,6 +1217,193 @@ h1 { font-weight: 750; }     /* Qualsiasi valore nell'intervallo */
                     </div>
                 </section>
 
+                <!-- Liste -->
+                <section id="liste" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-list-ul"></i> Stili per Liste</h2>
+                    <div class="content-box">
+                        <p>Le liste (<code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>) hanno uno stile di default: un <strong>marcatore</strong> (pallino o numero) e un <strong>rientro a sinistra</strong> (circa <code>40px</code> di <code>padding-left</code>). Con poche proprietà si possono cambiare entrambi, oppure azzerarli per costruire menu e navigazioni.</p>
+
+                        <h4>Il tipo di marcatore: list-style-type</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">ul {
+    list-style-type: disc;      /* ● pallino pieno (default di ul) */
+    list-style-type: circle;    /* ○ cerchio vuoto */
+    list-style-type: square;    /* ■ quadratino */
+    list-style-type: none;      /* nessun marcatore */
+    list-style-type: "→ ";      /* qualsiasi stringa (anche un'emoji) */
+}
+
+ol {
+    list-style-type: decimal;              /* 1. 2. 3. (default di ol) */
+    list-style-type: decimal-leading-zero; /* 01. 02. 03. */
+    list-style-type: lower-alpha;          /* a. b. c. */
+    list-style-type: upper-alpha;          /* A. B. C. */
+    list-style-type: lower-roman;          /* i. ii. iii. */
+    list-style-type: upper-roman;          /* I. II. III. */
+}</code></pre>
+                        </div>
+
+                        <div class="example-result mt-3">
+                            <div class="row g-3">
+                                <div class="col-6 col-md-3"><code>square</code><ul class="mt-2 mb-0" style="list-style-type: square;"><li>Uno</li><li>Due</li></ul></div>
+                                <div class="col-6 col-md-3"><code>"→ "</code><ul class="mt-2 mb-0" style="list-style-type: '→ ';"><li>Uno</li><li>Due</li></ul></div>
+                                <div class="col-6 col-md-3"><code>upper-roman</code><ol class="mt-2 mb-0" style="list-style-type: upper-roman;"><li>Uno</li><li>Due</li></ol></div>
+                                <div class="col-6 col-md-3"><code>lower-alpha</code><ol class="mt-2 mb-0" style="list-style-type: lower-alpha;"><li>Uno</li><li>Due</li></ol></div>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">Posizione, immagine e shorthand</h4>
+                        <div class="code-example">
+                            <pre><code class="language-css">ul {
+    /* Dove sta il marcatore rispetto al testo */
+    list-style-position: outside;  /* Default: fuori dal box, il testo a capo resta allineato */
+    list-style-position: inside;   /* Dentro il box: il testo a capo va sotto il marcatore */
+
+    /* Un'immagine come marcatore (poco controllabile: meglio ::marker o ::before) */
+    list-style-image: url('img/freccia.svg');
+
+    /* Shorthand: tipo posizione immagine (in qualsiasi ordine) */
+    list-style: square inside;
+    list-style: none;              /* Il più usato in assoluto */
+}</code></pre>
+                        </div>
+
+                        <div class="example-result mt-3">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <code>outside</code>
+                                    <ul class="mt-2 mb-0 border rounded py-2" style="list-style-position: outside;"><li>Un elemento con un testo abbastanza lungo da andare a capo, così si vede l'allineamento.</li></ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <code>inside</code>
+                                    <ul class="mt-2 mb-0 border rounded py-2" style="list-style-position: inside;"><li>Un elemento con un testo abbastanza lungo da andare a capo, così si vede l'allineamento.</li></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">Azzerare una lista (per menu e navigazioni)</h4>
+                        <p>Quasi ogni menu di navigazione è una <code>&lt;ul&gt;</code>: semanticamente è una lista di link. Per usarla come menu si tolgono marcatori e rientro, poi si dispone in orizzontale con Flexbox.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.menu {
+    list-style: none;   /* Via i pallini */
+    margin: 0;          /* Via il margine sopra/sotto */
+    padding: 0;         /* Via il rientro a sinistra (il "buco" di 40px) */
+
+    display: flex;      /* Voci in orizzontale */
+    gap: 1.5rem;
+}
+
+.menu a {
+    text-decoration: none;
+}</code></pre>
+                        </div>
+                        <div class="example-result mt-3">
+                            <ul class="m-0 p-0 d-flex flex-wrap gap-4" style="list-style: none;">
+                                <li><a href="#liste" class="text-decoration-none">Home</a></li>
+                                <li><a href="#liste" class="text-decoration-none">Chi siamo</a></li>
+                                <li><a href="#liste" class="text-decoration-none">Servizi</a></li>
+                                <li><a href="#liste" class="text-decoration-none">Contatti</a></li>
+                            </ul>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <strong><i class="bi bi-universal-access"></i> Accessibilità:</strong> Safari con VoiceOver, se togli i marcatori con <code>list-style: none</code>, a volte non annuncia più la lista come tale. Se è importante che venga letta come lista, aggiungi <code>role="list"</code> alla <code>&lt;ul&gt;</code>.
+                        </div>
+
+                        <h4 class="mt-4">Personalizzare il marcatore: ::marker</h4>
+                        <p>Lo pseudo-elemento <code>::marker</code> seleziona direttamente il pallino o il numero: si possono cambiare colore, dimensione, font e perfino il contenuto, senza toccare il testo.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">li::marker {
+    color: #e83e8c;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Cambiare il contenuto del marcatore */
+.lista-check li::marker {
+    content: "✓  ";
+    color: #198754;
+}</code></pre>
+                        </div>
+                        <div class="example-result mt-3">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <ol class="mb-0 demo-lista-marker"><li>Marcatore colorato</li><li>Il testo resta com'è</li></ol>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="mb-0 demo-lista-check"><li>HTML semantico</li><li>CSS ordinato</li></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">Marcatore totalmente libero: ::before</h4>
+                        <p><code>::marker</code> accetta poche proprietà (niente sfondi, bordi o posizionamento). Per un marcatore "disegnato" si toglie quello originale e se ne crea uno con <code>::before</code>.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.lista-pallini {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-pallini li {
+    position: relative;
+    padding-left: 1.5rem;   /* Spazio per il marcatore */
+    margin-bottom: 0.5rem;
+}
+
+.lista-pallini li::before {
+    content: "";             /* Obbligatorio, anche se vuoto */
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0d6efd, #e83e8c);
+}</code></pre>
+                        </div>
+                        <div class="example-result mt-3">
+                            <ul class="demo-lista-pallini mb-0"><li>Marcatore disegnato con CSS</li><li>Può avere gradienti, bordi, ombre</li><li>E si può anche animare</li></ul>
+                        </div>
+
+                        <h4 class="mt-4">Numerazioni: attributi HTML e contatori CSS</h4>
+                        <p>Per le liste ordinate l'HTML offre già <code>start</code> (da che numero partire) e <code>reversed</code> (conto alla rovescia). Per numerazioni più creative si usano i <strong>contatori CSS</strong>.</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;ol start="5"&gt;...&lt;/ol&gt;      &lt;!-- 5. 6. 7. --&gt;
+&lt;ol reversed&gt;...&lt;/ol&gt;       &lt;!-- 3. 2. 1. --&gt;</code></pre>
+                        </div>
+                        <div class="code-example">
+                            <pre><code class="language-css">.passi {
+    list-style: none;
+    padding: 0;
+    counter-reset: passo;             /* 1. Crea il contatore (parte da 0) */
+}
+
+.passi li {
+    counter-increment: passo;         /* 2. +1 a ogni li */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.passi li::before {
+    content: counter(passo, decimal-leading-zero); /* 3. Lo stampa: 01, 02... */
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: #0d6efd;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.8rem;
+}</code></pre>
+                        </div>
+                        <div class="example-result mt-3">
+                            <ol class="demo-passi mb-0"><li>Scegli il tema del progetto</li><li>Disegna il wireframe</li><li>Scrivi HTML e CSS</li></ol>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Immagini -->
                 <section id="immagini" class="mb-5">
                     <h2 class="section-title"><i class="bi bi-image-fill"></i> Stili per Immagini</h2>
@@ -1286,6 +1537,8 @@ h1 { font-weight: 750; }     /* Qualsiasi valore nell'intervallo */
                                 </div>
                             </div>
                         </div>
+
+                        <p class="small mt-3">Gradienti a strisce, sfondi a pattern, testo e bordi sfumati: vedi la guida <a href="css-gradienti-guide.html">Gradienti in dettaglio</a>.</p>
 
                         <h4 class="mt-4">Backdrop Filter</h4>
                         <div class="code-example">
@@ -1641,6 +1894,9 @@ transform: skewX(20deg);</code></pre>
 
                         <div class="alert alert-success mt-3">
                             <strong><i class="bi bi-lightbulb"></i> Best Practice:</strong> Usa l'approccio "Mobile First" - inizia con gli stili per mobile e aggiungi complessità con <code>min-width</code> per schermi più grandi.
+                        </div>
+                        <div class="alert alert-info mt-3 mb-0">
+                            <strong><i class="bi bi-book"></i> Approfondisci:</strong> operatori logici, nuova sintassi a intervalli (<code>width &gt;= 768px</code>), <code>hover</code>/<code>pointer</code>, preferenze utente e <code>matchMedia()</code> in JavaScript nella guida <a href="css-media-queries-guide.html">Media Queries in dettaglio</a>.
                         </div>
                     </div>
                 </section>

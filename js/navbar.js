@@ -16,7 +16,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 { text: 'Guida CSS Base', url: pathPrefix + 'css-guide.html' },
                 { text: 'CSS Moderno', url: pathPrefix + 'css-modern-guide.html' },
                 { text: 'Bootstrap', url: pathPrefix + 'bootstrap-guide.html' },
-                { text: 'SCSS, SASS e Compilatori', url: pathPrefix + 'scss-sass-guide.html' }
+                { text: 'SCSS, SASS e Compilatori', url: pathPrefix + 'scss-sass-guide.html' },
+                { separator: true },
+                { header: 'Approfondimenti' },
+                { text: 'Problemi di tutti i giorni 🛠️', url: pathPrefix + 'css-problemi-comuni-guide.html' },
+                { text: 'Flexbox in dettaglio', url: pathPrefix + 'css-flexbox-guide.html' },
+                { text: 'Grid in dettaglio', url: pathPrefix + 'css-grid-guide.html' },
+                { text: 'Gradienti in dettaglio', url: pathPrefix + 'css-gradienti-guide.html' },
+                { text: 'Media Queries in dettaglio', url: pathPrefix + 'css-media-queries-guide.html' }
             ]
         },
         { 
@@ -145,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
     links.forEach(link => {
         if (link.dropdown) {
             // Dropdown Menu Logic
-            const isActive = link.dropdown.some(item => !item.separator && item.url.endsWith(page));
+            const isActive = link.dropdown.some(item => item.url && item.url.endsWith(page));
             const activeClass = isActive ? ' active' : '';
 
             navLinksHtml += `
@@ -158,6 +165,8 @@ document.addEventListener("DOMContentLoaded", function() {
             link.dropdown.forEach(item => {
                 if (item.separator) {
                     navLinksHtml += `<li><hr class="dropdown-divider"></li>`;
+                } else if (item.header) {
+                    navLinksHtml += `<li><h6 class="dropdown-header">${item.header}</h6></li>`;
                 } else {
                     const itemActive = item.url.endsWith(page) ? ' active' : '';
                     navLinksHtml += `<li><a class="dropdown-item${itemActive}" href="${item.url}">${item.text}</a></li>`;

@@ -19,6 +19,8 @@ Dopo l'attivazione di GitHub Pages, il sito sara disponibile su:
 - `index.html`: homepage del manuale
 - `html-guide.html`, `css-guide.html`, `javascript-guide.html`: guide principali
 - `css-modern-guide.html`: novità del CSS moderno
+- `css-problemi-comuni-guide.html`: ricette per i problemi CSS di tutti i giorni (come centrare, footer in fondo, z-index...)
+- `css-flexbox-guide.html`, `css-grid-guide.html`, `css-gradienti-guide.html`, `css-media-queries-guide.html`: approfondimenti CSS con playground interattivi
 - `jquery-guide.html`, `javascript-api-crud.html`, `web-components-guide.html`: JavaScript e integrazioni
 - `react-guide.html`, `nextjs-guide.html`, `gsap-guide.html`: framework e animazioni
 - `ux-interface-guide.html`: hub grafica e progettazione interfacce

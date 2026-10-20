@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid in dettaglio - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ===== Stili delle demo di questa pagina ===== */
+        .poster-thumb {
+            display: block;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 6px 20px var(--shadow-color);
+            transition: transform 0.2s;
+        }
+        .poster-thumb:hover { transform: translateY(-3px); }
+        .poster-thumb img { display: block; width: 100%; height: auto; }
+
+        /* Contenitore grid delle demo (colori presi dal poster) */
+        .gx {
+            display: grid;
+            gap: 0.4rem;
+            padding: 0.4rem;
+            background: #9b59b6;
+            border-radius: 0.6rem;
+        }
+        .gx > div {
+            background: #f7941d;
+            color: #1a1a1a;
+            border: 2px solid #3d2a4f;
+            border-radius: 0.4rem;
+            padding: 0.4rem 0.6rem;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        .gx .blu   { background: #4fb3e8; }
+        .gx .rosso { background: #e86a6a; }
+        .gx .verde { background: #6cc36c; }
+        .gx .vuoto { background: transparent; border-style: dashed; color: #fff; }
+        .gx-label {
+            font-family: monospace;
+            font-size: 0.8rem;
+            margin: 0.75rem 0 0.3rem;
+            display: block;
+        }
+
+        /* Diagramma terminologia */
+        .termini-svg { max-width: 560px; width: 100%; height: auto; }
+        .termini-svg text { fill: var(--text-color); font-family: monospace; font-size: 12px; }
+
+        /* Playground */
+        .pg-controls label {
+            font-family: monospace;
+            font-size: 0.8rem;
+            margin-bottom: 0.2rem;
+        }
+        .pg-stage {
+            resize: horizontal;
+            overflow: auto;
+            max-width: 100%;
+            min-width: 200px;
+        }
+        .pg-stage .gx { min-height: 260px; }
+
+        /* auto-fit vs auto-fill */
+        .demo-autofit  { grid-template-columns: repeat(auto-fit,  minmax(80px, 1fr)); }
+        .demo-autofill { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
+
+        /* Sovrapposizione nella stessa cella */
+        .demo-overlay {
+            display: grid;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            max-width: 420px;
+        }
+        .demo-overlay > * { grid-area: 1 / 1; }
+        .demo-overlay__img {
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #6f42c1, #e83e8c, #fd7e14);
+        }
+        .demo-overlay__testo {
+            align-self: end;
+            padding: 1rem;
+            color: #fff;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Page Header -->
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #198754 0%, #f7941d 100%);">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-grid-3x3"></i> Grid in dettaglio</h1>
+            <p class="lead">Righe e colonne insieme: tutte le proprietà di CSS Grid, con il poster di CSS-Tricks e un playground</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#introduzione">1. Introduzione e poster</a>
+                        <a class="nav-link" href="#terminologia">2. Il vocabolario di Grid</a>
+                        <a class="nav-link" href="#definire">3. Definire righe e colonne</a>
+                        <a class="nav-link" href="#auto-fit">4. auto-fit e auto-fill</a>
+                        <a class="nav-link" href="#aree">5. grid-template-areas</a>
+                        <a class="nav-link" href="#posizionare">6. Posizionare gli elementi</a>
+                        <a class="nav-link" href="#allineamento">7. Allineamenti</a>
+                        <a class="nav-link" href="#playground">8. Playground</a>
+                        <a class="nav-link" href="#implicita">9. Griglia implicita</a>
+                        <a class="nav-link" href="#grid-vs-flex">10. Grid o Flexbox?</a>
+                        <a class="nav-link" href="#pattern">11. Pattern pratici</a>
+                        <a class="nav-link" href="#allenamento">12. Allenati giocando</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+
+                <!-- 1. Introduzione -->
+                <section id="introduzione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-info-circle"></i> Introduzione e poster</h2>
+                    <div class="content-box">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-md-7">
+                                <p><strong>CSS Grid</strong> è il sistema di layout <strong>a due dimensioni</strong>: controlli righe <em>e</em> colonne contemporaneamente. Disegni prima la griglia sul contenitore, poi decidi dove va ogni elemento, anche su più celle o sovrapposto ad altri.</p>
+                                <p>Come in Flexbox ci sono un <strong>contenitore</strong> (<code>display: grid</code>) e i suoi <strong>figli diretti</strong>, gli elementi della griglia.</p>
+                                <p>Il poster di <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank" rel="noopener noreferrer">CSS-Tricks</a> raccoglie tutto in una pagina: colonne sinistra e centrale con le proprietà del <span class="badge" style="background:#9b59b6;">contenitore</span>, colonna destra con quelle degli <span class="badge text-dark" style="background:#f7941d;">elementi</span>. Nei diagrammi i numeri tra parentesi quadre (<code>[1]</code>, <code>[-1]</code>...) sono i <strong>numeri di linea</strong>: tienili d'occhio, sono la chiave di tutto.</p>
+                                <p class="small text-muted mb-0"><i class="bi bi-zoom-in"></i> Clicca sul poster per aprirlo a piena risoluzione.</p>
+                            </div>
+                            <div class="col-md-5">
+                                <a class="poster-thumb" href="images/css-grid-poster.png" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/css-grid-poster.png" width="1333" height="2000" loading="lazy" alt="Poster CSS Grid di CSS-Tricks: schemi di grid-template-columns e rows, grid-template-areas, gap, justify e align content, items e self, grid-column, grid-row e grid-area con i numeri di linea">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. Terminologia -->
+                <section id="terminologia" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-book"></i> Il vocabolario di Grid</h2>
+                    <div class="content-box">
+                        <div class="text-center mb-3">
+                            <svg class="termini-svg" viewBox="0 0 560 250" role="img" aria-labelledby="termini-title">
+                                <title id="termini-title">Una griglia di 3 colonne e 2 righe: le linee verticali sono numerate da 1 a 4 e da -4 a -1; sono evidenziati una traccia, una cella e un'area</title>
+                                <rect x="60" y="40" width="360" height="160" fill="none" stroke="#9b59b6" stroke-width="2"/>
+                                <!-- traccia (colonna 1) -->
+                                <rect x="60" y="40" width="120" height="160" fill="#4fb3e8" opacity="0.35"/>
+                                <!-- cella -->
+                                <rect x="180" y="40" width="120" height="80" fill="#f7941d" opacity="0.8"/>
+                                <!-- area 2x2 -->
+                                <rect x="300" y="40" width="120" height="160" fill="#6cc36c" opacity="0.45"/>
+                                <line x1="180" y1="30" x2="180" y2="210" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="300" y1="30" x2="300" y2="210" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="50" y1="120" x2="430" y2="120" stroke="#9b59b6" stroke-width="2"/>
+                                <text x="54" y="228">[1]</text><text x="170" y="228">[2]</text><text x="290" y="228">[3]</text><text x="410" y="228">[4]</text>
+                                <text x="50" y="244">[-4]</text><text x="166" y="244">[-3]</text><text x="286" y="244">[-2]</text><text x="406" y="244">[-1]</text>
+                                <text x="20" y="45">[1]</text><text x="20" y="125">[2]</text><text x="20" y="205">[3]</text>
+                                <text x="75" y="165">traccia</text><text x="75" y="180">(colonna)</text>
+                                <text x="210" y="85">cella</text>
+                                <text x="335" y="125">area</text>
+                                <text x="440" y="125">← linea</text>
+                                <text x="60" y="22">linee di colonna →</text>
+                            </svg>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle mb-0">
+                                <tbody>
+                                    <tr><th>Linea</th><td>Le "righe di matita" che dividono la griglia. Si contano da <strong>1</strong> (non da 0!) e anche al contrario, da <strong>-1</strong> (l'ultima). Con 3 colonne ci sono 4 linee verticali.</td></tr>
+                                    <tr><th>Traccia (track)</th><td>Lo spazio tra due linee adiacenti: una colonna o una riga.</td></tr>
+                                    <tr><th>Cella</th><td>L'incrocio tra una riga e una colonna: l'unità più piccola.</td></tr>
+                                    <tr><th>Area</th><td>Un rettangolo di più celle, delimitato da quattro linee.</td></tr>
+                                    <tr><th>Gap</th><td>Lo spazio tra le tracce (il "canale" tra righe e colonne).</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. Definire -->
+                <section id="definire" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-rulers"></i> Definire righe e colonne</h2>
+                    <div class="content-box">
+                        <p><code>grid-template-columns</code> e <code>grid-template-rows</code> elencano le dimensioni delle tracce, separate da spazi: <strong>ogni valore è una colonna</strong> (o riga).</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.container {
+    display: grid;
+
+    grid-template-columns: 200px 200px 200px;   /* 3 colonne fisse */
+    grid-template-columns: 1fr 1fr 1fr;         /* 3 colonne uguali */
+    grid-template-columns: repeat(3, 1fr);      /* Uguale, più corto */
+    grid-template-columns: 250px 1fr;           /* Sidebar fissa + contenuto fluido */
+    grid-template-columns: 1fr 2fr 1fr;         /* La centrale è doppia */
+    grid-template-columns: auto 1fr auto;       /* Laterali grandi quanto il contenuto */
+    grid-template-columns: minmax(200px, 1fr) 3fr; /* Mai sotto 200px */
+
+    grid-template-rows: 80px auto 60px;         /* header, contenuto, footer */
+}</code></pre>
+                        </div>
+                        <h4 class="mt-4">L'unità <code>fr</code></h4>
+                        <p><code>fr</code> sta per <em>fraction</em>: una parte dello spazio <strong>rimasto libero</strong> dopo aver tolto le tracce fisse e i gap. In <code>250px 1fr 2fr</code> il browser toglie 250px, divide il resto in 3 parti, ne dà 1 alla seconda colonna e 2 alla terza.</p>
+                        <span class="gx-label">grid-template-columns: 100px 1fr 2fr</span>
+                        <div class="gx" style="grid-template-columns: 100px 1fr 2fr;"><div>100px</div><div>1fr</div><div>2fr</div></div>
+                        <span class="gx-label">grid-template-columns: auto 1fr auto</span>
+                        <div class="gx" style="grid-template-columns: auto 1fr auto;"><div>Logo</div><div>il resto dello spazio</div><div>Menu ☰</div></div>
+
+                        <h4 class="mt-4">Dare un nome alle linee</h4>
+                        <p>Nel poster vedi <code>[row1-start]</code>, <code>[last-line]</code>: tra parentesi quadre si possono dare nomi alle linee, per poi usarli al posto dei numeri.</p>
+                        <div class="code-example mb-0">
+                            <pre><code class="language-css">.container {
+    grid-template-columns: [inizio] 250px [contenuto] 1fr [fine];
+}
+.banner {
+    grid-column: contenuto / fine;
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. auto-fit -->
+                <section id="auto-fit" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-aspect-ratio"></i> auto-fit e auto-fill: griglie che si adattano da sole</h2>
+                    <div class="content-box">
+                        <p>Invece di un numero fisso di colonne, <code>repeat()</code> può calcolare <strong>quante ne entrano</strong>. Unito a <code>minmax()</code> crea una griglia responsive senza nessuna media query.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.galleria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* "Crea tutte le colonne che entrano, larghe almeno 200px,
+        poi dividi equamente lo spazio rimasto" */
+}</code></pre>
+                        </div>
+                        <p>La differenza tra le due parole chiave si vede solo quando gli elementi sono <strong>pochi</strong> e avanza spazio:</p>
+                        <span class="gx-label">auto-fit → le colonne vuote collassano, gli elementi si allargano</span>
+                        <div class="gx demo-autofit"><div>1</div><div>2</div></div>
+                        <span class="gx-label">auto-fill → le colonne vuote restano (invisibili), gli elementi mantengono la larghezza minima</span>
+                        <div class="gx demo-autofill"><div>1</div><div>2</div></div>
+                        <div class="alert alert-info mt-3 mb-0">
+                            <strong><i class="bi bi-lightbulb"></i> Regola pratica:</strong> <code>auto-fit</code> per card e gallerie che devono riempire la riga; <code>auto-fill</code> quando vuoi che gli elementi abbiano sempre la stessa larghezza, anche se sono solo due. Per non sbordare su schermi minuscoli scrivi <code>minmax(min(200px, 100%), 1fr)</code>.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. Aree -->
+                <section id="aree" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-layout-wtf"></i> grid-template-areas: disegnare il layout</h2>
+                    <div class="content-box">
+                        <p>Il modo più visivo di usare Grid: scrivi una "mappa" del layout con dei nomi. Ogni stringa è una riga, ogni parola una colonna, il punto <code>.</code> è una cella vuota. Ripetere un nome su più celle crea un'area più grande (deve restare un <strong>rettangolo</strong>).</p>
+                        <div class="row g-3">
+                            <div class="col-md-7">
+                                <div class="code-example mb-0">
+                                    <pre><code class="language-css">.pagina {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        "header header  header  header"
+        "main   main    .       sidebar"
+        "footer footer  footer  footer";
+}
+.pagina header { grid-area: header; }
+.pagina main   { grid-area: main; }
+.pagina aside  { grid-area: sidebar; }
+.pagina footer { grid-area: footer; }</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="gx" style="grid-template-columns: repeat(4, 1fr); grid-template-areas: 'header header header header' 'main main vuoto sidebar' 'footer footer footer footer';">
+                                    <div style="grid-area: header;">header</div>
+                                    <div class="blu" style="grid-area: main; padding-block: 1.5rem;">main</div>
+                                    <div class="vuoto" style="grid-area: vuoto;">.</div>
+                                    <div class="rosso" style="grid-area: sidebar;">sidebar</div>
+                                    <div class="verde" style="grid-area: footer;">footer</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">Il vantaggio enorme: per il layout mobile basta <strong>ridisegnare la mappa</strong> in una media query, senza toccare l'HTML. Un esempio completo è nella <a href="css-guide.html#grid">Guida CSS Base</a>.</p>
+                    </div>
+                </section>
+
+                <!-- 6. Posizionare -->
+                <section id="posizionare" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-cursor"></i> Posizionare gli elementi</h2>
+                    <div class="content-box">
+                        <p>Di default ogni elemento occupa la cella libera successiva. Con <code>grid-column</code> e <code>grid-row</code> dici invece <strong>da quale linea a quale linea</strong> deve estendersi.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.item {
+    grid-column: 1 / 3;      /* Dalla linea 1 alla linea 3 = 2 colonne */
+    grid-column: 1 / -1;     /* Dalla prima all'ultima: tutta la larghezza */
+    grid-column: span 2;     /* Occupa 2 colonne, a partire da dove capita */
+    grid-column: 2 / span 3; /* Parte dalla linea 2 e occupa 3 colonne */
+
+    grid-row: 1 / 3;         /* Due righe */
+
+    /* Shorthand: row-start / column-start / row-end / column-end */
+    grid-area: 1 / 2 / 3 / 4;
+}</code></pre>
+                        </div>
+                        <span class="gx-label">griglia 4×3: A = grid-column: 1 / -1 · B = grid-row: span 2 · C = grid-column: 2 / span 2</span>
+                        <div class="gx" style="grid-template-columns: repeat(4, 1fr);">
+                            <div style="grid-column: 1 / -1;">A</div>
+                            <div class="blu" style="grid-row: span 2; display: grid; place-items: center;">B</div>
+                            <div class="rosso" style="grid-column: 2 / span 2;">C</div>
+                            <div>4</div><div>5</div><div>6</div><div>7</div>
+                        </div>
+                        <div class="alert alert-success mt-3 mb-0">
+                            <strong><i class="bi bi-lightbulb"></i> Il trucco del <code>1 / -1</code>:</strong> funziona con qualsiasi numero di colonne, quindi è perfetto per titoli, banner e separatori che devono attraversare tutta la griglia.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. Allineamento -->
+                <section id="allineamento" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-align-center"></i> Allineamenti: items, content, self</h2>
+                    <div class="content-box">
+                        <p>Le proprietà di allineamento sono tante, ma seguono uno schema semplice: <strong>justify</strong> = asse delle righe (orizzontale), <strong>align</strong> = asse delle colonne (verticale). Poi cambia <em>cosa</em> si sposta:</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle">
+                                <thead class="table-dark">
+                                    <tr><th>Proprietà</th><th>Su chi</th><th>Cosa sposta</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>justify-items</code> / <code>align-items</code></td><td>contenitore</td><td>Ogni elemento <strong>dentro la sua cella</strong></td></tr>
+                                    <tr><td><code>justify-content</code> / <code>align-content</code></td><td>contenitore</td><td>L'<strong>intera griglia</strong> dentro il contenitore (serve spazio avanzato)</td></tr>
+                                    <tr><td><code>justify-self</code> / <code>align-self</code></td><td>elemento</td><td>Un solo elemento dentro la sua cella</td></tr>
+                                    <tr><td><code>place-items</code>, <code>place-content</code>, <code>place-self</code></td><td>—</td><td>Shorthand: <code>align</code> e <code>justify</code> insieme</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <span class="gx-label">justify-items: center (elementi nella cella)</span>
+                                <div class="gx" style="grid-template-columns: repeat(3, 1fr); justify-items: center;"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div></div>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="gx-label">justify-content: center (griglia nel contenitore)</span>
+                                <div class="gx" style="grid-template-columns: repeat(3, 50px); justify-content: center;"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div></div>
+                            </div>
+                        </div>
+                        <p class="small mt-3 mb-0">Nota: <code>justify-content</code> ha effetto solo se le colonne non occupano già tutta la larghezza, cioè con tracce fisse (<code>50px</code>) e non con <code>fr</code>, che si prendono tutto lo spazio.</p>
+                    </div>
+                </section>
+
+                <!-- 8. Playground -->
+                <section id="playground" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-joystick"></i> Playground: prova tu</h2>
+                    <div class="content-box">
+                        <p>Combina le proprietà e osserva la griglia. Prova per esempio colonne fisse da <code>80px</code> con <code>justify-content: space-between</code>, oppure <code>auto-fit</code> e ridimensiona il riquadro dall'angolo in basso a destra.</p>
+                        <form class="row g-2 pg-controls" id="grid-controls">
+                            <div class="col-12 col-md-6">
+                                <label for="pg-gtc" class="form-label">grid-template-columns</label>
+                                <select id="pg-gtc" class="form-select form-select-sm" data-prop="grid-template-columns">
+                                    <option>repeat(3, 1fr)</option>
+                                    <option>repeat(3, 80px)</option>
+                                    <option>1fr 2fr 1fr</option>
+                                    <option>150px 1fr</option>
+                                    <option>repeat(auto-fit, minmax(100px, 1fr))</option>
+                                    <option>repeat(auto-fill, minmax(100px, 1fr))</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label for="pg-ggap" class="form-label">gap</label>
+                                <select id="pg-ggap" class="form-select form-select-sm" data-prop="gap">
+                                    <option>0</option><option selected>0.4rem</option><option>1rem</option><option>1rem 2rem</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label for="pg-gji" class="form-label">justify-items</label>
+                                <select id="pg-gji" class="form-select form-select-sm" data-prop="justify-items">
+                                    <option>stretch</option><option>start</option><option>end</option><option>center</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label for="pg-gai" class="form-label">align-items</label>
+                                <select id="pg-gai" class="form-select form-select-sm" data-prop="align-items">
+                                    <option>stretch</option><option>start</option><option>end</option><option>center</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label for="pg-gjc" class="form-label">justify-content</label>
+                                <select id="pg-gjc" class="form-select form-select-sm" data-prop="justify-content">
+                                    <option>normal</option><option>start</option><option>end</option><option>center</option><option>space-between</option><option>space-around</option><option>space-evenly</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label for="pg-gac" class="form-label">align-content</label>
+                                <select id="pg-gac" class="form-select form-select-sm" data-prop="align-content">
+                                    <option>normal</option><option>start</option><option>end</option><option>center</option><option>space-between</option><option>space-around</option><option>space-evenly</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label for="pg-gaf" class="form-label">grid-auto-flow</label>
+                                <select id="pg-gaf" class="form-select form-select-sm" data-prop="grid-auto-flow">
+                                    <option>row</option><option>column</option><option>row dense</option>
+                                </select>
+                            </div>
+                        </form>
+                        <div class="pg-stage mt-3">
+                            <div class="gx" id="grid-stage">
+                                <div>1</div><div class="blu" style="grid-column: span 2;">2 (span 2)</div><div>3</div><div>4</div><div class="rosso" style="grid-column: span 2;">5 (span 2)</div><div>6</div>
+                            </div>
+                        </div>
+                        <div class="code-example mt-3 mb-0">
+                            <pre><code class="language-css" id="grid-code"></code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 9. Implicita -->
+                <section id="implicita" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-plus-square-dotted"></i> Griglia esplicita e implicita</h2>
+                    <div class="content-box">
+                        <p>Se definisci 3 colonne e 2 righe ma inserisci 10 elementi, Grid non va in crisi: crea automaticamente le righe che mancano. Queste sono la griglia <strong>implicita</strong>, e la loro dimensione si controlla con <code>grid-auto-rows</code>.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.galleria {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 200px;               /* Ogni nuova riga è alta 200px */
+    grid-auto-rows: minmax(150px, auto); /* Almeno 150px, di più se serve */
+
+    grid-auto-flow: row;     /* Default: riempie riga per riga */
+    grid-auto-flow: column;  /* Riempie colonna per colonna */
+    grid-auto-flow: dense;   /* Riempie i "buchi" lasciati dagli elementi grandi */
+}</code></pre>
+                        </div>
+                        <p class="mb-0"><code>dense</code> è perfetto per gallerie di foto con elementi di dimensioni diverse (stile masonry), ma cambia l'ordine visivo rispetto all'HTML: come per <code>order</code>, attenzione all'accessibilità. Provalo nel playground qui sopra con <code>repeat(3, 1fr)</code>.</p>
+                    </div>
+                </section>
+
+                <!-- 10. Grid vs Flex -->
+                <section id="grid-vs-flex" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-signpost-split"></i> Grid o Flexbox?</h2>
+                    <div class="content-box">
+                        <p>Non sono in competizione: si usano insieme, spesso Grid per la struttura della pagina e Flexbox per i componenti al suo interno.</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle">
+                                <thead class="table-dark">
+                                    <tr><th></th><th>Flexbox</th><th>Grid</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><th>Dimensioni</th><td>Una (riga <em>o</em> colonna)</td><td>Due (righe <em>e</em> colonne)</td></tr>
+                                    <tr><th>Approccio</th><td>Dal <strong>contenuto</strong>: gli elementi decidono quanto spazio occupare</td><td>Dal <strong>layout</strong>: disegni la griglia, poi ci metti gli elementi</td></tr>
+                                    <tr><th>Allineamento tra righe</th><td>Ogni riga è indipendente</td><td>Le colonne restano allineate su tutte le righe</td></tr>
+                                    <tr><th>Ideale per</th><td>Navbar, gruppi di bottoni, media object, centrare</td><td>Layout di pagina, gallerie, dashboard, card in griglia</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="alert alert-info mb-0">
+                            <strong><i class="bi bi-question-circle"></i> Test rapido:</strong> se in una griglia di card con <code>flex-wrap</code> l'ultima riga ha elementi più larghi delle altre e la cosa ti dà fastidio, ti serve Grid.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 11. Pattern -->
+                <section id="pattern" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-puzzle"></i> Pattern pratici</h2>
+                    <div class="content-box">
+                        <h4>Testo sopra un'immagine (sovrapposizione nella stessa cella)</h4>
+                        <p>Con Grid più elementi possono occupare la <strong>stessa cella</strong>: si sovrappongono senza bisogno di <code>position: absolute</code>.</p>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-6">
+                                <div class="code-example mb-0">
+                                    <pre><code class="language-css">.hero {
+    display: grid;
+}
+.hero > * {
+    grid-area: 1 / 1;   /* Tutti nella cella 1,1 */
+}
+.hero .testo {
+    align-self: end;    /* Il testo in basso */
+}</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="demo-overlay">
+                                    <div class="demo-overlay__img"></div>
+                                    <div class="demo-overlay__testo"><strong>Titolo della card</strong><br><small>Sovrapposto con Grid</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">Contenuto centrato con fasce a tutta larghezza</h4>
+                        <p>Le colonne laterali "elastiche" tengono il testo a una larghezza leggibile, ma un'immagine può uscire e occupare tutto lo schermo.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.articolo {
+    display: grid;
+    grid-template-columns: 1fr min(65ch, 100% - 2rem) 1fr;
+}
+.articolo > *      { grid-column: 2; }      /* Tutto nella colonna centrale */
+.articolo > .larga { grid-column: 1 / -1; } /* Questa da bordo a bordo */</code></pre>
+                        </div>
+
+                        <h4 class="mt-4">Dashboard con aree</h4>
+                        <div class="code-example mb-0">
+                            <pre><code class="language-css">.dashboard {
+    display: grid;
+    grid-template-columns: 220px repeat(3, 1fr);
+    grid-template-rows: auto 1fr 1fr;
+    grid-template-areas:
+        "menu top    top    top"
+        "menu grafico grafico kpi"
+        "menu tabella tabella tabella";
+    gap: 1rem;
+    min-height: 100dvh;
+}</code></pre>
+                        </div>
+                        <p class="small mt-3 mb-0">Per allineare elementi <em>dentro</em> card diverse (titoli, testi e bottoni tutti alla stessa altezza) esiste <code>subgrid</code>: vedi <a href="css-modern-guide.html#layout">CSS Moderno → Layout</a>.</p>
+                    </div>
+                </section>
+
+                <!-- 12. Allenamento -->
+                <section id="allenamento" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-controller"></i> Allenati giocando</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li><a href="https://cssgridgarden.com/#it" target="_blank" rel="noopener noreferrer">Grid Garden</a>: innaffia le carote posizionando l'acqua con Grid (disponibile in italiano).</li>
+                            <li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank" rel="noopener noreferrer">A Complete Guide to CSS Grid</a> (CSS-Tricks): la guida da cui proviene il poster.</li>
+                            <li>DevTools di Firefox e Chrome: cliccando il badge <code>grid</code> accanto all'elemento nel pannello Elements vengono disegnati linee, numeri e nomi delle aree direttamente sulla pagina.</li>
+                        </ul>
+                        <div class="alert alert-success mb-0">
+                            <strong><i class="bi bi-pencil"></i> Esercizio:</strong> scegli la homepage di una rivista online e ricostruiscine la struttura (senza contenuti, solo blocchi colorati) con <code>grid-template-areas</code>. Poi crea la versione mobile ridisegnando solo la mappa delle aree.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigazione Pagine -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="css-flexbox-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Flexbox in dettaglio
+                    </a>
+                    <a href="css-gradienti-guide.html" class="btn btn-primary">
+                        Gradienti in dettaglio <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-code-slash"></i> Web Design Guide</h5>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2026 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Cambia tema">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+        // Playground Grid: ogni select ha data-prop con il nome della proprietà CSS
+        const gridStage = document.getElementById('grid-stage');
+        const gridCode = document.getElementById('grid-code');
+        const gridSelects = document.querySelectorAll('#grid-controls select');
+
+        const aggiornaGrid = () => {
+            const righe = [];
+            gridSelects.forEach(select => {
+                gridStage.style.setProperty(select.dataset.prop, select.value);
+                righe.push(`    ${select.dataset.prop}: ${select.value};`);
+            });
+            gridCode.textContent = `.container {\n    display: grid;\n${righe.join('\n')}\n}`;
+            Prism.highlightElement(gridCode);
+        };
+
+        gridSelects.forEach(select => select.addEventListener('change', aggiornaGrid));
+        aggiornaGrid();
+    </script>
+</body>
+</html>

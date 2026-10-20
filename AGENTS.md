@@ -23,6 +23,11 @@ Manuale Web Design/
 ├── css-modern-guide.html       CSS moderno (clamp, :has, container queries, nesting, oklch...)
 ├── bootstrap-guide.html        Guida Bootstrap 5
 ├── scss-sass-guide.html        SCSS/SASS e compilatori CSS
+├── css-problemi-comuni-guide.html  "Problemi di tutti i giorni": ricette CSS (centrare, footer in fondo, z-index...)
+├── css-flexbox-guide.html      Flexbox in dettaglio (poster CSS-Tricks + playground)
+├── css-grid-guide.html         Grid in dettaglio (poster CSS-Tricks + playground)
+├── css-gradienti-guide.html    Gradienti in dettaglio (+ generatore interattivo)
+├── css-media-queries-guide.html  Media queries in dettaglio (+ tabella live matchMedia)
 │
 │   # JavaScript
 ├── javascript-guide.html       Guida JS base → ES6+ → DOM → eventi → asincrono
@@ -67,6 +72,9 @@ Manuale Web Design/
 ├── AGENTS.md                   ← questo file (importato da CLAUDE.md)
 ├── CLAUDE.md                   Istruzioni specifiche per Claude Code
 ├── .github/workflows/static.yml  Deploy GitHub Pages
+├── images/
+│   ├── css-flexbox-poster.png  Poster Flexbox di CSS-Tricks (usato in css-flexbox-guide.html)
+│   └── css-grid-poster.png     Poster Grid di CSS-Tricks (usato in css-grid-guide.html)
 ├── css/
 │   └── style.css               Stili custom: variabili, dark mode, componenti
 ├── js/
@@ -144,13 +152,14 @@ Tutte le librerie vengono caricate via CDN, non ci sono dipendenze npm.
 - Rileva automaticamente se la pagina è dentro `esempi/` e adatta i percorsi relativi (`pathPrefix = '../'`). Gestisce **un solo livello** di sottocartella; il link `navbar-brand` punta a `index.html` senza prefisso. In `esempi/` solo `index.html` carica navbar.js
 - Voci del menu (ordine attuale):
   - **Home**, **HTML**
-  - **CSS** (dropdown): Guida CSS Base, CSS Moderno, Bootstrap, SCSS/SASS e Compilatori
+  - **CSS** (dropdown): Guida CSS Base, CSS Moderno, Bootstrap, SCSS/SASS e Compilatori · intestazione "Approfondimenti": Problemi di tutti i giorni 🛠️, Flexbox in dettaglio, Grid in dettaglio, Gradienti in dettaglio, Media Queries in dettaglio
   - **JavaScript** (dropdown): Guida JS Base, jQuery (ripasso), API & CRUD, Web Components · React, Next.js, GSAP · "E dopo? 🗺️" (roadmap)
   - **Grafica & Interfacce** (dropdown): UX e Progettazione Interfaccia, Componenti Web Interattivi, Design System, Tipografia Web, Colore e Contrasto, Motion e Micro-interazioni, Wireframe/Prototipi/Handoff, Modelli di Layout Web
   - **PHP** (dropdown): Guida PHP Base, PHP OOP, PHP MVC
   - **AI** (dropdown): AI: Storia e Funzionamento, Usare bene l'AI, AI per Sviluppatori · Esercizi AI (`esempi/esercizi-ai.html`)
   - **Altro** (dropdown): Hosting Web (locale/remoto), Best Practices, Guida Git e GitHub Pages
   - **Esercizi** → `esempi/index.html`
+- Le voci dei dropdown possono essere link (`{ text, url }`), separatori (`{ separator: true }`) o intestazioni (`{ header: 'Testo' }` → `.dropdown-header`)
 - Il link attivo viene evidenziato confrontando `window.location.pathname` con il nome file
 - Navbar sempre scura (`navbar-dark bg-dark`); alcune aree hanno un bordo inferiore colorato tramite flag `isXxxPage`:
 
@@ -215,7 +224,24 @@ Ogni guida (`*-guide.html`) ha struttura identica:
 Struttura base HTML5, `<head>` e metadati (description, favicon, Open Graph, defer/async), concetti fondamentali (anatomia elemento, block/inline, attributi globali, entità), titoli, testo (+ citazioni, abbr, address, code/pre/kbd), link, immagini (+ width/height, lazy loading, srcset/sizes, `<picture>`), liste, tabelle, form/input (+ fieldset/legend, validazione nativa, autocomplete, inputmode, datalist; demo interattiva), tag semantici, multimedia (+ sottotitoli `<track>`), elementi interattivi nativi (details/summary, dialog, popover, progress/meter), SVG inline (forme, viewBox, currentColor, accessibilità), accessibilità di base (elemento giusto, aria-label, tabindex, checklist).
 
 ### `css-guide.html`
-Selettori (tutti i tipi + pseudo-classi + pseudo-elementi + attributo), cascata/specificità/ereditarietà (+ !important, inherit/initial/unset, debug DevTools), unità di misura (px/rem/em/%/vw/dvh/ch/fr, calc), box model (+ content-box vs border-box, reset moderno), display/posizionamento (+ z-index e stacking context), Flexbox completo, CSS Grid (+ grid-template-areas), colori, variabili CSS (custom properties, override per varianti, tema chiaro/scuro, modifica via JS), tipografia (+ @font-face, font variabili), immagini (object-fit, filtri), effetti visivi (ombre, gradienti, backdrop-filter), transizioni, trasformazioni, animazioni @keyframes, media queries responsive. Avanti → `css-modern-guide.html`.
+Selettori (tutti i tipi + pseudo-classi + pseudo-elementi + attributo), cascata/specificità/ereditarietà (+ !important, inherit/initial/unset, debug DevTools), unità di misura (px/rem/em/%/vw/dvh/ch/fr, calc), box model (+ content-box vs border-box, reset moderno), display/posizionamento (+ z-index e stacking context), Flexbox completo, CSS Grid (+ grid-template-areas), colori, variabili CSS (custom properties, override per varianti, tema chiaro/scuro, modifica via JS), tipografia (+ @font-face, font variabili), liste (list-style-type/position/image, reset per menu, ::marker, marcatori con ::before, contatori CSS), immagini (object-fit, filtri), effetti visivi (ombre, gradienti, backdrop-filter), transizioni, trasformazioni, animazioni @keyframes, media queries responsive. Avanti → `css-modern-guide.html`.
+
+Le sezioni Flexbox, Grid, Gradienti e Media Queries rimandano ai rispettivi approfondimenti; la pagina ha un `<style>` interno per le demo delle liste.
+
+### `css-problemi-comuni-guide.html`
+Ricettario "problema → soluzione" (pagina con `<style>` interno per le demo): come centrare (orizzontale con text-align/margin auto/inline-block, verticale con padding/line-height/flex, entrambi con grid place-items/flex/margin auto/absolute+transform/inset, tabella di scelta; ispirato a CSS-Tricks "Centering in CSS"), sticky footer, immagini (max-width, spazio sotto inline, object-fit), scroll orizzontale su mobile, testo lungo (ellipsis, line-clamp, overflow-wrap), margin collapse, card alte uguali con bottone in fondo + `min-width: 0`, griglia auto-fit, video con aspect-ratio, z-index e stacking context, scroll-margin-top e sticky, nascondere elementi (display/visibility/opacity/.visually-hidden), checklist di debug. Pensata per crescere: nuova ricetta = nuova `<section>` + voce nella sidebar.
+
+### `css-flexbox-guide.html`
+Poster `images/css-flexbox-poster.png` (CSS-Tricks), assi principale/trasversale (SVG), proprietà del contenitore con demo visive, playground interattivo (select con `data-prop` → stile del contenitore + codice generato), proprietà degli elementi, valori di `flex` (1, auto, none), margin auto, pattern, errori comuni, giochi (Flexbox Froggy/Defense).
+
+### `css-grid-guide.html`
+Poster `images/css-grid-poster.png` (CSS-Tricks), terminologia (linee, tracce, celle, aree; SVG), template columns/rows, `fr`, nomi di linea, auto-fit vs auto-fill, grid-template-areas, posizionamento (span, `1 / -1`), allineamenti items/content/self, playground interattivo, griglia implicita e `dense`, Grid vs Flexbox, pattern (sovrapposizione nella stessa cella, layout a fasce, dashboard), Grid Garden.
+
+### `css-gradienti-guide.html`
+Gradiente come immagine, linear (direzioni, angoli), color stop e hard stop, radial, conic (torta, ciambella), repeating e pattern (strisce, scacchiera, quaderno), più livelli e overlay su foto, testo sfumato, bordo sfumato con radius, gradiente animato, mask-image, interpolazione `in oklab`/`in oklch`, generatore interattivo. Ispirata a CSS-Tricks "A Complete Guide to CSS Gradients".
+
+### `css-media-queries-guide.html`
+Anatomia, tabella live con `matchMedia()`, tipi di media e CSS di stampa, mobile first e scelta dei breakpoint, operatori logici, sintassi a intervalli (`width >= 768px`), hover/pointer/orientation/resolution, preferenze utente (color-scheme, reduced-motion, contrast, forced-colors), attributo `media` nell'HTML, `matchMedia` in JS, nesting delle media query, alternative (clamp, auto-fit, container queries). Ispirata a CSS-Tricks "A Complete Guide to CSS Media Queries".
 
 ### `css-modern-guide.html`
 CSS moderno (pagina con `<style>` interno per le demo): @supports e Baseline, clamp/min/max e tipografia fluida, selettori moderni (:has, :is, :where, :focus-visible, ::marker, :user-invalid), nesting nativo vs SASS, container queries (demo ridimensionabile), aspect-ratio, proprietà logiche, subgrid, scroll-behavior/scroll-margin/scroll-snap, oklch/color-mix/accent-color/light-dark, clip-path/mix-blend-mode/mask-image, @layer, novità da seguire (View Transitions, scroll-driven animations, @property, anchor positioning), tabella riepilogo "cosa sostituisce cosa".

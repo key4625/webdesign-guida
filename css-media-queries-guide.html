@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Queries in dettaglio - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ===== Stili delle demo di questa pagina ===== */
+
+        /* Anatomia di una media query */
+        .anatomia {
+            font-family: monospace;
+            font-size: clamp(0.85rem, 0.7rem + 0.8vw, 1.15rem);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            align-items: flex-start;
+        }
+        .anatomia__pezzo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .anatomia__codice {
+            padding: 0.3rem 0.5rem;
+            border-radius: 0.4rem;
+            color: #fff;
+            font-weight: bold;
+        }
+        .anatomia__nota {
+            font-family: system-ui, sans-serif;
+            font-size: 0.75rem;
+            text-align: center;
+            max-width: 9rem;
+        }
+
+        /* Demo: box che cambia con la larghezza della finestra */
+        .demo-breakpoint {
+            padding: 1rem;
+            border-radius: 0.75rem;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            background: #dc3545;
+        }
+        .demo-breakpoint::after { content: "Mobile: meno di 576px"; }
+        @media (width >= 576px) {
+            .demo-breakpoint { background: #fd7e14; }
+            .demo-breakpoint::after { content: "Tablet verticale: da 576px"; }
+        }
+        @media (width >= 768px) {
+            .demo-breakpoint { background: #198754; }
+            .demo-breakpoint::after { content: "Tablet orizzontale: da 768px"; }
+        }
+        @media (width >= 992px) {
+            .demo-breakpoint { background: #0d6efd; }
+            .demo-breakpoint::after { content: "Desktop: da 992px"; }
+        }
+        @media (width >= 1200px) {
+            .demo-breakpoint { background: #6f42c1; }
+            .demo-breakpoint::after { content: "Desktop grande: da 1200px"; }
+        }
+
+        /* Demo: hover e pointer */
+        .demo-hover-card {
+            border: 2px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            position: relative;
+        }
+        .demo-hover-card__azioni {
+            margin-top: 0.5rem;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .demo-hover-card__azioni { opacity: 0; transition: opacity 0.2s; }
+            .demo-hover-card:hover .demo-hover-card__azioni,
+            .demo-hover-card:focus-within .demo-hover-card__azioni { opacity: 1; }
+        }
+
+        /* Tabella live */
+        .live-stato {
+            font-family: monospace;
+            font-weight: bold;
+        }
+        .live-stato.vero { color: #198754; }
+        .live-stato.falso { color: #dc3545; }
+    </style>
+</head>
+<body>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Page Header -->
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #198754 0%, #0dcaf0 100%);">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-phone"></i> Media Queries in dettaglio</h1>
+            <p class="lead">Adattare il design allo schermo, al dispositivo e alle preferenze di chi naviga</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#introduzione">1. Anatomia di una media query</a>
+                        <a class="nav-link" href="#live">2. Cosa vede il tuo browser</a>
+                        <a class="nav-link" href="#tipi">3. Tipi di media</a>
+                        <a class="nav-link" href="#mobile-first">4. Mobile first e breakpoint</a>
+                        <a class="nav-link" href="#operatori">5. Operatori logici</a>
+                        <a class="nav-link" href="#intervalli">6. Sintassi a intervalli</a>
+                        <a class="nav-link" href="#dispositivo">7. Hover, pointer, orientamento</a>
+                        <a class="nav-link" href="#preferenze">8. Preferenze dell'utente</a>
+                        <a class="nav-link" href="#html">9. Media queries nell'HTML</a>
+                        <a class="nav-link" href="#javascript">10. Media queries in JavaScript</a>
+                        <a class="nav-link" href="#organizzare">11. Organizzare il codice</a>
+                        <a class="nav-link" href="#alternative">12. Quando non servono</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+
+                <!-- 1. Introduzione -->
+                <section id="introduzione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-info-circle"></i> Anatomia di una media query</h2>
+                    <div class="content-box">
+                        <p>Una <strong>media query</strong> è una condizione: "applica queste regole <em>solo se</em> il dispositivo ha queste caratteristiche". È lo strumento alla base del <strong>responsive design</strong>, ma non riguarda solo la larghezza dello schermo: può chiedere al browser se c'è un mouse, se l'utente preferisce il tema scuro, se la pagina sta per essere stampata.</p>
+                        <div class="example-result">
+                            <div class="anatomia" aria-label="Anatomia: @media, tipo di media, operatore, condizione">
+                                <div class="anatomia__pezzo"><span class="anatomia__codice" style="background:#6f42c1">@media</span><span class="anatomia__nota">la regola (at-rule)</span></div>
+                                <div class="anatomia__pezzo"><span class="anatomia__codice" style="background:#0d6efd">screen</span><span class="anatomia__nota">tipo di media (facoltativo)</span></div>
+                                <div class="anatomia__pezzo"><span class="anatomia__codice" style="background:#fd7e14">and</span><span class="anatomia__nota">operatore logico</span></div>
+                                <div class="anatomia__pezzo"><span class="anatomia__codice" style="background:#198754">(min-width: 768px)</span><span class="anatomia__nota">media feature: la condizione, sempre tra parentesi</span></div>
+                                <div class="anatomia__pezzo"><span class="anatomia__codice" style="background:#6c757d">{ … }</span><span class="anatomia__nota">regole applicate se è vera</span></div>
+                            </div>
+                        </div>
+                        <div class="code-example mt-3">
+                            <pre><code class="language-css">@media screen and (min-width: 768px) {
+    .menu {
+        flex-direction: row;
+    }
+}</code></pre>
+                        </div>
+                        <div class="alert alert-warning mb-0">
+                            <strong><i class="bi bi-exclamation-triangle"></i> Senza questa riga nell'HTML il responsive non funziona su mobile:</strong><br>
+                            <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code><br>
+                            Senza il meta viewport lo smartphone finge di essere largo circa 980px e rimpicciolisce la pagina: le tue media query per "mobile" non scatteranno mai.
+                        </div>
+                        <p class="small text-muted mt-3 mb-0">Approfondimento ispirato a <a href="https://css-tricks.com/a-complete-guide-to-css-media-queries/" target="_blank" rel="noopener noreferrer">A Complete Guide to CSS Media Queries</a> di CSS-Tricks.</p>
+                    </div>
+                </section>
+
+                <!-- 2. Live -->
+                <section id="live" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-broadcast"></i> Cosa vede il tuo browser, adesso</h2>
+                    <div class="content-box">
+                        <p>Questa tabella interroga il browser con le stesse media query che useresti nel CSS e si aggiorna da sola. Prova a <strong>ridimensionare la finestra</strong>, a cambiare tema nel sistema operativo o ad aprire la pagina dal telefono.</p>
+                        <div class="demo-breakpoint mb-3" aria-live="polite"></div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle mb-0">
+                                <thead class="table-dark">
+                                    <tr><th>Media query</th><th>Risultato</th></tr>
+                                </thead>
+                                <tbody id="live-tabella">
+                                    <tr><td><em>Larghezza della finestra</em></td><td><span class="live-stato" id="live-larghezza">—</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. Tipi -->
+                <section id="tipi" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-printer"></i> Tipi di media</h2>
+                    <div class="content-box">
+                        <p>Il tipo di media indica la <em>categoria</em> di dispositivo. Oggi ne sopravvivono tre (gli altri, come <code>tv</code> o <code>handheld</code>, sono deprecati):</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle">
+                                <tbody>
+                                    <tr><th><code>all</code></th><td>Tutti i dispositivi. È il default: se ometti il tipo, è come scrivere <code>all</code>.</td></tr>
+                                    <tr><th><code>screen</code></th><td>Schermi: computer, tablet, smartphone, TV.</td></tr>
+                                    <tr><th><code>print</code></th><td>Stampa e anteprima di stampa (anche "Salva come PDF").</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h4>Un foglio di stile per la stampa</h4>
+                        <p>Pochi ci pensano, ma ricette, biglietti, fatture e articoli vengono stampati. Con <code>@media print</code> si eliminano menu e banner e si ottimizza il testo per la carta.</p>
+                        <div class="code-example mb-0">
+                            <pre><code class="language-css">@media print {
+    nav, footer, .banner, .no-print {
+        display: none;                 /* Via tutto ciò che sulla carta non serve */
+    }
+    body {
+        font-size: 12pt;               /* Sulla carta si ragiona in punti */
+        color: #000;
+        background: #fff;
+    }
+    a[href^="http"]::after {
+        content: " (" attr(href) ")";  /* Mostra l'URL dei link esterni */
+        font-size: 0.8em;
+    }
+    h2, h3 {
+        break-after: avoid;            /* Il titolo non resta orfano a fine pagina */
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. Mobile first -->
+                <section id="mobile-first" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-phone-flip"></i> Mobile first e scelta dei breakpoint</h2>
+                    <div class="content-box">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <h4 class="h5">Mobile first <span class="badge bg-success">consigliato</span></h4>
+                                <p class="small">Stili base per lo schermo piccolo, poi si <strong>aggiunge</strong> con <code>min-width</code>.</p>
+                                <div class="code-example mb-0">
+                                    <pre><code class="language-css">.griglia {
+    display: grid;
+    gap: 1rem;
+}
+@media (min-width: 768px) {
+    .griglia {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (min-width: 1200px) {
+    .griglia {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="h5">Desktop first</h4>
+                                <p class="small">Stili per il desktop, poi si <strong>toglie</strong> con <code>max-width</code>.</p>
+                                <div class="code-example mb-0">
+                                    <pre><code class="language-css">.griglia {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+@media (max-width: 1199px) {
+    .griglia {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 767px) {
+    .griglia {
+        grid-template-columns: 1fr;
+    }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3">Perché mobile first? Il CSS per il mobile è quasi sempre il più <strong>semplice</strong> (una colonna, elementi impilati): partire da lì significa scrivere meno codice e sovrascrivere meno regole. E costringe a decidere cosa è davvero importante.</p>
+                        <h4 class="mt-4">Quali breakpoint scegliere?</h4>
+                        <p>Non esistono breakpoint "giusti": i dispositivi sono migliaia e cambiano ogni anno. La regola professionale è: <strong>il breakpoint lo decide il contenuto, non il dispositivo</strong>. Allarga lentamente la finestra: quando il layout comincia a stare male (righe di testo troppo lunghe, card troppo larghe, spazi vuoti), lì serve un breakpoint.</p>
+                        <p class="mb-0">Come punto di partenza vanno benissimo quelli di Bootstrap (<code>576px</code>, <code>768px</code>, <code>992px</code>, <code>1200px</code>, <code>1400px</code>), che trovi nella tabella della <a href="css-guide.html#media-queries">Guida CSS Base</a>. Due o tre breakpoint bastano quasi sempre.</p>
+                    </div>
+                </section>
+
+                <!-- 5. Operatori -->
+                <section id="operatori" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-diagram-2"></i> Operatori logici: and, virgola, not, only</h2>
+                    <div class="content-box">
+                        <div class="code-example">
+                            <pre><code class="language-css">/* AND: tutte le condizioni devono essere vere */
+@media (min-width: 768px) and (orientation: landscape) { ... }
+
+/* OR: la virgola separa query alternative (basta che una sia vera) */
+@media (max-width: 575px), print { ... }
+
+/* OR (sintassi moderna, dentro la stessa query) */
+@media (max-width: 575px) or (orientation: portrait) { ... }
+
+/* NOT: nega l'intera query */
+@media not print { ... }                  /* tutto tranne la stampa */
+@media not (hover: hover) { ... }         /* dispositivi senza hover */
+
+/* ONLY: nasconde la query ai browser antichissimi. Oggi è superfluo */
+@media only screen and (min-width: 768px) { ... }</code></pre>
+                        </div>
+                        <div class="alert alert-info mb-0">
+                            <strong><i class="bi bi-info-circle"></i> Nota:</strong> <code>only screen and</code> si trova ancora in moltissimi tutorial e template. Non fa danni, ma non serve più: puoi scrivere semplicemente <code>@media (min-width: 768px)</code>.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. Intervalli -->
+                <section id="intervalli" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-arrows-expand-vertical"></i> La nuova sintassi a intervalli</h2>
+                    <div class="content-box">
+                        <p><code>min-width</code> e <code>max-width</code> confondono spesso: "min-width: 768px" significa "larghezza <em>minima</em> 768", cioè "da 768 in su". La sintassi moderna usa i normali simboli matematici, molto più leggibili. È supportata da tutti i browser moderni.</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle">
+                                <thead class="table-dark">
+                                    <tr><th>Sintassi classica</th><th>Sintassi a intervalli</th><th>Significato</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>(min-width: 768px)</code></td><td><code>(width &gt;= 768px)</code></td><td>da 768px in su</td></tr>
+                                    <tr><td><code>(max-width: 767.98px)</code></td><td><code>(width &lt; 768px)</code></td><td>sotto i 768px</td></tr>
+                                    <tr><td><code>(min-width: 768px) and (max-width: 1023.98px)</code></td><td><code>(768px &lt;= width &lt; 1024px)</code></td><td>solo tablet</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h4>Il problema del pixel di confine</h4>
+                        <p>Con la sintassi classica, <code>(max-width: 768px)</code> e <code>(min-width: 768px)</code> sono <strong>entrambe vere</strong> a 768px esatti: le due regole si scontrano. Per questo nei framework trovi valori strani come <code>767.98px</code>. Con gli intervalli il problema sparisce: <code>&lt;</code> esclude il confine, <code>&gt;=</code> lo include.</p>
+                        <div class="code-example mb-0">
+                            <pre><code class="language-css">@media (width &lt; 768px)  { /* mobile */  }
+@media (width &gt;= 768px) { /* tablet+ */ }   /* nessuna sovrapposizione */</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. Dispositivo -->
+                <section id="dispositivo" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-mouse"></i> Hover, pointer, orientamento e risoluzione</h2>
+                    <div class="content-box">
+                        <p>La larghezza non dice tutto: un tablet di 1024px può non avere il mouse, un portatile con touchscreen ha entrambi. Queste media feature chiedono <strong>come</strong> l'utente interagisce:</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle">
+                                <thead class="table-dark">
+                                    <tr><th>Media feature</th><th>Valori</th><th>Domanda</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>hover</code></td><td><code>hover</code> | <code>none</code></td><td>Il dispositivo principale può "passare sopra" gli elementi?</td></tr>
+                                    <tr><td><code>pointer</code></td><td><code>fine</code> | <code>coarse</code> | <code>none</code></td><td>Il puntatore è preciso (mouse) o grossolano (dito)?</td></tr>
+                                    <tr><td><code>any-hover</code>, <code>any-pointer</code></td><td>come sopra</td><td>Lo stesso, ma considerando <em>qualsiasi</em> dispositivo collegato</td></tr>
+                                    <tr><td><code>orientation</code></td><td><code>portrait</code> | <code>landscape</code></td><td>Lo schermo è più alto che largo, o viceversa?</td></tr>
+                                    <tr><td><code>aspect-ratio</code></td><td>es. <code>16/9</code></td><td>Il rapporto larghezza/altezza della finestra</td></tr>
+                                    <tr><td><code>resolution</code></td><td>es. <code>2dppx</code></td><td>Quanti pixel fisici per pixel CSS (schermi retina)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h4>Esempio: azioni visibili solo al passaggio del mouse... se c'è un mouse</h4>
+                        <p>Nascondere i bottoni finché non si passa sopra la card è elegante su desktop, ma su touch quei bottoni diventerebbero irraggiungibili. Soluzione: nasconderli <strong>solo</strong> dove l'hover esiste.</p>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-7">
+                                <div class="code-example mb-0">
+                                    <pre><code class="language-css">/* Di default (touch) le azioni sono sempre visibili */
+@media (hover: hover) and (pointer: fine) {
+    .card .azioni { opacity: 0; }
+    .card:hover .azioni,
+    .card:focus-within .azioni { opacity: 1; }
+}
+
+/* Su touch, aree cliccabili più grandi */
+@media (pointer: coarse) {
+    .bottone { min-height: 44px; }
+}</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="demo-hover-card">
+                                    <strong>Card di prova</strong><br>
+                                    <small>Con il mouse: passa sopra. Sul telefono i bottoni sono già visibili.</small>
+                                    <div class="demo-hover-card__azioni">
+                                        <button type="button" class="btn btn-sm btn-primary">Modifica</button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger">Elimina</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. Preferenze -->
+                <section id="preferenze" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-person-gear"></i> Preferenze dell'utente</h2>
+                    <div class="content-box">
+                        <p>Queste media query leggono le impostazioni del sistema operativo. Rispettarle è una questione di <strong>accessibilità</strong> e di rispetto per chi naviga.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Tema scuro del sistema */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --sfondo: #121212;
+        --testo: #e9ecef;
+    }
+}
+
+/* Movimento ridotto: per chi soffre di vertigini o disturbi vestibolari */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Più contrasto richiesto */
+@media (prefers-contrast: more) {
+    .bottone { border: 2px solid currentColor; }
+}
+
+/* Modalità a colori forzati (es. contrasto elevato di Windows) */
+@media (forced-colors: active) {
+    .icona-decorativa { forced-color-adjust: auto; }
+}</code></pre>
+                        </div>
+                        <div class="alert alert-success mb-0">
+                            <strong><i class="bi bi-lightbulb"></i> Combinare sistema e scelta manuale:</strong> questo stesso manuale parte da <code>prefers-color-scheme</code> e poi lascia scegliere con il bottone in basso a destra, salvando la scelta. Il codice è in <code>js/theme-toggle.js</code>. Per il movimento vedi anche <a href="motion-microinteractions-guide.html">Motion e Micro-interazioni</a>.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 9. HTML -->
+                <section id="html" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-filetype-html"></i> Media queries nell'HTML</h2>
+                    <div class="content-box">
+                        <p>Le media queries non vivono solo nel CSS: l'attributo <code>media</code> le porta anche nell'HTML.</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;!-- Un foglio di stile caricato solo per la stampa --&gt;
+&lt;link rel="stylesheet" href="stampa.css" media="print"&gt;
+
+&lt;!-- Immagini diverse (art direction): ritaglio verticale su mobile --&gt;
+&lt;picture&gt;
+    &lt;source media="(width &gt;= 768px)" srcset="hero-orizzontale.jpg"&gt;
+    &lt;img src="hero-verticale.jpg" alt="Studenti in laboratorio"&gt;
+&lt;/picture&gt;
+
+&lt;!-- Logo diverso per il tema scuro --&gt;
+&lt;picture&gt;
+    &lt;source media="(prefers-color-scheme: dark)" srcset="logo-chiaro.svg"&gt;
+    &lt;img src="logo-scuro.svg" alt="Accademia di Belle Arti"&gt;
+&lt;/picture&gt;</code></pre>
+                        </div>
+                        <p class="small mb-0">Il browser scarica comunque il CSS con <code>media="print"</code>, ma con priorità bassa, senza bloccare la visualizzazione della pagina. Per <code>&lt;picture&gt;</code> e <code>srcset</code> vedi la <a href="html-guide.html">Guida HTML</a>.</p>
+                    </div>
+                </section>
+
+                <!-- 10. JavaScript -->
+                <section id="javascript" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-braces"></i> Media queries in JavaScript: matchMedia()</h2>
+                    <div class="content-box">
+                        <p>A volte serve sapere in JavaScript se una media query è vera: per esempio per avviare un carosello solo su desktop o per disattivare un'animazione GSAP con <code>prefers-reduced-motion</code>. <code>window.matchMedia()</code> usa esattamente la stessa sintassi del CSS.</p>
+                        <div class="code-example">
+                            <pre><code class="language-javascript">const desktop = window.matchMedia('(width >= 992px)');
+
+// Lettura immediata: true o false
+if (desktop.matches) {
+    console.log('Siamo su desktop');
+}
+
+// Reagire quando cambia (ridimensionamento, rotazione...)
+desktop.addEventListener('change', (evento) => {
+    if (evento.matches) {
+        avviaMenuDesktop();
+    } else {
+        avviaMenuMobile();
+    }
+});
+
+// Rispettare il movimento ridotto anche nelle animazioni JS
+const menoMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+gsap.to('.box', { x: 200, duration: menoMovimento ? 0 : 1 });</code></pre>
+                        </div>
+                        <div class="alert alert-info mb-0">
+                            <strong><i class="bi bi-info-circle"></i> Meglio di <code>resize</code>:</strong> l'evento <code>resize</code> scatta decine di volte al secondo mentre si ridimensiona; <code>change</code> di <code>matchMedia</code> scatta solo quando si attraversa il breakpoint. La tabella della sezione 2 funziona proprio così.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 11. Organizzare -->
+                <section id="organizzare" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-folder2-open"></i> Organizzare il codice</h2>
+                    <div class="content-box">
+                        <p>Due approcci: raccogliere tutte le media query in fondo al file, oppure scriverle <strong>accanto al componente</strong> a cui si riferiscono. Il secondo è più facile da mantenere: quando modifichi la card, trovi tutto nello stesso punto. Con il <strong>nesting nativo</strong> del CSS (o con SASS) diventa ancora più comodo:</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.card {
+    padding: 1rem;
+    font-size: 1rem;
+
+    @media (width >= 768px) {
+        padding: 2rem;          /* Vale per .card da 768px in su */
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: transform 0.2s;
+    }
+}</code></pre>
+                        </div>
+                        <p class="mb-0">I breakpoint però non si possono (ancora) mettere in variabili CSS: <code>@media (width &gt;= var(--tablet))</code> <strong>non funziona</strong>. Con SASS invece sì, con variabili e mixin: vedi <a href="scss-sass-guide.html">SCSS/SASS</a>.</p>
+                    </div>
+                </section>
+
+                <!-- 12. Alternative -->
+                <section id="alternative" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-signpost-split"></i> Quando le media queries non servono</h2>
+                    <div class="content-box">
+                        <p>Il CSS moderno ha strumenti che si adattano da soli, spesso con meno codice e risultati più fluidi. Prima di aggiungere un breakpoint chiediti se basta uno di questi:</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle mb-0">
+                                <thead class="table-dark">
+                                    <tr><th>Esigenza</th><th>Invece di una media query</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Titoli più piccoli su mobile</td><td>Tipografia fluida: <code>font-size: clamp(1.5rem, 1rem + 3vw, 3rem)</code> → <a href="css-modern-guide.html#funzioni">CSS Moderno</a></td></tr>
+                                    <tr><td>Griglia di card da 1 a 4 colonne</td><td><code>repeat(auto-fit, minmax(250px, 1fr))</code> → <a href="css-grid-guide.html#auto-fit">Grid in dettaglio</a></td></tr>
+                                    <tr><td>Elementi in fila che vanno a capo</td><td><code>flex-wrap: wrap</code> + <code>flex: 1 1 250px</code> → <a href="css-flexbox-guide.html#pattern">Flexbox in dettaglio</a></td></tr>
+                                    <tr><td>Un componente che cambia in base allo spazio <em>che ha</em>, non allo schermo (la stessa card in sidebar e nel contenuto)</td><td><strong>Container queries</strong> (<code>@container</code>) → <a href="css-modern-guide.html#container-queries">CSS Moderno</a></td></tr>
+                                    <tr><td>Larghezza massima del contenitore</td><td><code>width: min(100% - 2rem, 1200px)</code></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigazione Pagine -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="css-gradienti-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Gradienti in dettaglio
+                    </a>
+                    <a href="css-modern-guide.html" class="btn btn-primary">
+                        CSS Moderno <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-code-slash"></i> Web Design Guide</h5>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2026 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Cambia tema">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+        // Tabella live: ogni riga è una media query interrogata con matchMedia()
+        const queryDaTestare = [
+            '(width >= 576px)',
+            '(width >= 768px)',
+            '(width >= 992px)',
+            '(orientation: portrait)',
+            '(hover: hover)',
+            '(pointer: coarse)',
+            '(prefers-color-scheme: dark)',
+            '(prefers-reduced-motion: reduce)',
+            '(prefers-contrast: more)',
+            '(resolution >= 2dppx)'
+        ];
+
+        const tabella = document.getElementById('live-tabella');
+        const larghezza = document.getElementById('live-larghezza');
+
+        const aggiornaRiga = (cella, mql) => {
+            cella.textContent = mql.matches ? 'vera ✓' : 'falsa ✗';
+            cella.className = `live-stato ${mql.matches ? 'vero' : 'falso'}`;
+        };
+
+        queryDaTestare.forEach(query => {
+            const riga = document.createElement('tr');
+            const cellaQuery = document.createElement('td');
+            const codice = document.createElement('code');
+            codice.textContent = query;
+            cellaQuery.append(codice);
+
+            const cellaRisultato = document.createElement('td');
+            const stato = document.createElement('span');
+            cellaRisultato.append(stato);
+            riga.append(cellaQuery, cellaRisultato);
+            tabella.append(riga);
+
+            const mql = window.matchMedia(query);
+            aggiornaRiga(stato, mql);
+            mql.addEventListener('change', () => aggiornaRiga(stato, mql));
+        });
+
+        // La larghezza cambia a ogni pixel: qui serve davvero l'evento resize
+        const mostraLarghezza = () => {
+            larghezza.textContent = `${window.innerWidth}px`;
+        };
+        window.addEventListener('resize', mostraLarghezza);
+        mostraLarghezza();
+    </script>
+</body>
+</html>

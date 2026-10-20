@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradienti in dettaglio - Manuale Web Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ===== Stili delle demo di questa pagina ===== */
+        .grad {
+            height: 110px;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border-color);
+        }
+        .grad--alto { height: 160px; }
+        .grad-label {
+            font-family: monospace;
+            font-size: 0.75rem;
+            margin: 0.4rem 0 0;
+            display: block;
+            word-break: break-word;
+        }
+
+        /* Testo sfumato */
+        .demo-testo-grad {
+            font-size: clamp(2rem, 1.5rem + 3vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            background: linear-gradient(90deg, #0d6efd, #e83e8c, #fd7e14);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        /* Bordo sfumato con angoli arrotondati */
+        .demo-bordo-grad {
+            border: 4px solid transparent;
+            border-radius: 1rem;
+            padding: 1.25rem;
+            background:
+                linear-gradient(var(--content-bg), var(--content-bg)) padding-box,
+                linear-gradient(135deg, #0d6efd, #e83e8c) border-box;
+        }
+
+        /* Gradiente animato */
+        .demo-grad-animato {
+            height: 110px;
+            border-radius: 0.75rem;
+            background: linear-gradient(270deg, #0d6efd, #e83e8c, #fd7e14, #0d6efd);
+            background-size: 300% 100%;
+            animation: scorri-gradiente 8s linear infinite;
+        }
+        @keyframes scorri-gradiente {
+            from { background-position: 0% 50%; }
+            to   { background-position: 300% 50%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .demo-grad-animato { animation: none; }
+        }
+
+        /* Overlay su immagine (immagine simulata con un SVG inline) */
+        .demo-overlay {
+            height: 180px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+            color: #fff;
+            background:
+                linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 60%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%2387ceeb'/%3E%3Ccircle cx='320' cy='60' r='30' fill='%23ffd700'/%3E%3Cpath d='M0 200 L120 80 L220 200 Z' fill='%232e8b57'/%3E%3Cpath d='M150 200 L280 100 L400 200 Z' fill='%233cb371'/%3E%3C/svg%3E") center / cover;
+        }
+
+        /* Generatore */
+        .gen-preview {
+            height: 200px;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border-color);
+        }
+        .gen-controls label {
+            font-family: monospace;
+            font-size: 0.8rem;
+            margin-bottom: 0.2rem;
+        }
+        .gen-controls input[type="color"] { width: 100%; height: 38px; }
+    </style>
+</head>
+<body>
+    <!-- Navbar (Generated via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Page Header -->
+    <div class="page-header text-white py-4" style="background: linear-gradient(135deg, #198754 0%, #0d6efd 50%, #e83e8c 100%);">
+        <div class="container">
+            <h1 class="display-4"><i class="bi bi-rainbow"></i> Gradienti in dettaglio</h1>
+            <p class="lead">Lineari, radiali, conici e ripetuti: dalle sfumature morbide ai pattern a strisce</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="sticky-sidebar">
+                    <h5 class="mb-3">Indice Argomenti</h5>
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link" href="#introduzione">1. Un gradiente è un'immagine</a>
+                        <a class="nav-link" href="#lineare">2. linear-gradient</a>
+                        <a class="nav-link" href="#stop">3. Color stop e tagli netti</a>
+                        <a class="nav-link" href="#radiale">4. radial-gradient</a>
+                        <a class="nav-link" href="#conico">5. conic-gradient</a>
+                        <a class="nav-link" href="#ripetuti">6. Gradienti ripetuti e pattern</a>
+                        <a class="nav-link" href="#livelli">7. Più livelli e overlay</a>
+                        <a class="nav-link" href="#effetti">8. Effetti creativi</a>
+                        <a class="nav-link" href="#interpolazione">9. Sfumature più belle</a>
+                        <a class="nav-link" href="#generatore">10. Generatore</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+
+                <!-- 1. Introduzione -->
+                <section id="introduzione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-info-circle"></i> Un gradiente è un'immagine</h2>
+                    <div class="content-box">
+                        <p>Un gradiente CSS è una sfumatura tra due o più colori generata dal browser. La cosa più importante da sapere: per il CSS <strong>un gradiente non è un colore, è un'immagine</strong>. Quindi:</p>
+                        <ul>
+                            <li>va in <code>background-image</code> (o nello shorthand <code>background</code>), <strong>non</strong> in <code>background-color</code>;</li>
+                            <li>funziona dovunque si accetti un'immagine: <code>border-image</code>, <code>mask-image</code>, <code>list-style-image</code>...;</li>
+                            <li>si possono <strong>sovrapporre</strong> più gradienti e immagini, separati da virgole;</li>
+                            <li>non pesa nulla da scaricare e resta nitido a qualsiasi risoluzione.</li>
+                        </ul>
+                        <div class="code-example">
+                            <pre><code class="language-css">.box {
+    background-color: #667eea;  /* Colore di riserva (fallback) */
+    background-image: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* ❌ Non funziona: un gradiente non è un colore */
+.box { background-color: linear-gradient(#667eea, #764ba2); }</code></pre>
+                        </div>
+                        <p class="small text-muted mb-0">Approfondimento ispirato a <a href="https://css-tricks.com/a-complete-guide-to-css-gradients/" target="_blank" rel="noopener noreferrer">A Complete Guide to CSS Gradients</a> di CSS-Tricks.</p>
+                    </div>
+                </section>
+
+                <!-- 2. Lineare -->
+                <section id="lineare" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-arrow-right"></i> linear-gradient: sfumatura lungo una linea</h2>
+                    <div class="content-box">
+                        <p>La sintassi è <code>linear-gradient(direzione, colore1, colore2, ...)</code>. La direzione è facoltativa (default: <strong>dall'alto verso il basso</strong>) e si scrive con parole chiave o con un angolo.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">background: linear-gradient(#0d6efd, #e83e8c);            /* ↓ default: to bottom */
+background: linear-gradient(to right, #0d6efd, #e83e8c);   /* → */
+background: linear-gradient(to top left, #0d6efd, #e83e8c);/* ↖ verso l'angolo */
+background: linear-gradient(45deg, #0d6efd, #e83e8c);      /* angolo */
+background: linear-gradient(90deg, red, orange, yellow, green, blue); /* più colori */</code></pre>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-6 col-md-3"><div class="grad" style="background: linear-gradient(#0d6efd, #e83e8c);"></div><span class="grad-label">default (to bottom)</span></div>
+                            <div class="col-6 col-md-3"><div class="grad" style="background: linear-gradient(to right, #0d6efd, #e83e8c);"></div><span class="grad-label">to right</span></div>
+                            <div class="col-6 col-md-3"><div class="grad" style="background: linear-gradient(45deg, #0d6efd, #e83e8c);"></div><span class="grad-label">45deg</span></div>
+                            <div class="col-6 col-md-3"><div class="grad" style="background: linear-gradient(90deg, red, orange, yellow, green, blue);"></div><span class="grad-label">5 colori</span></div>
+                        </div>
+                        <h4 class="mt-4">Come funzionano gli angoli</h4>
+                        <p class="mb-0">Pensa a un orologio: <code>0deg</code> punta in <strong>alto</strong> (equivale a <code>to top</code>), <code>90deg</code> a destra, <code>180deg</code> in basso, <code>270deg</code> a sinistra. L'angolo indica <em>verso dove va</em> la sfumatura, cioè dove si trova l'ultimo colore. Attenzione: <code>to top right</code> e <code>45deg</code> coincidono solo in un box quadrato; con le parole chiave l'ultimo colore arriva sempre esattamente nell'angolo.</p>
+                    </div>
+                </section>
+
+                <!-- 3. Color stop -->
+                <section id="stop" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-distribute-horizontal"></i> Color stop e tagli netti</h2>
+                    <div class="content-box">
+                        <p>Di default i colori sono distribuiti in modo uniforme. Aggiungendo una posizione dopo ogni colore (<strong>color stop</strong>) decidi tu dove si trovano.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Il rosa arriva subito, al 20% */
+background: linear-gradient(to right, #0d6efd, #e83e8c 20%, #fd7e14);
+
+/* Hint: sposta il punto a metà della sfumatura */
+background: linear-gradient(to right, #0d6efd, 80%, #e83e8c);
+
+/* Due posizioni per lo stesso colore = fascia piena */
+background: linear-gradient(to right, #0d6efd 0 30%, #e83e8c 70% 100%);</code></pre>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-4"><div class="grad" style="background: linear-gradient(to right, #0d6efd, #e83e8c 20%, #fd7e14);"></div><span class="grad-label">#e83e8c 20%</span></div>
+                            <div class="col-md-4"><div class="grad" style="background: linear-gradient(to right, #0d6efd, 80%, #e83e8c);"></div><span class="grad-label">hint 80%</span></div>
+                            <div class="col-md-4"><div class="grad" style="background: linear-gradient(to right, #0d6efd 0 30%, #e83e8c 70% 100%);"></div><span class="grad-label">fasce piene + sfumatura</span></div>
+                        </div>
+
+                        <h4 class="mt-4">Tagli netti (hard stop)</h4>
+                        <p>Se un colore finisce esattamente dove inizia il successivo, non c'è spazio per sfumare: ottieni un <strong>bordo netto</strong>. È la base di strisce, bandiere e pattern.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Bandiera italiana: tre fasce nette */
+.bandiera {
+    background: linear-gradient(to right,
+        #009246 0 33.33%,
+        #ffffff 33.33% 66.66%,
+        #ce2b37 66.66% 100%);
+}
+
+/* Metà e metà in diagonale */
+.diagonale {
+    background: linear-gradient(135deg, #0d6efd 50%, #ffc107 50%);
+}</code></pre>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6"><div class="grad" style="background: linear-gradient(to right, #009246 0 33.33%, #ffffff 33.33% 66.66%, #ce2b37 66.66% 100%);"></div><span class="grad-label">bandiera (hard stop)</span></div>
+                            <div class="col-md-6"><div class="grad" style="background: linear-gradient(135deg, #0d6efd 50%, #ffc107 50%);"></div><span class="grad-label">135deg, 50% / 50%</span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. Radiale -->
+                <section id="radiale" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-circle"></i> radial-gradient: sfumatura dal centro verso l'esterno</h2>
+                    <div class="content-box">
+                        <p>Parte da un punto e si allarga a cerchio o ellisse. Prima della virgola puoi indicare <strong>forma</strong>, <strong>dimensione</strong> e <strong>posizione</strong> (dopo <code>at</code>).</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">background: radial-gradient(#ffc107, #e83e8c);                  /* ellisse, al centro */
+background: radial-gradient(circle, #ffc107, #e83e8c);          /* cerchio */
+background: radial-gradient(circle at top left, #ffc107, #e83e8c); /* centro spostato */
+background: radial-gradient(circle at 70% 30%, #fff 0 10%, transparent 11%), #0d6efd;
+background: radial-gradient(circle closest-side, #ffc107, #e83e8c); /* finisce al lato più vicino */</code></pre>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-6 col-md-3"><div class="grad grad--alto" style="background: radial-gradient(#ffc107, #e83e8c);"></div><span class="grad-label">ellipse (default)</span></div>
+                            <div class="col-6 col-md-3"><div class="grad grad--alto" style="background: radial-gradient(circle, #ffc107, #e83e8c);"></div><span class="grad-label">circle</span></div>
+                            <div class="col-6 col-md-3"><div class="grad grad--alto" style="background: radial-gradient(circle at top left, #ffc107, #e83e8c);"></div><span class="grad-label">at top left</span></div>
+                            <div class="col-6 col-md-3"><div class="grad grad--alto" style="background: radial-gradient(circle at 70% 30%, #fff 0 10%, transparent 11%), #0d6efd;"></div><span class="grad-label">"sole" con hard stop</span></div>
+                        </div>
+                        <p class="small mt-3 mb-0">Parole chiave per la dimensione: <code>closest-side</code>, <code>closest-corner</code>, <code>farthest-side</code>, <code>farthest-corner</code> (default). Un uso classico è la <strong>vignettatura</strong>: <code>radial-gradient(transparent 50%, rgba(0,0,0,0.6))</code> sopra una foto.</p>
+                    </div>
+                </section>
+
+                <!-- 5. Conico -->
+                <section id="conico" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-pie-chart"></i> conic-gradient: sfumatura che gira intorno a un punto</h2>
+                    <div class="content-box">
+                        <p>I colori ruotano attorno al centro, come le lancette di un orologio. Con i tagli netti diventa un <strong>grafico a torta</strong> fatto solo di CSS.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Ruota dei colori */
+background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red);
+
+/* Grafico a torta: 40% / 35% / 25% */
+.torta {
+    border-radius: 50%;
+    background: conic-gradient(
+        #0d6efd 0 40%,
+        #e83e8c 40% 75%,
+        #ffc107 75% 100%);
+}
+
+/* Punto di partenza e centro personalizzati */
+background: conic-gradient(from 90deg at 30% 50%, #0d6efd, #e83e8c);</code></pre>
+                        </div>
+                        <div class="row g-3 text-center">
+                            <div class="col-4"><div class="grad grad--alto mx-auto" style="aspect-ratio: 1; height: auto; max-width: 140px; border-radius: 50%; background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red);"></div><span class="grad-label">ruota colori</span></div>
+                            <div class="col-4"><div class="grad grad--alto mx-auto" style="aspect-ratio: 1; height: auto; max-width: 140px; border-radius: 50%; background: conic-gradient(#0d6efd 0 40%, #e83e8c 40% 75%, #ffc107 75% 100%);"></div><span class="grad-label">torta</span></div>
+                            <div class="col-4"><div class="grad grad--alto mx-auto" style="aspect-ratio: 1; height: auto; max-width: 140px; border-radius: 50%; background: radial-gradient(var(--content-bg) 55%, transparent 56%), conic-gradient(#198754 0 72%, var(--border-color) 72% 100%);"></div><span class="grad-label">ciambella 72%</span></div>
+                        </div>
+                        <p class="small mt-3 mb-0">La ciambella è una torta con sopra un cerchio radiale del colore dello sfondo: un primo esempio di gradienti sovrapposti (sezione 7).</p>
+                    </div>
+                </section>
+
+                <!-- 6. Ripetuti -->
+                <section id="ripetuti" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-grid-3x3-gap"></i> Gradienti ripetuti e pattern</h2>
+                    <div class="content-box">
+                        <p><code>repeating-linear-gradient</code>, <code>repeating-radial-gradient</code> e <code>repeating-conic-gradient</code> ripetono all'infinito la sequenza di color stop. Con i tagli netti creano pattern senza nessuna immagine.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">/* Strisce diagonali (nastro "lavori in corso") */
+.strisce {
+    background: repeating-linear-gradient(45deg,
+        #ffc107 0 20px,
+        #212529 20px 40px);
+}
+
+/* Cerchi concentrici */
+.bersaglio {
+    background: repeating-radial-gradient(circle,
+        #dc3545 0 15px, #fff 15px 30px);
+}
+
+/* Scacchiera: un conico ripetuto ogni 40px */
+.scacchiera {
+    background: repeating-conic-gradient(#212529 0 25%, #f8f9fa 0 50%)
+                0 0 / 40px 40px;
+}
+
+/* Carta a righe: background-size ripete il gradiente */
+.quaderno {
+    background: linear-gradient(transparent 27px, #9ec5fe 27px 28px) 0 0 / 100% 28px,
+                #fff;
+}</code></pre>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-6 col-md-3"><div class="grad" style="background: repeating-linear-gradient(45deg, #ffc107 0 20px, #212529 20px 40px);"></div><span class="grad-label">strisce</span></div>
+                            <div class="col-6 col-md-3"><div class="grad" style="background: repeating-radial-gradient(circle, #dc3545 0 15px, #fff 15px 30px);"></div><span class="grad-label">bersaglio</span></div>
+                            <div class="col-6 col-md-3"><div class="grad" style="background: repeating-conic-gradient(#212529 0 25%, #f8f9fa 0 50%) 0 0 / 40px 40px;"></div><span class="grad-label">scacchiera</span></div>
+                            <div class="col-6 col-md-3"><div class="grad" style="background: linear-gradient(transparent 27px, #9ec5fe 27px 28px) 0 0 / 100% 28px, #fff;"></div><span class="grad-label">quaderno</span></div>
+                        </div>
+                        <p class="small mt-3 mb-0">Il trucco del quaderno vale per tutti i pattern: si disegna <strong>un solo "mattoncino"</strong> e <code>background-size</code> lo fa ripetere (perché <code>background-repeat</code> è <code>repeat</code> di default).</p>
+                    </div>
+                </section>
+
+                <!-- 7. Livelli -->
+                <section id="livelli" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-layers"></i> Più livelli e overlay su immagini</h2>
+                    <div class="content-box">
+                        <p>Nella proprietà <code>background</code> puoi elencare più livelli separati da virgole: il <strong>primo è quello più in alto</strong>. Il caso più utile in assoluto è il velo scuro sopra una foto, per rendere leggibile il testo bianco.</p>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-7">
+                                <div class="code-example mb-0">
+                                    <pre><code class="language-css">.hero {
+    background:
+        /* 1° livello (sopra): sfuma dal nero a trasparente */
+        linear-gradient(to top, rgba(0,0,0,0.8), transparent 60%),
+        /* 2° livello (sotto): la foto */
+        url('img/montagne.jpg') center / cover;
+    color: #fff;
+}</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="demo-overlay"><div><strong>Monti Sibillini</strong><br><small>Testo leggibile grazie al gradiente</small></div></div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-3 mb-0">
+                            <strong><i class="bi bi-universal-access"></i> Contrasto:</strong> il testo su un gradiente deve rispettare il contrasto minimo (4.5:1) <em>nel punto peggiore</em>, cioè dove lo sfondo è più chiaro sotto il testo. Vedi <a href="web-color-contrast-guide.html">Colore e Contrasto</a>.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. Effetti -->
+                <section id="effetti" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-magic"></i> Effetti creativi</h2>
+                    <div class="content-box">
+                        <h4>Testo sfumato</h4>
+                        <p>Il gradiente è lo sfondo dell'elemento; <code>background-clip: text</code> lo "ritaglia" sulla forma delle lettere, e il colore trasparente lo lascia vedere.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.titolo-sfumato {
+    background: linear-gradient(90deg, #0d6efd, #e83e8c, #fd7e14);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}</code></pre>
+                        </div>
+                        <p class="demo-testo-grad mb-4">Web Design</p>
+
+                        <h4>Bordo sfumato (anche con angoli arrotondati)</h4>
+                        <p><code>border-image</code> accetta un gradiente ma ignora <code>border-radius</code>. Il trucco: due sfondi, uno pieno limitato al <code>padding-box</code> e il gradiente esteso fino al <code>border-box</code>, con un bordo trasparente che lo lascia intravedere.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.card-bordo {
+    border: 4px solid transparent;
+    border-radius: 1rem;
+    background:
+        linear-gradient(white, white) padding-box,           /* riempimento interno */
+        linear-gradient(135deg, #0d6efd, #e83e8c) border-box; /* visibile solo nel bordo */
+}</code></pre>
+                        </div>
+                        <div class="demo-bordo-grad mb-4">Card con bordo sfumato e angoli arrotondati</div>
+
+                        <h4>Gradiente animato</h4>
+                        <p>I colori di un gradiente non si possono animare direttamente con <code>transition</code>, ma si può rendere lo sfondo più grande del box e spostarlo con <code>background-position</code>.</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.animato {
+    background: linear-gradient(270deg, #0d6efd, #e83e8c, #fd7e14, #0d6efd);
+    background-size: 300% 100%;
+    animation: scorri 8s linear infinite;
+}
+@keyframes scorri {
+    from { background-position: 0% 50%; }
+    to   { background-position: 300% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .animato { animation: none; }
+}</code></pre>
+                        </div>
+                        <div class="demo-grad-animato mb-4"></div>
+
+                        <h4>Dissolvenza verso il trasparente</h4>
+                        <p class="mb-2">Per far "sparire" un contenuto lungo (es. "Leggi tutto") si usa un gradiente come <strong>maschera</strong>: le parti nere restano visibili, quelle trasparenti spariscono.</p>
+                        <div class="code-example mb-0">
+                            <pre><code class="language-css">.anteprima {
+    max-height: 8rem;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, black 50%, transparent);
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 9. Interpolazione -->
+                <section id="interpolazione" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-palette2"></i> Sfumature più belle: evitare la "zona grigia"</h2>
+                    <div class="content-box">
+                        <p>Sfumando tra due colori complementari (es. blu e giallo) il centro diventa spesso grigiastro e spento. Succede perché il browser calcola i colori intermedi nello spazio colore <strong>sRGB</strong>, che non corrisponde a come l'occhio percepisce i colori. Il CSS moderno permette di scegliere lo spazio colore in cui interpolare:</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">background: linear-gradient(to right, blue, yellow);              /* sRGB: centro grigio */
+background: linear-gradient(to right in oklab, blue, yellow);     /* percettivo: più pulito */
+background: linear-gradient(to right in oklch, blue, yellow);     /* passa per la ruota dei colori */</code></pre>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-4"><div class="grad" style="background: linear-gradient(to right, blue, yellow);"></div><span class="grad-label">sRGB (default)</span></div>
+                            <div class="col-md-4"><div class="grad" style="background: linear-gradient(to right in oklab, blue, yellow);"></div><span class="grad-label">in oklab</span></div>
+                            <div class="col-md-4"><div class="grad" style="background: linear-gradient(to right in oklch, blue, yellow);"></div><span class="grad-label">in oklch</span></div>
+                        </div>
+                        <p class="small mt-3 mb-0">Nei browser che non supportano la sintassi <code>in ...</code> la regola viene ignorata: dichiara prima una versione classica come fallback. Per <code>oklch</code> vedi <a href="css-modern-guide.html#colore">CSS Moderno → Colore</a>. In alternativa funziona sempre il trucco "a mano": aggiungere un colore intermedio vivace (es. <code>blue, #00b4d8, yellow</code>).</p>
+                    </div>
+                </section>
+
+                <!-- 10. Generatore -->
+                <section id="generatore" class="mb-5">
+                    <h2 class="section-title"><i class="bi bi-sliders"></i> Generatore di gradienti</h2>
+                    <div class="content-box">
+                        <p>Scegli tipo, colori e angolo: il codice si aggiorna in tempo reale ed è pronto da copiare nel tuo CSS.</p>
+                        <form class="row g-2 gen-controls" id="gen-form">
+                            <div class="col-6 col-md-3">
+                                <label for="gen-tipo" class="form-label">tipo</label>
+                                <select id="gen-tipo" class="form-select form-select-sm">
+                                    <option value="linear">linear</option>
+                                    <option value="radial">radial</option>
+                                    <option value="conic">conic</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-md-2">
+                                <label for="gen-c1" class="form-label">colore 1</label>
+                                <input type="color" id="gen-c1" class="form-control form-control-sm" value="#0d6efd">
+                            </div>
+                            <div class="col-6 col-md-2">
+                                <label for="gen-c2" class="form-label">colore 2</label>
+                                <input type="color" id="gen-c2" class="form-control form-control-sm" value="#e83e8c">
+                            </div>
+                            <div class="col-6 col-md-2">
+                                <label for="gen-c3" class="form-label">colore 3</label>
+                                <input type="color" id="gen-c3" class="form-control form-control-sm" value="#fd7e14">
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <label for="gen-angolo" class="form-label">angolo: <span id="gen-angolo-val">135</span>deg</label>
+                                <input type="range" id="gen-angolo" class="form-range" min="0" max="360" step="5" value="135">
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="gen-usa-c3" checked>
+                                    <label class="form-check-label" for="gen-usa-c3">usa il terzo colore</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="gen-netto">
+                                    <label class="form-check-label" for="gen-netto">tagli netti (hard stop)</label>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="gen-preview mt-3" id="gen-preview"></div>
+                        <div class="code-example mt-3 mb-0">
+                            <pre><code class="language-css" id="gen-code"></code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigazione Pagine -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <a href="css-grid-guide.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Grid in dettaglio
+                    </a>
+                    <a href="css-media-queries-guide.html" class="btn btn-primary">
+                        Media Queries in dettaglio <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-code-slash"></i> Web Design Guide</h5>
+                    <p class="text-muted">Guida completa per studenti di web design</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2026 - Materiale didattico per studenti</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Cambia tema">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+        // Generatore di gradienti
+        const genForm = document.getElementById('gen-form');
+        const genPreview = document.getElementById('gen-preview');
+        const genCode = document.getElementById('gen-code');
+        const angoloVal = document.getElementById('gen-angolo-val');
+
+        // Con i tagli netti ogni colore occupa una fascia piena: "colore inizio% fine%"
+        const creaStop = (colori, netto) => {
+            if (!netto) return colori.join(', ');
+            const fascia = 100 / colori.length;
+            return colori
+                .map((c, i) => `${c} ${Math.round(i * fascia)}% ${Math.round((i + 1) * fascia)}%`)
+                .join(', ');
+        };
+
+        const aggiornaGeneratore = () => {
+            const tipo = document.getElementById('gen-tipo').value;
+            const angolo = document.getElementById('gen-angolo').value;
+            const colori = [
+                document.getElementById('gen-c1').value,
+                document.getElementById('gen-c2').value
+            ];
+            if (document.getElementById('gen-usa-c3').checked) {
+                colori.push(document.getElementById('gen-c3').value);
+            }
+            const stop = creaStop(colori, document.getElementById('gen-netto').checked);
+
+            let valore;
+            if (tipo === 'linear') {
+                valore = `linear-gradient(${angolo}deg, ${stop})`;
+            } else if (tipo === 'radial') {
+                valore = `radial-gradient(circle, ${stop})`;
+            } else {
+                valore = `conic-gradient(from ${angolo}deg, ${stop})`;
+            }
+
+            angoloVal.textContent = angolo;
+            genPreview.style.background = valore;
+            genCode.textContent = `.elemento {\n    background-color: ${colori[0]}; /* fallback */\n    background-image: ${valore};\n}`;
+            Prism.highlightElement(genCode);
+        };
+
+        genForm.addEventListener('input', aggiornaGeneratore);
+        aggiornaGeneratore();
+    </script>
+</body>
+</html>
