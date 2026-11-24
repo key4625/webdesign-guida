@@ -1159,57 +1159,239 @@ document.documentElement.style.setProperty('--colore-primario', '#e83e8c');</cod
 }</code></pre>
                         </div>
 
-                        <h4 class="mt-4">Google Fonts</h4>
+                        <!-- ===== Web font: statici/variabili, Google Fonts, self-hosting ===== -->
+                        <h4 class="mt-5" id="font-statici-variabili">Font statici e font variabili</h4>
+                        <p>Prima di collegare un font al sito conviene capire <strong>in che forma arriva</strong>, perché cambia il modo di scrivere il CSS.</p>
+                        <ul>
+                            <li><strong>Font statici</strong>: un file per ogni combinazione di peso e stile (<code>Inter-Regular.ttf</code>, <code>Inter-Bold.ttf</code>, <code>Inter-Italic.ttf</code>…). Esistono solo i pesi che hai scaricato: se scrivi <code>font-weight: 550</code> e hai solo 400 e 700, il browser usa il peso disponibile più vicino.</li>
+                            <li><strong>Font variabili</strong>: <strong>un unico file</strong> che contiene uno o più <strong>assi</strong> continui (peso, larghezza, inclinazione…). Il browser <em>interpola</em> tra il minimo e il massimo: qualunque peso intermedio funziona e le transizioni sul peso sono fluide.</li>
+                        </ul>
+
+                        <h5 class="mt-4">Gli assi di un font variabile</h5>
+                        <p>Gli <strong>assi registrati</strong> hanno un nome di 4 lettere <strong>minuscole</strong> e ognuno corrisponde a una proprietà CSS che conosci già:</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr><th>Asse</th><th>Significato</th><th>Proprietà CSS da usare</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>wght</code></td><td>Peso</td><td><code>font-weight: 550;</code></td></tr>
+                                    <tr><td><code>wdth</code></td><td>Larghezza</td><td><code>font-stretch: 125%;</code></td></tr>
+                                    <tr><td><code>ital</code></td><td>Corsivo</td><td><code>font-style: italic;</code></td></tr>
+                                    <tr><td><code>slnt</code></td><td>Inclinazione</td><td><code>font-style: oblique 10deg;</code></td></tr>
+                                    <tr><td><code>opsz</code></td><td>Dimensione ottica</td><td><code>font-optical-sizing: auto;</code></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Gli <strong>assi personalizzati</strong> hanno il nome in <strong>MAIUSCOLO</strong> (es. <code>GRAD</code>, la "grammatura") e si controllano solo con <code>font-variation-settings</code>:</p>
                         <div class="code-example">
-                            <pre><code class="language-html">&lt;!-- Nel head dell'HTML --&gt;
-&lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"&gt;</code></pre>
+                            <pre><code class="language-css">/* ✅ Assi registrati: proprietà dedicate */
+h1 {
+    font-weight: 750;        /* asse wght */
+    font-stretch: 115%;      /* asse wdth */
+}
+
+/* ✅ Assi personalizzati: font-variation-settings */
+.bottone:hover {
+    font-variation-settings: "GRAD" 50;
+}
+
+/* ❌ Da evitare per gli assi registrati */
+h1 { font-variation-settings: "wght" 750, "wdth" 115; }</code></pre>
+                        </div>
+                        <div class="alert alert-warning mt-3">
+                            <strong><i class="bi bi-exclamation-triangle"></i> Perché evitarlo?</strong> <code>font-variation-settings</code> <strong>si sovrascrive invece di sommarsi</strong>: se un'altra regola imposta solo <code>"GRAD" 50</code>, il valore di <code>"wght"</code> scritto prima si perde. Con le proprietà dedicate (<code>font-weight</code>, <code>font-stretch</code>…) ogni asse resta indipendente.
+                        </div>
+
+                        <h5 class="mt-4">Quale scegliere?</h5>
+                        <ul>
+                            <li><strong>Variabile</strong> se usi <strong>3 o più pesi</strong>, se vuoi animare il peso o fare tipografia fluida.</li>
+                            <li><strong>Statico</strong> se ti bastano <strong>1–2 pesi</strong>: due file piccoli pesano meno di un file variabile completo.</li>
+                        </ul>
+
+                        <h4 class="mt-5" id="google-fonts">Metodo A: collegare Google Fonts (CDN)</h4>
+                        <p>Su <a href="https://fonts.google.com" target="_blank" rel="noopener noreferrer">fonts.google.com</a> scegli il font, poi <strong>Get font → Get embed code</strong>. Google genera tre righe da incollare nel <code>&lt;head&gt;</code>:</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;head&gt;
+    &lt;!-- 1. Apre in anticipo la connessione ai server di Google --&gt;
+    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+    &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+
+    &lt;!-- 2. Il foglio di stile che contiene le @font-face già pronte --&gt;
+    &lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"&gt;
+
+    &lt;!-- 3. Il tuo CSS viene DOPO --&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;</code></pre>
                         </div>
                         <div class="code-example">
-                            <pre><code class="language-css">/* Nel CSS */
+                            <pre><code class="language-css">/* Nel CSS: si usa il nome del font, con un fallback */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
 }</code></pre>
                         </div>
 
-                        <h4 class="mt-4">Font Locali con @font-face</h4>
-                        <p>Per usare un font acquistato o scaricato (o per non dipendere da Google), si carica il file direttamente dal proprio sito. Il formato da usare è <strong>WOFF2</strong>: compresso e supportato da tutti i browser moderni.</p>
+                        <h5 class="mt-4">Leggere l'URL</h5>
+                        <p>I parametri dell'URL decidono <strong>quali file</strong> Google ti manda:</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr><th>Parametro</th><th>Cosa significa</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>family=Inter:wght@400;700</code></td><td>Solo i pesi 400 e 700 (istanze <strong>statiche</strong>, separate dal <code>;</code>)</td></tr>
+                                    <tr><td><code>family=Inter:wght@100..900</code></td><td>Font <strong>variabile</strong> con tutto l'intervallo (i due punti <code>..</code> indicano un intervallo)</td></tr>
+                                    <tr><td><code>family=Inter:ital,wght@0,400;1,400</code></td><td>Combinazioni corsivo/peso: <code>0,400</code> = regular, <code>1,400</code> = corsivo. Gli assi vanno in <strong>ordine alfabetico</strong> (<code>ital</code> prima di <code>wght</code>)</td></tr>
+                                    <tr><td><code>display=swap</code></td><td>Mostra subito un font di sistema e lo sostituisce quando il web font è caricato (niente testo invisibile)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p><strong>Vantaggio:</strong> è comodissimo, e Google serve già file <strong>WOFF2</strong> suddivisi per set di caratteri (il browser scarica solo i caratteri latini, se servono solo quelli).</p>
+                        <div class="alert alert-warning mt-3">
+                            <strong><i class="bi bi-shield-exclamation"></i> Attenzione al GDPR:</strong> a ogni visita il browser dell'utente contatta i server di Google e gli invia il proprio <strong>indirizzo IP</strong>. Nel 2022 un tribunale di Monaco di Baviera ha ritenuto questo trasferimento, fatto senza consenso, una violazione del GDPR. Per un sito reale (soprattutto di un cliente) è quindi preferibile il <strong>self-hosting</strong>.
+                        </div>
+
+                        <h4 class="mt-5" id="font-self-hosting">Metodo B: self-hosting con @font-face</h4>
+                        <p>Con il self-hosting i file del font stanno <strong>sul tuo sito</strong>, accanto all'HTML e al CSS. Nessuna richiesta a server esterni.</p>
+
+                        <h5 class="mt-4">1. Scaricare i file</h5>
+                        <p>Dalla pagina del font su Google Fonts, <strong>Download all</strong> scarica uno ZIP che contiene, per esempio con Inter:</p>
+                        <div class="code-example">
+                            <pre><code class="language-plaintext">Inter.zip
+├── Inter-VariableFont_opsz,wght.ttf          ← variabile (assi opsz e wght)
+├── Inter-Italic-VariableFont_opsz,wght.ttf   ← variabile, corsivo
+├── static/                                   ← un file per ogni peso
+│   ├── Inter_18pt-Regular.ttf
+│   ├── Inter_18pt-Bold.ttf
+│   └── ...
+├── OFL.txt                                   ← licenza
+└── README.txt</code></pre>
+                        </div>
+                        <p><strong>Licenza:</strong> i Google Fonts sono rilasciati con licenza <strong>OFL</strong> (SIL Open Font License) o <strong>Apache 2.0</strong>: puoi ospitarli sul tuo sito, anche per progetti commerciali.</p>
+
+                        <h5 class="mt-4">2. Convertire in WOFF2</h5>
+                        <p>Lo ZIP contiene <strong>solo file TTF</strong>, pensati per il computer. Per il web si usa <strong>WOFF2</strong>, che è compresso e pesa molto meno (spesso meno della metà). Strumenti:</p>
+                        <ul>
+                            <li><a href="https://gwfh.mranftl.com" target="_blank" rel="noopener noreferrer">google-webfonts-helper</a>: scegli font e pesi e scarichi direttamente i WOFF2 con il CSS già scritto. Comodo per i font <strong>statici</strong>.</li>
+                            <li><strong>fonttools</strong> da terminale (richiede Python): <code>pip install fonttools brotli</code> e poi <code>fonttools ttLib.woff2 compress Inter-VariableFont_opsz,wght.ttf</code>. Mantiene il font variabile.</li>
+                            <li><a href="https://transfonter.org" target="_blank" rel="noopener noreferrer">Transfonter</a>: convertitore online. <strong>Attenzione:</strong> alcuni convertitori trasformano il variabile in statico; controlla sempre il risultato (vedi più sotto come).</li>
+                        </ul>
+
+                        <h5 class="mt-4">3. Organizzare le cartelle</h5>
+                        <div class="code-example">
+                            <pre><code class="language-plaintext">mio-sito/
+├── index.html
+├── css/
+│   └── style.css      ← qui scrivi le @font-face
+└── fonts/
+    ├── inter-regular.woff2
+    ├── inter-bold.woff2
+    ├── inter-variable.woff2
+    └── inter-italic-variable.woff2</code></pre>
+                        </div>
+                        <p>Il percorso nella <code>url()</code> è relativo <strong>al file CSS</strong>, non all'HTML: da <code>css/style.css</code> bisogna prima risalire con <code>../</code> → <code>url("../fonts/inter-bold.woff2")</code>.</p>
+
+                        <h5 class="mt-4">4a. @font-face per font statici</h5>
+                        <p><strong>Un blocco per ogni file.</strong> Il <code>font-family</code> è sempre lo stesso; cambiano solo <code>src</code>, <code>font-weight</code> e <code>font-style</code>. Il browser sceglie da solo il file giusto in base al peso richiesto.</p>
                         <div class="code-example">
                             <pre><code class="language-css">@font-face {
-    font-family: 'Mio Font';                 /* Nome a scelta, da usare poi in font-family */
-    src: url('../fonts/mio-font-regular.woff2') format('woff2');
+    font-family: 'Inter';                    /* Nome a scelta, da usare poi in font-family */
+    src: url('../fonts/inter-regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;   /* Mostra subito un font di sistema, poi lo sostituisce */
 }
 
 @font-face {
-    font-family: 'Mio Font';                 /* Stesso nome, peso diverso */
-    src: url('../fonts/mio-font-bold.woff2') format('woff2');
+    font-family: 'Inter';                    /* Stesso nome, peso diverso */
+    src: url('../fonts/inter-bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 
-body { font-family: 'Mio Font', system-ui, sans-serif; }
-strong { font-weight: 700; }  /* Il browser userà automaticamente il file bold */</code></pre>
+body   { font-family: 'Inter', system-ui, sans-serif; }
+strong { font-weight: 700; }  /* Il browser userà automaticamente inter-bold.woff2 */</code></pre>
                         </div>
 
-                        <h4 class="mt-4">Font Variabili</h4>
-                        <p>Un <strong>font variabile</strong> contiene in un solo file tutti i pesi (e a volte larghezze, inclinazioni...). Meno file da scaricare e pesi intermedi come 450 o 650.</p>
+                        <h5 class="mt-4">4b. @font-face per font variabili</h5>
+                        <p><strong>Un solo blocco</strong> (più uno per il corsivo, se c'è), con <code>font-weight</code> scritto come <strong>intervallo di due valori</strong>:</p>
                         <div class="code-example">
                             <pre><code class="language-css">@font-face {
     font-family: 'Inter';
-    src: url('../fonts/Inter-Variable.woff2') format('woff2');
-    font-weight: 100 900;    /* Intervallo di pesi disponibili */
+    src: url('../fonts/inter-variable.woff2') format('woff2');
+    font-weight: 100 900;    /* ← intervallo: minimo e massimo */
+    font-style: normal;
     font-display: swap;
 }
 
-h1 { font-weight: 750; }     /* Qualsiasi valore nell'intervallo */
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/inter-italic-variable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
 
-/* Assi personalizzati del font (dipendono dal font scelto) */
-.titolo-largo {
-    font-variation-settings: "wdth" 125;
-}</code></pre>
+h1   { font-weight: 750; }   /* Qualsiasi valore nell'intervallo */
+.nav-link { font-weight: 450; transition: font-weight 0.3s; }
+.nav-link:hover { font-weight: 650; }   /* Transizione fluida del peso */</code></pre>
+                        </div>
+                        <div class="alert alert-danger mt-3">
+                            <strong><i class="bi bi-x-circle"></i> Errore comune:</strong> scrivere <code>font-weight: 400;</code> (un solo valore) in una <code>@font-face</code> variabile. Il browser crede che il file contenga <em>solo</em> il peso 400 e <strong>non interpola</strong>: per gli altri pesi genera un grassetto "finto" o usa il 400.
+                        </div>
+                        <p>In tutti e due i casi ricordati di <code>font-display: swap;</code> e di <code>format("woff2")</code>.</p>
+
+                        <h5 class="mt-4">5. Facoltativo: preload del font principale</h5>
+                        <p>Per il font del testo principale puoi chiedere al browser di scaricarlo <strong>subito</strong>, prima ancora di leggere il CSS:</p>
+                        <div class="code-example">
+                            <pre><code class="language-html">&lt;link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin&gt;</code></pre>
+                        </div>
+                        <p class="small text-muted">Qui il percorso è relativo all'HTML (niente <code>../</code>). <code>crossorigin</code> è obbligatorio anche se il font è sul tuo stesso sito. Usa il preload solo per 1–2 file: precaricare tutto rallenta invece di velocizzare.</p>
+
+                        <h4 class="mt-5" id="font-variabile-come-riconoscerlo">Come capire se un font è variabile</h4>
+                        <h5 class="mt-3">Su Google Fonts</h5>
+                        <ul>
+                            <li>Nella ricerca, attiva il filtro <strong>Variable</strong> per vedere solo i font variabili.</li>
+                            <li>Nella pagina del font, l'anteprima mostra degli <strong>slider</strong> per gli assi (peso, larghezza…).</li>
+                            <li>Nell'URL dell'embed, i due punti <code>..</code> (es. <code>wght@100..900</code>) indicano un intervallo, quindi un font variabile.</li>
+                        </ul>
+                        <h5 class="mt-3">Dal nome del file</h5>
+                        <ul>
+                            <li>Google Fonts usa la convenzione <code>NomeFont-VariableFont_assi.ttf</code> (es. <code>Inter-VariableFont_opsz,wght.ttf</code>: assi <code>opsz</code> e <code>wght</code>).</li>
+                            <li>Se nello ZIP c'è una cartella <code>static/</code>, i file <strong>fuori</strong> da quella cartella sono variabili.</li>
+                        </ul>
+                        <h5 class="mt-3">Il metodo sicuro: la tabella <code>fvar</code></h5>
+                        <p>Il nome di un file si può cambiare; la prova certa è che il font contenga la tabella OpenType <strong><code>fvar</code></strong> (font variations), dove sono descritti gli assi. Per verificarlo:</p>
+                        <ul>
+                            <li><a href="https://wakamaifondue.com" target="_blank" rel="noopener noreferrer">Wakamai Fondue</a>: trascini il file nella pagina e vedi gli assi con valori minimo e massimo.</li>
+                            <li><strong>Firefox DevTools</strong>, scheda <strong>Fonts</strong> (nel pannello Inspector): mostra gli slider degli assi del font usato dall'elemento selezionato, modificabili dal vivo.</li>
+                            <li>Da terminale: <code>fonttools ttx -t fvar -o - file.ttf</code> (se il font non è variabile, la tabella non c'è).</li>
+                            <li>Dal sistema operativo: <strong>Libro Font</strong> su macOS (sezione "Variazioni") o <strong>Impostazioni → Personalizzazione → Tipi di carattere</strong> su Windows ("Proprietà variabili").</li>
+                        </ul>
+                        <h5 class="mt-3">La prova pratica</h5>
+                        <p>Metti tre righe di testo una sotto l'altra con pesi molto vicini:</p>
+                        <div class="code-example">
+                            <pre><code class="language-css">.p500 { font-weight: 500; }
+.p550 { font-weight: 550; }
+.p600 { font-weight: 600; }</code></pre>
+                        </div>
+                        <p>Con un font <strong>variabile</strong> il passaggio è graduale e la riga a 550 è a metà tra le altre due. Con un font <strong>statico</strong> la riga a 550 "salta" al peso disponibile più vicino ed è identica a una delle altre.</p>
+
+                        <h4 class="mt-5">Riepilogo: statici vs variabili</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr><th></th><th>Statici</th><th>Variabili</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><th>File</th><td>uno per peso/stile</td><td>uno (+ uno per il corsivo)</td></tr>
+                                    <tr><th><code>@font-face</code></th><td>uno per file, <code>font-weight: 700</code></td><td>uno, <code>font-weight: 100 900</code></td></tr>
+                                    <tr><th>Pesi intermedi (450, 550…)</th><td>no</td><td>sì</td></tr>
+                                    <tr><th>Animazione del peso</th><td>a scatti</td><td>fluida</td></tr>
+                                    <tr><th>Conviene se</th><td>servono 1–2 pesi</td><td>servono 3+ pesi o controllo fine</td></tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="alert alert-info mt-3">
                             <strong><i class="bi bi-info-circle"></i> Approfondisci:</strong> gerarchie, scale tipografiche e abbinamenti tra font sono trattati nella guida <a href="web-typography-guide.html">Tipografia per il Web</a>.
